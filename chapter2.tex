@@ -56,7 +56,7 @@ By utilizing its high precision position resolution and streaming readout capabi
         \includegraphics[width=0.8\linewidth]{Figures/MVTX_detector_barrel.png}
         \caption{MVTX detector barrel}
     \end{subfigure}
-    \caption{Top: Schematic of an sPHENIX MVTX stave (left) and half barrel layer made up of staves and service section (right). Bottom: Cross-section of MVTX silicon barrel with its 3 layers highlighted in different colors (Red, Green, and Blue) and sPHENIX beam pipe included to highlight the MVTX location relative to the beam pipe. Reproduced from \cite{MVTX}.}
+    \caption{(a) Schematic of an sPHENIX MVTX stave (left) and half barrel layer made up of staves and service section (right). (b) Cross-section of MVTX silicon barrel with its 3 layers highlighted in different colors (Red, Green, and Blue) and sPHENIX beam pipe included to highlight the MVTX location relative to the beam pipe. Reproduced from \cite{MVTX}.}
     \label{fig:sphenix_mvtx_stave}
 \end{figure}
 
@@ -99,7 +99,33 @@ The TPC has a total of 159,744 readout channels read out through a set of 6, 8 a
     \label{fig:sphenix_tpc}
 \end{figure}
 
-The TPOT 
+The TPOT is a Micromegas-based detector located just outside the TPC outer cylinder and used for facilitating in-situ TPC calibration by measuring real time distortions in the electron drift within the TPC \cite{TPOT_nim}.
+The TPOT covers a total of 8\% of the TPC acceptance and comprises four modules which cover the full z range of the bottom-most TPC sector and four addition modules, split between the two neighboring TPC sectors in $\phi$. 
+Each module contains two radially stacked Micromegas chambers where the first chamber measures the z coordinate and the second measures the $\phi$ coordinate of a transversing particle. 
+Each Micromegas chamber contains a drift electrode, a micromesh, a resistive layer and a readout layer with an electric field applied across the layers to guide ionization electrons through the drift gap. 
+The micromesh separates the ionization electron drift and amplification regions and the readout layer collects signals which are then read out via a set of front end electronics (FEEs).
+
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.5\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figures/tpot_schematic.png}
+        \caption{TPOT schematic}
+    \end{subfigure}
+    \begin{subfigure}{0.35\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{Figures/tpot_for_tracking_correction.png}
+        \caption{Track Reconstruction Corrections with TPOT}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics[width=0.8\linewidth]{Figures/tpot_micromegas.png}
+        \caption{TPOT Micromegas chamber}
+    \end{subfigure}
+    \caption{(a) Schematic of sPHENIX TPOT detector (left). (b) Schematic of track reconstruction using all tracking subsystems highlighting the benefit to having a TPOT hit for drift corrections. (c)  Cross-section of TPOT Micromegas chamber. Reproduced from \cite{TPOT_nim}.}
+    \label{fig:sphenix_tpot_module}
+\end{figure}
 
 \subsection{sPHENIX Calorimeter System}
 
@@ -141,6 +167,13 @@ During both PHENIX and sPHENIX running, the MBD has been located close to the be
 In it's original design, quartz was selected for the radiator material and PMTs for signal amplification due to their radiation hardness and over the data taking lifetime of the MBD, the subsystem has not seen any signification degradation due to radiation damage.
 The MBD is used for online triggering of hadronic interactions and offline to provide a selection of minimum-bias (MB) events and centrality determination in heavy-ion collisions. 
 It is also used for the offline reconstruction of the collision z-vertex position using the arrival time difference between the first charged particles detected by the PMTs on the north and south side of the interaction point. 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth]{Figures/mbd_schematic.png}
+    \caption{Left: Schematic of 64 MBD module array mounted on detector frame. Right: Photo of individual MBD module with quartz radiator and PMT. Reproduced from \cite{sPHENIX_TDR}.}
+    \label{fig:sphenix_mbd}
+\end{figure}
+
 
 The ZDCs~\cite{zdc} are located on both sides of the interaction point at very forward rapidity, 18 m from the interaction point, and are also repurposed from the PHENIX detector. 
 They are sampling hadronic calorimeters composed of three modules made of tungsten alloy and PMMA optical fiber with a total of 5.1 nuclear interation lengths (149 radiation lengths).
