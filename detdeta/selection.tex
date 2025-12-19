@@ -1,0 +1,95 @@
+We used \mbox{Au+Au}\xspace Run 2024 data for this analysis. This section describes the details of the dataset, the MC samples, event selection, and event centrality determination for the measurement.
+
+\subsection{Data and MC samples}
+For this analysis, we used data from three runs taken near the end of the Run 2024 running period and included in the good run list outlined for Run 2024.
+This period of running has a 1 mrad crossing angle and the z-vertex of the collision centered close to zero.
+The runs listed in table~\ref{table:Run2023dataset} were also chosen as they correspond to the store used as a reference for Run 2024 \auau centrality measurements, as well as having near-maximum calorimeter acceptance. Around 98\% of the EMCal and nearly all of HCals are read out for each run; exact run by run acceptance for each calorimeter can be deducted from the bad tower masks in Fig.~\ref{fig:bad_tower_mask} for runs 54911, 54912 and 54914. DST files at the triggered event level were used from ana450\_2024p009 production and data reconstruction (both calorimeter tower fitting and calibration) was run on the fly using build ana.460 and cdb tag 2024p009. 
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+Run Number & Production tag           & CDB tag                   \\ \hline
+54911      & \multirow{3}{*}{Ana.450} & \multirow{3}{*}{2024p009} \\ \cline{1-1}
+54912      &                          &                           \\ \cline{1-1}
+54914      &                          &                           \\ \hline
+\end{tabular}
+\caption{List of runs used in this analysis with production and cdb tag information.}
+\label{table:Run2023dataset}
+\end{table}
+
+For MC simulation, three different generators HIJING~\cite{hijing}, AMPT~\cite{ampt} and EPOS~\cite{epos} were used and detailed information are summarized in table~\ref{table:MCdataset}. Additionally, for the AMPT and EPOS event generators, more detailed notes on their implementation, including the parameter files used for the centrally produced event production, are included in the Appendix \ref{sec:epos_ampt_implement}. MC datasets were run using the g4hits DSTs from run 14, tower reconstruction using the default MC tower reconstruction method (no calo waveform sim) was preformed using build ana470 with cdb tag MDC2. 
+
+\begin{table}[]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+Generator & Production tag           & CDB tag                   \\ \hline
+HIJING    & run 14 type 4 & MDC2  \\ \hline
+EPOS      & run 14 type 25 & MDC2  \\ \hline
+AMPT      & run 14 type 24 & MDC2 \\ \hline
+\end{tabular}
+\caption{Summary of MC samples with production and cdb tag information.}
+\label{table:MCdataset}
+\end{table}
+
+\subsection{MC reweighting}
+The MC events are weighted to match the $z$-vertex and particle composition in data. 
+
+\subsubsection{MC Z-vertex reweighting}
+In both the data and simulation datasets, the event z-vertex is reconstruction using the MBD. While the Run 2024 \auau data used for this analysis does have the z-vertex centered near zero, the MC events are still reweighted to match the z-vertex distribution in data since the z-vertex distribution in data is wider than the z-vertex distribution of the Run 14 simulation samples. The z-vertex distribution in data has a mean value of 1.6 cm and width of 11.6 cm. The z-vertex distribution for the simulation datasets have a mean value $\sim$ 0 cm and width of 5-7 cm.
+The left and center plots in Fig.~\ref{fig:zvtxweight} show the reconstructed z-vertex distribution using the MBD for data and three MC generators. The right plot in Fig.~\ref{fig:zvtxweight} shows the data-over-MC z-vertex that are used as event-by-event weights to match the z-vertex distribution to that in data. The MC event level weighting factors vary between 0.82 and 1.66 for z-vertex values in the range used for this measurement of [-10,10] cm. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.32\linewidth]{Figures/zvertex_reweighting/vz_all_runs_run24_-30_30cm.png}
+    \includegraphics[width=0.32\linewidth]{Figures/zvertex_reweighting/vz_all_runs_run24.png}
+        \includegraphics[width=0.32\linewidth]{Figures/zvertex_reweighting/vz_ratio_all_runs_run24.png}
+    \caption{Distributions of the z-vertex reconstructed using the MBD in data and MC (left, center), and the data-over-MC ratios (right). Plots made using nominal analysis run, run 54912.}
+    \label{fig:zvtxweight}
+\end{figure}
+
+\subsubsection{MC Particle Composition Reweighting Factors}
+The particle spectra as a function of centrality were found for all three MC generators. These spectra were then compared to previous measurements by PHENIX~\cite{PhysRevC.88.024906}, STAR~\cite{PhysRevLett.98.062301} and BRAHMS~\cite{Brahms_pi_spectra,Brahms_p_spectra} of particle spectra from 200 GeV \auau collisions. 
+
+In simulations, the generators often fail to accurately reproduce the particle spectrum ratio due to processes such as hadronization through recombination. We illustrate the nominal discrepancy between the particle spectra from MC and previous PHENIX and STAR measurements in Appendix \ref{sec:MC_particle_ratios}. To correct for this discrepancy, a truth-level particle and calorimeter G4Hit energy reweighting module has been employed within our reconstruction chain. This module adjusts the simulated truth and calorimeter level energy distribution, $\text{d}\ET/\text{d}\eta$, based on the particle yield spectrum obtained from previous PHENIX and STAR experiments.
+
+The reweighting ratio was established using particle spectra in 200 GeV Au-Au collision data from previous PHENIX and STAR measurements \cite{PhysRevC.88.024906, PhysRevLett.98.062301}. The invariant yields of $\pi^{+}$, $K^{\pm}$, $p$, $\bar{p}$, $\Lambda$, and $\bar{\Lambda}$ as functions of transverse momentum ($p_{T}$) were analyzed across various centrality bins. The Monte Carlo (MC) particle spectrum was calculated for models like HIJING, EPOS, and AMPT, utilizing identical centrality binning and acceptance range. The spectra of $\pi^{\pm}$, $K^{\pm}$, $p$, and $\bar{p}$ were then compared to PHENIX data, while $\Lambda$ and $\bar{\Lambda}$ were compared to STAR data to compute the data/MC ratio. As an additional check on these previously measured particle spectra, we compared the previously measured STAR and PHENIX data for three separate centrality ranges used in our particle reweighting methodology and found agreement between the STAR and PHENIX results. Additional information about this study is included in Appendix~\ref{sec:MC_particle_ratios}.
+
+The data/MC ratio was fit with a Padé approximant of order 2/2, and this fit function was used as the reweighting factor for each specific particle. This is illustrated for HIJING proton and kaon reweighting factors in Fig. \ref{fig:hijing_data_mc_ratios} and all remaining reweighting distributions used in this analysis are outlined in Appendix \ref{sec:MC_particle_ratios}. For baryons and anti-baryons other than $\Lambda$ and $\Bar{\Lambda}$, the reweighting factor used is the same as $p$ and $\Bar{p}$. For neutral pions and kaons, the reweighting factor was determined as the average of the charged counterparts' reweighting factors. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.48\linewidth]{Figures/particle_reweighting_ratios/HIJING_p_0.png}
+    \includegraphics[width=0.48\linewidth]{Figures/particle_reweighting_ratios/HIJING_p_1.png}
+    \includegraphics[width=0.48\linewidth]{Figures/particle_reweighting_ratios/HIJING_p_2.png}
+    \includegraphics[width=0.48\linewidth]{Figures/particle_reweighting_ratios/HIJING_p_3.png}
+    \caption{Data to MC ratios of proton yields for \sqsntwo \auau PHENIX data \cite{PhysRevC.88.024906} versus HIJING for centrality ranges 0-10\%, 10-20\%, 20-40\% and 40-60\%.}
+    \label{fig:hijing_data_mc_ratios}
+\end{figure}
+
+\subsubsection{Applying MC Particle Composition Reweighting Factors}
+
+Calorimeter energy reweighting is conducted by tracing back each G4Hit in the detector to its originating primary particle. The reweighting factor for each hit is calculated based on the primary parent particle's particle ID (PID), transverse momentum ($p_{T}$), and the event's centrality. This factor is derived from interpolating the MC/data ratios across different centrality bins as a function of $p_{T}$, ensuring a precise adjustment of the G4Hit energy.
+
+For a specific primary particle in a given event, the reweighting factor for G4Hits originating from this particle is interpolated from the MC/data ratios across different centrality bins according to the particle's $p_{T}$. The same reweighting factor is also applied to the primary particles' four momenta in the truth record for the truth $\ET$ calculation.
+
+Although this approach does not replicate the precise conditions of each individual event, it effectively incorporates the average particle spectrum from the data into the MC simulations across a multitude of events. The motivation for this reweighting method to align the simulated data more closely with the actual experimental observations. The data/MC ratios represent the variance between the observed and simulated occurrences of each particle type. By applying this ratio to all G4Hits from the respective particle, the method on average adjusts the MC simulation to approach the empirical data, thereby ensuring that the particle energy response in the simulation is representative of real-world observations. 
+
+\subsection{Event Selection}
+Events in both data and MC are selected using the following \textit{minimum-bias} event selection criteria in order to remove beam-gas interactions and nonhadronic collisions, and at the same time to ensure high efficiency of hadronic collisions \cite{Lis1}. 
+\begin{itemize}
+    \item MBD $\textit{N}_{\textit{tubes,N}} \geq 2 \, \& \, \textit{N}_{\textit{tubes,S}} \geq 2$ 
+    \item $\Sigma Q_{MBD,N} > 10 \lor \Sigma Q_{MBD,S} < 150 $
+    \item $\Sigma E_{ZDC,N} > 40\, \text{GeV}\, \& \, \Sigma E_{ZDC,S} > 40\, \text{GeV} $
+    \item $\mid z_{vtx,MBD}\mid < 60$ cm
+    \item Trigger 10 (Online MBD $\textit{N}_{\textit{tubes,N}} \geq 2 \, \& \, \textit{N}_{\textit{tubes,S}} \geq 2$)
+\end{itemize}
+
+Note minimum bias criteria cuts on ZDC energy and requirement of Trigger 10 are only included in data since the ZDC is not simulated in nominal simulation datasets and Trigger 10 is an online trigger. 
+
+In addition, a tighter cut has been applied on the z-vertex, $\mid z_{vtx,MBD} \mid < 10$ cm, to avoid possible bias and fluctuations on the collision vertex.
+Combining all these selections, the total number of events used in this analysis for measurements of events with centrality between 0 and 60\% correspond to 444k events.
+
+\subsection{Event centrality determination}
+Events in both data and MC are given a centrality index value via the CentralityReco module; calibrations for these centrality values are determined on a run-by-run basis for data and more information on centrality determination for the runs used in this analysis is available in the Centrality Calibration Internal Note \cite{Lis1}.

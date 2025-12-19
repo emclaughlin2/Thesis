@@ -1,0 +1,62 @@
+\subsection{Uncorrected \& Reconstructed Simulated \dEtdeta}
+To obtain uncorrected (reconstructed from data) or reconstructed simulated \dEtdeta for a given run and centrality class, $\ET$ is first calculated for each calorimeter tower as
+\begin{equation}
+    E_{\text{T,tower}}=E_{\text{tower}}/\cosh\eta
+\end{equation}
+this value is corrected for bin width and used to fill a 1-D TProfile in $\eta$. This TProfile is then converted to a histogram to scale each of the bins in $\eta$ by their respective bin widths. In total, we create 5 histograms of the reconstructed \dEtdeta, a reconstructed \dEtdeta from each of the individual calorimeters using only contributions from that calorimeters' towers (e.g. the EMCal \dEtdeta measurement only has contributions from EMCal towers), a HCal reconstructed \dEtdeta histogram comprising both layers of the HCal, and a full calorimeter reconstructed \dEtdeta histogram which is filled with tower contribution from all three calorimeters. Our reconstructed full calorimeter measurement is the same as the sum of the reconstructed individual calorimeter measurements; there is no additional weighting applied on our part between contributions of the hadronic calorimeters versus EM calorimeter applied to our full calorimeter reconstructed \dEtdeta. Additionally, the detector acceptance determined from hot tower masking in data is applied identically to both data and simulation, ensuring the reconstruction level \dEtdeta in both data and simulation is determined from the same detector acceptance. Fig.~\ref{fig:dEtdeta_reco} shows the detector-level \dEtdeta measurements for all calorimeter layers for both data and simulation samples for the 0-5\% most central events; reconstructed \dEtdeta measurements for all centrality bins are included in Appendix~\ref{sec:full_detdeta_plots}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.32\linewidth]{Figures/dETdeta_measurements/emcal_reco_0-5.png}
+    \includegraphics[width=0.32\linewidth]{Figures/dETdeta_measurements/hcal_reco_0-5.png}
+    \includegraphics[width=0.32\linewidth]{Figures/dETdeta_measurements/calo_reco_0-5.png}
+    \includegraphics[width=0.32\linewidth]{Figures/dETdeta_measurements/ihcal_reco_0-5.png}
+    \includegraphics[width=0.32\linewidth]{Figures/dETdeta_measurements/ohcal_reco_0-5.png}
+    \caption{Reconstructed \dEtdeta for 0-5\% central events for EMCal (top left), HCal (top middle), Full Calorimeter (top right), IHCal-only (bottom left), and OHCal-only (bottom right), compared to the reconstructed \dEtdeta from simulated events of reweighted EPOS, AMPT and HIJING.}
+    \label{fig:dEtdeta_reco}
+\end{figure}
+
+\subsection{Truth \dEtdeta}
+Truth \dEtdeta is calculated by binning $E_{\text{T,particle}}=E_{\text{particle}}/\cosh\eta$ in a 1-D histogram over $\eta$ after correcting for bin width. This histogram is then divided by the number of events in the centrality class. Particle information, including energy and coordinates, are obtained from the PHG4TruthContainer node of the GEANT4 simulation. All particles within the detector's acceptance are considered and the truth \dEtdeta histogram is binned with the same bin sizes as the histogram of reconstructed \dEtdeta from calorimeter data. For baryons, the energy used for our truth \dEtdeta measurement is the particle's kinetic energy, for anti-baryons, the kinetic energy + twice the nucleon mass is used, and for all other particles, the total energy is used.
+
+\subsection{Correction Factors}
+Full simulation of the sPHENIX detector is performed to determine the correction factor that takes into account the acceptance and reconstruction efficiency.
+The correction factors are derived from MC simulation and defined as the ratio of the transverse energy from reconstructed calorimeter towers to that in truth level for a given $\eta$ interval.
+\begin{equation}
+    C(\eta) = \frac{ \sum E_{\text{T,tower}}(\eta)}{ \sum E_{\text{T,particle}}(\eta)}
+\end{equation}
+
+Correction factors are created for each calorimeter measurement and each centrality bin using the mean simulated reconstructed \dEtdeta measurement over the truth transverse energy distribution for that centrality class. In this analysis, we use the correction factors from our reweighted EPOS dataset to correct our nominal \dEtdeta measurements; correction factors from reweighted AMPT and HIJING are used to determine the uncertainty in our reweighting method. Example correction factor distributions are shown in Fig.\ref{fig:correction_factors}, where the correction factors created using reweighted EPOS, AMPT and HIJING MC samples are compared for the EMCal, IHCal and OHCal measurements for 0-5\% centrality events. The correction factors for each calorimeter measurement are fairly consistent across the full measurement centrality range with variations in the correction factors for all calorimeter layer measurements of at most 2-4\% across all centrality bins studied in this analysis. The full set of correction factors for all centralities is included in Appendix~\ref{sec:full_detdeta_plots}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.32\linewidth]{Figures/dETdeta_measurements/emcal_correction_factor_0-5.png}
+    \includegraphics[width=0.32\linewidth]{Figures/dETdeta_measurements/hcal_correction_factor_0-5.png}
+    \includegraphics[width=0.32\linewidth]{Figures/dETdeta_measurements/calo_correction_factor_0-5.png}
+    \includegraphics[width=0.32\linewidth]{Figures/dETdeta_measurements/ihcal_correction_factor_0-5.png}
+    \includegraphics[width=0.32\linewidth]{Figures/dETdeta_measurements/ohcal_correction_factor_0-5.png}
+    \caption{Correction factors for 0-5\% central events for EMCal (upper left), HCal (upper middle) and Full Calorimeter (upper right) as well as IHCal-only (lower left) and OHCal-only (lower right) data. Correction factors calculated using reweighted HIJING, EPOS and AMPT MC datasets. Bad tower mask applied to correction factors to match tower acceptance in data.}
+    \label{fig:correction_factors}
+\end{figure}
+
+\subsection{Corrected \dEtdeta}
+To obtain a fully corrected \dEtdeta, the truth \dEtdeta histogram is multiplied by the reconstructed \dEtdeta histogram from data, and divided by the reconstructed \dEtdeta histogram from simulation. In this way, there is compensation for non-uniform acceptance in the real detector by means of dividing out the reconstructed simulated \dEtdeta which has been artificially induced to have the same acceptance as reconstructed data \dEtdeta.
+
+\begin{equation}
+    \frac{\text{d}\ET}{\text{d}\eta}( \eta) = \frac{ \sum E_{\text{T,tower}}(\eta)}{C(\eta)}
+\end{equation}
+
+%\subsection{Closure Test with MC Correction Factors}
+%Our application of \dEtdeta correction factors from MC datasets, EPOS, AMPT and HIJING, is validated using a half closure test for each of the three generator datasets for all calorimeter measurements and centrality bins presented in the \dEtdeta measurement. 
+
+%\begin{figure}
+%    \centering
+%    \includegraphics[width=0.32\linewidth]{Figures/mc_closure/emcal_closure.png}
+%    \includegraphics[width=0.32\linewidth]{Figures/mc_closure/hcal_closure.png}
+%    \includegraphics[width=0.32\linewidth]{Figures/mc_closure/calo_closure.png}
+%    \includegraphics[width=0.32\linewidth]{Figures/mc_closure/emcal_closure_ratio.png}
+%    \includegraphics[width=0.32\linewidth]{Figures/mc_closure/hcal_closure_ratio.png}
+%    \includegraphics[width=0.32\linewidth]{Figures/mc_closure/calo_closure_ratio.png}
+%    \caption{Overlaid fully corrected and truth-level \dEtdeta for EMCal (left), HCal (middle) and Full Calorimeter (right) measurements (top plots). Ratio of fully corrected and truth-level \dEtdeta shown for each centrality bin (bottom plots).}
+%    \label{fig:enter-label}
+%\end{figure}

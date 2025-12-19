@@ -1,0 +1,29 @@
+To study the effect of including the pole tip doors in the simulation on the simulation Reco HCal $\text{d}\ET/\text{d} \eta$, comparison of data from Run 23696 ana.389p004, EPOS w/o pole tip doors, EPOS w/ pole tip doors with MC vertex reweighting for 100k MC events. 
+Much better agreement between truth $\text{d}\ET/\text{d} \eta$ and corrected OHCal $\text{d}\ET/\text{d} \eta$ from EPOS simulation with pole tip doors on, agreement at the 10\% level for all eta bins except for i$\eta$ = 1,22 with agreement at 20\% level. 
+Still have overall scale difference between truth $\text{d}\ET/\text{d} \eta$ and corrected IHCal $\text{d}\ET/\text{d} \eta$ from EPOS simulation but structure at wings in ratio plot of truth $\text{d}\ET/\text{d} \eta$ to fully corrected IHCal plot is slightly flatter with pole tip doors on than with pole tip doors off. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.48\linewidth]{Figures/pole_tip_doors/ihcal_reco_0-5_epos_plugdoor_z=0_wratio.png}
+    \includegraphics[width=0.48\linewidth]{Figures/pole_tip_doors/ohcal_reco_0-5_epos_plugdoor_z=0_wratio.png}
+    \caption{Plots made with ana.389p004 and privately generated EPOS simualtion (with timing bug)}
+    \label{fig:enter-label}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.48\linewidth]{Figures/pole_tip_doors/corrected_ihcal_0-5_epos_plugdoor_z=0_wratio.png}
+    \includegraphics[width=0.48\linewidth]{Figures/pole_tip_doors/corrected_ohcal_0-5_epos_plugdoor_z=0_wratio.png}
+    \caption{Plots made with ana.389p004 and privately generated EPOS simualtion (with timing bug)}
+    \label{fig:enter-label}
+\end{figure}
+
+To study the effect of the OHCal support structure ring at i$\eta$ = 2,21, we compare \dEtdeta measurements with correction factors from HIJING run 14 and HIJING run 101. Run 101 does not have the update support ring included in the simulation which Run 14 does have this geometry upgrade. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.48\linewidth]{Figures/ihcal_support_structure/detdeta_reweight_hijing_run101_0-5.png}
+    \includegraphics[width=0.48\linewidth]{Figures/ihcal_support_structure/detdeta_reweight_hijing_run14_0-5.png}
+    \caption{Comparison of fully corrected \dEtdeta measurements using correction factors from HIJING run 101 (left) and HIJING run 14 (right). The OHCal \dEtdeta measurement at $|\eta|$ = 1.0 dips in the HIJING run 101 plot due to data and MC geometry mismatch is rectified in the OHCal \dEtdeta measurement in the HIJING run 101 plot.}
+    \label{fig:enter-label}
+\end{figure}

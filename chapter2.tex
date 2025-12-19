@@ -34,29 +34,77 @@ A rendering of the sPHENIX detector highlighting these subsystems with labels ca
 
 \subsection{sPHENIX Tracking System}
 The sPHENIX tracking system comprises four subdetectors: a MAPS-based vertex detector (MVTX), an intermediate silicon tracker (INTT), the time projection chamber (TPC) and the TPC Outer Tracker (TPOT).
+These tracking subdetectors can provide a combination of particle momentum measurements, particle species identification, and secondary vertex reconstruction for use in physics measurements espeically related to heavy flavor physics and jet substructure. 
 
 The MVTX is the innermost tracking subsystem, at a distance of 2-5 cm from the beam pipe, and is a 3 layer silicon barrel design with full azimuthal coverage ($0 < \phi < 2 \pi$) and pseudorapidity coverage of $|\eta| < 1$.
-Each layer of silicon barrel is composed of a set of staves, for a total of 48 staves, which each contain a hybrid integrated circuit with a flexible printed circuit connected to nine ALICE Pixel Detector (ALPIDE) pixel chip sensors, for a total of 432 ALPIDE sensors.
+Each layer of silicon barrel is composed of a set of staves, for a total of 48 staves, which each contain a hybrid integrated circuit with a flexible printed circuit connected to nine ALICE Pixel Detector (ALPIDE) pixel chip sensors, for a total of 432 ALPIDE sensors \cite{MVTX,MVTX_proceeding}.
 The ALPIDE sensors are Monolithic Active Pixel Sensors (MAPS) that use Complementary Metal Oxide Semiconductor (CMOS) technology to build the pixel directly on the read out chip. 
 The sensor consists of a silicon die of size 15 mm x 30 mm with an active p-doped epitaxial layer where charge is freed by an incoming particle and a set of charge collection diodes (pixels) with position resolution of 30 $\mu$m where the charge is then collected. 
 Following collection, the sensors also amplify and digitize signals from each pixel and zero suppression is applied before read out. 
-\textcolor{red}{Add in pictures of MVTX}\textcolor{red}{Add in reference for MVTX}
+The MVTX is essential in sPHENIX's ability to make heavy flavor measurements \cite{MVTX2024heavyflavorphysicssphenix}. 
+By utilizing its high precision position resolution and streaming readout capabilities, the MVTX can reconstruct a large sample of decay vertices from heavy flavor hadrons. 
+\begin{figure}
+    \centering
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics[width=0.8\linewidth]{Figures/MVTX_stave_and_half_layer.png}
+        \caption{MVTX stave and half-barrel layer}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}{\linewidth}
+        \centering
+        \includegraphics[width=0.8\linewidth]{Figures/MVTX_detector_barrel.png}
+        \caption{MVTX detector barrel}
+    \end{subfigure}
+    \caption{Top: Schematic of an sPHENIX MVTX stave (left) and half barrel layer made up of staves and service section (right). Bottom: Cross-section of MVTX silicon barrel with its 3 layers highlighted in different colors (Red, Green, and Blue) and sPHENIX beam pipe included to highlight the MVTX location relative to the beam pipe. Reproduced from \cite{MVTX}.}
+    \label{fig:sphenix_mvtx_stave}
+\end{figure}
 
-The TPC is the main sPHENIX tracking subdetector, spanning in radial distance from 20 to 80 cm with 
+The INTT is a two-layer silicon barrel subsystem located between the MVTX and TPC with the first layer at a radial distance of 7.5 cm and second layer at 10 cm and has full azimuthal coverage, which is ensured by staggering the silicon sensors of the two layers in $\phi$. 
+The INTT barrels are composed of silicon ladders containing silicon strip sensors, readout chips, high-density interconnect cables and a carbon fiber stave that serves as a support structure \cite{INTT_beamtest2025}. 
+At the silicon sensor, electron-hole pairs are created when charge particles pass through the detector.
+This signal is then digitized, zero suppression is applied and the data is read out via the high-density interconnect cables to readout cards.
+INTT hits can be used to bridge the MVTX and TPC tracks to improve tracking reconstruction. 
+However, the INTT is also essential in associating reconstructed tracks with data from the sPHENIX calorimeter system and global detectors which are readout in triggered mode.
+This is done by using the precise timing resolution of the INTT hits, therefore reconstructed tracks can be associated with RHIC bunch crossings by using the timing of their INTT hits \cite{INTT_beamtest2025}. 
 
-Gaseous Drift Detectors
-- Big cylinder filled with (mostly)
-noble gas (Ne, Ar, etc...) and
-electric field
-- Particles come in, ionize gas,
-make electroncs (and ions)
-- Electrons drift to anode plane
-– are read out
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth]{Figures/intt_ladder.png}
+    \caption{Schematic of sPHENIX INTT silicon ladder component. Highlighted on silicon ladder are silicon sensors, readout chips and high-density interconnect (HDI) cables. Reproduced from \cite{INTT_beamtest2025}.}
+    \label{fig:sphenix_intt}
+\end{figure}
+
+The TPC is the main sPHENIX tracking subdetector, spanning in radial distance from 20 to 80 cm with full azimuthal coverage ($0 < \phi < 2 \pi$) and pseudorapidity coverage of $|\eta| < 1.1$.
+The sPHENIX TPC is a cylindrical double-sided TPC design with a central membrane at the center of the detector and two readout endcaps on the interior of either side of the detector's span in z.
+In each half of the TPC, an electric field is formed by setting the central membrane electrode to a high voltage and the readout endcaps to ground \cite{sPHENIX_TDR,TPC_overview}.
+This electric field is constrained in the radial direction by field cages on the inner and outer cylindrical surfaces of the TPC.
+The TPC volume is also filled with a gas mixture of Argon, CF4 and Isobutane in a ratio of 75:20:5.
+When charged particles from the collision pass through the TPC gas volume, they ionize the gas creating electrons and ions, which act as signal for use in determining particle trajectories through the TPC. 
+These freed electronics then drift towards the readout endcaps via the electric field between the central membrane and the readout endcaps. 
+
+On each end of the TPC there is an amplification region where Gaseous Electron Multipliers (GEM) modules are used to amplify the signal from ionized electrons within the TPC volume.
+Each GEM module contains a stack of four Kapton + Copper foils with a varying voltage across each foil creating a high electric field within the holes of the foils. 
+As electrons pass through the full GEM stack they undergo avalanche amplification, where each foil contributes a small amount of the overall electron amplification.
+The electric fields between the GEM foils are also able to minimize the amount of avalanche induced positive ions that drift back into the TPC volume thereby reducing ion back flow and allowing the TPC to operate continuous readout. 
+Finally the amplified electron signals are read out using SAMPA chips developed by ALICE each which contain 32 channels. 
+The TPC has a total of 159,744 readout channels read out through a set of 6, 8 and 12 Front End Electronics (FEE) corresponding to the inner (R1), middle (R2) and outer (R3) radial regions of the TPC endcaps.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth]{Figures/tpc_diagram.png}
+    \caption{Left: Cross-section schematic of sPHENIX TPC showing central membrane (CM), inner- and outer-field cages (I-FC, O-FC) and end plates (EP). 
+    Middle: Segementation of TPC endcap into 72 GEM modules. 
+    Right: Schematic of TPC GEM modules highlighting the four foil layers with varying electric fields and pad plane for readout of amplified signal. Reproduced from \cite{sPHENIX_TDR}.}
+    \label{fig:sphenix_tpc}
+\end{figure}
+
+The TPOT 
 
 \subsection{sPHENIX Calorimeter System}
 
 sPHENIX has three central barrel calorimeter layers, an electromagnetic calorimeter (EMCal), an inner hadronic calorimeter (IHCal) and an outer hadronic calorimeter (OHCal). 
-\textcolor{red}{Add in sentence about calorimeter necessary for jet physics goals}
+\textcolor{red}{Add in sentence about calorimeter necessary for jet physics goals and about that the caloriemter system measures energy and is used as a trigger}
 These detectors are concentric and sandwich the sPHENIX magnet with the EMCal located closest to the interaction point and the OHCal located further from the interaction point within the calorimeter system. 
 Further, these detectors have full azimuthal coverage ($0 < \phi < 2 \pi$) and pseudorapidity coverage of $|\eta| < 1.1$. 
 

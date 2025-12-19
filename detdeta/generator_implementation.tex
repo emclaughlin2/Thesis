@@ -1,0 +1,105 @@
+\subsection{AMPT}
+
+The version of AMPT used in this analysis is the latest build(v1.26t9b-v2) from the \href{https://myweb.ecu.edu/linz/ampt/}{AMPT website}.
+
+The generator setting used for this study is as followed:
+
+\begin{verbatim}
+200            ! EFRM (sqrt(S_NN) in GeV if FRAME is CMS)
+CMS             ! FRAME
+A               ! PROJ
+A               ! TARG
+197             ! IAP (projectile A number)
+79              ! IZP (projectile Z number)
+197             ! IAT (target A number)
+79              ! IZT (target Z number)
+10000		! NEVNT (total number of events)
+0.              ! BMIN (mininum impact parameter in fm) 
+20.		! BMAX (maximum impact parameter in fm, also see below)
+4		! ISOFT (D=4): select Default AMPT or String Melting(see below)
+150		! NTMAX: number of timesteps (D=150), see below
+0.2		! DT: timestep in fm (hadron cascade time= DT*NTMAX) (D=0.2)
+0.55		! PARJ(41): parameter a in Lund symmetric splitting function
+0.15    	! PARJ(42): parameter b in Lund symmetric splitting function
+1	      	! (D=1,yes;0,no) flag for popcorn mechanism(netbaryon stopping)
+1.0	      	! PARJ(5) to control BMBbar vs BBbar in popcorn (D=1.0)
+1		! shadowing flag (Default=1,yes; 0,no)
+0		! quenching flag (D=0,no; 1,yes)
+2.0		! quenching parameter -dE/dx (GeV/fm) in case quenching flag=1
+2.0		! p0 cutoff in HIJING for minijet productions (D=2.0)
+2.265d0  	! parton screening mass in fm^(-1) (D=2.265d0), see below
+0		! IZPC: (D=0 forward-angle parton scatterings; 100,isotropic)
+0.33d0		! alpha in parton cascade (D=0.33d0), see parton screening mass
+1d6		! dpcoal in GeV
+1d6		! drcoal in fm
+11		! ihjsed: take HIJING seed from below (D=0)or at runtime(11)
+13150909	! random seed for HIJING
+8		! random seed for parton cascade
+0		! flag for K0s weak decays (D=0,no; 1,yes)
+1		! flag for phi decays at end of hadron cascade (D=1,yes; 0,no)
+0		! flag for pi0 decays at end of hadron cascade (D=0,no; 1,yes)
+1		! optional OSCAR output (D=0,no; 1,yes; 2&3,more parton info)
+0		! flag for perturbative deuteron calculation (D=0,no; 1or2,yes)
+1		! integer factor for perturbative deuterons(>=1 & <=10000)
+1		! choice of cross section assumptions for deuteron reactions
+-7.		! Pt in GeV: generate events with >=1 minijet above this value
+1000		! maxmiss (D=1000): maximum # of tries to repeat a HIJING event
+3		! flag on initial and final state radiation (D=3,both yes; 0,no)
+1		! flag on Kt kick (D=1,yes; 0,no)
+0		! flag to turn on quark pair embedding (D=0,no; 1,yes)
+7., 0.		! Initial Px and Py values (GeV) of the embedded quark (u or d)
+0., 0.		! Initial x & y values (fm) of the embedded back-to-back q/qbar
+1, 5., 0.       ! nsembd(D=0), psembd (in GeV),tmaxembd (in radian).
+0 		! Flag to enable users to modify shadowing (D=0,no; 1,yes)
+1.d0		! Factor used to modify nuclear shadowing
+0		! Flag for random orientation of reaction plane (D=0,no; 1,yes)
+\end{verbatim}
+
+
+\subsection{EPOS}
+EPOS used in this analysis is version 4.0.0 from \href{https://klaus.pages.in2p3.fr/epos4/code/version}{EPOS official website}, our local build is built under gcc 4.8.5 with one modification to the original source code that fixes the conversion of the vertex time unit.
+
+the input setting file used for this study is as followed:
+
+\begin{verbatim}
+    !-------------------------------------------------------------
+!       AuAu collisions with hydro and hadronic
+!-------------------------------------------------------------
+application hadron !hadron-hadron, hadron-nucleus, or nucleus-nucleus collision                                                   
+set laproj 79  !projectile atomic number
+set maproj 197 !projectile mass number
+set latarg 79  !target atomic number
+set matarg 197 !target mass number
+set ecms 200  !sqrt(s)_pp
+
+set istmax 25 
+set iranphi 1 
+ftime on 
+
+!suppressed decays: 
+nodecays 110 20 2130 -2130 2230 -2230 1130 -1130 1330 -1330 2330 -2330 3331 -3331 
+9300 -9300 9297 -9297 end
+
+set ninicon 1            !number of initial conditions used for hydro evolution
+core full                !core/corona activated 
+hydro hlle               !hydro activated 
+eos x3ff                 !eos activated
+hacas full               !hadronic cascade activated  
+set nfull 40              !number of events
+set nfreeze 10            !number of freeze out events per hydro event 
+set modsho 100           !certain printout every modsho events
+set centrality 0         ! 0=min bias 
+
+set ihepmc 1             !write out hepmc file
+\end{verbatim}
+
+
+\subsection{Event Plane afterburner}
+Since the EPOS and AMPT implementation used in this analysis doesn't randomize the event plane angle, an \href{https://github.com/sPHENIX-Collaboration/coresoftware/pull/2433}{event plane afterburner} is applied to randomize the reaction plane in the HEPMC record and rotate vertex positions and particle momenta accordingly.
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.95\linewidth]{Figures/Generator/eventplane.png}
+    \caption{Transverse energy as a function of $\phi$ for AMPT before(red) and after(blue) appling the event plane afterburner.}
+    \label{fig:enter-label}
+\end{figure}

@@ -1,0 +1,123 @@
+\subsection{$ADC_{\text{Template Fit}}$ versus $ADC_{\text{sample 6 - sample 0}}$}
+
+We employ two methods to study effect of applying ZS by comparing the energy value of a tower from the template fit versus the energy value of the tower from sample 6 – sample 0. First by looking at the correlation of $ADC_{\text{template fit}}$ to $ADC_{\text{sample 6 – sample 0}}$ to look at the energy dependence on the relationship between the template fit and ZS energy values. Second by looking at the mean ratio of $ADC_{\text{template fit}}$/$ADC_{\text{sample 6 – sample 0}}$ for each tower entry in a set energy range to look for tower by tower effects on the relationship between the template fit and ZS energy values.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth]{Figures/ZS_template_fit/emcal_zs_vs_template_fit.png}
+    \caption{Comparison of EMCal waveform processing with zero suppression versus template fit. Correlation between tower's ADC value from ZS versus from template fit shown in left plots for two different ADC ranges [-100,1000] ADC (top left) and [-100,100] ADC (bottom left). Ratio of ADC value from ZS versus ADC value from template fit on a tower by tower basis shown in right plots for two different ranges [100,1000] ADC (top right) and  [-100,100] ADC (bottom right). Plots made with ana.399 p008 production.}
+    \label{fig:emcal_zs_template_corr}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth]{Figures/ZS_template_fit/ohcal_zs_vs_template_fit.png}
+    \caption{Comparison of OHCal waveform processing with zero suppression versus template fit. Correlation between tower's ADC value from ZS versus from template fit shown in left plots for two different ADC ranges [-100,1000] ADC (top left) and [-100,100] ADC (bottom left). Ratio of ADC value from ZS versus ADC value from template fit on a tower by tower basis shown in right plots for two different ranges [100,1000] ADC (top right) and  [-100,100] ADC (bottom right). Plots made with ana.399 p008 production.}
+    \label{fig:ohcal_zs_template_corr}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.8\linewidth]{Figures/ZS_template_fit/ihcal_zs_vs_template_fit.png}
+    \caption{Comparison of IHCal waveform processing with zero suppression versus template fit. Correlation between tower's ADC value from ZS versus from template fit shown in left plots for two different ADC ranges [-100,1000] ADC (top left) and [-100,100] ADC (bottom left). Ratio of ADC value from ZS versus ADC value from template fit on a tower by tower basis shown in right plots for two different ranges [100,1000] ADC (top right) and  [-100,100] ADC (bottom right). Plots made with ana.399 p008 production.}
+    \label{fig:ihcal_zs_template_corr}
+\end{figure}
+
+For EMCal $ADC_{\text{template fit}}$ to $ADC_{\text{sample 6 – sample 0}}$ correlation plot in Fig. \ref{fig:emcal_zs_template_corr} (upper left), we see a main trendline at 1, a broader trendline below 1, and additional structure in region below 100 ADC. Additionally, in the region below 100 ADC in the EMCal $ADC_{\text{template fit}}$ to $ADC_{\text{sample 6 – sample 0}}$ correlation plot, we can see both correlated and anti correlated trends of the template fitting versus zero suppression algorithm. For OHCal $ADC_{\text{template fit}}$ to $ADC_{\text{sample 6 – sample 0}}$ correlation plot in Fig. \ref{fig:ohcal_zs_template_corr} (upper left) we see the same trends as EMCal correlation plot, namely a band at 1, a broader band below 1 and structure at low energy. However, the band below 1 for the OHCal is broader than in the EMCal case. Additionally, in the OHCal case, we still see the correlated and anti correlated trendlines for the processing of low energy waveforms using the template fit versus the zs method. For IHCal $ADC_{\text{template fit}}$ to $ADC_{\text{sample 6 – sample 0}}$ correlation plot, we can see the same trends as EMCal/OHCal correlation plot (band at 1, broader band below 1, structure at low energy).
+
+Further investigation into the correlated and anti correlated trendlines seen in the low ADC region was conducted using the OHCal waveform data from run 23727 and confirmed with EMCal waveform data from run 23727. By selecting for waveforms which fit into the anti correlated band, namely with a positive ADC value from processing with the template fit and a negative ADC value from processing with the ZS method and vice versa, we found that the majority of the events in this anti correlated band were waveforms like the ones shown in Fig. \ref{fig:noisy_waveforms}. In Fig \ref{fig:noisy_waveforms} we see a waveform decreasing (left)/increasing (right) across the full timing window of the waveform and exhibiting some kind of long range or multi time sample noise in addition to single sample noise. This fully increasing/decreasing noise behavior is fit by the template fit to be the tail of a waveform peak, therefore in the increasing case, the template fit returns a positive ADC value and a peak timing between the 0-4th time sample, and in the decreasing case, the template fit returns a negative ADC value expecting that this is the tail of an inverted peak also with a peak timing between the 0-4th time sample. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.49\textwidth]{Figures/ZS_template_fit/pos_noise_wf.png}
+    \includegraphics[width=0.49\textwidth]{Figures/ZS_template_fit/neg_noise_wf.png}
+    \caption{Examples of noisy waveforms from beam data. Left waveform processed by template fit with value of 18.9 ADC and processed with ZS algorithm with value of -10 ADC. Right waveform processed by template fit with value of -20.5 ADC and processed with ZS algorithm with value of 11 ADC.}
+    \label{fig:noisy_waveforms}
+\end{figure}
+
+Understanding how the template fit processes these waveforms with long range noise can help us to understand the structure and scale of Figs. \ref{fig:emcal_zs_template_corr} (bottom right) and \ref{fig:ohcal_zs_template_corr} (bottom right). These plots show the mean ratio of ADC distribution in region [-50,50] is lower for ZS distribution than template fit distribution. For the EMCal this mean ratio of $ADC_{\text{template fit}}$/$ADC_{\text{sample 6 – sample 0}}$ in low energy range [-50,50] ADC (~+/-75 MeV) show a consistent ratio of 0.57. This ratio should be related to the competing effects at low energy of correlated energy values found from processing with the template fit and ZS on waveforms with low energy signals and anti correlated energy values found from processing waveforms with long range noise using the template fit and ZS. THe OHCal mean ratio of $ADC_{\text{template fit}}$/$ADC_{\text{sample 6 – sample 0}}$ in low energy range [-50,50] ADC (~+/-150 MeV) is around 0.74 but has two blue areas that correspond to 4 ADC boards with high pedestal RMS (around 10 ADC), that seem to be main contributors to the anti-correlation band seen in the full detector correlation plot. Once again the two trends compete with one another at low energy with more noisy boards having a lower mean ratio due to the larger contribution of anti correlated noise and less noisy boards having a higher mean ratio due to the smaller contribution of anti correlated waveforms. The IHCal mean ratio of $ADC_{\text{template fit}}$/$ADC_{\text{sample 6 – sample 0}}$ in low energy range [-50,50] ADC (~+/-25 MeV) has 2 blue shaded areas correspond to 2 ADC boards with high pedestal RMS (around 6 ADC) which exhibit the same behavior as the OHCal noisy boards.
+
+To determine the energy values in GeV that correspond to the ADC values found from our ZS method, we need to establish a cross calibration between the ADC values found using the ZS method and the ADC values found using the template fit. The absolute calibration established for all three calorimeters in \cite{Seidlitz1} is using the template fit where the peak time is a free parameter. Since the ZS method does not take the timing as a free parameter, we need to establish a cross calibration to account for tower by tower timing differences which are easily handled by the template fit but are not handled by the ZS method. To find this cross calibration, we find the $ADC_{\text{template fit}}$/$ADC_{\text{sample 6 – sample 0}}$ ratio for a higher energy range of [100,1000] ADC. This corresponds to the band structure at 1 and lower band structure below 1 seen in the $ADC_{\text{template fit}}$ to $ADC_{\text{sample 6 – sample 0}}$ correlation plots (Figs. \ref{fig:emcal_zs_template_corr}, \ref{fig:ohcal_zs_template_corr}, \ref{fig:ihcal_zs_template_corr} (top left)). Mapping these trends on to our tower by tower mean ratio of $ADC_{\text{template fit}}$/$ADC_{\text{sample 6 – sample 0}}$ in higher energy range [100,1000] ADC (Figs. \ref{fig:emcal_zs_template_corr}, \ref{fig:ohcal_zs_template_corr}, \ref{fig:ihcal_zs_template_corr} (top right)), we see that for the EMCal, most towers have a ratio value of nearly 1 with some parts of the detector having a value around 0.8, likely from these parts of the detector not being timed in exactly at time sample 6. These towers contribute to the band below 1 in the correlation plot. We see similar results in the OHCal and IHCal, with parts of the detector having a ratio of 1 and towers timed in at time sample 6, and other parts of the detector being slightly out of time, lowering the ratio and contributing to the large band below 1 seen in the OHCal and IHCal $ADC_{\text{template fit}}$ to $ADC_{\text{sample 6 – sample 0}}$ correlation plots. Additionally, we see structure in mean ratio of $ADC_{\text{template fit}}$/$ADC_{\text{sample 6 – sample 0}}$ which  somewhat corresponds to different cable lengths of OHCal, once again pointing towards this ratio be influenced by timing differences between different parts of the detector. 
+
+We use these tower by tower ratios as a cross calibration for the energy in GeV from the ZS waveform processing method. 
+To find the energy of a waveform processed with the ZS method, we use the following equation:
+\begin{equation}
+    E_{ZS} = ADC_{ZS} * C_{\text{Template fit}} * \frac{\overline{ADC}_{\text{Template fit}}}{\overline{{ADC}}_{ZS}}
+\end{equation}
+where $C_{\text{Template fit}}$ is the tower by tower absolute energy calibration factor from either the HCal cosmics calibration or EMCal calibration from the $\pi^{0}$ mass peak and $\frac{\overline{ADC}_{\text{Template fit}}}{\overline{ADC}_{ZS}}$ is the tower by tower ZS cross calibration factor previously described and shown in Figs. \ref{fig:emcal_zs_template_corr}, \ref{fig:ohcal_zs_template_corr}, \ref{fig:ihcal_zs_template_corr} (top right).
+
+\subsection{Total $\ET$ and \dEtdeta with ZS + template fit}
+
+From our study of the ZS and template fit waveform processing methods, we now understand that the low energy region of our tower energy spectra is quite noisy and this noise is processed differently using the template fit versus ZS method. To eliminate the positive bias derived from the template fit processing of noisy waveforms, we implement a ZS + template fit method for processing our calorimeter towers for our $\ET$ and $\text{d}\ET/\text{d} \eta$ measurements. Using this ZS + template fit processing method, we establish a threshold ADC value which is checked against a waveform's sample 6 - sample 0 ADC value. If the waveform's ZS value falls below the threshold ADC value, we process the waveform using the value from sample 6 - sample 0 and if the waveform's ZS value is above the threshold ADC value, we process the waveform using the template fit method. 
+
+Our goal of using the ZS + template fit method is to fully process the calorimeter noise waveforms with the ZS method so that they do not incur a positive bias from the template fitting. Therefore, we test a range of ZS thresholds from 10 to 50 ADC to find at what point our $\ET$ and $\text{d}\ET/\text{d} \eta$ measurements become robust to the ZS + template fit processing method, indicating that we are no longer having noise contributions to the offset or pedestal of our energy measurements. In Fig. \ref{fig:ET_w_zs} we can see the effect of applying various ZS thresholds on the total $\ET$ of each calorimeter. 
+
+Applying any ZS threshold has the largest effect on the EMCal $\ET$ distribution, where we see a large decrease in the offset of the $\ET$ distribution once we start processing low energy waveforms with the ZS method instead of the template fit. Interestingly, we can see that low ZS thresholds like 10 ADC the EMCal $\ET$ distribution peaks at below 0 GeV and then as we increase the ZS threshold the $\ET$ distribution increases and finally stabilizes at 5 GeV for ZS thresholds of 30 ADC and above. For the ZS thresholds of 10 and 20 ADC, we are still processing some of the noise using the template fit, however if we recall the waveforms in Fig. \ref{fig:noisy_waveforms}, the waveform that is uniformly decreasing will be alwasy be fit with the ZS method, resulting in a negative energy contribution to the total $\ET$ while the waveform that is uniformly increasing when fit with the template fit method because its ZS value is above the threshold will also result in a negative energy contribution to the total $\ET$ as this waveform processed with the template fit is seen as the tail of an inverted peak. Therefore, when we are processing all of the waveforms with decreasing long range noise with the ZS method and some of the waveforms with increasing long range noise with the template fit method, we see an overall shift of the total $\ET$ distribution in the negative energy direction. As we raise the ZS threshold and more of these increasing noise waveforms are processed with the ZS method, we see the total $\ET$ rise and finally stablize around a threshold of 30 ADC. 
+
+We see very little impact on the IHCal $\ET$ distribution and a modest decrease of the offset of the OHCal $\ET$ distribution of about 2 GeV leaving the offset of the OHCal $\ET$ distribution processed with the ZS + template fit method between 0 and 1 GeV. Additionally, for the OHCal MB $\ET$ distribution, we see little change in the distribution for ZS thresholds of 20 ADC and higher. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.32\linewidth]{Figures/ZS_template_fit/emcal_totalET_multi_zs_p011.png}
+    \includegraphics[width=0.32\linewidth]{Figures/ZS_template_fit/ihcal_totalET_multi_zs_p011.png}
+    \includegraphics[width=0.32\linewidth]{Figures/ZS_template_fit/ohcal_totalET_multi_zs_p011.png}
+    \caption{EMCal, IHCal and OHCal total $\ET$ distributions without timing cuts and with ZS cross calibration factors applied for 5 different ZS thresholds. Plots made with ana.403 p011 production}
+    \label{fig:ET_w_zs}
+\end{figure}
+
+We also investigate the effect of applying the ZS cross calibration factors on the reconstructed calorimeter $\text{d}\ET/\text{d} \eta$ in Figs. \ref{fig:emcal_zs_detdeta}, \ref{fig:ihcal_zs_detdeta} and \ref{fig:ohcal_zs_detdeta}. For the EMCal reconstructed $\text{d}\ET/\text{d} \eta$, we see a very large effect on the $\text{d}\ET/\text{d} \eta$ value by applying any threshold of zero suppression. However, we find that there is little effect on the $\text{d}\ET/\text{d} \eta$ measurement from applying the ZS cross calibration factors. This is likely due to the majority of the EMCal being timed in correctly have having cross calibration factors very close to 1, therefore this is a very small effect for the EMCal. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.4\linewidth]{Figures/ZS_template_fit/emcal_reco_zs_nocrosscalib.png}
+    \includegraphics[width=0.4\linewidth]{Figures/ZS_template_fit/emcal_reco_zs_crosscalib.png}
+    \includegraphics[width=0.4\linewidth]{Figures/ZS_template_fit/emcal_reco_zs_nocrosscalib_ratio.png}
+    \includegraphics[width=0.4\linewidth]{Figures/ZS_template_fit/emcal_reco_zs_crosscalib_ratio.png}
+    \caption{Comparison of reconstructed EMCal $\text{d}\ET/\text{d} \eta$ measurements from beam data processed using ZS + template fit method for 7 different ZS thresholds between 10 and 50 ADC. Plots on the left do not have tower by tower ZS cross calibration factors applied while plots of the right do have ZS cross calibration factors applied.}
+    \label{fig:emcal_zs_detdeta}
+\end{figure}
+
+We also look at the effect of applying ZS cross calibration factors in the IHCal and OHCal. In Fig. \ref{fig:ihcal_zs_detdeta}, we see that there is a small effect on the $\text{d}\ET/\text{d} \eta$ from applying any ZS threshold. However, in the case that we don't apply a ZS cross calibration factor, the $\text{d}\ET/\text{d} \eta$ changes as a function of the ZS threshold. This is happening because we are underestimating real signal energies by using the ZS method of waveform processing when the signal peak is not at exactly time sample 6 and by raising the ZS threshold we are increasing the number of real signals we are processing with this ZS method that is underestimating the energy. When we correct for this effect by applying the ZS cross calibration factors we find that the $\text{d}\ET/\text{d} \eta$ for all ZS threshold for the IHCal is stable. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.4\linewidth]{Figures/ZS_template_fit/ihcal_reco_zs_nocrosscalib.png}
+    \includegraphics[width=0.4\linewidth]{Figures/ZS_template_fit/ihcal_reco_zs_crosscalib.png}
+    \includegraphics[width=0.4\linewidth]{Figures/ZS_template_fit/ihcal_reco_zs_nocrosscalib_ratio.png}
+    \includegraphics[width=0.4\linewidth]{Figures/ZS_template_fit/ihcal_reco_zs_crosscalib_ratio.png}
+    \caption{Comparison of reconstructed IHCal $\text{d}\ET/\text{d} \eta$ measurements from beam data processed using ZS + template fit method for 7 different ZS thresholds between 10 and 50 ADC. Plots on the left do not have tower by tower ZS cross calibration factors applied while plots of the right do have ZS cross calibration factors applied. Plots made with ana.399p008 production.}
+    \label{fig:ihcal_zs_detdeta}
+\end{figure}
+
+In Fig. \ref{fig:ohcal_zs_detdeta}, we see similar results to the IHCal, that applying any ZS threhold has a small effect on the reconstructed $\text{d}\ET/\text{d} \eta$ and that in order to not underestimate the energy of waveforms processed by the ZS method and have our $\text{d}\ET/\text{d} \eta$ value robust to ZS threshold, we must apply a tower by tower ZS cross calibration factor.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.4\linewidth]{Figures/ZS_template_fit/ohcal_reco_zs_nocrosscalib.png}
+    \includegraphics[width=0.4\linewidth]{Figures/ZS_template_fit/ohcal_reco_zs_crosscalib.png}
+    \includegraphics[width=0.4\linewidth]{Figures/ZS_template_fit/ohcal_reco_zs_nocrosscalib_ratio.png}
+    \includegraphics[width=0.4\linewidth]{Figures/ZS_template_fit/ohcal_reco_zs_crosscalib_ratio.png}
+    \caption{Comparison of reconstructed OHCal $\text{d}\ET/\text{d} \eta$ measurements from beam data processed using ZS + template fit method for 7 different ZS thresholds between 10 and 50 ADC. Plots on the left do not have tower by tower ZS cross calibration factors applied while plots of the right do have ZS cross calibration factors applied. Plots made with ana.399p008 production.}
+    \label{fig:ohcal_zs_detdeta}
+\end{figure}
+
+\subsection{ZS + template fit method on pedestal data}
+
+To ensure we are accounting for all pedestal noise contributions to $\text{d}\ET/\text{d} \eta$ in our ZS + template fit method, we also apply this method to pedestal data. Using 3M pedestal data events for the IHCal and OHCal and 700k pedestal data events for the EMCal, we process waveforms using the ZS + template fit method used for beam events, for multiple ZS thresholds and then measure the reconstructed $\text{d}\ET/\text{d} \eta$ from this pedestal data to find the pedestal contribution to $\text{d}\ET/\text{d} \eta$. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.32\linewidth]{Figures/ZS_template_fit/emcal_reco_pedestal_data_nozs.png}
+    \includegraphics[width=0.32\linewidth]{Figures/ZS_template_fit/emcal_reco_pedestal_data_30_50_zs.png}
+    \includegraphics[width=0.32\linewidth]{Figures/ZS_template_fit/emcal_reco_pedestal_data_40_50_zs.png}
+    \includegraphics[width=0.32\linewidth]{Figures/ZS_template_fit/ihcal_reco_pedestal_data_3M.png}
+    \includegraphics[width=0.32\linewidth]{Figures/ZS_template_fit/ihcal_reco_pedestal_data_multi_zs_3M.png}
+    \includegraphics[width=0.32\linewidth]{Figures/ZS_template_fit/ihcal_reco_pedestal_data_20_30_zs_3M.png}
+    \includegraphics[width=0.32\linewidth]{Figures/ZS_template_fit/ohcal_reco_pedestal_data_3M.png}
+    \includegraphics[width=0.32\linewidth]{Figures/ZS_template_fit/ohcal_reco_pedestal_data_multi_zs_3M.png}
+    \includegraphics[width=0.32\linewidth]{Figures/ZS_template_fit/ohcal_reco_pedestal_data_20_30_zs_3M.png}
+    \caption{Comparison of $\text{d}\ET/\text{d} \eta$ measurements from pedestal data processed using template fit only and ZS + template fit method for 3 different ZS thresholds, 10, 20 and 30 ADC for the IHCal and OHCal and 30, 40 and 50 ADC for the EMCal. Plots in right column are included to more clearly show the results included in the center column plots with values close to zero.}
+    \label{fig:pedestal_detdeta}
+\end{figure}
+
+In Fig. \ref{fig:pedestal_detdeta}, we can see the EMCal, IHCal and OHCal reconstructed $\text{d}\ET/\text{d} \eta$ found using the ZS + template fit method. We see that for all three calorimeters, when only processing the pedestal data with the template fit, there is an overall positive value for the reconstructed $\text{d}\ET/\text{d} \eta$. However, when processing the IHCal and OHCal pedestal data with the ZS + template fit method for a ZS threshold of 20 or 30 ADC, the reconstructed $\text{d}\ET/\text{d} \eta$ in both the IHCal and OHCal is consistent with 0. When processing the EMCal pedestal data with the ZS + template fit method for a ZS threshold of 40 ADC, the reconstructed $\text{d}\ET/\text{d} \eta$ in the EMCal is less than 30 MeV for all $\eta$ bins. Therefore in our nominal data results we chose to process our beam data using the ZS + template fit method with a ZS threshold of 30 ADC for both the IHCal and OHCal which corresponds to a pedestal contribution to $\text{d}\ET/\text{d} \eta$ of 0 GeV and a ZS threshold of 40 ADC for the EMCal with an $\eta$ dependent pedestal contribution to $\text{d}\ET/\text{d} \eta$ between -0.03 and 0 GeV. 

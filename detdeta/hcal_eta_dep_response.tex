@@ -1,0 +1,38 @@
+A comparison of IHCal and OHCal sampling fractions was calculated with single particle studies using the simple event generator of $\mu_{-}$ and $\pi^{-}$ particles. Dataset information is as follows: 
+\begin{itemize}
+    \item 5M 16 GeV $\mu_{-}$ with uniform $\eta$ distribution and 10 cm wide z vertex distribution using simple event generator with only IHCal or OHCal in simulation
+    \item 5M 16 GeV $\pi^{-}$ with uniform $\eta$ distribution and 10 cm wide z vertex distribution using simple event generator with only IHCal or OHCal in simulation
+    \item 1M 16 GeV $\pi^{-}$ with uniform $\eta$ distribution and 10 cm wide z vertex distribution using simple event generator with full detector in simulation
+\end{itemize}
+
+Sampling fraction for $\eta$ slices of the HCals were found from distributions of:
+\begin{equation}
+    \frac{E_{\text{vis}}}{E_{\text{dep}}} = \frac{E_{\text{vis}}}{E_{\text{scint}} + E_{\text{abs}}}
+\end{equation}
+
+Where $E_{vis}$ is the light yield from the scintillators and $E_{dep}$ is the energy deposited in scintillators + absorbers, both accessed on the g4hits level. $E_{\text{scint}}$ is the energy deposited in the scintillators, and $E_{\text{abs}}$ is the energy deposited in the absorber material.
+
+Both HCals were segmented into a grid of 24x32 two-towers (1 tower in eta and 2 towers in phi) because the geometry information about the absorber hits is only known to the sector (2 tower) level. An $E_{\text{vis}}$/$E_{\text{dep}}$ distribution was found for each of the 24 $\eta$ slices with entries of each of the 32 two-tower blocks that correspond to that $\eta$ slice. These distributions were then each fit with a Gaussian function to find their peak value. To minimize background in the $E_{\text{vis}}$/$E_{\text{dep}}$ distribution from towers with very low energy deposition, an $E_{\text{dep}} >$ 20 MeV cut is applied for the IHCal and $E_{\text{dep}} >$ 100 MeV cut for the OHCal.
+
+The resulting sampling fractions are compared with the current $\eta$ independent sampling fraction values in the simulation. The $\eta$ independent OHCal sampling fraction is 0.0338 and $\eta$ independent IHCal sampling fraction is 0.162 in simulation, both found using a 16 GeV $\pi^{-}$ particle gun at $\eta$ = 0 with the old HCal geometry.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.48\linewidth]{Figures/hcal_sampling_fraction/ihcal_muon_sf.png}
+    \includegraphics[width=0.48\linewidth]{Figures/hcal_sampling_fraction/ohcal_muon_sf.png}
+    \includegraphics[width=0.48\linewidth]{Figures/hcal_sampling_fraction/ihcal_pion_sf.png}
+    \includegraphics[width=0.48\linewidth]{Figures/hcal_sampling_fraction/ohcal_pion_sf.png}
+    \includegraphics[width=0.48\linewidth]{Figures/hcal_sampling_fraction/ihcal_pion_full_detector_sf.png}
+    \includegraphics[width=0.48\linewidth]{Figures/hcal_sampling_fraction/ohcal_pion_full_detector_sf.png}
+    \caption{$\eta$ dependent sampling fraction for different particle types in both the inner and outer hadronic calorimeters. The top figures show the $\mu^-$ response in the IHCal and OHCal (left column and right column, respectively) with only the detector of interest in simulation. The middle figures show the same for the $\pi^-$. The bottom figures show the same as the middle figures, but with the entire detector enabled in simulation. }
+    \label{fig:enter-label}
+\end{figure}
+
+The IHCal sampling fraction for $\pi^{-}$ with just only the IHCal enabled and with full detector simulation show good agreement with $\eta$ independent sampling fraction (bottom left plot). The OHCal sampling fraction for $\pi^{-}$ is lower than the $\eta$ independent sampling fraction. The peak fitting procedure used to determine this sampling fraction is influenced by the large background in $E_{\text{vis}}$/$E_{\text{dep}}$ distributions for the $\pi^{-}$ particle gun cases. 
+
+Overall results of $\eta$ dependent sampling fraction study are first that there is a small influence from hadronic showering. The sampling fraction calculated from $\mu^{-}$ is higher than sampling fraction found from $\pi^{-}$, and thus there is a slight effect from showering compared to the mip distribution. The low energy region of the sampling fraction vs. $E_{\text{dep}}$ plot is not constant. 
+
+We also find that there is a small influence from inner detectors/support structure on the high $\eta$ region of HCals. Sampling fractions in particle gun studies with standalone HCals versus with the full detector in simulation agree with each other for $\eta$ bins = [4,19], with slight deviations in high $\eta$ regions. IHCal results agree with the $\eta$ independent sampling fraction within 7\% for all $\eta$ slices. The large background in OHCal sampling fraction distributions for $\pi_{-}$ particle gun cases influence the peak fitting. The overall scale is lower than the $\eta$ independent sampling fraction, and the background in SF distributions larger in forward $\eta$ slices than in central $\eta$ slices ($\approx$ 30\% difference between the sampling fraction for central eta towers and for $\eta$ bins = 0,23 towers).
+
+Note all of these sampling fraction studies were completed with the pole tip doors turned off in simulation. Studies should be redone with pole tip doors turned on in simulation. Additionally, the findings from this study were that deviations from the $\eta$ independent sampling fraction are small and the absolute energy calibration in the HCals is determined on the $E_{vis}$ to ADC level. Therefore, applying any kind of $\eta$ dependent sampling fraction was found to not be necessary for this analysis.
+

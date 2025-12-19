@@ -1,0 +1,110 @@
+\documentclass[type=report,linenumbering=on]{sphenix}
+\usepackage{amsmath}
+\usepackage{lipsum}
+\usepackage{array}
+\usepackage{cleveref}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+
+\newcommand{\Npart}{\mbox{$N_{\rm part}$}\xspace}
+\newcommand{\Ncoll}{\mbox{$N_{\rm coll}$}\xspace}
+\newcommand{\Nch}{\mbox{$N_{\rm ch}$}\xspace}
+\newcommand{\dEtdeta}{\mbox{$\text{d}E_{\text{T}}/\text{d}\eta$}\xspace}
+\newcommand{\meanpt}{\mbox{$\langle p_T \rangle$}\xspace}
+\newcommand{\meanet}{\mbox{$\langle {\rm E}_{\text{T}} \rangle$}\xspace}
+\newcommand{\sqs}{\mbox{$\sqrt{s}$}\xspace}
+\newcommand{\snn}{\mbox{$\sqrt{s_{_\mathrm{NN}}}$}\xspace}
+\newcommand{\sqsn}{\mbox{$\sqrt{s_{_\mathrm{NN}}}$}\xspace}
+\newcommand{\sqsntwo}{\mbox{$\sqrt{s_{_\mathrm{NN}}}=200$~GeV}\xspace}
+\newcommand{\auau}{\mbox{Au+Au}\xspace}
+\newcommand{\pp}{\mbox{$p$+$p$}\xspace}
+\newcommand{\pT}{\mbox{$p_{\text{T}}$}}
+\newcommand{\ET}{\mbox{$E_{\text{T}}$}}
+
+\begin{document}
+
+\title{PPG03 \dEtdeta measurement analysis}
+\author{Emma McLaughlin, Hanpu Jiang, Shuhang Li, Blair Seidlitz, W.A. Zajc (Columbia University)\\Skaydi Grossberndt, Stefan Bathe (Baruch College CUNY)\\Joseph Clement, Sam Liechty, Daniel Lis, JaeBeom Park, Jamie Nagle (University of Colorado Boulder)}
+\date{\today}
+
+\doctag{sPH-ppg-2023-003}
+\docversion{0.1}
+
+
+\maketitle
+
+\begin{abstract}
+This is the internal note for sPH-ppg-2023-003, the \dEtdeta measurement in \auau collisions at \snn = 200 GeV using Au+Au data collected by sPHENIX during RHIC Run24.
+\end{abstract}
+
+
+\section{Introduction} 
+\input{Introduction}
+
+\section{Analysis code base}
+\input{codebase}
+
+\section{Data Selection}
+\input{selection}
+
+\section{Calorimeter Tower Usage}
+\label{sec:towerreco}
+\input{towerreco}
+
+\section{Analysis Procedure and Corrections}
+\input{anacorr}
+
+\section{Systematic Uncertainties}
+\input{systematics}
+
+\clearpage
+\section{Results}
+\input{Results}
+
+\section{Conclusion}
+\input{Conclusion}
+
+\clearpage
+\bibliographystyle{unsrturl}
+\bibliography{cite}
+\clearpage
+
+\appendix{Appendix} 
+
+\section{MC particle composition}
+\label{sec:MC_particle_ratios}
+\input{mc_particle_spectra_ratios}
+\clearpage
+
+\section{Zero Suppression}
+\label{sec:zerosuppression}
+\input{zerosuppression}
+\clearpage
+
+\section{Complete set of \dEtdeta measurements}
+\label{sec:full_detdeta_plots}
+\input{full_detdeta_plots}
+\clearpage
+
+\section{Effect of pole tip doors and support structures}
+\label{sec:support_structure}
+\input{pole_doors_support_structure}
+\clearpage
+
+\section{Calorimeter tower timing cut studies}
+\label{sec:timing_stutides}
+\input{timing_cut}
+\clearpage
+
+\section{Z-direction flipped for Hijing events}
+\input{Z-flip HIJING}
+
+\section{EPOS and AMPT implementation/validation}
+\label{sec:epos_ampt_implement}
+\input{generator_implementation}
+\clearpage
+
+\section{HCal response and sampling fraction}
+\label{sec:SamplingFrac}
+\input{hcal_eta_dep_response}
+
+\end{document}

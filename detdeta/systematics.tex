@@ -1,0 +1,372 @@
+This section describes the various systematic uncertainties considered in this analysis. 
+The individual items for each systematic source are listed as following:
+\begin{itemize}
+    \item Calorimeter calibration 
+    \item Intermittant hot tower masking
+    \item Calorimeter hadronic response modeling
+    \item MC reweighting
+    \item Zero suppression application
+    \item Detector acceptance
+    \item Global uncertainties (z-vertex, \Npart determination)
+\end{itemize}
+
+\subsection{Calorimeter calibration}
+
+Three systematic uncertainties were provided to account for the uncertainty for the absolute calibration of each of the three calorimeter layers (EMCal, IHCal and OHCal). These are labeled EMsyst1-3, IHsyst1-3 and OHsyst1-3. 
+
+The EMCal systematic uncertainties account for the statistical uncertainty on the $\pi^{0}$ mass found from data and for data and MC differences in the $\pi^{0}$ mass, including resolution difference studied by varying the MC smearing and seeing the effect on the predicted $\pi^{0}$ mass value. The total effect of these calibration systematics on the EMCal $dE_{T}/d \eta$ is a 2.6\% over all centrality bins studied in this measurement. The vast majority of this uncertainty comes from EMsyst2 which accounts for data and MC differences. More information on the EMCal calibration uncertainties can be found in the Year 1 EMCal calibration note \cite{Seidlitz1}.
+
+Three systematic uncertainties were provided to account for the uncertainty in each of the HCal's absolute EM scale calibration, IHsyst1-IHsyst3 and OHsyst1-OHsyst3. To find tower by tower calibration factors from cosmic muons, the ratio of MPV, or most probable value, is taken in MC/data; to get the MPV nominally, the MIP distributions are fit to a gamma function and the MPV is extracted from this fit. The HCal's absolute EM scale calibration systematic uncertainties, IHsyst1-IHsyst3 and OHsyst1-OHsyst3, are determined from both the statistical and systematic errors in the fitting of these cosmics MIP distributions.
+
+\subsection{Intermittent hot tower masking}
+\label{hot_tower_syst}
+
+To study the effect changing calorimeter acceptance from masking high $\chi2$ towers on the event by event level, the dataset was split into 1\% centrality intervals and the variation in the $\dEtdeta$ measurement was found between events in this centrality interval including events with intermittent hot towers and excluding events with intermittent hot towers. First, the smallest centrality intervals possible of 1\% were used in this study since the rate of intermittent hot towers is slightly centrality dependent. Second, in the dataset which includes events with intermittent hot towers, these hot towers were masked on the event level. These steps were taken to make as direct a comparison as possible of the effects of only the small changes in calorimeter acceptance (on the level of 1 tower) on the $\dEtdeta$ measurement. The variation in the reconstruction level $\dEtdeta$ measurement for the EMCal, HCal, Full calorimeter, IHCal-only and OHCal-only are included in Fig~\ref{fig:hot_tower_variation} for a range of centrality intervals both in the most central and most peripheral intervals of the measurement centrality range of 0-60\%. For all centrality intervals studied, the effect of including events with masked intermittent hot towers was found to be negligible on the $\dEtdeta$ measurement. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.24\linewidth]{Figures/hot_tower_syst/emcal_hot_tower_mask_0-1.png}
+    \includegraphics[width=0.24\linewidth]{Figures/hot_tower_syst/emcal_hot_tower_mask_2-3.png}
+    \includegraphics[width=0.24\linewidth]{Figures/hot_tower_syst/emcal_hot_tower_mask_57-58.png}
+    \includegraphics[width=0.24\linewidth]{Figures/hot_tower_syst/emcal_hot_tower_mask_59-60.png}
+    \includegraphics[width=0.24\linewidth]{Figures/hot_tower_syst/hcal_hot_tower_mask_0-1.png}
+    \includegraphics[width=0.24\linewidth]{Figures/hot_tower_syst/hcal_hot_tower_mask_2-3.png}
+    \includegraphics[width=0.24\linewidth]{Figures/hot_tower_syst/hcal_hot_tower_mask_57-58.png}
+    \includegraphics[width=0.24\linewidth]{Figures/hot_tower_syst/hcal_hot_tower_mask_59-60.png}
+    \includegraphics[width=0.24\linewidth]{Figures/hot_tower_syst/calo_hot_tower_mask_0-1.png}
+    \includegraphics[width=0.24\linewidth]{Figures/hot_tower_syst/calo_hot_tower_mask_2-3.png}
+    \includegraphics[width=0.24\linewidth]{Figures/hot_tower_syst/calo_hot_tower_mask_57-58.png}
+    \includegraphics[width=0.24\linewidth]{Figures/hot_tower_syst/calo_hot_tower_mask_59-60.png}
+    \includegraphics[width=0.24\linewidth]{Figures/hot_tower_syst/ihcal_hot_tower_mask_0-1.png}
+    \includegraphics[width=0.24\linewidth]{Figures/hot_tower_syst/ihcal_hot_tower_mask_2-3.png}
+    \includegraphics[width=0.24\linewidth]{Figures/hot_tower_syst/ihcal_hot_tower_mask_57-58.png}
+    \includegraphics[width=0.24\linewidth]{Figures/hot_tower_syst/ihcal_hot_tower_mask_59-60.png}
+    \includegraphics[width=0.24\linewidth]{Figures/hot_tower_syst/ohcal_hot_tower_mask_0-1.png}
+    \includegraphics[width=0.24\linewidth]{Figures/hot_tower_syst/ohcal_hot_tower_mask_2-3.png}
+    \includegraphics[width=0.24\linewidth]{Figures/hot_tower_syst/ohcal_hot_tower_mask_57-58.png}
+    \includegraphics[width=0.24\linewidth]{Figures/hot_tower_syst/ohcal_hot_tower_mask_59-60.png}
+    \caption{Variation in reconstruction level $\dEtdeta$ from Run 54912 using production tag ana450\_2024p009 with and without the inclusion of events with masked intermittently hot towers. Variations for EMCal, HCal, Full Calorimeter, IHCal-only and OHCal-only reconstructed $\dEtdeta$ are shown in vertically in ascending order. Centrality intervals of 0-1\%, 2-3\%, 57-58\% and 59-60\% are shown in order left to right for each calorimeter measurement of reconstructed $\dEtdeta$. }
+    \label{fig:hot_tower_variation}
+\end{figure}
+
+\subsection{Calorimeter hadronic response modeling}
+
+Data to MC comparisons of the $\langle E_{e} \rangle/\langle E_{\pi} \rangle$ response from the sPHENIX test beam paper were used to estimate the uncertainty in the calorimeter hadronic response; this comparison is included in Fig.~\ref{fig:testbeam_eoverpi}. For these data to MC comparisons, the simulation physics lists and Birk's constants were varied to determine a range of possible hadronic responses and compared with test beam data collected by the sPHENIX prototypes. The full range of possible simulation curves is used in the estimation of the hadronic response uncertainty and this range is estimated to be uniformly distributed across the range of simulation curves resulting in a final hadronic response uncertainty from these test beam data to MC comparisons of 6.8\%. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{Figures/hadronic_fraction_syst/HCAL_standalone_eoverpi.pdf}
+    \caption{Taken directly from sPHENIX test beam paper. HCal $\langle E_{e} \rangle/\langle E_{\pi} \rangle$ response. Test beam data is compared with several different simulation setups by changing physics lists and Birks’ constants.}
+    \label{fig:testbeam_eoverpi}
+\end{figure}
+
+This hadronic response uncertainty was then multiplied by the fraction of hadronic energy seen in each of the individual calorimeter layers to determine the hadronic response uncertainty for measurements with each calorimeter configuration (EMCal, HCal, Full Calorimeter, IHCal-only and OHCal-only). The fraction of hadronic energy in each of the calorimeter layers was determined from simulation using the same reweighted EPOS dataset used to determine our \dEtdeta correction factors. An additional check of hadronic fraction of energy in each calorimeter was done using the reweighted AMPT and HIJING datasets and found to be consistent with the reweighted EPOS dataset results.
+
+The hadronic versus EM energy fractions were determined for each calorimeter layer via the calorimeter scintillator g4hits light yield. Whether a g4hit in a calorimeter's scintillator was considered to be EM or hadronic energy was determined by tracing this hit back to it's primary particle at the G4TruthPrimaryParticle level; Contributions to EM-only energy fraction came from primary $e^{+/-}$, $\gamma$ and $\pi^{0}$ particles, while all other particles contributed to the hadronic energy fraction. Fig.\ref{fig:hadronic_fraction_syst} shows the event-by-event fraction of hadronic energy seen in each of the calorimeter layers; the average EMCal average hadronic energy fraction is 61\%, average HCal hadronic fraction is 97\% and average full calorimeter hadronic energy fraction is 69\%. Using both our test beam derived hadronic response uncertainty and our simulation based hadronic energy fraction for each calorimeter layer, we estimate the EMCal hadronic response uncertainty to be 4.1\%, HCal hadronic response uncertainty to be 6.6\%, and full calorimeter hadronic response uncertainty to be 4.7\%. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.32\linewidth]{Figures/hadronic_fraction_syst/had_frac_emcal.png}
+    \includegraphics[width=0.32\linewidth]{Figures/hadronic_fraction_syst/had_frac_hcal.png}
+    \includegraphics[width=0.32\linewidth]{Figures/hadronic_fraction_syst/had_frac_calo.png}
+    \includegraphics[width=0.32\linewidth]{Figures/hadronic_fraction_syst/had_frac_ihcal.png}
+    \includegraphics[width=0.32\linewidth]{Figures/hadronic_fraction_syst/had_frac_ohcal.png}
+    \caption{Fraction of hadronic energy in each calorimeter configuration found from reweighted EPOS events shown for EMCal (top left), HCal (top middle), full calorimeter (top right), IHCal-only (bottom left) and OHCal-only (bottom right).}
+    \label{fig:hadronic_fraction_syst}
+\end{figure}
+
+Additional previous studies of the hadronic response uncertainty were undertaken for the Run 2023 measurement and the results of these previous studies have been used to verify that the hadronic uncertainty determined from test beam studies of the standalone HCal are suitable to be applied to the EMCal and full calorimeter \dEtdeta measurements, since the hadronic response variation due to variations in GEANT hadronic shower modeling is very comparable between the EMCal, full calorimeter and HCal. Here, to estimate our sensitivity to the hadronic response modeling, we use two variations of GEANT physics configuration lists to compare to our nominal physics configuration using FTFP\_BERT. Three datasets of 50,000 EPOS events were simulated in the sPHENIX GEANT4 simulation using the physics configurations FTFP\_BERT, FTFP\_BERT\_HP and QGSP\_BERT\_HP. We compare the reconstructed $\text{d}\ET/\text{d} \eta$ value for each calorimeter and take the largest difference between $\text{d}\ET/\text{d} \eta$ values over the measurement $\eta$ range to determine the effect of using different physics configurations on our measurement. This corresponds to a variation of 3\% in the EMCal $\text{d}\ET/\text{d} \eta$ results, 2-3\% in the IHCal $\text{d}\ET/\text{d} \eta$ results and 3-4\% in the OHCal $\text{d}\ET/\text{d} \eta$ results (Fig. \ref{fig:phys_list_comp}). We make this physics list comparison using standard (unweighted) EPOS generated events due to simulation constraints with studying this effect using the reweighted datasets; however, from previous studies of the particle composition of EPOS, the baryon content, here studied via the $p/\pi$ ratio, is very similar to measured results, with EPOS agreeing well with previous measurements in central events and slightly overestimating the baryon content in peripherial events. Therefore, we expect that we are accurately modeling the differences between different physics lists in central events with possibly a slight overestimation of the effect of different physics lists in more peripheral events. A comparison of the $p/\pi$ ratios mentioned above can be found in App. \ref{sec:MC_particle_ratios} and \cite{PhysRevC.88.024906}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.24\linewidth]{Figures/physics_lists_comp/emcal_reco_w_ratio_epos_mb_phys_list_comp.png}
+    \includegraphics[width=0.24\linewidth]{Figures/physics_lists_comp/ihcal_reco_w_ratio_epos_mb_phys_list_comp.png}
+    \includegraphics[width=0.24\linewidth]{Figures/physics_lists_comp/ohcal_reco_w_ratio_epos_mb_phys_list_comp.png}
+    \includegraphics[width=0.24\linewidth]{Figures/physics_lists_comp/calo_reco_w_ratio_epos_mb_phys_list_comp.png}
+    \caption{Reconstructed $\text{d}\ET/\text{d} \eta$ measurements for EMCal (left), IHCal (middle left), OHCal (middle right) and full calorimeter (right) from EPOS + GEANT4 simulation. Comparison between different physics configuration lists, FTFP\_BERT, FTFP\_BERT\_HP and QGSP\_BERT\_HP.}
+    \label{fig:phys_list_comp}
+\end{figure}
+
+\subsection{MC reweighting}
+To estimate the uncertainty associated with deriving our correction factors from reconstructed calorimeter energy to truth $\text{d}\ET/\text{d} \eta$, we find the variation in applying our reweighting scheme to three different generators, EPOS, AMPT and HIJING. We first correct our data using both our nominal correction factors from the reweighted EPOS MC sample as well as our variation correction factors from the reweighted HIJING and AMPT MC samples, then we find the average variation from our nominal measurement for each of the fully corrected \dEtdeta measurements at each $\eta$ value over the $\eta$ measurement region. 
+
+Additionally, since we are using a particle spectra reweighting scheme which is a function of only $p_{\text{T}}$ and centrality, we use an additional method of particle spectra reweighting which is differential in transverse momentum and rapidity in order to see how robust our correction factors are to particle spectra differences as a function of rapidity. This rapidity dependence will impart an additional uncertainty on the \dEtdeta measurements. 
+
+To study the effect of applying weights derived from mid-rapidity data for our reweighting factors, we first calculate the data/MC ratio of particle yield as a function of rapidity using data from central collisions (0-5\%) measured by the BRAHMS~\cite{Brahms_pi_spectra,Brahms_p_spectra} experiment. We then apply a rapidity dependent adjustment to our $p_{\text{T}}$-dependent corrections, originally derived from mid-rapidity data, by applying the ratio of the data/MC at specific rapidities to the data/MC at mid-rapidity. By incorporating this rapidity-dependent variation, we can estimate the uncertainties on our MC correction factors from a rapidity-dependent particle spectra, an effect we believe could influence to our measurement in the forward $\eta$ calorimeter towers since this region sees the majority of forward $\eta$ particles either directly from the collision or secondary particles from showers beginning at the pole tip doors at very forward $\eta$. Note that the particle spectra measured by BRAHMS is only for central collisions of 0-5\%. Therefore, we apply the above methodology to find the rapidity dependence on our MC correction factors for central collisions and the relative variation is then propagated to all centrality bins of the \dEtdeta measurement. This rapidity dependence uncertainty on the MC reweighting has an  effect of at most 5.5\% in the most forward towers of the HCal, at most 2.8\% in the most forward towers of the EMCal and 4\% in the full calorimeter measurement. A plot of the MC reweighting rapidity dependence uncertainty is included in Fig. \ref{fig:mc_rap_dep}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.5\linewidth]{Figures/mc_generator_syst/MC_rap_dep_syst.png}
+    \caption{Relative uncertainty in MC particle spectra reweighting rapidity dependence found from relative variation on the \dEtdeta measurement when using rapidity dependent correction to MC-weighting scheme. Nominal MC correction factor is weighted using weighting factors derived from mid-rapidity particle spectra from PHENIX and STAR. Variation MC correction factor has additional weighting factor differential in rapidity which comes from data/MC ratios derived from rapidity dependent spectra from BRAHMS~\cite{Brahms_pi_spectra,Brahms_p_spectra}.}
+    \label{fig:mc_rap_dep}
+\end{figure}
+
+Therefore, the systematic uncertainty on our monte carlo derived correction factors is comprised of these two contributions, uncertainty on the reweighting methodology found from reweighting multiple generators and uncertainty on the $\eta$ dependence of the particle spectra measured in previous experiments that we use to reweight our monte carlo datasets. The overall effect of the MC reweighting uncertainty on the \dEtdeta measurement is between 1.4-1.7\% for the EMCal \dEtdeta measurement, 2.5-2.9\% for the HCal \dEtdeta measurement, and 1.6-1.8\% for the Full Calorimeter \dEtdeta measurement. The HCal \dEtdeta measurement is the most sensitive to both the reweighting methodology and the $\eta$ dependence of the particle spectra used for our MC weights.
+
+\subsection{Zero suppression application}
+As described in Sec. \ref{sec:towerenergyreco}, we employ a zero suppression algorithm for processing both the low energy signals and noise. We vary the ADC threshold at which we switch from waveform processing using zero suppression to using the template fit to estimate the uncertainty in this waveform processing method. The ADC threshold is varied from the nominal thresholds of 100(50) ADC for the EMCal(HCal) to thresholds of 200(100) ADC and 60(30) ADC for the EMCal(HCal). For \dEtdeta results from the EMCal, varying the ZS application threshold has a 1.0-3.6\% effect, with the effect growing in more peripheral events. There is a 0.2\% effect on the HCal \dEtdeta results and 0.8-2.7\% effect on the Full Calorimeter \dEtdeta results. The EMCal measurement varying the most from changes to the ZS threshold is expected as this threshold is directly related to how much noise is processed using the template fit method versus the ZS method in our tower reconstruction. The effects of processing noise with template fit method versus ZS method was studied in depth using Run23 data and is included in Appendix~\ref{sec:zerosuppression}.
+
+\subsubsection{Detector acceptance} 
+To determine the effect of the changing calorimeter acceptance run by run on the \dEtdeta measurement, we study the fully corrected $\text{d}\ET/\text{d} \eta$ for our nominal run 54912 as well as two variation runs, runs 54911 and 54914, on a run by run basis. The run by run variation is determined for each centrality bin and uses run specific correction factors from the reweighted EPOS MC sample determined from run specific bad tower masks (shown in Fig.~\ref{fig:bad_tower_mask}) as well as run specific MC vertex reweighting factors. The fully corrected $\text{d}\ET/\text{d} \eta$ are measured for 3 runs all taken within the same beam fill and have the same calorimeter absolute EM-scale calibration factors applied. Therefore, we expect that the remaining variation that we see for these run by run differences should be due to the run by run differences in acceptance. Fig.\ref{fig:calo_run_variation} shows the run by run \dEtdeta measurements for 0-5\% central events of runs in this run group. Here we can see that the effect of changing calorimeter acceptance is very small, on the level of less than 0.5\%, for all calorimeter \dEtdeta measurements.
+ 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.32\linewidth]{Figures/detector_acceptance_syst/run_by_run_emcal_0-5.png}
+    \includegraphics[width=0.32\linewidth]{Figures/detector_acceptance_syst/run_by_run_hcal_0-5.png}
+    \includegraphics[width=0.32\linewidth]{Figures/detector_acceptance_syst/run_by_run_calo_0-5.png}
+    \includegraphics[width=0.32\linewidth]{Figures/detector_acceptance_syst/run_by_run_ihcal_0-5.png}
+    \includegraphics[width=0.32\linewidth]{Figures/detector_acceptance_syst/run_by_run_ohcal_0-5.png}
+    \includegraphics[width=0.32\linewidth]{Figures/detector_acceptance_syst/run_by_run_syst_0-5.png}
+    \caption{Fully corrected $\text{d}\ET/\text{d} \eta$ results shown for 0-5\% centrality bin using data from EMCal (top left), HCal (top middle), full calorimeter (top right), IHCal-only (bottom left) and OHCal (bottom middle) from 3 different runs of the measurement dataset. The average relative variation as a function of $\eta$ for each calorimeter measurement shown in \dEtdeta uncertainty plot (bottom right).}
+    \label{fig:calo_run_variation}
+\end{figure}
+
+\subsection{Z-vertex Uncertainty}
+For all events used in this study, the z-vertex was determined using the MBD, which in discussion with MBD experts was determined to have a z-vertex resolution of less than 1 cm in central events and about 2.5 cm in peripheral events \cite{Mickey}. To study the effect of this MBD z-vertex resolution on the \dEtdeta measurement, we shift the z-vertex by a conservative 3 cm for all events and find the \dEtdeta value. For all calorimeter measurements, this z-vertex shift has $< 0.5\%$ effect on the \dEtdeta measurement. 
+
+\subsection{\Npart Uncertainty}
+For measurements of \dEtdeta as a function of \Npart, an additional uncertainty on the mean \Npart value for a centrality range is included. Uncertainties on the extracted $\left<\Npart\right>$ values were evaluated using a standard set of variations in the MC Glauber modeling and centrality determination. These include varying the nucleon--nucleon cross-section and other geometric parameters in the Glauber model and varying centile cuts according to the uncertainty in the total efficiency. The dominant source of uncertainty for the  $\left<\Npart\right>$ values was the MB trigger inefficiency. For the centrality intervals used in this measurement, the uncertainties ranged from $0.6$\% in $0$--$5$\% events to $9.5$\% in $50$--$60$\% events. The $\left<\Npart\right>$ uncertainties only contribute to the measurement of $\dEtdeta / (0.5 \Npart)$.
+
+\subsection{Total Systematic Uncertainty}
+
+The total systematic uncertainties for \dEtdeta are found as a function of $\eta$ for each calorimeter measurement and each centrality bin and are shown in Figs.~\labelcref{fig:eta_dep_syst1,fig:eta_dep_syst2}. The total systematic uncertainty as well as contributing uncertainties averaged over the full $-1.1 < \eta < 1.1$ measurement range are shown in Table \ref{table:SystUncertainties} for all centrality bins. The averaged total uncertainty on \dEtdeta from EMCal data is between 5.3\% and 6.5\% and the uncertainty on the EMCal \dEtdeta measurement increases when moving to more peripheral centrality bins. For all centrality bins, largest uncertainty contribution on the EMCal \dEtdeta measurement comes from the uncertainty in hadronic response. However, in more peripheral centrality bins, the uncertainty due to noise processing is also a major source of uncertainty on the EMCal \dEtdeta measurement. The total uncertainty on \dEtdeta from HCal data is consistently between 7.7\% and 7.9\% across all centrality bins. The largest source of uncertainty on the HCal \dEtdeta measurement comes from the uncertainty on the hadronic response and the second largest uncertainty comes from the uncertainty on the MC correction factors. The total uncertainty on the full calorimeter measurement of \dEtdeta ranges between 5.6\% and 6.3\% and, similar to the EMCal measurement, the full calorimeter uncertainties increase when moving to more peripheral bins. The full calorimeter uncertainty is dominated by the hadronic response uncertainty for all centrality bins with uncertainty on the noise becoming a second major source of uncertainty in more peripheral centrality bins.
+
+\begin{table}
+\centering
+\begin{tabular}{ |p{1.3cm}|p{2.1cm}|p{1.0cm}|p{1.0cm}|p{1.0cm}|p{1.0cm}|p{1.3cm}|p{1.0cm}|p{1.0cm}|  }
+\hline
+& & \raggedright Calib. & \raggedright Had. resp. & \raggedright MC & ZS & Accept. & Glob. & Total \\
+\hline
+\multirow{4}{*}{0-5\%} & EMCal   & 2.6  & 4.1 & 1.4 & 1.0 & 0.2 & 0.3 & 5.3 \\
+& HCal                           & 2.7  & 6.6 & 2.9 & 0.3 & 0.3 & 0.1 & 7.9 \\
+& Full Calo                      & 2.1  & 4.7 & 1.8 & 0.8 & 0.2 & 0.2 & 5.6 \\
+& IHCal-only                     & 10.0 & 6.5 & 1.6 & 0.1 & 0.2 & 0.4 & 12.1 \\
+& OHCal-only                     & 1.0  & 6.6 & 3.3 & 0.4 & 0.4 & 0.1 & 7.7 \\
+\hline
+\multirow{4}{*}{5-10\%}& EMCal   & 2.6  & 4.1 & 1.4 & 1.2 & 0.2 & 0.3 & 5.3 \\
+& HCal                           & 2.7  & 6.6 & 2.7 & 0.2 & 0.3 & 0.1 & 7.8 \\
+& Full Calo                      & 2.1  & 4.7 & 1.7 & 0.9 & 0.2 & 0.2 & 5.6 \\
+& IHCal-only                     & 10.0 & 6.5 & 1.5 & 0.1 & 0.3 & 0.4 & 12.1 \\
+& OHCal-only                     & 1.0  & 6.6 & 3.1 & 0.3 & 0.3 & 0.1 & 7.7 \\
+\hline
+\multirow{4}{*}{10-20\%}& EMCal  & 2.6  & 4.1 & 1.4 & 1.3 & 0.4 & 0.3 & 5.3 \\
+& HCal                           & 2.7  & 6.6 & 2.5 & 0.2 & 0.3 & 0.1 & 7.7 \\
+& Full Calo                      & 2.1  & 4.7 & 1.6 & 1.0 & 0.3 & 0.2 & 5.6 \\
+& IHCal-only                     & 10.0 & 6.5 & 1.4 & 0.1 & 0.4 & 0.4 & 12.1 \\
+& OHCal-only                     & 1.0  & 6.6 & 2.9 & 0.3 & 0.3 & 0.1 & 7.5 \\
+\hline
+\multirow{4}{*}{20-30\%}& EMCal  & 2.6  & 4.1 & 1.4 & 1.6 & 0.3 & 0.3 & 5.4 \\
+& HCal                           & 2.7  & 6.6 & 2.5 & 0.2 & 0.2 & 0.1 & 7.7 \\
+& Full Calo                      & 2.1  & 4.7 & 1.6 & 1.2 & 0.2 & 0.2 & 5.7 \\
+& IHCal-only                     & 10.0 & 6.5 & 1.3 & 0.1 & 0.3 & 0.4 & 12.1 \\
+& OHCal-only                     & 1.0  & 6.6 & 2.8 & 0.3 & 0.3 & 0.1 & 7.7 \\
+\hline
+\multirow{4}{*}{30-40\%}& EMCal  & 2.6  & 4.1 & 1.4 & 2.0 & 0.2 & 0.3 & 5.5 \\
+& HCal                           & 2.7  & 6.6 & 2.5 & 0.2 & 0.4 & 0.1 & 7.7 \\
+& Full Calo                      & 2.1  & 4.7 & 1.6 & 1.5 & 0.1 & 0.2 & 5.7 \\
+& IHCal-only                     & 10.0 & 6.5 & 1.4 & 0.1 & 0.2 & 0.4 & 12.1 \\
+& OHCal-only                     & 1.0  & 6.6 & 2.9 & 0.2 & 0.5 & 0.2 & 7.5 \\
+\hline
+\multirow{4}{*}{40-50\%}& EMCal  & 2.6  & 4.1 & 1.6 & 2.5 & 0.2 & 0.3 & 5.9 \\
+& HCal                           & 2.7  & 6.6 & 2.8 & 0.2 & 0.4 & 0.2 & 7.8 \\
+& Full Calo                      & 2.1  & 4.7 & 1.8 & 1.9 & 0.2 & 0.3 & 5.9 \\
+& IHCal-only                     & 10.0 & 6.5 & 1.8 & 0.1 & 0.3 & 0.5 & 12.1 \\
+& OHCal-only                     & 1.0  & 6.6 & 3.1 & 0.2 & 0.5 & 0.2 & 7.6 \\
+\hline
+\multirow{4}{*}{50-60\%}& EMCal  & 2.6  & 4.1 & 1.8 & 3.6 & 0.4 & 0.4 & 6.5 \\
+& HCal                           & 2.7  & 6.6 & 3.0 & 0.2 & 0.4 & 0.2 & 7.9 \\
+& Full Calo                      & 2.1  & 4.7 & 1.9 & 2.7 & 0.3 & 0.3 & 6.3 \\
+& IHCal-only                     & 10.0 & 6.5 & 2.1 & 0.1 & 0.4 & 0.5 & 12.2 \\
+& OHCal-only                     & 1.0  & 6.6 & 3.4 & 0.3 & 0.5 & 0.2 & 7.8 \\
+\hline
+\end{tabular}
+\caption{Summary of systematic uncertainties for \dEtdeta measurements averaged over the full $\eta$ measurement range ($-1.1 < \eta < 1.1$) for each calorimeter measurement for all centrality bins. Uncertainty values listed above are given in percentages.}
+\label{table:SystUncertainties}
+\end{table}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/emcal_total_syst_0-5.png}
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/emcal_total_syst_5-10.png}
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/emcal_total_syst_10-20.png}
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/emcal_total_syst_20-30.png}
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/hcal_total_syst_0-5.png}
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/hcal_total_syst_5-10.png}
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/hcal_total_syst_10-20.png}
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/hcal_total_syst_20-30.png}
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/calo_total_syst_0-5.png}
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/calo_total_syst_5-10.png}
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/calo_total_syst_10-20.png}
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/calo_total_syst_20-30.png}
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/ihcal_total_syst_0-5.png}
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/ihcal_total_syst_5-10.png}
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/ihcal_total_syst_10-20.png}
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/ihcal_total_syst_20-30.png}
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/ohcal_total_syst_0-5.png}
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/ohcal_total_syst_5-10.png}
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/ohcal_total_syst_10-20.png}
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/ohcal_total_syst_20-30.png}
+    \caption{Systematic uncertainties on \dEtdeta measurements as a function of $\eta$ for \dEtdeta measurements from EMCal (top), HCal (middle top), full calorimeter (middle), IHCal-only (middle bottom) and OHCal-only (bottom) data. Uncertainties from the four most central bins, 0-5\%, 5-10\%, 10-20\% and 20-30\%, are shown in increasing order from left to right.}
+    \label{fig:eta_dep_syst1}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/emcal_total_syst_30-40.png}
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/emcal_total_syst_40-50.png}
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/emcal_total_syst_50-60.png}
+    \\
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/hcal_total_syst_30-40.png}
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/hcal_total_syst_40-50.png}
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/hcal_total_syst_50-60.png}
+    \\
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/calo_total_syst_30-40.png}
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/calo_total_syst_40-50.png}
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/calo_total_syst_50-60.png}
+    \\
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/ihcal_total_syst_30-40.png}
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/ihcal_total_syst_40-50.png}
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/ihcal_total_syst_50-60.png}
+    \\
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/ohcal_total_syst_30-40.png}
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/ohcal_total_syst_40-50.png}
+    \includegraphics[width=0.2\linewidth]{Figures/syst_uncertainty/ohcal_total_syst_50-60.png}
+    \caption{Systematic uncertainties on \dEtdeta measurements as a function of $\eta$ for \dEtdeta measurements from EMCal (top), HCal (middle top), full calorimeter (middle), IHCal-only (middle bottom) and OHCal-only (bottom) data. Uncertainties from the three most peripheral bins, 30-40\%, 40-50\% and 50-60\%, are shown in increasing order from left to right.}
+    \label{fig:eta_dep_syst2}
+\end{figure}
+
+\subsection{Correlated and Uncorrelated Systematic Uncertainties}
+
+To make accurate statements comparing the \dEtdeta measurements between the different calorimeter systems and as a function of $\eta$, we must compare the measurements using only their uncorrelated uncertainties. However, many of the systematic uncertainties in this analysis are highly correlated in $\eta$, in centrality as well as between different calorimeter measurements. The most dominant correlated uncertainty is the testbeam-based hadronic response uncertainty which is applied as a constant value across the full measurement range in $\eta$ and is applied as the same relative uncertainty for each centrality bin. The hadronic response uncertainty is a different relative uncertainty between the different calorimeter measurements (ie. EMCal-only, HCal-only and full calorimeter), but these uncertainties are also highly correlated. We look to determine the level of agreement within only uncorrelated systematic uncertainties between the EMCal-only and HCal-only measurements and between measurements of \dEtdeta at positive and negative $\eta$ for all calorimeter measurements below.
+
+\subsubsection{EMCal and HCal agreement}
+
+We first determine the level of correlation between the EMCal and HCal measurements using all systematic variations in this analysis. Plots of the EMCal versus HCal variation for each centrality bin are shown in Fig.~\ref{fig:emcal_hcal_covariance}. The Pearson correlation coefficient is extracted from these correlation plots using the ROOT TGraph function getCorrelationFactor(). The correlation coefficients between the EMCal and HCal measurements for each centrality bin range from 0.77 to 0.59 are given in Table~\ref{tab:emcal_hcal_correlation}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.2\linewidth]{Figures/corr_syst_uncertainties/covariance_0-5.png}
+    \includegraphics[width=0.2\linewidth]{Figures/corr_syst_uncertainties/covariance_5-10.png}
+    \includegraphics[width=0.2\linewidth]{Figures/corr_syst_uncertainties/covariance_10-20.png}
+    \includegraphics[width=0.2\linewidth]{Figures/corr_syst_uncertainties/covariance_20-30.png}
+    \includegraphics[width=0.2\linewidth]{Figures/corr_syst_uncertainties/covariance_30-40.png}
+    \includegraphics[width=0.2\linewidth]{Figures/corr_syst_uncertainties/covariance_40-50.png}
+    \includegraphics[width=0.2\linewidth]{Figures/corr_syst_uncertainties/covariance_50-60.png}
+    \caption{Correlation plots for EMCal and HCal \dEtdeta measurements using each analysis systematic variation for each centrality measurement in the analysis.}
+    \label{fig:emcal_hcal_covariance}
+\end{figure}
+
+\begin{table}[]
+    \centering
+     \begin{tabular}{cc}
+    Centrality interval & $\rho_{EMCal,HCal}$ \\
+    \hline
+        0-5\% & 0.7769 \\
+        5-10\% & 0.7680 \\
+        10-20\% & 0.7545 \\
+        20-30\% & 0.7332 \\
+        30-40\% & 0.7021 \\
+        40-50\% & 0.6456 \\
+        50-60\% & 0.5854 \\
+    \end{tabular}
+    \caption{Correlation coefficient for EMCal and HCal \dEtdeta measurements for each centrality measurement in the analysis.}
+    \label{tab:emcal_hcal_correlation}
+\end{table}
+
+The ratio of the EMCal and HCal \dEtdeta measurements was found with correct subtraction of correlated uncertainties using the following formula for error propagation. 
+\begin{equation}
+    (\frac{\sigma_{EMCal/HCal}}{EMCal/HCal})^2 = (\frac{\sigma_{EMCal}}{EMCal})^2 + (\frac{\sigma_{HCal}}{HCal})^2 - \frac{2\rho_{EMCal,HCal}\sigma_{EMCal}\sigma_{HCal}}{EMCal*HCal}
+\end{equation}
+
+Where EMCal/HCal is the ratio of the EMCal and HCal \dEtdeta measurements, EMCal is the EMCal \dEtdeta measurement and HCal is the HCal \dEtdeta measurement. Fig.~\ref{fig:emcal_hcal_detdeta_ratio} shows the ratio of the EMCal and HCal \dEtdeta measurements for each of the centrality bins in this analysis. For all measurements, the EMCal and HCal measurements are consistent with one another within uncorrelated uncertainties and the ratio of EMCal to HCal measurements is 1 within uncorrelated uncertainties. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.18\linewidth]{Figures/corr_syst_uncertainties/hcal_emcal_ratio_syst_0-5.png}
+    \includegraphics[width=0.18\linewidth]{Figures/corr_syst_uncertainties/hcal_emcal_ratio_syst_5-10.png}
+    \includegraphics[width=0.18\linewidth]{Figures/corr_syst_uncertainties/hcal_emcal_ratio_syst_10-20.png}
+    \includegraphics[width=0.18\linewidth]{Figures/corr_syst_uncertainties/hcal_emcal_ratio_syst_20-30.png}
+    \includegraphics[width=0.18\linewidth]{Figures/corr_syst_uncertainties/hcal_emcal_ratio_syst_30-40.png}
+    \includegraphics[width=0.18\linewidth]{Figures/corr_syst_uncertainties/hcal_emcal_ratio_syst_40-50.png}
+    \includegraphics[width=0.18\linewidth]{Figures/corr_syst_uncertainties/hcal_emcal_ratio_syst_50-60.png}
+    \caption{Ratio of the EMCal and HCal \dEtdeta measurements with full subtraction of correlated measurement uncertainties for each centrality measurement in the analysis.}
+    \label{fig:emcal_hcal_detdeta_ratio}
+\end{figure}
+
+\subsubsection{Agreement at positive and negative $\eta$}
+
+We determine the level of correlation between the EMCal, HCal and full calorimeter measurements at positive and negative $\eta$ in the same manner as for the test of the agreement between the EMCal and HCal measurements. We measure \dEtdeta in 6 bins across the $\eta$ measurement range $\eta < 1.1$ with 3 bins in each of the positive and negative $\eta$ regions. We find the correlation between each of the 3 pairs of measurements at $|\eta|$ using all systematic variations in this analysis for each centrality bin. The correlation between the the most forward bins of the measurement ($0.74 < |\eta| < 1.1$) for the EMCal, HCal and full calorimeter measurements for all centrality intervals are shown in Fig.~\ref{fig:eta_covariance}. The Pearson correlation coefficient is also extracted from these correlation plots using the ROOT TGraph function getCorrelationFactor(). For all measurements and $\eta$ ranges, the results are highly correlated in $|\eta|$ as expected from how the uncertainties were devised. The correlation coefficients for each of the positive-negative $\eta$ pairs, for each calorimeter measurement and each centrality interval are given in Table~\ref{tab:eta_correlation}.
+
+\begin{figure}
+    \centering
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/emcal_pos_neg_eta_covariance_0-5.png}
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/emcal_pos_neg_eta_covariance_5-10.png}
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/emcal_pos_neg_eta_covariance_10-20.png}
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/emcal_pos_neg_eta_covariance_20-30.png} \\
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/emcal_pos_neg_eta_covariance_30-40.png}
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/emcal_pos_neg_eta_covariance_40-50.png}
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/emcal_pos_neg_eta_covariance_50-60.png} \\
+    \includegraphics[height=1.4in] {Figures/corr_syst_uncertainties/hcal_pos_neg_eta_covariance_0-5.png}
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/hcal_pos_neg_eta_covariance_5-10.png}
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/hcal_pos_neg_eta_covariance_10-20.png}
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/hcal_pos_neg_eta_covariance_20-30.png} \\
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/hcal_pos_neg_eta_covariance_30-40.png}
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/hcal_pos_neg_eta_covariance_40-50.png}
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/hcal_pos_neg_eta_covariance_50-60.png} \\
+    \includegraphics[height=1.4in] {Figures/corr_syst_uncertainties/calo_pos_neg_eta_covariance_0-5.png}
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/calo_pos_neg_eta_covariance_5-10.png}
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/calo_pos_neg_eta_covariance_10-20.png}
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/calo_pos_neg_eta_covariance_20-30.png} \\
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/calo_pos_neg_eta_covariance_30-40.png}
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/calo_pos_neg_eta_covariance_40-50.png}
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/calo_pos_neg_eta_covariance_50-60.png}
+    \caption{Correlation plots for the EMCal (top), HCal (middle) and full calorimeter (bottom) \dEtdeta measurements at $0.74 < |\eta| < 1.1$ using each analysis systematic variation for each centrality measurement in the analysis.}
+    \label{fig:eta_covariance}
+\end{figure}
+
+\begin{table}[]
+    \centering
+     \begin{tabular}{c|c|c|c|c|c|c|c|c|c}
+    \multirow{2}{*}{Centrality} & \multicolumn{3}{c|}{EMCal} & \multicolumn{3}{c|}{HCal} & \multicolumn{3}{c}{Full Calo} \\
+    & $\rho_{\eta_{1}}$ & $\rho_{\eta_{2}}$ & $\rho_{\eta_{3}}$ & $\rho_{\eta_{1}}$ & $\rho_{\eta_{2}}$ & $\rho_{\eta_{3}}$ & $\rho_{\eta_{1}}$ & $\rho_{\eta_{2}}$ & $\rho_{\eta_{3}}$ \\
+    \hline
+    0-5\%   & 0.9911 & 0.9791 & 0.9196 & 0.9932 & 0.9621 & 0.8408 & 0.9896 & 0.9742 & 0.8484 \\
+    5-10\%  & 0.9947 & 0.9833 & 0.9419 & 0.9921 & 0.9713 & 0.8411 & 0.9924 & 0.9812 & 0.8723 \\
+    10-20\% & 0.9961 & 0.9812 & 0.9521 & 0.9892 & 0.9671 & 0.8343 & 0.9938 & 0.9807 & 0.8948 \\
+    20-30\% & 0.9965 & 0.9794 & 0.9402 & 0.9900 & 0.9650 & 0.8673 & 0.9943 & 0.9773 & 0.8924 \\
+    30-40\% & 0.9975 & 0.9804 & 0.9586 & 0.9851 & 0.9587 & 0.8607 & 0.9938 & 0.9764 & 0.9146 \\
+    40-50\% & 0.8690 & 0.8394 & 0.9208 & 0.4655 & 0.5028 & 0.5402 & 0.6403 & 0.6318 & 0.7243 \\
+    50-60\% & 0.9601 & 0.9852 & 0.9755 & 0.9135 & 0.9568 & 0.9454 & 0.9483 & 0.9759 & 0.9624 \\
+    \end{tabular}
+    \caption{Correlation coefficient between \dEtdeta measurements at positive and negative $\eta$ for 3 $|\eta|$ bins of EMCal, HCal and full calorimeter \dEtdeta measurements for each centrality measurement in the analysis. Here, $\eta_{1}$ refers to $\eta$ bins $0 < |\eta| < 0.36$, $\eta_{2}$ refers to $\eta$ bins $0.36 < |\eta| < 074$, and $\eta_{3}$ refers to $\eta$ bins $0.74 < |\eta| < 1.1$.}
+    \label{tab:eta_correlation}
+\end{table}
+
+The ratio of the \dEtdeta measurements at positive and negative $\eta$ was found with correct subtraction of correlated uncertainties using the following formula for error propagation using the same ratio equation as for the EMCal and HCal measurement ratio. Fig.~\ref{fig:eta_detdeta_ratio} shows the ratio of the EMCal, HCal and full calorimeter \dEtdeta measurements at positive and negative $\eta$ for each of the centrality bins in this analysis. The measurements at the same $\left|\eta\right|$ are generally consistent across all methods and centralities. Small deviations, up to a few percent, are observed at forward-$\left|\eta\right|$ in the most central intervals and are accounted for within the total estimated uncertainties. The ratio deviates from unity by at most 1.6 sigma (~4\%) in central collisions at high-eta in the EMCal only results. 
+
+\begin{figure}
+    \centering
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/emcal_eta_ratio_syst_0-5.png}
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/emcal_eta_ratio_syst_5-10.png}
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/emcal_eta_ratio_syst_10-20.png}
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/emcal_eta_ratio_syst_20-30.png} \\
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/emcal_eta_ratio_syst_30-40.png}
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/emcal_eta_ratio_syst_40-50.png}
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/emcal_eta_ratio_syst_50-60.png} \\
+    \includegraphics[height=1.4in] {Figures/corr_syst_uncertainties/hcal_eta_ratio_syst_0-5.png}
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/hcal_eta_ratio_syst_5-10.png}
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/hcal_eta_ratio_syst_10-20.png}
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/hcal_eta_ratio_syst_20-30.png} \\
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/hcal_eta_ratio_syst_30-40.png}
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/hcal_eta_ratio_syst_40-50.png}
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/hcal_eta_ratio_syst_50-60.png} \\
+    \includegraphics[height=1.4in] {Figures/corr_syst_uncertainties/calo_eta_ratio_syst_0-5.png}
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/calo_eta_ratio_syst_5-10.png}
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/calo_eta_ratio_syst_10-20.png}
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/calo_eta_ratio_syst_20-30.png} \\
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/calo_eta_ratio_syst_30-40.png}
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/calo_eta_ratio_syst_40-50.png}
+    \includegraphics[height=1.4in]{Figures/corr_syst_uncertainties/calo_eta_ratio_syst_50-60.png}
+    \caption{Correlation plots for the EMCal (top), HCal (middle) and full calorimeter (bottom) \dEtdeta measurements at $0.74 < |\eta| < 1.1$ using each analysis systematic variation for each centrality measurement in the analysis.}
+    \label{fig:eta_detdeta_ratio}
+\end{figure}

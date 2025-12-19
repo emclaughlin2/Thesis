@@ -1,0 +1,25 @@
+The major use of timing cut in this analysis originally was to account for the positive bias incurred from processing waveforms with the template fit. Since calorimeter data in Run 2023 was not zero suppressed, all channels including channels with no signal, just noise waveforms, were readout. These channels with low energy noise when fit with the template fit led to an offset in the calorimeter total $\ET$ distribution. This offset was was most noticeable in the EMCal with 24576 channels (slightly less due to uninstrumented areas) which all contributed a slight positive bias to the total $\ET$ distribution. Therefore, by applying a timing cut to only include energy from waveforms with a peak time around the expected timed-in peak position, we could mitigate some of positive bias to the total $\ET$ from noisy channels since we expect that the timing for noisy channels to be evenly distributed along the full range of 16 time samples in our waveform processing. By taking a timing window of [-2,2] around our expected timed-in peak position, we should be able to eliminate 75\% of the noisy waveforms contributing to the total $\ET$ offset.
+
+For EMCal data processed with only the template fit, there is still a large difference in the offset from zero of the total $\ET$ MB distribution when applying a timing cut around the region of expected timed-in peak position. We took a timing cut window of [-2,2] from the timing of the template fit (determined from the timing distribution of calorimeter hits with ADC $>$ 100); this corresponds to peaks between time samples 4 and 8 of our waveforms. Without using some kind of ZS + template fit method to remedy the contribution from noise to the total $\ET$ distribution, a timing cut is necessary in the EMCal to combat the large contribution of low energy noise from the EMCal having so many towers + positive energy bias from the template fit. 
+
+In central events, applying a timing cut of [-2,2] decreases the Reco EMCal $\text{d}\ET/\text{d} \eta$ by at most 7\%. For the IHCal and OHCal in central events, applying timing cuts of [-2.5,2] for the IHCal and [-3,3.5] for the OHCal (determined from timing distribution of calorimeter hits with ADC $>$ 100) had $<$ 1\% effect on either of the Reco HCal $\text{d}\ET/\text{d} \eta$ measurements. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.48\linewidth]{Figures/timing/emcal_totalET_timing_cut_lowe.png}
+    \includegraphics[width=0.48\linewidth]{Figures/timing/emcal_totalET_timing_cut.png}
+    \caption{Comparison of EMCal total $E_{T}$ for waveforms processed with and without a timing cut. Plots made with ana.399 p008 production.}
+    \label{fig:enter-label}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.48\linewidth]{Figures/timing/emcal_reco_0-5_timing_cuts.png}
+    \includegraphics[width=0.48\linewidth]{Figures/timing/ihcal_reco_basic_timing_cut.png}
+    \includegraphics[width=0.48\linewidth]{Figures/timing/ohcal_reco_basic_timing_cut.png}
+    \includegraphics[width=0.48\linewidth]{Figures/timing/calo_reco_0-5_timing_cuts_ratio.png}
+    \caption{Comparison of reconstructed $dE_{T}/d \eta$ for waveforms processed with and without a timing cut. Plots made with ana.395 p007 production with intermediate EMCal calibration}
+    \label{fig:enter-label}
+\end{figure}
+
+For all three calorimeters, we no longer apply a timing cut to our waveforms and instead apply the ZS + template fit method outlined in Sec. \ref{sec:zerosuppression} to deal with noise contributions to our total $\ET$ and $\text{d}\ET/\text{d} \eta$ measurements.
