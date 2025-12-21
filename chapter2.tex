@@ -2,6 +2,8 @@
 
 \section{Relativistic Heavy Ion Collider}
 
+ 
+
 \section{sPHENIX Detector}
 
 The super Pioneering High Energy Nuclear Interaction eXperiment (sPHENIX) detector is located at RHIC and employs an array of central tracking, calorimeter and global event characterization subsystems in order to make measurements of the heavy ion and proton-proton collisions that occur from the RHIC beams. 
@@ -9,7 +11,7 @@ sPHENIX is the first general purpose detector to be built on a particle collider
 The full array of sPHENIX physics program goals can be found in Fig. \ref{fig:sphenix_physics_program}.
 \begin{figure}
     \centering
-    \includegraphics[width=\linewidth]{Figures/sPHENIXPhysicsProgram.png}
+    \includegraphics[width=\linewidth]{figures/chapter2/sPHENIXPhysicsProgram.png}
     \caption{Diagram of full array of sPHENIX physics program goals including measurements in jet structure, heavy flavor, quarkonia, bulk heavy ion physics and proton spin physics.}
     \label{fig:sphenix_physics_program}
 \end{figure}
@@ -27,7 +29,7 @@ A rendering of the sPHENIX detector highlighting these subsystems with labels ca
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.9\linewidth]{Figures/sphenix_rendering.png}
+    \includegraphics[width=\linewidth]{figures/chapter2/sphenix_rendering.png}
     \caption{sPHENIX detector with subsystems labeled.}
     \label{fig:sphenix_schematic}
 \end{figure}
@@ -47,13 +49,13 @@ By utilizing its high precision position resolution and streaming readout capabi
     \centering
     \begin{subfigure}{\linewidth}
         \centering
-        \includegraphics[width=0.8\linewidth]{Figures/MVTX_stave_and_half_layer.png}
+        \includegraphics[width=\linewidth]{figures/chapter2/MVTX_stave_and_half_layer.png}
         \caption{MVTX stave and half-barrel layer}
     \end{subfigure}
     \hfill
     \begin{subfigure}{\linewidth}
         \centering
-        \includegraphics[width=0.8\linewidth]{Figures/MVTX_detector_barrel.png}
+        \includegraphics[width=\linewidth]{figures/chapter2/MVTX_detector_barrel.png}
         \caption{MVTX detector barrel}
     \end{subfigure}
     \caption{(a) Schematic of an sPHENIX MVTX stave (left) and half barrel layer made up of staves and service section (right). (b) Cross-section of MVTX silicon barrel with its 3 layers highlighted in different colors (Red, Green, and Blue) and sPHENIX beam pipe included to highlight the MVTX location relative to the beam pipe. Reproduced from \cite{MVTX}.}
@@ -70,7 +72,7 @@ This is done by using the precise timing resolution of the INTT hits, therefore 
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.8\linewidth]{Figures/intt_ladder.png}
+    \includegraphics[width=\linewidth]{figures/chapter2/intt_ladder.png}
     \caption{Schematic of sPHENIX INTT silicon ladder component. Highlighted on silicon ladder are silicon sensors, readout chips and high-density interconnect (HDI) cables. Reproduced from \cite{INTT_beamtest2025}.}
     \label{fig:sphenix_intt}
 \end{figure}
@@ -92,7 +94,7 @@ The TPC has a total of 159,744 readout channels read out through a set of 6, 8 a
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.8\linewidth]{Figures/tpc_diagram.png}
+    \includegraphics[width=\linewidth]{figures/chapter2/tpc_diagram.png}
     \caption{Left: Cross-section schematic of sPHENIX TPC showing central membrane (CM), inner- and outer-field cages (I-FC, O-FC) and end plates (EP). 
     Middle: Segementation of TPC endcap into 72 GEM modules. 
     Right: Schematic of TPC GEM modules highlighting the four foil layers with varying electric fields and pad plane for readout of amplified signal. Reproduced from \cite{sPHENIX_TDR}.}
@@ -107,20 +109,20 @@ The micromesh separates the ionization electron drift and amplification regions 
 
 \begin{figure}
     \centering
-    \begin{subfigure}{0.5\linewidth}
+    \begin{subfigure}{0.6\linewidth}
         \centering
-        \includegraphics[width=\linewidth]{Figures/tpot_schematic.png}
+        \includegraphics[width=\linewidth]{figures/chapter2/tpot_schematic.png}
         \caption{TPOT schematic}
     \end{subfigure}
     \begin{subfigure}{0.35\linewidth}
         \centering
-        \includegraphics[width=\linewidth]{Figures/tpot_for_tracking_correction.png}
-        \caption{Track Reconstruction Corrections with TPOT}
+        \includegraphics[width=\linewidth]{figures/chapter2/tpot_for_tracking_correction.png}
+        \caption{Track Reconstruction Corrections}
     \end{subfigure}
     \hfill
     \begin{subfigure}{\linewidth}
         \centering
-        \includegraphics[width=0.8\linewidth]{Figures/tpot_micromegas.png}
+        \includegraphics[width=\linewidth]{figures/chapter2/tpot_micromegas.png}
         \caption{TPOT Micromegas chamber}
     \end{subfigure}
     \caption{(a) Schematic of sPHENIX TPOT detector (left). (b) Schematic of track reconstruction using all tracking subsystems highlighting the benefit to having a TPOT hit for drift corrections. (c)  Cross-section of TPOT Micromegas chamber. Reproduced from \cite{TPOT_nim}.}
@@ -130,10 +132,42 @@ The micromesh separates the ionization electron drift and amplification regions 
 \subsection{sPHENIX Calorimeter System}
 
 sPHENIX has three central barrel calorimeter layers, an electromagnetic calorimeter (EMCal), an inner hadronic calorimeter (IHCal) and an outer hadronic calorimeter (OHCal). 
-\textcolor{red}{Add in sentence about calorimeter necessary for jet physics goals and about that the caloriemter system measures energy and is used as a trigger}
+These calorimeter subdetectors provide energy measurements of all particles, both neutral and charged, for use online in triggering on rare physics probes like high momentum photons and jets and offline for use mainly in jet measurements. 
 These detectors are concentric and sandwich the sPHENIX magnet with the EMCal located closest to the interaction point and the OHCal located further from the interaction point within the calorimeter system. 
 Further, these detectors have full azimuthal coverage ($0 < \phi < 2 \pi$) and pseudorapidity coverage of $|\eta| < 1.1$. 
 
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.49\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/chapter2/emcal_ihcal_ohcal.png} 
+        \caption{Installed EMCal, IHCal and OHCal}
+    \end{subfigure}
+    \begin{subfigure}{0.5\linewidth}
+        \centering  
+        \includegraphics[width=\linewidth]{figures/chapter2/sphenix_ihcal_magnet_ohcal.png} 
+        \caption{IHCal, Magnet, OHCal Simulated Graphic}
+    \end{subfigure}
+    \caption{(a) Photo of the sPHENIX EMCal, IHCal and OHCal detectors after installation and cabling. (b) Graphic of sPHENIX IHCal (red), OHCal (gray) and superconducting magnet (pink) from GEANT simulation. IHCal(OHCal) scintillator tiles shown in yellow(green).}
+    \label{fig:sphenix_calorimeter_schematic}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.49\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/chapter2/emcal_towers.png} 
+        \caption{EMCal Sector Schematic}
+    \end{subfigure}
+    \begin{subfigure}{0.49\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/chapter2/ohcal_tiles.png}   
+        \caption{OHCal Sector Schematic}
+    \end{subfigure}
+    \caption{(a) Schematic of EMCal sector highlighting projective geometry of towers in $\eta$ and lightguides and electronics on the inner radius of the sector. (b) Schematic of OHCal half-sector highlighting projective geometry of towers in $\eta$, layered absorber/scintillator tile tower design, wavelength-shifting fiber located within HCal scintillating tiles, and readout electronics on the outer radius of the sector. Reproduced from \cite{sPHENIX_TDR}.}
+    \label{fig:sphenix_emcal_schematic}
+\end{figure}
+ 
 The sPHENIX EMCal is designed to precisely measure photons, electrons and positrons via electromagnetic showers.
 To acheive this goal, the EMCal has a depth of 18 radiation lengths and it's electromagnetic shower resolution was measured in beam tests to be 2.8\% $\oplus$ 15.5\%/$\sqrt{E}$ for electrons \cite{emcal_beamtest,emcal_hcal_beamtest}.
 The EMCal is also nearly one nuclear interaction length in depth and therefore sees a substantial amount of energy in the ion collisions from hadronic showers as well. 
@@ -169,7 +203,7 @@ The MBD is used for online triggering of hadronic interactions and offline to pr
 It is also used for the offline reconstruction of the collision z-vertex position using the arrival time difference between the first charged particles detected by the PMTs on the north and south side of the interaction point. 
 \begin{figure}
     \centering
-    \includegraphics[width=0.8\linewidth]{Figures/mbd_schematic.png}
+    \includegraphics[width=\linewidth]{figures/chapter2/mbd_schematic.png}
     \caption{Left: Schematic of 64 MBD module array mounted on detector frame. Right: Photo of individual MBD module with quartz radiator and PMT. Reproduced from \cite{sPHENIX_TDR}.}
     \label{fig:sphenix_mbd}
 \end{figure}
@@ -181,15 +215,13 @@ Ultizing their very forward location, the ZDCs are able to detect beam fragment 
 A schematic showing how the sPHENIX ZDC detector measures these beam fragment neutrons while not being sensitive to beam fragment charged particles can be found in Fig. \ref{fig:sphenix_zdc}.
 \begin{figure}
     \centering
-    \includegraphics[width=0.8\linewidth]{Figures/zdc_profile.png}
+    \includegraphics[width=\linewidth]{figures/chapter2/zdc_profile.png}
     \caption{Schematic of sPHENIX ZDC detector shown from (a) collision region view and (b) "beam's eye" view to show the ZDC location past the RHIC DX dipole magnets and between the beam pipes. Also shown is the trajectory of beam fragments with neutrons measured in the region of the ZDC and protons deflected. Reproduced from \cite{zdc}.}
     \label{fig:sphenix_zdc}
 \end{figure}
 The total energy of the neutrons are measured in the ZDCs via the transmission of Cherekov radiation from the neutron's hadronic showers by PMMA fibers to PMTs.
 Each side of the ZDC is calibrated by requiring that the peak in the measured energy distribution which corresponds to the energy deposition of a single neutron is set at the nominal beam energy value of 100 GeV. 
 Additionally, specifically in sPHENIX, criteria on signals in both sides of the ZDC are included in the minimum bias event selection to selarate hadronic interactions from beam backgrounds like beam-gas interactions.
-
-The sEPD 
 
 \subsection{sPHENIX Data Acquisition and Readout}
 sPHENIX is designed with a state of the art data aquisition system and computing resources to collect data at very high rates which is necessary to achieve it's data-intensive physics goals within it's short three year running period.
@@ -203,8 +235,21 @@ second the data collection modules (DCMs) which combine data from multiple FEMs 
 the data is then passed through the sub event buffer (SEB) computers used to store the data temporarily, and then is transferred to bufferboxes, before finally being written to disk storage.
 The tracking data is read out from the front end electronics (FEEs) through the ATLAS "FELIX" card which is connected directly to a standard computer which serves as a buffer similar to the triggered SEBs.
 The tracking data is also transferred to bufferboxes and written to disk storage in the same manner as the triggered data.
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figures/chapter2/daq_diagram.png}
+    \caption{Flowchart of sPHENIX data aquisition system showing progagation through the stages of data aquisition from the front end electronics to the RHIC computing facility. Reproduced from \cite{sPHENIX_TDR}.}
+    \label{fig:sphenix_daq}  
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figures/chapter2/calorimeter_readout.png}
+    \caption{Detailed flowchart of sPHENIX data aquisition system for triggered subsystems (calorimeters and global detectors) including feedback on data readout from Trigger System. Reproduced from \cite{sPHENIX_TDR}.}
+    \label{fig:sphenix_calorimeter_readout_w_trigger}
+\end{figure}
 
 The Really Cool Data Acquisition (RCDAQ) system is used to control and coordinate the entire sPHENIX data aquisition and readout process. 
-The RCDAQ coordinates the start and stop of all of sPHENIX's indepedent read out data streams and tramission of data of variable types with fixed packet sizes through the different stages of buffer computers.
-This is necessary to ensure that all subsystems are sychronized in their read out and is especially important since in sPHENIX all subsystem compnents have indpendent data stream read out and there is no online event building.
+The RCDAQ coordinates the start and stop of all of sPHENIX's independent read out data streams and transmission of data of variable types with fixed packet sizes through the different stages of buffer computers.
+This is necessary to ensure that all subsystems are synchronized in their read out and is especially important since in sPHENIX all subsystem components have independent data stream read out and there is no online event building.
 Via the transmission of data packets with fixed sizes, the RCDAQ is also able develop a controlled and steady flow for the data through the read out system.

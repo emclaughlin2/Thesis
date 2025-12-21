@@ -1,14 +1,121 @@
 \chapter{sPHENIX Calorimeter Commissioning, Reconstruction and Calibration}
 
+Substantial work on the calorimeter commissioning, reconstruction, and calibration was necessary before producing high-quality physics results using the sPHENIX calorimeters, 
+This commissioning work included devising and implementing real-time monitoring and logging of the calorimeter detector state and investigating various reconstruction issues in the calorimeter data related to read out electronics issues.
+Additionally, a vast array of calorimeter calibrations were also necessary to accurately reconstruction the correct energy scale of the calorimeter signals. 
+
 \section{Real-time Calorimeter State Logging and Monitoring}
+
+Each EMCal sector has six interface boards used to communicate with the detector for setting and monitoring the detector state.
+Each interface board is connected to a slow control communication board, a Multi-channel Power Output Device (MPOD), a low voltage power supply, and an Analog-to-Digital Converter (ADC) board.
+The slow control communication board is used to set the detector state including information about the SiPM temperatures, set value for the low and bias voltage, tower by tower bias voltage offsets supplied to the SiPMs, tower by tower leakage current from the SiPMs, and pre-amplifier gain mode. 
+These slow control communication boards are also used for detector commissioning tasks such as turning on and pulsing LED and test pulses for calibration runs.
+A similar control scheme is used for communication with the IHCal and OHCal.
+Here each IHCal and OHCal half sector has one interface and slow control communication board and these are also used to set and monitor the detector state including SiPM temperatures, bias voltages and offsets, leakage current and pre-amplifier gain mode.
+
+\begin{figure}
+    \centering
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/chapter3/emcal_control_diagram.png} 
+        \caption{EMCal Sector Communication Design}
+    \end{subfigure}
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/chapter3/hcal_control_diagram.png} 
+        \caption{IHCal/OHCal Half-Sector Communication Design}
+    \end{subfigure}
+    \caption{(a) Diagram of EMCal sector design with interface board connections to slow control, MPOD, low voltage power and ADC boards. (b) Diagram of HCal half-sector design with interface board connections to slow control, MPOD, low voltage power and ADC boards. Reproduced from \cite{sPHENIX_TDR}}
+    \label{figure:calorimeter_control_diagrams}
+\end{figure}
+
+This information about the detector state is vital both during the online operation of the detector and during offline reconstruction and calibration of the data.
+The detector state information for both the EMCal and HCal is logged in real time by first communicating with the slow control communication boards via a telnet connection, parsing the response, and then writing the detector state information to a PostgreSQL database. 
+The detector state information has been logged up to every 10 minutes for the last three years of data taking.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/chapter3/hcal_database_schema.png} 
+    \caption{Diagram of HCal database table schema for logging detector state information. Includes tables for hcal slow control and bias voltage information as well as LED and pedestal run analysis results.}
+    \label{figure:detector_state_logging}   
+\end{figure}
+To accurately map the detector state information into a useable format for reconstruction and calibration, the detector information is keyed on the offline tower id and timestamp of the log entry. 
+This allows for easy access to the tower by tower information for use in calibration tasks such as applying corrections to the HCal absolute energy calibration due to changes in SiPM operating temperature over periods of data taking. 
+
+The detector state information is also used to monitor the well-being of the detector in real time. 
+Grafana dashboards, which provide an aggregate view of the logged detector state information, are used by data taking shifters to monitor well-being of the detector in real time.
+In order to present clear descriptions of the detector state, the tower by tower information stored in the database is queried and then aggregated to present the overall health of individual sectors or half-sectors of the calorimeters. 
+These dashboards include both real time and time series information on the SiPM and pre-amplifier temperatures, the bias voltages, whether the tower by tower bias voltage offsets are set to their nominal values, and gain modes.
+
+\begin{figure}
+    \centering
+    \begin{subfigure}{0.9\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/chapter3/shift_monitoring.png} 
+        \caption{Shifter Monitoring Dashboard}
+    \end{subfigure}
+    \begin{subfigure}{0.9\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/chapter3/expert_bias_monitoring.png}    
+        \caption{Bias Voltage Monitoring Dashboard}
+    \end{subfigure}
+    \caption{(a) Shifter monitoring dashboard for HCal gain, SiPM temperature and bias voltage offsets, LED and Pin Diode status. (b) Bias voltage monitoring dashboard showing the bias voltage for sector of the HCal.}
+    \label{figure:detector_state_monitoring}
+\end{figure}
+
 
 \section{sPHENIX Low-Level Data Reconstruction}
 
+\textcolor{red}{Small introduction to ADC}.
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/chapter3/adc_diagram.png} 
+    \caption{Diagram of the ADC board design used for digitization of signals from the sPHENIX calorimeters.}
+    \label{figure:adc_diagram}
+\end{figure}
+
 \subsection{Diagnosing ADC Bit Issues}
+
+
 
 \subsection{Online ADC Firmware Fixes}
 
 \subsection{Offline Reconstruction Software Fixes}
+
+A small fraction (<0.1\%) of the ADC channels in the sPHENIX calorimeters were determined to have intermittent stuck bits due to hardware issues with the ADCs.
+In the default calorimeter reconstruction chain, waveforms from channels with stuck bit issues were masked as energy contributions from towers with high value stuck bits can easily polute a physics measurement especially studies of rare high-energy jet and photon measurements.
+This masking was determined by fitting the waveform to a template and masking based on the value of a quality parameter defined as the least squared error over the number of degrees of freedom of the fit. 
+In this default reconstruction chain, waveforms with stuck bit issues have a characteristic high quality parameter (denoted as $\chi^2$) of 10 times the nominal value range.
+
+While this masking was effective, in an effort to maximize calorimeter acceptance and minimize event-by-event changes in the calorimeter acceptance, a recovery scheme at the offline waveform fitting stage was devised to "un-flip" the stuck bits and recover a high quality, useable waveform. 
+The goal of this recovery method was fairly constrained as to not introduce any reconstruction artifacts into the calorimeter reconstruction chain.
+Therefore, the recovery method focused on a set of abnormal waveforms where we have a good understanding of the underlying waveform shape and can comfortably do a recovery. 
+The constrained goal was to recover as many single sample bit flip waveforms as possible from waveforms with characteristic high value (bits $2^{11}$ to $2^{13}$) stuck bit behavior which have been previously successfully identified using high $\chi^2$ signature from the template fit.
+Within this goal was also to reject preforming this recovery procedure on other sources of failure that could cause poor waveform fit quality include channels with the previously mentioned shifted bit-stream, waveforms with abnormal shape, and waveforms with lower value stuck bits (bits $2^{10}$ and below).
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/chapter3/bit_flip_recovery_algorithm.png} 
+    \caption{Pseudo-code algorithm for discovering and recovering calorimeter waveforms digitized with stuck high value bits using the quality of fit to the calorimeter waveform template.}
+    \label{figure:bit_flip_recovery_algorithm}   
+\end{figure}
+
+The recovery method is defined below and described using pseduocode in Figure \ref{figure:bit_flip_recovery_algorithm}.
+First, possible stuck bit waveform candidates are identified using the fit quality ($\chi^2$) and pedestal values return from the waveform's fit to the default calorimeter template.
+Next, a recovery step is performed on these waveform candidates by iterating through bits $2^{11}$ to $2^{13}$ and subtracting this bit value if the waveform sample value is greater than the bit value and the subtracted value is greater than the waveform pedestal value.
+Following this bit subtraction, the waveform is refit to the calorimeter template and the quality of the fit is re-evaluated.
+A example of successful execution of this recovery method for a stuck bit $2^{11}$ is shown in Figure \ref{figure:bit_flip_recovery_waveforms}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.48\textwidth]{figures/chapter3/before_bit_flip_recovery_event5.png} 
+    \includegraphics[width=0.48\textwidth]{figures/chapter3/after_bit_flip_recovery_event5.png}
+    \caption{Example waveforms of before (left) and after (right) the waveform recovery method for an EMCal channel with a known intermittent stuck bit.}
+    \label{figure:bit_flip_recovery_waveforms}
+\end{figure}
+
+Channels with shifted bit streams are eliminated from the recovery procedure by requiring that the pedestal calculated from the first round of template fit be < 4000 ADC; these shifted bit stream waveforms have pedestals between 8000 and 10000 ADC while range of normal calorimeter pedestal values are between 1300 and 2000 ADC.
+Further, channels with very noisy behavior or lower value stuck bits are eliminated from the recovery procedure by requiring that the bit subtraction return a value above pedestal values and the recovered waveform have a good fit quality passing the default fit quality criteria.
 
 \section{sPHENIX Calorimeter Calibration and Reconstruction Routines}
 
