@@ -42,11 +42,6 @@ The detector state information has been logged up to every 10 minutes for the la
 To accurately map the detector state information into a useable format for reconstruction and calibration, the detector information is keyed on the offline tower id and timestamp of the log entry. 
 This allows for easy access to the tower by tower information for use in calibration tasks such as applying corrections to the HCal absolute energy calibration due to changes in SiPM operating temperature over periods of data taking. 
 
-The detector state information is also used to monitor the well-being of the detector in real time. 
-Grafana dashboards, which provide an aggregate view of the logged detector state information, are used by data taking shifters to monitor well-being of the detector in real time.
-In order to present clear descriptions of the detector state, the tower by tower information stored in the database is queried and then aggregated to present the overall health of individual sectors or half-sectors of the calorimeters. 
-These dashboards include both real time and time series information on the SiPM and pre-amplifier temperatures, the bias voltages, whether the tower by tower bias voltage offsets are set to their nominal values, and gain modes.
-
 \begin{figure}
     \centering
     \begin{subfigure}{0.9\textwidth}
@@ -63,10 +58,25 @@ These dashboards include both real time and time series information on the SiPM 
     \label{figure:detector_state_monitoring}
 \end{figure}
 
+The detector state information is also used to monitor the well-being of the detector in real time. 
+Grafana dashboards, which provide an aggregate view of the logged detector state information, are used by data taking shifters to monitor well-being of the detector in real time.
+In order to present clear descriptions of the detector state, the tower by tower information stored in the database is queried and then aggregated to present the overall health of individual sectors or half-sectors of the calorimeters. 
+These dashboards include both real time and time series information on the SiPM and pre-amplifier temperatures, the bias voltages, whether the tower by tower bias voltage offsets are set to their nominal values, and gain modes.
 
 \section{sPHENIX Low-Level Data Reconstruction}
 
-\textcolor{red}{Small introduction to ADC}.
+During the first year of data-taking, the sPHENIX calorimeters collected a commissioning dataset of Au+Au collision events.
+These events were used to exercise the data production, reconstruction, and calibration chains. 
+Hot towers found in this commissioning dataset due to issues with the digitization were studied and a set of characteristic failure modes in the digitization and read out process were determined.
+
+\subsection{Diagnosing ADC Bit Issues}
+
+The calorimeter digitization and read out is performed via digitizer boards originally designed for PHENIX. 
+These digitizer boards first read in differential analog signals from a total of 64 channels.
+The Analog Device AD9257 on the boards perform a digitization of each analog signal to 14-bit digital precision operating at 6x the Beam Crossing Clock (17.6 ns).
+The serialized data from the ADC chip is then received by the ALTERA Arria V GX FPGA on the boards which triggers optical read out of the digitized signal information. 
+A diagram of the ADC board design is shown in Figure~\ref{figure:adc_diagram}.
+
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/chapter3/adc_diagram.png} 
@@ -74,15 +84,52 @@ These dashboards include both real time and time series information on the SiPM 
     \label{figure:adc_diagram}
 \end{figure}
 
-\subsection{Diagnosing ADC Bit Issues}
+Two main cases of abnormal behavior for calorimeter waveforms were found in the Run 2023 commissioning dataset.
+The first case of abnormal waveform shape was characterized by waveforms with gaps of ADC counts in $2^{n}$ and this behavior was found to persist in every event for a channel across an entire run. 
+The second case was characterized by waveforms with stuck bit or "bit flip" for a time sample in the digitized waveform and was found to occur intermittantly throughout a run.
 
-
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figures/chapter3/bit_flip_shift_examples.png}
+    \caption{Examples of abnormal waveforms with bit flip (top) or $2^{n}$  gaps of ADC counts (middle and bottom) behavior. Left plots show the abnormal waveforms for a single event. Right plot show a peristancy plot of the channels waveforms overlaid for an entire run.}
+    \label{fig:bit_flip_shift_examples}
+\end{figure}
 
 \subsection{Online ADC Firmware Fixes}
+
+For the first case of abnormal waveforms where the waveforms always exibited a gap of $2^{n}$ between digitized waveform values for particular time samples the binary sequence of the waveform values was studied in detail.
+The values of $n$ were found to be constant for a given channel over an entire run and could be any value between 1 and 13.
+After studying the binary sequence of the waveform values, it was found that the digitized waveform value in binary (the 14-bit bit-stream) was being shifted by a number of bits related to the number $n$ in the $2^{n}$ gaps.
+An illustration of this shift in the read out bit-stream and examples of these shifted bit-stream waveforms and resulting waveforms from un-shifting these bit-streams is shown in Figure~\ref{fig:bit_shift_diagram}.
+
+The ADC configuration procedure was intended to use a fake-data test sequence available locally on the ADC to test that the bit alignment is correctly set. 
+However, the configuration procedure was missing the validation step of the test sequence alignment.
+Therefore in cases when the bit alignment step of the ADC configuration procedure failed, no error was thrown in the configuration sequence and mis-aligned ADCs were reading out data for full runs.
+This led to a situation where the ADCs were mis-aligned by any number of bits and the read out waveforms had gaps of $2^{n}$ between waveform values for particular time samples.
+To solve this issue, a step was added to the ADC configuration procedure to validate the bit alignment step using the fake-data test sequence and rerun the alignment in the case that the fake-data alignment test does not pass.
+This fix was implemented into the online ADC configuration procedure and this abnormal waveform issue was resolved for all calorimeter channels.
+
+\begin{figure}
+    \centering
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/chapter3/bit_shift_diagram.png} 
+        \caption{Diagram of shifted bit-stream read out for single ADC channel.}
+    \end{subfigure}
+    \begin{subfigure}{\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{figures/chapter3/bit_shift_recovery_waveforms.png} 
+        \caption{Examples of shifted bit-stream waveforms and recovered waveform after re-shifting bit-stream.}
+    \end{subfigure}
+    \caption{(a) Diagram of shifted bit-stream read out for a single ADC channel in the case of mis-alignment during ADC configuration step. (b) Examples of abnormal shifted bit-stream waveforms in red and waveforms after re-shifted recovery procedure in blue. Right figures included to show re-shifted waveforms in detail.}
+    \label{fig:bit_shift_diagram}
+\end{figure}
+
 
 \subsection{Offline Reconstruction Software Fixes}
 
 A small fraction (<0.1\%) of the ADC channels in the sPHENIX calorimeters were determined to have intermittent stuck bits due to hardware issues with the ADCs.
+For these ADC channels with known stuck bit phenomena, around 1\% of events in a run will have a waveform with a stuck bit.
 In the default calorimeter reconstruction chain, waveforms from channels with stuck bit issues were masked as energy contributions from towers with high value stuck bits can easily polute a physics measurement especially studies of rare high-energy jet and photon measurements.
 This masking was determined by fitting the waveform to a template and masking based on the value of a quality parameter defined as the least squared error over the number of degrees of freedom of the fit. 
 In this default reconstruction chain, waveforms with stuck bit issues have a characteristic high quality parameter (denoted as $\chi^2$) of 10 times the nominal value range.
@@ -110,7 +157,7 @@ A example of successful execution of this recovery method for a stuck bit $2^{11
     \centering
     \includegraphics[width=0.48\textwidth]{figures/chapter3/before_bit_flip_recovery_event5.png} 
     \includegraphics[width=0.48\textwidth]{figures/chapter3/after_bit_flip_recovery_event5.png}
-    \caption{Example waveforms of before (left) and after (right) the waveform recovery method for an EMCal channel with a known intermittent stuck bit.}
+    \caption{Example waveforms of before (left) and after (right) the waveform recovery method for an EMCal channel with a known intermittent stuck bit $2^{11}$.}
     \label{figure:bit_flip_recovery_waveforms}
 \end{figure}
 
