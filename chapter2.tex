@@ -2,7 +2,38 @@
 
 \section{Relativistic Heavy Ion Collider}
 
- 
+The Relativistic Heavy Ion Collider (RHIC) is a hadron accelerator located at Brookhaven National Lab (BNL) in Upton, NY capable of colliding a range of ion species from protons to uranium at center of mass energies as high as 500 GeV.
+RHIC can collide Au ions at center of mass energies of 7.7 GeV to 200 GeV per nucleon pair and protons at energies of 200 GeV to 500 GeV.
+During 2024, RHIC provided both proton-proton and \auau{} collisions at 200 GeV and sPHENIX's collected datasets from these collision systems are used in measurements presented in Chapters \ref{sec:chapter4} and \ref{sec:chapter5}.
+
+RHIC is comprised of two quasi-circular concentric storage rings of circumfrence 3.8 km.
+Each ring has six 356 m long arc sections and six 277 m long insertion sections, which each contain a collision point at their center enabling six iteraction points for the two rings \cite{rhic_overview}. 
+The two rings are labeled "blue" for counter-clockwise beam and "yellow" for clockwise beam. 
+The arc sections are each composed of 11 focusing quadrupole, drift space, defocusing quadrupole, drift space (FODO) cells and the beams are separated by 90 cm horizontally within the arc sections.
+In the insertion sections, a pair of dipole magnets are used to steer the beams and three quadropole magnets are used to focus the beams for high luminosity head-on collison in the collision points. 
+In total, 1740 superconducting magnets were required for the two storage rings. 
+
+To reach a stage of steady ion storage and collision at RHIC, a series of ion sources and accelerators are needed \cite{rhic_overview}. 
+When running with heavy ions such as Au, ions are first produced from the Electron Beam Ion Source (EBIS), which is an upgrade from the Tandem Van de Graff previous used as the heavy ion source for RHIC operations \cite{ebis_rhic_overview}.
+In the EBIS, Au atoms are ionized via electron-impact ionization, freeing the atoms' bound-state electrons until $Au^{32+}$ ions are created.
+Following the EBIS, ions are injected into the Booster Synchrotron which accelerates the ions to an energy of 95 MeV/u.
+When exiting the Booster, ions are stripped again, this time via a silicon foil to reach a ionization of $Au^{77+}$, reaching a Helium-like ionization.
+The ions are then injected into the Alternating Gradient Synchrotron (AGS) for further acceleration to 10.8 GeV/u.
+The ions enter the AGS in 24 bunches and are then de-bunched and re-bunched into four bunches for accleration in the AGS.
+These four bunches are then ejected individually into the AGS-to-RHIC (ATR) beam transfer line and ions in these bunches are stripped of their remaining two electrons in the ATR via another stripping foil. 
+The fully stripped $Au^{79+}$ ions are split across the two beams and organized into buckets via a switching magnet at the end of the ATR transfer line.
+Finally, the magnets in RHIC's storage and accelerator rings are used to steer and focus the beams as they are accelerated to their final energies of 100 GeV/u. 
+
+The ion production and acceleration chain for proton-proton collisions is similar. 
+However, in the proton case, protons are sourced from a hydrogen gas source and first accelerated using a linear accelerator (LINAC) before entering the Booster $\rightarrow$ AGS $\rightarrow$ ATR $\rightarrow$ RHIC chain \cite{rhic_overview}.
+Figure \ref{fig:rhic_diagram} shows a schematic of the ionization and acceleration process for creating RHIC Au ion beams.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figures/chapter2/rhic_diagram.png}
+    \caption{Schematic of RHIC acceleration chain for Au beams. Reproduced from \cite{rhic_overview}.}
+    \label{fig:rhic_diagram}
+\end{figure}
 
 \section{sPHENIX Detector}
 
@@ -16,11 +47,11 @@ The full array of sPHENIX physics program goals can be found in Fig. \ref{fig:sp
     \label{fig:sphenix_physics_program}
 \end{figure}
 
-sPHENIX began data taking in 2023 with a commissioning dataset of Au+Au collisions at $\sqrt{s_{NN}} = 200$ GeV. 
-In 2024, sPHENIX took its premire physics dataset of p+p collisions at $\sqrt{s} = 200$ GeV sampling over 100 pb$^{-1}$ allowing for precision jet measurements in p+p collisions at RHIC energies.
-sPHENIX also collected an additional dataset of Au+Au collisions at $\sqrt{s_{NN}} = 200$ GeV in 2024 intended for the commissioning of the tracking detectors with the calorimeter system and global detectors in full physics datataking mode. 
-This Au+Au dataset was very useful in validating the calorimeter and jet reconstruction, calibration and preformance and provided confidence in the sPHENIX data collection and reconstruction prior to the sPHENIX high statistics flagship Au+Au dataset collected in 2025 sampling 7 nb$^{-1}$. 
-The results shown in this thesis are from the 2024 p+p and Au+Au datasets. 
+sPHENIX began data taking in 2023 with a commissioning dataset of \auau{} collisions at $\sqrt{s_{NN}} = 200$ GeV. 
+In 2024, sPHENIX took its premire physics dataset of \pp{} collisions at $\sqrt{s} = 200$ GeV sampling over 100 pb$^{-1}$ allowing for precision jet measurements in \pp{} collisions at RHIC energies.
+sPHENIX also collected an additional dataset of \auau{} collisions at $\sqrt{s_{NN}} = 200$ GeV in 2024 intended for the commissioning of the tracking detectors with the calorimeter system and global detectors in full physics datataking mode. 
+This \auau{} dataset was very useful in validating the calorimeter and jet reconstruction, calibration and preformance and provided confidence in the sPHENIX data collection and reconstruction prior to the sPHENIX high statistics flagship \auau{} dataset collected in 2025 sampling 7 nb$^{-1}$. 
+The results shown in this thesis are from the 2024 \pp{} and \auau{} datasets. 
 
 sPHENIX has three main subsystem groups: a 4-part tracking system with a MAPS-based vertex detector (MVTX), an intermediate silicon tracker (INTT), the time projection chamber (TPC) and the TPC Outer Tracker (TPOT), 
 a central barrel calorimeter system with three calorimeter layers of electromagnetic and hadronic calorimetry (EMCal, IHCal and OHCal), 
@@ -38,7 +69,7 @@ A rendering of the sPHENIX detector highlighting these subsystems with labels ca
 The sPHENIX tracking system comprises four subdetectors: a MAPS-based vertex detector (MVTX), an intermediate silicon tracker (INTT), the time projection chamber (TPC) and the TPC Outer Tracker (TPOT).
 These tracking subdetectors can provide a combination of particle momentum measurements, particle species identification, and secondary vertex reconstruction for use in physics measurements espeically related to heavy flavor physics and jet substructure. 
 
-The MVTX is the innermost tracking subsystem, at a distance of 2-5 cm from the beam pipe, and is a 3 layer silicon barrel design with full azimuthal coverage ($0 < \phi < 2 \pi$) and pseudorapidity coverage of $|\eta| < 1$.
+The MVTX is the innermost tracking subsystem, at a distance of 2 to 5 cm from the beam pipe, and is a 3 layer silicon barrel design with full azimuthal coverage ($0 < \phi < 2 \pi$) and pseudorapidity coverage of $|\eta| < 1$.
 Each layer of silicon barrel is composed of a set of staves, for a total of 48 staves, which each contain a hybrid integrated circuit with a flexible printed circuit connected to nine ALICE Pixel Detector (ALPIDE) pixel chip sensors, for a total of 432 ALPIDE sensors \cite{MVTX,MVTX_proceeding}.
 The ALPIDE sensors are Monolithic Active Pixel Sensors (MAPS) that use Complementary Metal Oxide Semiconductor (CMOS) technology to build the pixel directly on the read out chip. 
 The sensor consists of a silicon die of size 15 mm x 30 mm with an active p-doped epitaxial layer where charge is freed by an incoming particle and a set of charge collection diodes (pixels) with position resolution of 30 $\mu$m where the charge is then collected. 
@@ -138,14 +169,14 @@ Further, these detectors have full azimuthal coverage ($0 < \phi < 2 \pi$) and p
 
 \begin{figure}
     \centering
-    \begin{subfigure}{0.49\linewidth}
+    \begin{subfigure}{\linewidth}
         \centering
-        \includegraphics[width=\linewidth]{figures/chapter2/emcal_ihcal_ohcal.png} 
+        \includegraphics[width=0.7\linewidth]{figures/chapter2/emcal_ihcal_ohcal.png} 
         \caption{Installed EMCal, IHCal and OHCal}
     \end{subfigure}
-    \begin{subfigure}{0.5\linewidth}
+    \begin{subfigure}{\linewidth}
         \centering  
-        \includegraphics[width=\linewidth]{figures/chapter2/sphenix_ihcal_magnet_ohcal.png} 
+        \includegraphics[width=0.7\linewidth]{figures/chapter2/sphenix_ihcal_magnet_ohcal.png} 
         \caption{IHCal, Magnet, OHCal Simulated Graphic}
     \end{subfigure}
     \caption{(a) Photo of the sPHENIX EMCal, IHCal and OHCal detectors after installation and cabling. (b) Graphic of sPHENIX IHCal (red), OHCal (gray) and superconducting magnet (pink) from GEANT simulation. IHCal(OHCal) scintillator tiles shown in yellow(green).}
@@ -154,14 +185,14 @@ Further, these detectors have full azimuthal coverage ($0 < \phi < 2 \pi$) and p
 
 \begin{figure}
     \centering
-    \begin{subfigure}{0.49\linewidth}
+    \begin{subfigure}{\linewidth}
         \centering
-        \includegraphics[width=\linewidth]{figures/chapter2/emcal_towers.png} 
+        \includegraphics[width=0.9\linewidth]{figures/chapter2/emcal_towers.png} 
         \caption{EMCal Sector Schematic}
     \end{subfigure}
-    \begin{subfigure}{0.49\linewidth}
+    \begin{subfigure}{\linewidth}
         \centering
-        \includegraphics[width=\linewidth]{figures/chapter2/ohcal_tiles.png}   
+        \includegraphics[width=0.9\linewidth]{figures/chapter2/ohcal_tiles.png}   
         \caption{OHCal Sector Schematic}
     \end{subfigure}
     \caption{(a) Schematic of EMCal sector highlighting projective geometry of towers in $\eta$ and lightguides and electronics on the inner radius of the sector. (b) Schematic of OHCal half-sector highlighting projective geometry of towers in $\eta$, layered absorber/scintillator tile tower design, wavelength-shifting fiber located within HCal scintillating tiles, and readout electronics on the outer radius of the sector. Reproduced from \cite{sPHENIX_TDR}.}
@@ -173,9 +204,9 @@ To acheive this goal, the EMCal has a depth of 18 radiation lengths and it's ele
 The EMCal is also nearly one nuclear interaction length in depth and therefore sees a substantial amount of energy in the ion collisions from hadronic showers as well. 
 The sPHENIX EMCal is a compact sampling calorimeter; it is located just outside of the TPC/TPOT with an inner radius of 90 cm and the EMCal and IHCal combined are constrained to fit within the repurposed Babar magnet. 
 The EMCal uses a tungsten powder absorber, which has a small Moliere radius and large particle stopping power. 
-This allows the EMCal to have a large number of radiation lengths and precision position resolution while still being compact. 
+This allows the EMCal to have a large number of radiation lengths and precise position resolution while still being compact. 
 Scintillating fibers embedded within the tungsten powder collect and transmit light to a lightguide on the front of each EMCal block (size 2x2 towers). 
-Following collection by the lightguide, the signals are proccessed by Silicon Photomultiplers (SiPMs), which convert the light to electric current, and passed through a pre-amplifier.
+Following collection by the lightguide, the signals are proccessed by Silicon Photomultiplers (SiPMs), which convert the light to electric current, and are passed through a pre-amplifier.
 The analog voltage signals are then passed to the Analog-Digital Converters as the start of the sPHENIX calorimeter data aquistition system. 
 The EMCal is composed of 64 sectors, 2 sectors in $\eta$ and 32 sectors in $\phi$, with each sector containing 384 towers for a total of 24,576 EMCal towers of tower size $\Delta \eta \times \Delta \phi = 0.024 \times 0.024$.
 Each sector has six interface boards used to communicate with the detector for setting and monitoring the detector state, including information about the SiPM temperatures, bias voltage and offsets supplied to the SiPMs, leakage current, and detector gain. 
@@ -184,9 +215,9 @@ These slow control communication boards are also used for detector commissioning
 The sPHENIX HCal system is the first central barrel hadronic calorimeter on a detector at RHIC and allows for full jet reconstruction with both electromagnetic and hadronic calorimetry at RHIC energies for the first time. 
 sPHENIX is designed to measure hadronic showers with the full calorimeter system totaling a depth of 5 nuclear interaction lengths and having a hadron resolution response in beam tests of 13.5\% $\oplus$ 64.9\%/$\sqrt{E}$ \cite{emcal_hcal_beamtest}. 
 The HCal system is split into two layers, the IHCal and OHCal, separated by the Babar superconducting magnet repurposed for sPHENIX.
-The IHCal is located between the EMCal and the magnet with an inner radius of ??? cm and the OHCal is located outside of the magnet acting as the magnet flux return with an inner radius of ??? cm and an outer radius of ??? cm.
+The IHCal is located between the EMCal and the magnet with an inner radius of 117 cm and outer radius of 134 cm and the OHCal is located outside of the magnet acting as the magnet flux return with an inner radius of 183 cm and an outer radius of 269 cm.
 The IHCal (OHCal) are sampling calorimeters composed of aluninum (steel) aborber plates and 4 (5) scintillating tiles set at an angle offset to the transverse direction to reduce the amount of collision particles that do not interact with the active volumes of these calorimeters. 
-Wavelength shifting fibers are embedded within the scintllating tiles which collect and transmit the produced light to SiPMs.
+Wavelength shifting fibers are embedded within the scintillating tiles which collect and transmit the produced light to SiPMs.
 The SiPMs process this light into voltage signals which is then amplified and digitized in the same manner as for the EMCal.
 Both the IHCal and OHCal contain 32 sectors split into North and South half-sector sides and each sector contains 48 towers for a total of 1536 towers of tower size  $\Delta \eta \times \Delta \phi = 0.01 \times 0.01$.
 Each half sector has one interface and slow control communication board and these are also used to set and monitor the detector state including SiPM temperatures, bias voltages and offsets, leakage current and detector gain.
@@ -221,18 +252,18 @@ A schematic showing how the sPHENIX ZDC detector measures these beam fragment ne
 \end{figure}
 The total energy of the neutrons are measured in the ZDCs via the transmission of Cherekov radiation from the neutron's hadronic showers by PMMA fibers to PMTs.
 Each side of the ZDC is calibrated by requiring that the peak in the measured energy distribution which corresponds to the energy deposition of a single neutron is set at the nominal beam energy value of 100 GeV. 
-Additionally, specifically in sPHENIX, criteria on signals in both sides of the ZDC are included in the minimum bias event selection to selarate hadronic interactions from beam backgrounds like beam-gas interactions.
+Additionally, specifically in sPHENIX, criteria on signals in both sides of the ZDC are included in the minimum bias event selection to separate hadronic interactions from beam backgrounds like beam-gas interactions.
 
 \subsection{sPHENIX Data Acquisition and Readout}
-sPHENIX is designed with a state of the art data aquisition system and computing resources to collect data at very high rates which is necessary to achieve it's data-intensive physics goals within it's short three year running period.
-The sPHENIX data aquisition system is designed to readout data from triggered calorimeter events at a rate of 15 kHz in both p+p and Au+Au collisions and read out tracking detectors in full streaming mode collecting all of the supplied collision data.
+sPHENIX is designed with a state of the art data aquisition system and computing resources to collect data at very high rates which is necessary to achieve its data-intensive physics goals within its short three year running period.
+The sPHENIX data aquisition system is designed to readout data from triggered calorimeter events at a rate of 15 kHz in both \pp{} and \auau{} collisions and read out tracking detectors in full streaming mode collecting all of the supplied collision data.
 With the high collision rate (>> 15 kHz) supplied by RHIC, the sPHENIX trigger system is used to make decisions using information from the calorimeter and global detectors on whether to read out a particular collision event.
 This trigger system uses calorimeter information to identify and save likely high $p_{T}$ photon and jet events and uses the global detectors to identify and save minimum bias hadronic collision events.
 
-The triggered calorimeter and global detector data is read out by going through in five steps: 
-first the front end modules (FEM) which digitize the analog signals from the SiPMs and PMTs in the detectors, 
-second the data collection modules (DCMs) which combine data from multiple FEMs and act as very short term buffers, 
-the data is then passed through the sub event buffer (SEB) computers used to store the data temporarily, and then is transferred to bufferboxes, before finally being written to disk storage.
+The triggered calorimeter and global detector data is read out passing through five steps: 
+first the front end modules (FEM) digitize the analog signals from the SiPMs and PMTs in the detectors, 
+second the data collection modules (DCMs) combine data from multiple FEMs and act as very short term buffers.
+The data is then passed through the sub event buffer (SEB) computers used to store the data temporarily, and then is transferred to bufferboxes, before finally being written to disk storage.
 The tracking data is read out from the front end electronics (FEEs) through the ATLAS "FELIX" card which is connected directly to a standard computer which serves as a buffer similar to the triggered SEBs.
 The tracking data is also transferred to bufferboxes and written to disk storage in the same manner as the triggered data.
 \begin{figure}
