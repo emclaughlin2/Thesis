@@ -1,15 +1,16 @@
 \chapter{Experimental Detector Design}
+\label{ch:detector}
 
 \section{Relativistic Heavy Ion Collider}
 
 The Relativistic Heavy Ion Collider (RHIC) is a hadron accelerator located at Brookhaven National Lab (BNL) in Upton, NY capable of colliding a range of ion species from protons to uranium at center of mass energies as high as 500 GeV.
 RHIC can collide Au ions at center of mass energies of 7.7 GeV to 200 GeV per nucleon pair and protons at energies of 200 GeV to 500 GeV.
-During 2024, RHIC provided both proton-proton and \auau{} collisions at 200 GeV and sPHENIX's collected datasets from these collision systems are used in measurements presented in Chapters \ref{sec:chapter4} and \ref{sec:chapter5}.
+During 2024, RHIC provided both proton-proton and \auau{} collisions at 200 GeV and sPHENIX's collected datasets from these collision systems are used in measurements presented in Chapters \ref{ch:detdeta_auau} and \ref{ch:ue_in_pp}.
 
 RHIC is comprised of two quasi-circular concentric storage rings of circumfrence 3.8 km.
 Each ring has six 356 m long arc sections and six 277 m long insertion sections, which each contain a collision point at their center enabling six iteraction points for the two rings \cite{rhic_overview}. 
 The two rings are labeled "blue" for counter-clockwise beam and "yellow" for clockwise beam. 
-The arc sections are each composed of 11 focusing quadrupole, drift space, defocusing quadrupole, drift space (FODO) cells and the beams are separated by 90 cm horizontally within the arc sections.
+The arc sections are each composed of 11 Focusing quadrupole, Off, Defocusing quadrupole, Off (FODO) cells and the beams are separated by 90 cm horizontally within the arc sections.
 In the insertion sections, a pair of dipole magnets are used to steer the beams and three quadropole magnets are used to focus the beams for high luminosity head-on collison in the collision points. 
 In total, 1740 superconducting magnets were required for the two storage rings. 
 
@@ -31,7 +32,7 @@ Figure \ref{fig:rhic_diagram} shows a schematic of the ionization and accelerati
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{figures/chapter2/rhic_diagram.png}
-    \caption{Schematic of RHIC acceleration chain for Au beams. Reproduced from \cite{rhic_overview}.}
+    \caption{Original design for the RHIC acceleration chain for Au beams. Reproduced from \cite{rhic_overview}.}
     \label{fig:rhic_diagram}
 \end{figure}
 
@@ -48,13 +49,13 @@ The full array of sPHENIX physics program goals can be found in Fig. \ref{fig:sp
 \end{figure}
 
 sPHENIX began data taking in 2023 with a commissioning dataset of \auau{} collisions at $\sqrt{s_{NN}} = 200$ GeV. 
-In 2024, sPHENIX took its premire physics dataset of \pp{} collisions at $\sqrt{s} = 200$ GeV sampling over 100 pb$^{-1}$ allowing for precision jet measurements in \pp{} collisions at RHIC energies.
+In 2024, sPHENIX took its premiere physics dataset of \pp{} collisions at $\sqrt{s} = 200$ GeV sampling over 100 pb$^{-1}$ allowing for precision jet measurements in \pp{} collisions at RHIC energies.
 sPHENIX also collected an additional dataset of \auau{} collisions at $\sqrt{s_{NN}} = 200$ GeV in 2024 intended for the commissioning of the tracking detectors with the calorimeter system and global detectors in full physics datataking mode. 
 This \auau{} dataset was very useful in validating the calorimeter and jet reconstruction, calibration and preformance and provided confidence in the sPHENIX data collection and reconstruction prior to the sPHENIX high statistics flagship \auau{} dataset collected in 2025 sampling 7 nb$^{-1}$. 
 The results shown in this thesis are from the 2024 \pp{} and \auau{} datasets. 
 
-sPHENIX has three main subsystem groups: a 4-part tracking system with a MAPS-based vertex detector (MVTX), an intermediate silicon tracker (INTT), the time projection chamber (TPC) and the TPC Outer Tracker (TPOT), 
-a central barrel calorimeter system with three calorimeter layers of electromagnetic and hadronic calorimetry (EMCal, IHCal and OHCal), 
+sPHENIX has three main subsystem groups: a 4-part tracking system with a Monolithic Active Pixel Sensor (MAPS) based vertex detector (MVTX), an intermediate silicon tracker (INTT), the time projection chamber (TPC) and the TPC Outer Tracker (TPOT), 
+a central barrel calorimeter system with three calorimeter layers of electromagnetic and hadronic calorimetry including an EMCal, Inner HCal (IHCal) and Outer HCal (OHCal), 
 and global detectors including the Minimum Bias Detector (MBD), Zero Degree Calorimeters (ZDCs) and sPHENIX Event Plane Detector (sEPD).
 A rendering of the sPHENIX detector highlighting these subsystems with labels can be found in Fig. \ref{fig:sphenix_schematic}.
 
@@ -67,7 +68,7 @@ A rendering of the sPHENIX detector highlighting these subsystems with labels ca
 
 \subsection{sPHENIX Tracking System}
 The sPHENIX tracking system comprises four subdetectors: a MAPS-based vertex detector (MVTX), an intermediate silicon tracker (INTT), the time projection chamber (TPC) and the TPC Outer Tracker (TPOT).
-These tracking subdetectors can provide a combination of particle momentum measurements, particle species identification, and secondary vertex reconstruction for use in physics measurements espeically related to heavy flavor physics and jet substructure. 
+These tracking subdetectors can provide a combination of particle momentum measurements, particle species identification, and secondary vertex reconstruction for use in physics measurements especially related to heavy flavor physics and jet substructure. 
 
 The MVTX is the innermost tracking subsystem, at a distance of 2 to 5 cm from the beam pipe, and is a 3 layer silicon barrel design with full azimuthal coverage ($0 < \phi < 2 \pi$) and pseudorapidity coverage of $|\eta| < 1$.
 Each layer of silicon barrel is composed of a set of staves, for a total of 48 staves, which each contain a hybrid integrated circuit with a flexible printed circuit connected to nine ALICE Pixel Detector (ALPIDE) pixel chip sensors, for a total of 432 ALPIDE sensors \cite{MVTX,MVTX_proceeding}.
@@ -100,7 +101,7 @@ This signal is then digitized, zero suppression is applied and the data is read 
 INTT hits can be used to bridge the MVTX and TPC tracks to improve tracking reconstruction. 
 However, the INTT is also essential in associating reconstructed tracks with data from the sPHENIX calorimeter system and global detectors which are readout in triggered mode.
 This is done by using the precise timing resolution of the INTT hits, therefore reconstructed tracks can be associated with RHIC bunch crossings by using the timing of their INTT hits \cite{INTT_beamtest2025}. 
-
+\textcolor{red}{Bill edit: include information about INTT strip size}
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{figures/chapter2/intt_ladder.png}
@@ -109,18 +110,18 @@ This is done by using the precise timing resolution of the INTT hits, therefore 
 \end{figure}
 
 The TPC is the main sPHENIX tracking subdetector, spanning in radial distance from 20 to 80 cm with full azimuthal coverage ($0 < \phi < 2 \pi$) and pseudorapidity coverage of $|\eta| < 1.1$.
-The sPHENIX TPC is a cylindrical double-sided TPC design with a central membrane at the center of the detector and two readout endcaps on the interior of either side of the detector's span in z.
+The sPHENIX TPC is a cylindrical double-sided TPC design with a central membrane at z = 0 and two readout endcaps on the interior of either side of the detector's span in z.
 In each half of the TPC, an electric field is formed by setting the central membrane electrode to a high voltage and the readout endcaps to ground \cite{sPHENIX_TDR,TPC_overview}.
 This electric field is constrained in the radial direction by field cages on the inner and outer cylindrical surfaces of the TPC.
 The TPC volume is also filled with a gas mixture of Argon, CF4 and Isobutane in a ratio of 75:20:5.
 When charged particles from the collision pass through the TPC gas volume, they ionize the gas creating electrons and ions, which act as signal for use in determining particle trajectories through the TPC. 
-These freed electronics then drift towards the readout endcaps via the electric field between the central membrane and the readout endcaps. 
+These freed electrons then drift towards the readout endcaps via the electric field between the central membrane and the readout endcaps. 
 
 On each end of the TPC there is an amplification region where Gaseous Electron Multipliers (GEM) modules are used to amplify the signal from ionized electrons within the TPC volume.
 Each GEM module contains a stack of four Kapton + Copper foils with a varying voltage across each foil creating a high electric field within the holes of the foils. 
 As electrons pass through the full GEM stack they undergo avalanche amplification, where each foil contributes a small amount of the overall electron amplification.
-The electric fields between the GEM foils are also able to minimize the amount of avalanche induced positive ions that drift back into the TPC volume thereby reducing ion back flow and allowing the TPC to operate continuous readout. 
-Finally the amplified electron signals are read out using SAMPA chips developed by ALICE each which contain 32 channels. 
+The electric fields between the GEM foils are also able to minimize the amount of avalanche induced positive ions that drift back into the TPC volume thereby reducing ion back flow and allowing the TPC to operate in continuous readout mode. 
+Finally the amplified electron signals are read out using SAMPA chips developed by ALICE. Each chip contains 32 channels. 
 The TPC has a total of 159,744 readout channels read out through a set of 6, 8 and 12 Front End Electronics (FEE) corresponding to the inner (R1), middle (R2) and outer (R3) radial regions of the TPC endcaps.
 
 \begin{figure}
@@ -148,13 +149,13 @@ The micromesh separates the ionization electron drift and amplification regions 
     \begin{subfigure}{0.35\linewidth}
         \centering
         \includegraphics[width=\linewidth]{figures/chapter2/tpot_for_tracking_correction.png}
-        \caption{Track Reconstruction Corrections}
+        \caption{Track Reconstruction Correction Schematic}
     \end{subfigure}
     \hfill
     \begin{subfigure}{\linewidth}
         \centering
         \includegraphics[width=\linewidth]{figures/chapter2/tpot_micromegas.png}
-        \caption{TPOT Micromegas chamber}
+        \caption{TPOT Micromegas Chamber Schematic}
     \end{subfigure}
     \caption{(a) Schematic of sPHENIX TPOT detector (left). (b) Schematic of track reconstruction using all tracking subsystems highlighting the benefit to having a TPOT hit for drift corrections. (c)  Cross-section of TPOT Micromegas chamber. Reproduced from \cite{TPOT_nim}.}
     \label{fig:sphenix_tpot_module}
@@ -164,8 +165,8 @@ The micromesh separates the ionization electron drift and amplification regions 
 
 sPHENIX has three central barrel calorimeter layers, an electromagnetic calorimeter (EMCal), an inner hadronic calorimeter (IHCal) and an outer hadronic calorimeter (OHCal). 
 These calorimeter subdetectors provide energy measurements of all particles, both neutral and charged, for use online in triggering on rare physics probes like high momentum photons and jets and offline for use mainly in jet measurements. 
-These detectors are concentric and sandwich the sPHENIX magnet with the EMCal located closest to the interaction point and the OHCal located further from the interaction point within the calorimeter system. 
-Further, these detectors have full azimuthal coverage ($0 < \phi < 2 \pi$) and pseudorapidity coverage of $|\eta| < 1.1$. 
+These detectors are concentric and sandwich the sPHENIX magnet with the EMCal located closest to the interaction point and the OHCal located outside the magnet furthest from the interaction point within the calorimeter system. 
+These detectors have full azimuthal coverage ($0 < \phi < 2 \pi$) and pseudorapidity coverage of $|\eta| < 1.1$. 
 
 \begin{figure}
     \centering
@@ -182,6 +183,7 @@ Further, these detectors have full azimuthal coverage ($0 < \phi < 2 \pi$) and p
     \caption{(a) Photo of the sPHENIX EMCal, IHCal and OHCal detectors after installation and cabling. (b) Graphic of sPHENIX IHCal (red), OHCal (gray) and superconducting magnet (pink) from GEANT simulation. IHCal(OHCal) scintillator tiles shown in yellow(green).}
     \label{fig:sphenix_calorimeter_schematic}
 \end{figure}
+% issue with aspect ratio of top image
 
 \begin{figure}
     \centering
@@ -195,13 +197,14 @@ Further, these detectors have full azimuthal coverage ($0 < \phi < 2 \pi$) and p
         \includegraphics[width=0.9\linewidth]{figures/chapter2/ohcal_tiles.png}   
         \caption{OHCal Sector Schematic}
     \end{subfigure}
-    \caption{(a) Schematic of EMCal sector highlighting projective geometry of towers in $\eta$ and lightguides and electronics on the inner radius of the sector. (b) Schematic of OHCal half-sector highlighting projective geometry of towers in $\eta$, layered absorber/scintillator tile tower design, wavelength-shifting fiber located within HCal scintillating tiles, and readout electronics on the outer radius of the sector. Reproduced from \cite{sPHENIX_TDR}.}
+    \caption{(a) Schematic of EMCal sector highlighting projective geometry of towers in $\eta$ and lightguides and electronics on the inner radius of the sector. (b) Schematic of OHCal half-sector highlighting projective geometry of towers in $\eta$, layered absorber/scintillator tile tower design, wavelength-shifting fiber located within HCal scintillating tiles, and readout electronics on the outer radius of the sector. Both reproduced from \cite{sPHENIX_TDR}.}
     \label{fig:sphenix_emcal_schematic}
 \end{figure}
+\textcolor{red}{Bill edit: include scales for EMCal and OHCal sector sizes.}
  
 The sPHENIX EMCal is designed to precisely measure photons, electrons and positrons via electromagnetic showers.
-To acheive this goal, the EMCal has a depth of 18 radiation lengths and it's electromagnetic shower resolution was measured in beam tests to be 2.8\% $\oplus$ 15.5\%/$\sqrt{E}$ for electrons \cite{emcal_beamtest,emcal_hcal_beamtest}.
-The EMCal is also nearly one nuclear interaction length in depth and therefore sees a substantial amount of energy in the ion collisions from hadronic showers as well. 
+To acheive this goal, the EMCal has a depth of 18 radiation lengths and its electromagnetic shower resolution was measured in beam tests to be 2.8\% $\oplus$ 15.5\%/$\sqrt{E}$ for electrons \cite{emcal_beamtest,emcal_hcal_beamtest}.
+The EMCal is also nearly one nuclear interaction length in depth and therefore sees a substantial amount of energy from hadronic showers as well. 
 The sPHENIX EMCal is a compact sampling calorimeter; it is located just outside of the TPC/TPOT with an inner radius of 90 cm and the EMCal and IHCal combined are constrained to fit within the repurposed Babar magnet. 
 The EMCal uses a tungsten powder absorber, which has a small Moliere radius and large particle stopping power. 
 This allows the EMCal to have a large number of radiation lengths and precise position resolution while still being compact. 
@@ -212,7 +215,7 @@ The EMCal is composed of 64 sectors, 2 sectors in $\eta$ and 32 sectors in $\phi
 Each sector has six interface boards used to communicate with the detector for setting and monitoring the detector state, including information about the SiPM temperatures, bias voltage and offsets supplied to the SiPMs, leakage current, and detector gain. 
 These slow control communication boards are also used for detector commissioning tasks such as turning on and pulsing LED and test pulses for calibration runs.
 
-The sPHENIX HCal system is the first central barrel hadronic calorimeter on a detector at RHIC and allows for full jet reconstruction with both electromagnetic and hadronic calorimetry at RHIC energies for the first time. 
+The sPHENIX HCal system is the first central barrel hadronic calorimeter for a RHIC detector and allows for full jet reconstruction with both electromagnetic and hadronic calorimetry at RHIC energies for the first time. 
 sPHENIX is designed to measure hadronic showers with the full calorimeter system totaling a depth of 5 nuclear interaction lengths and having a hadron resolution response in beam tests of 13.5\% $\oplus$ 64.9\%/$\sqrt{E}$ \cite{emcal_hcal_beamtest}. 
 The HCal system is split into two layers, the IHCal and OHCal, separated by the Babar superconducting magnet repurposed for sPHENIX.
 The IHCal is located between the EMCal and the magnet with an inner radius of 117 cm and outer radius of 134 cm and the OHCal is located outside of the magnet acting as the magnet flux return with an inner radius of 183 cm and an outer radius of 269 cm.
@@ -229,7 +232,8 @@ These detectors include the Minimum Bias Detector (MBD), Zero Degree Calorimeter
 The MBD is located at forward rapidity, $3.51 < |\eta| < 4.61$, on both the north and south side of the interaction point, close to the beam pipe, and is repurposed from the PHENIX Beam Beam Counter (BBC) with updated trigger and readout electronics, where it was located in a different position $3.0 < |\eta| < 3.9$ along the beam line \cite{phenix_bbc1,phenix_bbc2}.
 Each side of the MBD contains a set of 64 1-in diameter mesh-dynode photomultiplier tubes (PMT) and the front of these PMTs are connected with a 3 cm quartz Cherenkov radiator to detect charged particles via Cherenkov radiation.
 During both PHENIX and sPHENIX running, the MBD has been located close to the beam pipe and is subject to high levels of radiation during data taking.
-In it's original design, quartz was selected for the radiator material and PMTs for signal amplification due to their radiation hardness and over the data taking lifetime of the MBD, the subsystem has not seen any signification degradation due to radiation damage.
+In its original design, quartz was selected for the radiator material and PMTs for signal amplification due to their radiation hardness.
+Over the data taking lifetime of the MBD, the subsystem has not seen any signification degradation due to radiation damage.
 The MBD is used for online triggering of hadronic interactions and offline to provide a selection of minimum-bias (MB) events and centrality determination in heavy-ion collisions. 
 It is also used for the offline reconstruction of the collision z-vertex position using the arrival time difference between the first charged particles detected by the PMTs on the north and south side of the interaction point. 
 \begin{figure}
@@ -255,11 +259,11 @@ Each side of the ZDC is calibrated by requiring that the peak in the measured en
 Additionally, specifically in sPHENIX, criteria on signals in both sides of the ZDC are included in the minimum bias event selection to separate hadronic interactions from beam backgrounds like beam-gas interactions.
 
 \subsection{sPHENIX Data Acquisition and Readout}
-sPHENIX is designed with a state of the art data aquisition system and computing resources to collect data at very high rates which is necessary to achieve its data-intensive physics goals within its short three year running period.
-The sPHENIX data aquisition system is designed to readout data from triggered calorimeter events at a rate of 15 kHz in both \pp{} and \auau{} collisions and read out tracking detectors in full streaming mode collecting all of the supplied collision data.
+sPHENIX is designed with a state of the art data aquisition system and computing resources to collect data at very high rates in order to achieve its data-intensive physics goals within its short three year running period.
+The sPHENIX data aquisition system is designed to read out data from triggered calorimeter events at a rate of 15 kHz in both \pp{} and \auau{} collisions and read out tracking detectors in full streaming mode collecting all of the supplied collision data.
 With the high collision rate (>> 15 kHz) supplied by RHIC, the sPHENIX trigger system is used to make decisions using information from the calorimeter and global detectors on whether to read out a particular collision event.
 This trigger system uses calorimeter information to identify and save likely high $p_{T}$ photon and jet events and uses the global detectors to identify and save minimum bias hadronic collision events.
-
+\textcolor{red}{Bill edit: include information about triggered versus streaming read out here}
 The triggered calorimeter and global detector data is read out passing through five steps: 
 first the front end modules (FEM) digitize the analog signals from the SiPMs and PMTs in the detectors, 
 second the data collection modules (DCMs) combine data from multiple FEMs and act as very short term buffers.

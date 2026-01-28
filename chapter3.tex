@@ -1,4 +1,5 @@
 \chapter{sPHENIX Calorimeter Commissioning, Reconstruction and Calibration}
+\label{ch:reconstruction}
 
 Substantial work on the calorimeter commissioning, reconstruction, and calibration was necessary before producing high-quality physics results using the sPHENIX calorimeters, 
 This commissioning work included devising and implementing real-time monitoring and logging of the calorimeter detector state and investigating various reconstruction issues in the calorimeter data related to read out electronics issues.
@@ -6,12 +7,12 @@ Additionally, a vast array of calorimeter calibrations were also necessary to ac
 
 \section{Real-time Calorimeter State Logging and Monitoring}
 
-Each EMCal sector has six interface boards used to communicate with the detector for setting and monitoring the detector state.
+Each EMCal sector has six 64 channel interface boards used to communicate with the detector for setting and monitoring the detector state.
 Each interface board is connected to a slow control communication board, a Multi-channel Power Output Device (MPOD), a low voltage power supply, and an Analog-to-Digital Converter (ADC) board.
 The slow control communication board is used to set the detector state including information about the SiPM temperatures, set value for the low and bias voltage, tower by tower bias voltage offsets supplied to the SiPMs, tower by tower leakage current from the SiPMs, and pre-amplifier gain mode. 
 These slow control communication boards are also used for detector commissioning tasks such as turning on and pulsing LED and test pulses for calibration runs.
 A similar control scheme is used for communication with the IHCal and OHCal.
-Here each IHCal and OHCal half sector has one interface and slow control communication board and these are also used to set and monitor the detector state including SiPM temperatures, bias voltages and offsets, leakage current and pre-amplifier gain mode.
+Here each IHCal and OHCal half sector has one 24 channel interface board and these are also used to set and monitor the detector state including SiPM temperatures, bias voltages and offsets, leakage current and pre-amplifier gain mode by connecting to a slow control communication board.
 
 \begin{figure}
     \centering
@@ -67,13 +68,13 @@ These dashboards include both real time and time series information on the SiPM 
 
 During the first year of data-taking, the sPHENIX calorimeters collected a commissioning dataset of \auau{} collision events.
 These events were used to exercise the data production, reconstruction, and calibration chains. 
-Hot towers found in this commissioning dataset due to issues with the digitization were studied and a set of characteristic failure modes in the digitization and read out process were determined.
-
-\subsection{Diagnosing ADC Bit Issues}
+This nominal reconstruction procedures is outlined below in Section \ref{sec:nominal_calorimeter_reconstruction}.
+This dataset was also used to investigate a set of characteristic failure modes in the calorimeter digitization and read out process.
+This investigation process is also described in detail below in Sections \ref{sec:diagnosing_adc_bit_issues}, \ref{sec:online_adc_firmware_fixes}, and \ref{sec:offline_reconstruction_software_fixes}.
 
 The calorimeter digitization and read out is performed via digitizer boards originally designed for PHENIX \cite{sPHENIX_TDR}. 
 These digitizer boards first read in differential analog signals from a total of 64 channels.
-The Analog Device AD9257 on the boards perform a digitization of each analog signal to 14-bit digital precision operating at 6x the Beam Crossing Clock (17.6 ns).
+The Analog Device AD9257 on the boards perform a digitization of each analog signal to 14-bit digital precision operating at 6x the Beam Crossing Clock (106 ns / 6 = 17.6 ns).
 The serialized data from the ADC chip is then received by the ALTERA Arria V GX FPGA on the boards which triggers optical read out of the digitized signal information. 
 A diagram of the ADC board design is shown in Figure~\ref{figure:adc_diagram}.
 
@@ -84,9 +85,54 @@ A diagram of the ADC board design is shown in Figure~\ref{figure:adc_diagram}.
     \label{figure:adc_diagram}
 \end{figure}
 
+\subsection{Nominal Calorimeter Tower Reconstruction}
+\label{sec:nominal_calorimeter_reconstruction}
+
+\textcolor{red}{Bill edit: include some figures showing waveforms, templates and chi2 distributions would be useful.}
+The digitized waveform signals from the calorimeters are reconstructed into energy deposits using a fit to a custom waveform template method which extracts the ADC signal amplitude from each tower in each event.
+Additionally, tower-by-tower hardware zero suppression (ZS) thresholds set at 2$\sigma$ of the calorimeter pedestal noise were implemented to reduce data volume. 
+Calorimeter tower waveforms with recorded pre-minus-post values below the hardware level ZS threshold only recorded the pre and post samples of the waveform and pre-minus-post values above the ZS threshold recorded the full 12 time sample waveform. 
+During the fitting step of the calorimeter tower reconstruction, an additional software level ZS threshold is applied to correct for biases in the calorimeter energy distribution from noise waveforms. 
+This ZS threshold is higher than the hardware level threshold and uniform across the full detector; 
+for calorimeter tower waveforms which fall below this software level ZS threshold, the pre and post sample values of the waveform are used instead of fitting the waveform using the template fit method. 
+For the \auau{} (\pp{}) analyses, the software level ZS thresholds were set to 100 (60) ADC for the EMCal and 50 (30) ADC for each of the HCals.
+
+Both EMCal and HCal waveform templates were created using beam data from early runs of Run 2024. 
+The template fit has three free parameters: the pedestal, peak time and scale of the waveform, and the processing procedure returns these parameters plus the $\chi^{2}$ term representing fit's least-squares over number of degrees of freedom value which acts as a goodness of fit metric. 
+
+Finally, the calorimeter reconstruction pipeline also includes masking bad towers within the run bad tower masks.
+Figure~\ref{figure:bad_tower_masks} shows examples of hot tower masks for EMCal, IHCal and OHCal for a single run used in the Run 2024 \auau{} analysis described in detail in Chapter \ref{ch:detdeta_auau}.
+There are three ways for a tower to be considered bad on a run by run basis: a tower can be dead, cold or hot.
+To determine a tower's status on a run by run basis, the hits above a threshold are collected for each tower and the tower by tower distribution of these hits is studied.
+In towers where the number of hits above a threshold is exactly zero, the tower is considered dead for the run. 
+There are ~300 dead towers in the EMCal due to unrecoverable interface board hardware issues and no dead towers in either of the HCals.
+A tower is considered cold if the number of hits above a threshold is either 10\% or 5$\sigma$ below the median number of hits above a threshold for all towers in that calorimeter layer. 
+A small number, $< 5$, of towers are considered cold in either the EMCal or HCal. 
+A tower is considered hot if the number of hits above a threshold is 5$\sigma$ above the median number of hits above a threshold for all towers in that calorimeter layer or more 1\% of the tower's waveforms above some threshold for a run have a bad quality parameter from the template fit. 
+A small number of towers are considered hot in the HCal ($< 5$) and a moderate number of towers are considered hot in the EMCal (~50).
+
+Finally, there are small contributions to the bad tower masking on the event-by-event level from towers with a waveform fit quality parameter outside of the nominal range. 
+Less than 1\% of events have a tower in any of the calorimeter layers with a bad quality parameter that is not already included in the run-by-run bad tower mask. 
+A systematic study masking these abnormal waveforms on the event-by-event level found the effect on the measurements in Chapters \ref{ch:detdeta_auau} and \ref{ch:ue_in_pp} to be negligible. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.48\textwidth]{detdeta/Figures/hot_tower_masks/emcal_hot_tower_mask_54912.png} 
+    \includegraphics[width=0.48\textwidth]{detdeta/Figures/hot_tower_masks/ihcal_hot_tower_mask_54912.png} 
+    \includegraphics[width=0.48\textwidth]{detdeta/Figures/hot_tower_masks/ohcal_hot_tower_mask_54912.png} 
+    \caption{Example of hot tower masks for EMCal (top left), IHCal (top right) and OHCal (bottom) for a single run used in the Run 2024 \auau{} analyses.}
+    \label{figure:bad_tower_masks}
+\end{figure}
+
+\subsection{Diagnosing ADC Bit Issues}
+\label{sec:diagnosing_adc_bit_issues}
+
+An investigation into the causes for the bad towers found in the calorimeter reconstruction chain was performed using the Run 2023 commissioning dataset.
+This investigated focused on using the quality parameter from the calorimeter waveform template fit to identify abnormal waveforms. 
 Two main cases of abnormal behavior for calorimeter waveforms were found in the Run 2023 commissioning dataset.
-The first case of abnormal waveform shape was characterized by waveforms with gaps of ADC counts in $2^{n}$ and this behavior was found to persist in every event for a channel across an entire run. 
-The second case was characterized by waveforms with stuck bit or "bit flip" for a time sample in the digitized waveform and was found to occur intermittantly throughout a run.
+The first case of abnormal waveform shape was characterized by waveforms with gaps in ADC counts of $2^{n}$ and this behavior was found in ~10-20 channels per run and persists in every event for an effected channel across an entire run. 
+The second case was characterized by waveforms with stuck bit or "bit flip" for a time sample in the digitized waveform.
+This behavior was found in ~10 channels per run and was found to occur intermittantly throughout a run.
 
 \begin{figure}
     \centering
@@ -96,6 +142,7 @@ The second case was characterized by waveforms with stuck bit or "bit flip" for 
 \end{figure}
 
 \subsection{Online ADC Firmware Fixes}
+\label{sec:online_adc_firmware_fixes}
 
 For the first case of abnormal waveforms where the waveforms always exibited a gap of $2^{n}$ between digitized waveform values for particular time samples the binary sequence of the waveform values was studied in detail.
 The values of $n$ were found to be constant for a given channel over an entire run and could be any value between 1 and 13.
@@ -127,18 +174,20 @@ This fix was implemented into the online ADC configuration procedure and this ab
 
 
 \subsection{Offline Reconstruction Software Fixes}
+\label{sec:offline_reconstruction_software_fixes}
 
 A small fraction (<0.1\%) of the ADC channels in the sPHENIX calorimeters were determined to have intermittent stuck bits due to hardware issues with the ADCs.
 For these ADC channels with known stuck bit phenomena, around 1\% of events in a run will have a waveform with a stuck bit.
-In the default calorimeter reconstruction chain, waveforms from channels with stuck bit issues were masked as energy contributions from towers with high value stuck bits can easily polute a physics measurement especially studies of rare high-energy jet and photon measurements.
+In the default calorimeter reconstruction chain, waveforms from channels with stuck bit issues were masked out, since energy contributions from towers with high value stuck bits can easily pollute a physics measurement, especially studies of rare high-energy jet and photon measurements.
 This masking was determined by fitting the waveform to a template and masking based on the value of a quality parameter defined as the least squared error over the number of degrees of freedom of the fit. 
-In this default reconstruction chain, waveforms with stuck bit issues have a characteristic high quality parameter (denoted as $\chi^2$) of 10 times the nominal value range.
+In this default reconstruction chain, waveforms with stuck bit issues have a characteristic value for the quality parameter (denoted as $\chi^2/NDF$) which is different from the nominal value range.
+These abnormal waveforms have a $\chi^2/NDF$ value of greater than 10 times the nominal value range.
 
 While this masking was effective, in an effort to maximize calorimeter acceptance and minimize event-by-event changes in the calorimeter acceptance, a recovery scheme at the offline waveform fitting stage was devised to "un-flip" the stuck bits and recover a high quality, useable waveform. 
 The goal of this recovery method was fairly constrained as to not introduce any reconstruction artifacts into the calorimeter reconstruction chain.
 Therefore, the recovery method focused on a set of abnormal waveforms where the underlying waveform shape was well understood and the recovery procedure was easy to validate and replicate. 
-The constrained goal was to recover as many single sample bit flip waveforms as possible from waveforms with characteristic high value (bits $2^{11}$ to $2^{13}$) stuck bit behavior which have been previously successfully identified using high $\chi^2$ signature from the template fit.
-Within this goal was also to reject preforming this recovery procedure on other sources of failure that could cause poor waveform fit quality include channels with the previously mentioned shifted bit-stream, waveforms with abnormal shape, and waveforms with lower value stuck bits (bits $2^{10}$ and below).
+The constrained goal was to recover as many single sample bit flip waveforms as possible from waveforms with characteristic high value (bits $2^{11}$ to $2^{13}$) stuck bit behavior which have been previously successfully identified using high $\chi^2/NDF$ signature from the template fit.
+An additional goal of this recovery method was to only recover stuck bit waveforms and avoid performing the recovery procedure on other types of abnormal waveforms (ie. waveforms with a shifted bit-stream, waveforms with abnormal shape, and waveforms with lower value stuck bits (bits $2^{10}$ and below)).
 
 \begin{figure}
     \centering
@@ -148,7 +197,7 @@ Within this goal was also to reject preforming this recovery procedure on other 
 \end{figure}
 
 The recovery method is defined below and described using pseduocode in Figure \ref{figure:bit_flip_recovery_algorithm}.
-First, possible stuck bit waveform candidates are identified using the fit quality ($\chi^2$) and pedestal values return from the waveform's fit to the default calorimeter template.
+First, possible stuck bit waveform candidates are identified using the fit quality ($\chi^2/NDF$) and pedestal values returned from the waveform's fit to the default calorimeter template.
 Next, a recovery step is performed on these waveform candidates by iterating through bits $2^{11}$ to $2^{13}$ and subtracting this bit value if the waveform sample value is greater than the bit value and the subtracted value is greater than the waveform pedestal value.
 Following this bit subtraction, the waveform is refit to the calorimeter template and the quality of the fit is re-evaluated.
 A example of successful execution of this recovery method for a stuck bit $2^{11}$ is shown in Figure \ref{figure:bit_flip_recovery_waveforms}.
@@ -164,70 +213,53 @@ A example of successful execution of this recovery method for a stuck bit $2^{11
 Channels with shifted bit streams are eliminated from the recovery procedure by requiring that the pedestal calculated from the first round of template fit be < 4000 ADC; these shifted bit stream waveforms have pedestals between 8000 and 10000 ADC while range of normal calorimeter pedestal values are between 1300 and 2000 ADC.
 Further, channels with very noisy behavior or lower value stuck bits are eliminated from the recovery procedure by requiring that the bit subtraction return a value above pedestal values and the recovered waveform have a good fit quality passing the default fit quality criteria.
 
-\section{sPHENIX Calorimeter Calibration and Reconstruction Routines}
-
-\subsection{Calorimeter Tower Reconstruction}
-
-The digitized waveform signals from the calorimeters are reconstructed into energy deposits using a fit to a custom waveform template method which extracts the ADC signal amplitude from each tower in each event.
-Additionally, tower-by-tower hardware zero suppression (ZS) thresholds set at 2$\sigma$ of the calorimeter pedestal noise were implemented to reduce data volume. 
-Calorimeter tower waveforms with recorded pre-minus-post values below the hardware level ZS threshold only recorded the pre and post samples of the waveform and pre-minus-post values above the ZS threshold recorded the full 12 time sample waveform. 
-During the fitting step of the calorimeter tower reconstruction, an additional software level ZS threshold is applied to correct for biases in the calorimeter energy distribution from noise waveforms. 
-This ZS threshold is higher than the hardware level threshold and uniform across the full detector; 
-for calorimeter tower waveforms which fall below this software level ZS threshold, the pre and post sample values of the waveform are used instead of fitting the waveform using the template fit method. 
-For the \auau{} (\pp{}) analyses, the software level ZS thresholds were set to 100 (60) ADC for the EMCal and 50 (30) ADC for each of the HCals.
-
-Both EMCal and HCal waveform templates were created using beam data from early runs of Run 2024. 
-The template fit has three free parameters: the pedestal, peak time and scale of the waveform, and the processing procedure returns these parameters plus the $\chi^{2}$ term representing fit's least-squares over number of degrees of freedom value which acts as a goodness of fit metric. 
-Finally, the calorimeter reconstruction pipeline also includes masking bad towers within the run bad tower masks.
-A tower is considered hot on a run by run basis, one way for a tower to be considered hot is if the 1\% of events with energy above a threshold have a high $\chi^2$ value for the template fit. 
-Less than 1\% of events have a tower in any of the calorimeter layers with a high $\chi^2$ value that is not already included in the run-by-run bad tower mask. 
-A systematic study of the effect of masking these intermittently high $\chi^2$ towers on the upcoming measurements found that the effect of masking these intermittently high $\chi^2$ towers on the event by event level had negligible effects on these measurements. 
+\section{sPHENIX Calorimeter Calibration}
 
 \subsection{EMCal Energy Calibration}
 
 The EMCal absolute energy scale is calibrated using an $\eta$-dependent calibration to the $\pi^{0}\to\gamma\gamma$ mass peak. 
 This calibration is performed in-situ using the same beam data as is used for the physics analyses and is calibrated to a mass target value determined from simulation. 
-This simulation-based target mass is determined from a full detector simulation of \auau{} collisions generated with \texttt{HIJING}~\cite{hijing} and \pp{} collisions generated with \texttt{PYTHIA8}~\cite{pythia8,pythia8_detroittune} passed through a \textsc{geant-4}~\cite{GEANT4} simulation of the sPHENIX detector and digitized using the sPHENIX digitization chain.
-The calibration procedure contains two steps: first a relative calibration based on the tower slope method is applied to the EMCal towers to enforce $\phi$ symmetry and eliminate tower-by-tower gain differences.
-In the tower slope method, each tower spectra is fit to the reference spectra using the fit function $A\times f(gE)$, where $A$ is a scale factor and $g$ is the gain parameter, in the tower energy region between 0.2 and 0.8 GeV.
+This simulation-based target mass is obtrained from a full detector simulation of \auau{} collisions generated with \texttt{HIJING}~\cite{hijing} and \pp{} collisions generated with \texttt{PYTHIA8}~\cite{pythia8,pythia8_detroittune} passed through a \textsc{geant-4}~\cite{GEANT4} simulation of the sPHENIX detector and its digitization chain.
+The calibration procedure contains two steps: first a relative calibration is applied to enforce $\phi$ symmetry and eliminate tower-by-tower gain differences.
+In this tower slope method, each tower spectrum is fit to the reference spectrum using the fit function $A\times f(gE)$, where $A$ is a scale factor and $g$ is the gain parameter, in the tower energy region between 0.2 and 0.8 GeV.
 This procedure is performed twice with a QA procedure between iterations to remove outlier towers with gain values outside 5 standard deviations of the mean. 
-The tower slope mean and standard deviation values are then recalcuated after removing outliers and tower by tower gain values are extracted again from the fit to the reference spectra.
-
+The tower slope mean and standard deviation values are then recalculated after removing outliers and tower by tower gain values are extracted again from the fit to the reference spectra.
 Second, the absolute calibration to the $\pi^{0}\to\gamma\gamma$ mass peak is performed using EMCal clusters composed of continuous towers with energies exceeding 70 MeV and results are combined for EMCal towers in each $\eta$ slice. 
 Performing this $\phi$ based relative calibration and then $\eta$ based absolute calibration allows for high statistics in performing the absolute calibration while still accurately calibrating each tower in both $\phi$ and $\eta$.
 The $\pi^{0}$ mass peak formed from the EMCal di-cluster invariant mass distribution is fit with a Gaussian plus third order polynomial background function to extract the mass peak position and width for each $\eta$ slice.
 The extracted $\pi^{0}$ mass peak position for each $\eta$ slice is compared to the simulation-based target mass value for that $\eta$ slice and the absolute calibration is updated according to the ratio of the target mass over the observed mass.
-This procedure is iterated through many times (20-30) until sub-statistical fluctuations in the observed $\pi^{0}$ mass peak position are achieved.
+This procedure is iterated through many times (20-30) until only sub-statistical fluctuations in the observed $\pi^{0}$ mass peak position are observed.
 
-For the EMCal absolute energy scale calibration for the Run 2024 \auau{} dataset, data to simulation comparisons of the $\pi^{0}$ distribution showed that the $\pi^{0}$ mass width was larger in data than simulation when using nominal \texttt{HIJING} events and the default sPHENIX \textsc{geant-4} simulation and digitization.
-The data to simulation disagreement in the $\pi^{0}$ mass width can be seen in Figure~\ref{fig:emcal_pi0_before_mc_smear}.
-Additionally, $\pi^{0}$ mass peak position used for the EMCal calibration is shifted in both data and simulation from the Particle Data Group value~\cite{ParticleDataGroup:2024cfk} because of effects from the convolution of the falling energy spectrum and the resolution in the energy response of the EMCal clusters used for the calibration.
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.7\textwidth]{figures/chapter3/emcal_calib_pi0_dist_before_mc_smear.png} 
-    \caption{EMCal di-cluster invariant mass distribution from Run 2024 \auau{} data (black points) and geant-4 simulation of \texttt{HIJING} events (blue histogram) before cluster energy smearing.}
-    \label{fig:emcal_pi0_before_mc_smear}
-\end{figure}
+For the EMCal absolute energy scale calibration for the Run 2024 \auau{} dataset, data to simulation comparisons of the $\pi^{0}$ distribution showed that the $\pi^{0}$ mass width was larger in data than in simulation when using nominal \texttt{HIJING} events and the default sPHENIX \textsc{geant-4} simulation and digitization.
+\textcolor{red}{Would be good to include information on the simulation and data datasets used for the EMCal calibration here.}
+The data to simulation disagreement in the $\pi^{0}$ mass width can be seen in Figure~\ref{fig:emcal_pi0} (left).
+Additionally, $\pi^{0}$ mass peak position used for the EMCal calibration is shifted in both data and simulation from the Particle Data Group value~\cite{ParticleDataGroup:2024cfk} because of effects from the convolution of the falling energy spectrum with the resolution in the energy response of the EMCal clusters used for the calibration.
 
 To understand effects on the calibration from the data's wider EMCal energy resolution and improve the data to simulation agreement in the $\pi^{0}$ mass width, a EMCal cluster energy smearing procedure was implemented in simulation.
 This smearing procedure applied an additional energy independent gaussian smearing term to the EMCal cluster energies in simulation.
 To find the correct width for the smearing term, an iterative procedure was performed starting from the quadrature difference of the $\pi^{0}$ mass width in data and simulation.
 The smearing width was adjusted until convergence of the $\pi^{0}$ mass width in simulation to that in data was reached.
 After two iterations of this procedure, a smearing width of 8.4\% on the $\pi^{0}$ mass peak corresponding to a smearing width of 11.9\% ($\sqrt(2)*8.4\%$) on the EMCal cluster energies was found to give good agreement with the $\pi^{0}$ mass width in data.
-Figures~\ref{fig:emcal_pi0_eta_dependence} show the $\pi^{0}$ mass peak position and width as a function of cluster $\eta$ slice with and without the simulation EMCal cluster energy smearing and Figure~\ref{fig:emcal_pi0} shows the good agreement in the EMCal di-cluster distribution between data and simulation with the EMCal cluster energy smearing.
+Figure~\ref{fig:emcal_pi0} compares the EMCal di-cluster distributions before and after simulation EMCal cluster energy smearing and shows the good agreement in the EMCal di-cluster distribution between data and simulation with this smearing applied.
+
+Figure~\ref{fig:emcal_pi0_eta_dependence} shows the $\pi^{0}$ mass peak position and width as a function of cluster $\eta$ with and without the simulation EMCal cluster energy smearing.
+In Figure~\ref{fig:emcal_pi0_eta_dependence}, the x-axis $i\eta$ value represents the EMCal cluster $\eta$ from the di-cluster pair mapped onto the EMCal tower $i\eta$ indices which range from 0 to 95.
+This mapping is done to allow for binning of the EMCal cluster pairs dominated by $\pi^{0}$ candidates into discrete tower slices for the calibration procedure.
+Additionally, a small dip in the $\pi^{0}$ mass peak position in the central $\eta$ region of the EMCal is also observed in both data and simulation.
+This noticable change in the energy response for towers at central $\eta$ is due to the projective nature of the EMCal towers where central $\eta$ towers have a smaller surface area compared to towers at larger $\eta$ values. 
 
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/chapter3/emcal_pi0_mass_width_versus_eta.png} 
-    \caption{EMCal $\pi^{0}$ mass peak position (top) and relative width (bottom) for simulation (red), simulation with cluster energy smearing (green), data calibrated to the un-smeared simulation (blue) and data calibrated to the smeared simulation (black). Left plots show quantities as a function of cluster $\eta$ slice and right plots show the $\eta$ averaged quantities for easy comparison.}
+    \caption{EMCal $\pi^{0}$ mass peak position (left) and relative width (right) for simulation (red), simulation with cluster energy smearing (green), data calibrated to the un-smeared simulation (blue) and data calibrated to the smeared simulation (black). $\eta$ averaged quantities are shown as dotted (data) and dashed (simulation) lines for easy comparison.}
     \label{fig:emcal_pi0_eta_dependence}
-\end{figure}
+\end{figure} 
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.7\textwidth]{figures/chapter3/emcal_pi0_final_prc_edit_label.pdf} 
-    \caption{Final EMCal di-cluster invariant mass distribution from Run 2024 \auau{} data (black points) and geant-4 simulation of \texttt{HIJING} events (blue histogram).}
+    \includegraphics[width=0.48\textwidth]{figures/chapter3/emcal_calib_pi0_dist_before_mc_smear.png} 
+    \includegraphics[width=0.48\textwidth]{figures/chapter3/emcal_pi0_final_prc_edit_label.pdf} 
+    \caption{EMCal di-cluster invariant mass distribution from Run 2024 \auau{} data (black points) and geant-4 simulation of \texttt{HIJING} events (blue histogram) before (left) and after (right) simulation EMCal cluster energy smearing.}
     \label{fig:emcal_pi0}
 \end{figure}
 
@@ -236,7 +268,7 @@ These studies included studying the extracted $\pi^{0}$ mass peak value and widt
  studying the effects of the EMCal tower noise on the tower energy resolution, and studying variations in the calibration parameters including the cluster tower energy threshold and centrality selection. 
 
 The $\pi^{0}$ mass peak value and width as a function of $\pi^{0}$ $p_{T}$ before and after the EMCal cluster energy smearing is shown in Figure~\ref{fig:emcal_pi0_pt_dependence}.
-While there is some small $p_{T}$ dependence in the $\pi^{0}$ mass peak and width, this residual dependence is seen in all data and simulation samples and should be due to the fitting procedure which is optmized for low $p_{T}$ $\pi^{0}$'s which dominate the calibration process rather than an inherent $p_{T}$ dependence.
+While there is some small $p_{T}$ dependence in the $\pi^{0}$ mass peak and width, this residual dependence is seen in all data and simulation samples and should be due to the fitting procedure which is optmized for low $p_{T}$ $\pi^{0}$s, which dominate the calibration process, rather than an inherent $p_{T}$ dependence.
 The di-cluster invariant mass distributions for different $\pi^{0}$ $p_{T}$ bins are shown with the gaussian plus polynomial background fit in Figure~\ref{fig:emcal_pi0_dist_pt_bins}.
 
 \begin{figure}
@@ -254,7 +286,7 @@ The di-cluster invariant mass distributions for different $\pi^{0}$ $p_{T}$ bins
 \end{figure}
 
 Energy resolution effects from the EMCal tower noise were studied in simulation by turning off and on the realistic EMCal tower noise in the digitization step of the simulation.
-Figure~\ref{fig:emcal_noise_effects} shows a 3.5\% effect on the EMCal tower energy resolution from the inclusion of realistic EMCal tower noise for towers $\sim 1 GeV$ which dominate the calibration cluster candidates. 
+Figure~\ref{fig:emcal_noise_effects} shows a 3.5\% effect on the EMCal tower energy resolution from the inclusion of realistic EMCal tower noise for towers $\sim 1 \mathrm{GeV}$ which dominate the calibration cluster candidates. 
 This effect is small in comparison to the 11.9\% EMCal cluster energy smearing needed to achieve good agreement between data and simulation in the $\pi^{0}$ mass peak width.
 
 \begin{figure}
@@ -266,22 +298,21 @@ This effect is small in comparison to the 11.9\% EMCal cluster energy smearing n
 
 Finally studies of variations in the calibration parameters including the cluster tower energy threshold and centrality selection were performed. 
 Figures~\ref{fig:emcal_pi0_mass_vars} and \ref{fig:emcal_pi0_width_vars} show the effects of varying the cluster tower energy threshold and centrality selection on the extracted $\pi^{0}$ mass peak value and width in both data and simulation
+Similar to Figure~\ref{fig:emcal_pi0_eta_dependence}, in Figures~\ref{fig:emcal_pi0_mass_vars} and \ref{fig:emcal_pi0_width_vars}, the x-axis $i\eta$ value represents the EMCal cluster $\eta$ from the di-cluster pair mapped onto the EMCal tower $i\eta$ indices which range from 0 to 95.
 When varying the cluster tower energy thresholds, small deviations ($<2\%$) on the extracted $\pi^{0}$ mass peak value and width are seen from these variations and the scale and trend of these variations are well matched between data and simulation.
 The centrality selection in simulation and data is set as a percentile cut on the total event EMCal cluster multiplicity. 
 The centrality selection in simulation was varied to match the data absolute-scale total event EMCal cluster multiplicity cut and was found to have negligible effects on the $\pi^{0}$ mass peak position and width.
 
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{figures/chapter3/emcal_calib_mc_var_pi0_mass.png} 
-    \includegraphics[width=\textwidth]{figures/chapter3/emcal_calib_data_var_pi0_mass.png}
+    \includegraphics[width=\textwidth]{figures/chapter3/emcal_calib_mc_data_var_pi0_mass.png} 
     \caption{EMCal $\pi^{0}$ mass peak position value (left) and variation from nominal (right) as a function of $\eta$ for nominal result (red), variations in cluster tower energy thresholds (green, blue), and variation in simulation centrality selection (yellow). Variation results for simulation are shown in top plots and for data are shown in bottom plots.}
     \label{fig:emcal_pi0_mass_vars}
 \end{figure}
 
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{figures/chapter3/emcal_calib_mc_var_pi0_width.png} 
-    \includegraphics[width=\textwidth]{figures/chapter3/emcal_calib_data_var_pi0_width.png}
+    \includegraphics[width=\textwidth]{figures/chapter3/emcal_calib_mc_data_var_pi0_width.png} 
     \caption{EMCal $\pi^{0}$ mass peak relative width value (left) and variation from nominal (right) as a function of $\eta$ for nominal result (red), variations in cluster tower energy thresholds (green, blue), and variation in simulation centrality selection (yellow). Variation results for simulation are shown in top plots and for data are shown in bottom plots.}
     \label{fig:emcal_pi0_width_vars}
 \end{figure}
@@ -291,19 +322,19 @@ Therefore, a conservative systematic uncertainty of 2.6\% derived from the varia
 
 \subsection{HCal Energy Calibration}
 
-The IHCal and OHCal are both calibrated to the electromagnetic energy scale using the minimum ionizing particle (MIP) energy depositions from cosmic ray muons from data taken during no-beam period. 
-These cosmics runs are taken throughout the year-long data-taking period.
-Therefore, it is expected that the detector conditions are fairly consistent between cosmics and beam running and any small time-dependent detector condition effects on gain variations should be accounted for in the calibration from cosmics data. 
+The IHCal and OHCal are both calibrated to the electromagnetic energy scale using the minimum ionizing particle (MIP) energy depositions from cosmic ray muons from data taken during no-beam periods. 
+Cosmic ray data collection for HCal calibration were taken periodically throughout the year-long data-taking period.
+Time-dependent calibrations were developed which use collections of cosmic ray data taken closest in time to each beam data-taking period to include small time-dependent detector condition effects on gain variations in the calibration. 
 To collect an unbiased sample of cosmic ray muon events, a single OHCal tower trigger with a threshold well below the MIP peak is used. 
 A simulation dataset using cosmic ray muons generated with EcoMug~\cite{ecomug} and propagated through a \textsc{geant-4}~\cite{GEANT4} simulation of the sPHENIX detector is used to model in simulation the angular distribution of cosmic rays seen by the sPHENIX HCals.
 In both data and simulation, a set of offline cuts are applied to select muon events that propagate through a single HCal tower in the azimuthal direction depositing energy in a majority of the tower's scintillating tiles.
 These offline cuts include an isolation cut on the energy surrounding the tower in $\eta$ and a requirement of energy deposited in the neighboring towers in $\phi$. 
 A comparison between data and simulation after these offline cuts of the MIP energy distribution for an OHCal tower can be found in Figure~\ref{fig:hcal_mip}. 
-Since this selection requires events where the muon traverses a majority of the tower's scintillating tiles, it results in a narrow, characteristic MIP energy peak needed for a precise calibration.
+Since this selection requires events where the muon traverses a majority of the tower's scintillating tiles, it produces a narrow, characteristic MIP energy peak needed for a precise calibration.
 
 An additional HCal calibration step of a tower-slope correction is applied to account for inconsistencies in the angular distribution of cosmic rays in the cosmic data simulation; 
 here a relative calibration is applied to HCal towers using the assumptions of $\phi$ symmetry and that the absolute cosmics-based calibrations of the HCal towers on the sides of the detectors with very high statistics are accurate.
-Finally, an additional sampling fraction factor is applied to calibrate the measured scintillator MIP energy distribution to an estimate of the energy in the full HCal tower (scintillator and absorber material).
+Finally, a sampling fraction factor is applied to calibrate the measured scintillator MIP energy distribution to an estimate of the energy in the full HCal tower (scintillator and absorber material).
 This sample fraction value was determined in the sPHENIX \textsc{geant-4} simulation using high-$E_\mathrm{T}$ single hadrons and validated by test beam studies~\cite{emcal_hcal_beamtest}.
 
 \begin{figure}
@@ -315,8 +346,8 @@ This sample fraction value was determined in the sPHENIX \textsc{geant-4} simula
 
 \subsection{Calorimeter Zero Suppression and Cross Calibration}
 
-The effect of tower reconstruction via fitting to the calorimeter waveform template versus zero suppression algorithm as well as the application of an additional cross calibration factors for zero suppressed towers was extensively studied since the low energy towers are a significant contributor to soft physics analyses like the $\detdeta$ and underlying event measurements.
-An additional calibration was applied to the ZS tower energies to account for the ZS algorithm, waveform sample 6 - sample 0, underestimating the tower energy. 
+The effect of tower reconstruction via fitting to the calorimeter waveform template versus zero suppression (ZS) algorithm as well as the application of an additional cross calibration factors for zero suppressed towers was extensively studied since the low energy towers are a significant contributor to soft physics analyses like the $\detdeta$ and underlying event measurements.
+An additional calibration was applied to the ZS tower energies to account for the ZS algorithm, based on waveform sample 6 - sample 0, underestimating the tower energy. 
 The calorimeters on the whole are timed in at sample 6, however for multiple reasons including differences in trigger latching time samples, intra-sector cable lengths and tower distances to the collision points, on the tower by tower level, a tower may not be timed in exactly at sample 6. 
 While the template fit has little to no constraints within the waveform length on the signal timing when looking for the signal peak, the ZS algorithm expects the signal peak to be timed in exactly at sample 6. 
 Therefore, a cross calibration is applied to the zero suppressed waveforms to account for shifts in the tower-by-tower mean time of signal peaks. 
@@ -326,31 +357,31 @@ These cross calibration factors are determined on a tower-by-tower and run-by-ru
 \subsubsection{$ADC_{\text{Template Fit}}$ versus $ADC_{\text{sample 6 - sample 0}}$}
 
 Two methods are used to study effect of applying ZS by comparing the energy value of a tower from the template fit versus the energy value of the tower from sample 6 – sample 0. 
-First by looking at the correlation of $ADC_{\text{template fit}}$ to $ADC_{\text{sample 6 – sample 0}}$ to look at the energy dependence on the relationship between the template fit and ZS energy values. 
-Second by looking at the mean ratio of $ADC_{\text{template fit}}$/$ADC_{\text{sample 6 – sample 0}}$ for each tower entry in a set energy range to look for tower by tower effects on the relationship between the template fit and ZS energy values.
+The first method is by looking at the correlation of $ADC_{\text{template fit}}$ to $ADC_{\text{sample 6 – sample 0}}$ to look at the energy dependence on the relationship between the template fit and ZS energy values. 
+The second method is by looking at the mean ratio of $ADC_{\text{template fit}}$/$ADC_{\text{sample 6 – sample 0}}$ for each tower entry in a set energy range to look for tower by tower effects on the relationship between the template fit and ZS energy values.
 
 \begin{figure}
     \centering
     \includegraphics[width=0.8\linewidth]{detdeta/Figures/ZS_template_fit/emcal_zs_vs_template_fit.png}
-    \caption{Comparison of EMCal waveform processing with zero suppression versus template fit. Correlation between tower's ADC value from ZS versus from template fit shown in left plots for two different ADC ranges [-100,1000] ADC (top left) and [-100,100] ADC (bottom left). Ratio of ADC value from ZS versus ADC value from template fit on a tower by tower basis shown in right plots for two different ranges [100,1000] ADC (top right) and  [-100,100] ADC (bottom right).}
+    \caption{Comparison of EMCal waveform processing with zero suppression versus template fit. The correlation between a tower's ADC value from ZS versus from template fit is shown in left plots for two different ADC ranges [-100,1000] ADC (top left) and [-100,100] ADC (bottom left). The ratio of ADC value from ZS versus ADC value from template fit on a tower by tower basis is shown in right plots for two different ranges [100,1000] ADC (top right) and [-100,100] ADC (bottom right).}
     \label{fig:emcal_zs_template_corr}
 \end{figure}
 
 \begin{figure}
     \centering
     \includegraphics[width=0.8\linewidth]{detdeta/Figures/ZS_template_fit/ohcal_zs_vs_template_fit.png}
-    \caption{Comparison of OHCal waveform processing with zero suppression versus template fit. Correlation between tower's ADC value from ZS versus from template fit shown in left plots for two different ADC ranges [-100,1000] ADC (top left) and [-100,100] ADC (bottom left). Ratio of ADC value from ZS versus ADC value from template fit on a tower by tower basis shown in right plots for two different ranges [100,1000] ADC (top right) and  [-100,100] ADC (bottom right).}
+    \caption{Comparison of OHCal waveform processing with zero suppression versus template fit. The correlation between a tower's ADC value from ZS versus from template fit is shown in left plots for two different ADC ranges [-100,1000] ADC (top left) and [-100,100] ADC (bottom left). The ratio of ADC value from ZS versus ADC value from template fit on a tower by tower basis is shown in right plots for two different ranges [100,1000] ADC (top right) and [-100,100] ADC (bottom right).}
     \label{fig:ohcal_zs_template_corr}
 \end{figure}
 
 \begin{figure}
     \centering
     \includegraphics[width=0.8\linewidth]{detdeta/Figures/ZS_template_fit/ihcal_zs_vs_template_fit.png}
-    \caption{Comparison of IHCal waveform processing with zero suppression versus template fit. Correlation between tower's ADC value from ZS versus from template fit shown in left plots for two different ADC ranges [-100,1000] ADC (top left) and [-100,100] ADC (bottom left). Ratio of ADC value from ZS versus ADC value from template fit on a tower by tower basis shown in right plots for two different ranges [100,1000] ADC (top right) and  [-100,100] ADC (bottom right).}
+    \caption{Comparison of IHCal waveform processing with zero suppression versus template fit. The correlation between a tower's ADC value from ZS versus from template fit is shown in left plots for two different ADC ranges [-100,1000] ADC (top left) and [-100,100] ADC (bottom left). The ratio of ADC value from ZS versus ADC value from template fit on a tower by tower basis is shown in right plots for two different ranges [100,1000] ADC (top right) and [-100,100] ADC (bottom right).}
     \label{fig:ihcal_zs_template_corr}
 \end{figure}
 
-For EMCal $ADC_{\text{template fit}}$ to $ADC_{\text{sample 6 – sample 0}}$ correlation plot in Figure \ref{fig:emcal_zs_template_corr} (upper left), there is a main trendline at 1, a broader trendline below 1, and additional structure in region below 100 ADC. 
+In the EMCal $ADC_{\text{template fit}}$ versus $ADC_{\text{sample 6 – sample 0}}$ correlation plot in Figure \ref{fig:emcal_zs_template_corr} (upper left), there is a main trendline at 1, a broader trendline below 1, and additional structure in region below 100 ADC. 
 Additionally, in the region below 100 ADC in the EMCal $ADC_{\text{template fit}}$ to $ADC_{\text{sample 6 – sample 0}}$ correlation plot, there are both correlated and anti-correlated trends of the template fitting versus zero suppression algorithm. 
 For OHCal $ADC_{\text{template fit}}$ to $ADC_{\text{sample 6 – sample 0}}$ correlation plot in Figure \ref{fig:ohcal_zs_template_corr} (upper left) there are the same trends as EMCal correlation plot, namely a band at 1, a broader band below 1 and structure at low energy. 
 However, the band below 1 for the OHCal is broader than in the EMCal case. Additionally, in the OHCal case, there are still the correlated and anti-correlated trendlines for the processing of low energy waveforms using the template fit versus the ZS method. 
@@ -360,7 +391,8 @@ Further investigation into the correlated and anti-correlated trendlines seen in
 When selecting for waveforms which fit into the anti-correlated band, namely with a positive ADC value from processing with the template fit and a negative ADC value from processing with the ZS method and vice versa, the majority of the events in this anti-correlated band were abnormal waveforms like the ones shown in Figure \ref{fig:noisy_waveforms}. 
 Figure \ref{fig:noisy_waveforms} shows a waveform decreasing (left)/increasing (right) across the full timing window of the waveform and exhibiting some kind of long range or multi time sample noise in addition to single sample noise. 
 This fully increasing/decreasing noise behavior is fit by the template fit to be the tail of a waveform peak, therefore in the increasing case, the template fit returns a positive ADC value and a peak timing between the 0-4th time sample, and in the decreasing case, the template fit returns a negative ADC value expecting that this is the tail of an inverted peak also with a peak timing between the 0-4th time sample. 
-The fully decreasing waveform processed by template fit with value of 18.9 ADC and processed with ZS algorithm with value of -10 ADC, while the fully increasing waveform processed by template fit with value of -20.5 ADC and processed with ZS algorithm with value of 11 ADC.
+The fully decreasing waveform in Figure \ref{fig:noisy_waveforms} (left) when processed by template fit returns peak-pedestal value of 18.9 ADC and when processed with the ZS algorithm returns a peak-pedestal value of -10 ADC.
+The fully increasing waveform in Figure \ref{fig:noisy_waveforms} (right) when processed by template fit returns a peak-pedestal value of -20.5 ADC and when processed with the ZS algorithm returns a peak-pedestal value of 11 ADC.
 
 \begin{figure}
     \centering
@@ -370,25 +402,25 @@ The fully decreasing waveform processed by template fit with value of 18.9 ADC a
     \label{fig:noisy_waveforms}
 \end{figure}
 
-Understanding how the template fit processes these waveforms with long range noise helps to understand the structure and scale of Figures \ref{fig:emcal_zs_template_corr} (bottom right) and \ref{fig:ohcal_zs_template_corr} (bottom right). 
-These plots show the mean ratio of ADC distribution in region [-50,50] is lower for ZS distribution than template fit distribution. 
-For the EMCal, this mean ratio of $ADC_{\text{template fit}}$/$ADC_{\text{sample 6 – sample 0}}$ in low energy range (+/-75 MeV) show a consistent ratio of 0.57. 
-This ratio should be related to the competing effects at low energy of correlated energy values found from processing with the template fit and ZS on waveforms with low energy signals and anti-correlated energy values found from processing waveforms with long range noise using the template fit and ZS. 
-The OHCal mean ratio of $ADC_{\text{template fit}}$/$ADC_{\text{sample 6 – sample 0}}$ in low energy range (+/-150 MeV) is around 0.74 but has two blue areas that correspond to 4 ADC boards with high pedestal RMS (around 10 ADC), that seem to be main contributors to the anti-correlation band seen in the full detector correlation plot. 
-Once again the two trends compete with one another at low energy with more noisy boards having a lower mean ratio due to the larger contribution of anti-correlated noise and less noisy boards having a higher mean ratio due to the smaller contribution of anti-correlated waveforms. 
-The IHCal mean ratio of $ADC_{\text{template fit}}$/$ADC_{\text{sample 6 – sample 0}}$ in low energy range (+/-25 MeV) has 2 blue shaded areas correspond to 2 ADC boards with high pedestal RMS (around 6 ADC) which exhibit the same behavior as the OHCal noisy boards.
+Understanding how the template fit processes these waveforms with long range noise helps to explain the structure and scale of Figures \ref{fig:emcal_zs_template_corr} (bottom right) and \ref{fig:ohcal_zs_template_corr} (bottom right). 
+These plots show for each tower, denoted by its $i\eta,i\phi$ location, the ratio of the mean ADC value extracted from the template fit to the mean ADC value extracted from the ZS algorithm, $\overline{ADC}_{\text{template fit}}$/$\overline{ADC}_{\text{sample 6 – sample 0}}$, in the region [-50,50] ADC. 
 
-The absolute calibration established for all three calorimeters is using the template fit where the peak time is a free parameter. 
+For the EMCal, this ratio $\overline{ADC}_{\text{template fit}}$/$\overline{ADC}_{\text{sample 6 – sample 0}}$ in low energy range (+/- 50 ADC = +/-75 MeV) shows a consistent value across EMCal towers of 0.57. 
+This ratio should be related to the two competing effects at low energy: low energy signals which produce correlated values from the two waveform reconstruction methods (template fit and ZS) and long range noise waveforms with produce anti-correlated values from the two waveform reconstruction methods.
+The OHCal ratio $\overline{ADC}_{\text{template fit}}$/$\overline{ADC}_{\text{sample 6 – sample 0}}$ in the low energy range (+/- 50 ADC = +/-150 MeV) is around 0.74 but has two blue areas that correspond to four ADC boards with high pedestal RMS (~10 ADC), that seem to be main contributors to the anti-correlation band seen in the full detector correlation plot. 
+Once again the two trends, correlated behavior between the template fit and ZS results from real low energy signals and anti-correlated behavior from long range noise waveforms, compete with one another and the noisier boards have a lower mean ratio due to a larger contribution of long range noise waveforms with anti-correlated behavior between the two waveform processing methods.
+The IHCal ratio $\overline{ADC}_{\text{template fit}}$/$\overline{ADC}_{\text{sample 6 – sample 0}}$ in the low energy range (+/- 50 ADC = +/-25 MeV) also has two blue shaded areas correspond to 2 ADC boards with high pedestal RMS (~6 ADC) which exhibit the same behavior as the OHCal noisy boards.
+
+The absolute calibration established for all three calorimeters uses the template fit where the peak time is a free parameter. 
 Since the ZS method does not take the timing as a free parameter, a cross calibration is necessary to account for tower by tower timing differences which are easily handled by the template fit but are not handled by the ZS method. 
 Specifically the ratio of ADC values found using the ZS method and the ADC values found using the template fit are used to determine the energy values in GeV that correspond to the ADC values extracted from the ZS algorithm. 
 
-To find this cross calibration, the $ADC_{\text{template fit}}$/$ADC_{\text{sample 6 – sample 0}}$ ratio for well defined waveforms above the noise contributions is used. 
-This corresponds to the band structure at 1 and lower band structure below 1 seen in the $ADC_{\text{template fit}}$ to $ADC_{\text{sample 6 – sample 0}}$ correlation plots (Figs. \ref{fig:emcal_zs_template_corr}, \ref{fig:ohcal_zs_template_corr}, \ref{fig:ihcal_zs_template_corr} (top left)). 
-By mapping these trends on to the tower by tower mean ratio of $ADC_{\text{template fit}}$/$ADC_{\text{sample 6 – sample 0}}$ in higher energy range [100,1000] ADC (Figs. \ref{fig:emcal_zs_template_corr}, \ref{fig:ohcal_zs_template_corr}, \ref{fig:ihcal_zs_template_corr} (top right)), 
-for the EMCal, most towers have a ratio value of nearly 1 with some parts of the detector having a value around 0.8, likely from these parts of the detector not being timed in exactly at time sample 6. 
-These towers contribute to the band below 1 in the correlation plot. 
+To determine this cross calibration, the $\overline{ADC}_{\text{template fit}}$/$\overline{ADC}_{\text{sample 6 – sample 0}}$ ratio for well defined waveforms well above the noise contributions show in Figures \ref{fig:emcal_zs_template_corr}, \ref{fig:ohcal_zs_template_corr}, \ref{fig:ihcal_zs_template_corr} (top right) is used. 
+The waveforms that determine these ratios can be mapped to the correlation plots in Figures \ref{fig:emcal_zs_template_corr}, \ref{fig:ohcal_zs_template_corr}, \ref{fig:ihcal_zs_template_corr} (top left), where they make up both the band structure at 1 and lower band structure below 1. 
+For the EMCal, most towers have a value for the $\overline{ADC}_{\text{template fit}}$/$\overline{ADC}_{\text{sample 6 – sample 0}}$ ratio of nearly 1 with some parts of the detector having a value around 0.8, due to these parts of the detector not being timed in exactly at time sample 6. 
+These towers with ratio value around 0.8 contribute to the band below 1 in the correlation plot. 
 There are similar results in the OHCal and IHCal, with parts of the detector having a ratio of 1 and towers timed in at time sample 6, and other parts of the detector being slightly out of time, lowering the ratio and contributing to the large band below 1 seen in the OHCal and IHCal $ADC_{\text{template fit}}$ to $ADC_{\text{sample 6 – sample 0}}$ correlation plots. 
-Additionally, the structure in mean ratio of $ADC_{\text{template fit}}$/$ADC_{\text{sample 6 – sample 0}}$ which somewhat corresponds to different cable lengths of OHCal, once again pointing towards this ratio be influenced by timing differences between different parts of the detector. 
+Additionally, in the OHCal and IHCal, the tower-by-tower values for the $\overline{ADC}_{\text{template fit}}$/$\overline{ADC}_{\text{sample 6 – sample 0}}$ ratio have a small $|\eta|$ dependence due to cable length differences resulting in overall timing differences across the detectors.
 
 These tower by tower ratios are used as a cross calibration for the energy in GeV from the ZS waveform processing method. 
 To find the energy of a waveform processed with the ZS method, we use the following equation:
@@ -399,20 +431,21 @@ where $C_{\text{Template fit}}$ is the tower by tower absolute energy calibratio
 
 \subsubsection{ZS + template fit method for calorimeter tower reconstruction}
 
-Through in-depth studies of the ZS and template fit waveform processing methods, it is now understood that the low energy region of our tower energy spectra is quite noisy and this noise is processed differently using the template fit versus ZS method. 
+Through in-depth studies of the ZS and template fit waveform processing methods, it is now understood that the low energy region of our tower energy spectra is quite noisy and that this noise is processed differently using the template fit versus ZS method. 
 To eliminate the positive bias derived from the template fit processing of noisy waveforms, a ZS + template fit method is implemented for processing calorimeter towers. 
 In this ZS + template fit processing method, a threshold ADC value is established which is checked against a waveform's sample 6 - sample 0 ADC value. 
 If the waveform's ZS value falls below the threshold ADC value, the waveform is processed using the value from sample 6 - sample 0 and if the waveform's ZS value is above the threshold ADC value, the waveform is processed using the template fit method. 
+Finally, the cross calibration factors are applied to the ZS processed waveforms to establish the correct energy scale for these towers and ensure a continuous energy spectrum across the boundary between the ZS and template fit processing methods. 
 
 The goal of using the ZS + template fit method is to fully process the calorimeter \emph{noise} waveforms with the ZS method so that they do not incur a positive bias from the template fitting. 
 This method was commissioned using beam data from Run 2023.
-A range of thresholds from 10 to 50 ADC is tested to find at what point the minimum bias distribution of calorimeter total $\ET$ value, for example, becomes robust to the ZS + template fit processing method, indicating that there are no longer noise contributions included in the offset or pedestal of the total calorimeter energy. 
+A range of thresholds from 10 to 50 ADC is tested to find at what point the minimum bias distribution of calorimeter total $\ET$ value, for example, becomes insensitive to the ZS + template fit processing method, indicating that there are no longer noise contributions included in the offset or pedestal of the total calorimeter energy. 
 Figure \ref{fig:ET_w_zs} shows the effect of applying various ZS thresholds on the minimum bias distribution of the total $\ET$ of each calorimeter. 
 
 Applying any ZS threshold has the largest effect on the EMCal total $\ET$ distribution; there is a large decrease in the offset of the total $\ET$ distribution once any low energy waveforms are processed with the ZS method instead of the template fit. 
 Interestingly, for low ZS thresholds, like 10 ADC, the EMCal total $\ET$ distribution peaks at below 0 GeV and then for increasing thresholds, the total $\ET$ distribution increases and finally stabilizes at 5 GeV for ZS thresholds of 30 ADC and above. 
 For the ZS thresholds of 10 and 20 ADC, some of the noise is still being processed using the template fit. 
-However, recalling the waveforms in Figure \ref{fig:noisy_waveforms}, the waveform that is uniformly decreasing will be alwasy be fit with the ZS method, resulting in a negative energy contribution to the calorimeter total $\ET$ while the waveform that is uniformly increasing when fit with the template fit method because its ZS value is above the threshold will also result in a negative energy contribution to the total $\ET$ as this waveform processed with the template fit is seen as the tail of an inverted peak. 
+However, recalling the waveforms in Figure \ref{fig:noisy_waveforms}, the waveform that is uniformly decreasing will be always be fit with the ZS method, resulting in a negative energy contribution to the calorimeter total $\ET$ while the waveform that is uniformly increasing when fit with the template fit method because its ZS value is above the threshold will also result in a negative energy contribution to the total $\ET$ as this waveform processed with the template fit is seen as the tail of an inverted peak. 
 Therefore, when processing all of the waveforms with decreasing long range noise with the ZS method and some of the waveforms with increasing long range noise with the template fit method, there is an overall shift of the total $\ET$ distribution in the negative energy direction. 
 In raising the ZS threshold, more of these increasing noise waveforms are then processed with the ZS method, and the total $\ET$ rises and finally stablizes around a threshold of 30 ADC. 
 
@@ -429,52 +462,52 @@ Additionally, for the OHCal total $\ET$ distribution, there is very little chang
 \end{figure}
 
 The reconstructed $\detdeta$ measurement from each calorimeter subsystem is also an excellent tool for investigating calorimeter calibration and reconstruction effects.
-This measurement will be outlined in detail in Chapter~\ref{sec:chapter4}, but for the purposes of interpretting the template fit + ZS method for calorimeter waveform reconstruction, the reconstructed-level $\detdeta$ is the sum of transverse energy from all towers in an $\eta$ slice of the calorimeter, ($\Sigma E_{T,tower} (\eta)$). 
+This measurement will be outlined in detail in Chapter~\ref{ch:detdeta_auau}, but for the purposes of interpreting the template fit + ZS method for calorimeter waveform reconstruction, the reconstructed-level $\detdeta$ is the sum of transverse energy from all towers in an $\eta$ slice of the calorimeter, ($\Sigma E_{T,tower} (\eta)$). 
 The effect of applying ZS and the ZS cross calibration factors on the reconstructed-level calorimeter $\detdeta$ is shown in Figures \ref{fig:emcal_zs_detdeta}, \ref{fig:ihcal_zs_detdeta} and \ref{fig:ohcal_zs_detdeta}. 
 There is large effect on the reconstructed-level EMCal $\detdeta$ value when applying any threshold of zero suppression. 
 However, there is little effect on the reconstructed-level EMCal $\detdeta$ measurement from applying the ZS cross calibration factors since the majority of the EMCal is timed in uniformly and most EMCal towers have cross calibration factors very close to 1. 
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.45\linewidth]{detdeta/Figures/ZS_template_fit/emcal_reco_zs_nocrosscalib.png}
     \includegraphics[width=0.45\linewidth]{detdeta/Figures/ZS_template_fit/emcal_reco_zs_crosscalib.png}
-    \includegraphics[width=0.45\linewidth]{detdeta/Figures/ZS_template_fit/emcal_reco_zs_nocrosscalib_ratio.png}
+    \includegraphics[width=0.45\linewidth]{detdeta/Figures/ZS_template_fit/emcal_reco_zs_nocrosscalib.png}
     \includegraphics[width=0.45\linewidth]{detdeta/Figures/ZS_template_fit/emcal_reco_zs_crosscalib_ratio.png}
+    \includegraphics[width=0.45\linewidth]{detdeta/Figures/ZS_template_fit/emcal_reco_zs_nocrosscalib_ratio.png}
     \caption{Comparison of reconstructed EMCal $\detdeta$ measurements (top) and ratios to full template fit EMCal $\detdeta$ (bottom) from beam data processed using ZS + template fit method for thresholds between 10 and 50 ADC with (left) and without (right) tower by tower ZS cross calibration factors applied.}
     \label{fig:emcal_zs_detdeta}
 \end{figure}
 
 In Figure \ref{fig:ihcal_zs_detdeta}, there is a small effect on the reconstructed-level IHCal $\detdeta$ from applying any ZS threshold. 
 Additionally, when a ZS cross calibration factor is not applied, the reconstructed-level IHCal $\detdeta$ changes as a function of the ZS threshold. 
-This is happening because real signal energies are underestimated when using the ZS method of waveform processing if the signal peak is not at exactly time sample 6.
+This occurs because real signal energies are underestimated when using the ZS method of waveform processing if the signal peak is not at exactly time sample 6.
 By raising the ZS threshold, the number of real signals processed with this ZS method that underestimates the tower's energy increases. 
 Correcting for this effect by applying the ZS cross calibration factors, the reconstructed-level IHCal $\detdeta$ for all ZS thresholds is stable. 
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.45\linewidth]{detdeta/Figures/ZS_template_fit/ihcal_reco_zs_nocrosscalib.png}
     \includegraphics[width=0.45\linewidth]{detdeta/Figures/ZS_template_fit/ihcal_reco_zs_crosscalib.png}
-    \includegraphics[width=0.45\linewidth]{detdeta/Figures/ZS_template_fit/ihcal_reco_zs_nocrosscalib_ratio.png}
+    \includegraphics[width=0.45\linewidth]{detdeta/Figures/ZS_template_fit/ihcal_reco_zs_nocrosscalib.png}
     \includegraphics[width=0.45\linewidth]{detdeta/Figures/ZS_template_fit/ihcal_reco_zs_crosscalib_ratio.png}
+    \includegraphics[width=0.45\linewidth]{detdeta/Figures/ZS_template_fit/ihcal_reco_zs_nocrosscalib_ratio.png}
     \caption{Comparison of reconstructed IHCal $\detdeta$ measurements (top) and ratios to full template fit IHCal $\detdeta$ (bottom) from beam data processed using ZS + template fit method for thresholds between 10 and 50 ADC with (left) and without (right) tower by tower ZS cross calibration factors applied.}
     \label{fig:ihcal_zs_detdeta}
 \end{figure}
 
-In Figure \ref{fig:ohcal_zs_detdeta}, the reconstructed-level OHCal $\detdeta$ sees similar trends to the IHCal: that applying any ZS threhold has a small effect on the reconstructed $\detdeta$ and that in order to not underestimate the energy of waveforms processed by the ZS method and have calorimeter energies be robust to ZS threshold, a tower by tower ZS cross calibration factor must be applied.
+In Figure \ref{fig:ohcal_zs_detdeta}, the reconstructed-level OHCal $\detdeta$ sees similar trends to the IHCal: that applying any ZS threshold has a small effect on the reconstructed $\detdeta$ and that in order to not underestimate the energy of waveforms processed by the ZS method and have calorimeter energies that are robust to ZS threshold variations, a tower-by-tower ZS cross calibration factor must be applied.
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.45\linewidth]{detdeta/Figures/ZS_template_fit/ohcal_reco_zs_nocrosscalib.png}
     \includegraphics[width=0.45\linewidth]{detdeta/Figures/ZS_template_fit/ohcal_reco_zs_crosscalib.png}
-    \includegraphics[width=0.45\linewidth]{detdeta/Figures/ZS_template_fit/ohcal_reco_zs_nocrosscalib_ratio.png}
+    \includegraphics[width=0.45\linewidth]{detdeta/Figures/ZS_template_fit/ohcal_reco_zs_nocrosscalib.png}
     \includegraphics[width=0.45\linewidth]{detdeta/Figures/ZS_template_fit/ohcal_reco_zs_crosscalib_ratio.png}
+    \includegraphics[width=0.45\linewidth]{detdeta/Figures/ZS_template_fit/ohcal_reco_zs_nocrosscalib_ratio.png}
     \caption{Comparison of reconstructed OHCal $\detdeta$ measurements (top) and ratios to full template fit OHCal $\detdeta$ (bottom) from beam data processed using ZS + template fit method for thresholds between 10 and 50 ADC with (left) and without (right) tower by tower ZS cross calibration factors applied.}
     \label{fig:ohcal_zs_detdeta}
 \end{figure}
 
 \subsubsection{ZS + template fit method on pedestal data}
 
-To ensure we are unbiasly processing pedestal noise contributions in the ZS + template fit method, the ZS threshold scale was also applied to pedestal data. 
+To further ensure the ZS + template fit method does not bias the calorimeter energy spectra from pedestal noise contributions, the ZS threshold variations were also studied on pedestal data.
 Waveforms from calorimeter pedestal data events are processed using the same ZS + template fit method for multiple ZS thresholds and then the reconstructed-level $\detdeta$ from this pedestal data is investigated. 
 
 \begin{figure}

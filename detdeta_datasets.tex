@@ -1,0 +1,13 @@
+A set of runs from one store during physics quality RHIC Run 2024 \auau collision period were used for this analysis. 
+These runs were selected based on high calorimeter and global detector data quality.
+The calorimeters had a limited set of bad channels for runs in this store (>98\% in the EMCal and >99\% in the HCals).
+The global detectors (MBD + ZDC) also had high data quality and were used for centrality determination for each run in the store. 
+Data was collected using a hardware level minimum bias trigger requiring at least two PMTs on each side of the MBD detector to fire.
+A set of minimum bias event offline selection criteria was also applied to the data to remove events consistent with beam-related backgrounds and non-hadronic interactions.
+More details on the minimum bias trigger and event selection used for this analysis is outlined in Section~\ref{sec:detdeta_selection}.
+
+Three MC samples are used for comparison to data and for deriving correction factors mapping the reconstructed \detdeta distributions back to the truth particle level \detdeta. 
+1 million minimum bias \auau events at \snn = 200 GeV were used from each generator, \verb|HIJING|~\cite{hijing}, \verb|AMPT|~\cite{ampt}, and \verb|EPOS4|~\cite{epos}.
+These events were then passed through the full sPHENIX detector \textsc{GEANT-4}~\cite{GEANT4} simulation and reconstruction to produce simulation datasets that can be compared directly to data.
+The MC samples are also reweighted to match the z-vertex distribution in data as well as the particle composition in previous \auau measurements at \snn = 200 GeV. 
+More details on the MC samples reweighting for this analysis is included in Section~\ref{sec:detdeta_mcsamples}.

@@ -1,12 +1,86 @@
 \chapter{Introduction and Background}
+\label{ch:intro_background}
 
-\section{Footnotes: Two ways of adding to your text}
+\section{Quantum Chromodynamics}
 
-\footnote{By using footnote command and writing your note in the curly brackets}. Or it is possible to mark the location of a foot note with footnote mark command\footnotemark \, then you can write the footnote in its own line for ease of reading. 
+\section{Relativistic Heavy Ion Collisions}
 
-\footnotetext{You then use footnotetext command and then write you note in as if you are using regular footnote command as we did previously.}
+\section{Hadronic Particle Production}
 
-\section{Other section of first chapter}
+\section{Monte Carlo Generators and Models}
+HIJING is a high-energy heavy ion and proton-proton collision event generator that uses a glauber model of the nuclei geometry and perturbative QCD to model hard scatterings as minijets including multi- parton interactions, initial state, and final state radiation, the Dual Parton Model for soft interactions, and the Lund string model to model hadronization. 
+HIJING (Heavy Ion Jet Interaction Generator) is a Monte Carlo event generator designed primarily for simulating high-energy heavy-ion and proton-proton collisions. 
+It is particularly useful for studying jet production, minijet interactions, and the effects of nuclear matter on particle production.
+Key Features of HIJING:
+Multiple Scattering and Minijets:
+HIJING incorporates multiple parton-parton scatterings based on perturbative QCD.
+Minijet production (low transverse momentum jets) plays a crucial role in soft and semi-hard interactions.
+Soft and Hard Interactions:
+Uses the Dual Parton Model (DPM) for soft interactions.
+Perturbative QCD is used for hard scatterings.
+A cutoff scale pTmin determines when an interaction is considered "hard."
+Nuclear Effects:
+Gluon Shadowing: Reduces the number of low-xxx gluons in heavy nuclei.
+Jet Quenching: Simulates parton energy loss due to interactions with the dense medium.
+Multiple Scattering and Cronin Effect: Partons undergo multiple scatterings in nuclear matter, modifying transverse momentum distributions.
+Hadronization and Fragmentation:
+Uses the Lund string model for fragmentation.
+Quark-gluon plasma effects can be incorporated to simulate medium modifications.
+Impact Parameter Dependence:
+Implements a Glauber model to describe the collision geometry and centrality.
+The number of binary nucleon-nucleon collisions and participants is calculated accordingly.
+Implementation:
+Generates events in PYTHIA-like fashion.
+Simulations can be tuned to reproduce experimental data from RHIC, LHC, and other experiments.
+
+AMPT has a similar theoretical basis to HIJING and uses HIJING to generate initial parton distribution; these partons are then developed through a parton cascade of 2-2 elastic collisions, followed by hadronization using either the Lund string model or a quark coalescence model. 
+Finally, the resulting hadron distribution is developed through a hadron transport model including elastic and inelastic scatterings, and resonance decays.
+Key Features of AMPT
+AMPT consists of multiple physics components that simulate different stages of heavy-ion collisions:
+1. Initial Conditions (HIJING)
+AMPT uses HIJING to generate the initial parton and hadron distributions.
+Nuclear shadowing, multiple scatterings, and minijet production are included.
+2. Parton Transport (ZPC Zhangs Parton Cascade)
+The system evolves as a partonic phase using the ZPC (Zhangs Parton Cascade) model.
+Partons undergo 2 2 elastic scatterings based on a cross-section derived from pQCD.
+The strength of parton interactions determines the transport properties of the QGP.
+3. Hadronization
+Two different hadronization mechanisms are used based on the AMPT version:
+String Melting Mode: Converts all partons into hadrons using a quark coalescence model.
+Default Mode: Uses HIJINGs Lund string fragmentation for hadronization.
+4. Hadron Transport (ART A Relativistic Transport Model)
+The hadronic phase is simulated using ART (A Relativistic Transport Model).
+Hadronic interactions include:
+Elastic and inelastic scatterings.
+Resonance decays.
+Baryon-antibaryon annihilation.
+This stage models final-state interactions before kinetic freeze-out.
+
+EPOS4 models collisions using an S-matrix approach to Gribov-Regge Theory which simultaneously describes soft and hard scatterings. 
+Primary interactions are developed based on this S-matrix approach for parallel scatterings, the system then undergoes a core-corona separation production, followed by hydrodynamic evolution, hadronization and hadronic transport. 
+in  which accounts for multiple parton scatterings through parallel Pomeron exchanges which take into account saturation effects. 
+primary interactions, based on an S-matrix approach for parallel scatterings, (ii) secondary interactions, composed of (a) core-corona separation procedure, (b) hydrodynamic evolution and microcanonical hadronization, (c) hadronic afterburner (UrQMD [52,53]).
+Key Features of EPOS4
+EPOS4 builds upon the physics framework of its predecessors (EPOS3, EPOS-LHC) and introduces new modeling improvements. It consists of the following main components:
+1. Initial Parton Scattering (Multiple Scattering Model)
+Collisions are modeled using the Parton-Based Gribov-Regge Theory, which accounts for multiple parton scatterings (Pomeron exchanges).
+Perturbative QCD (pQCD) is used to describe the hard scatterings, while soft processes are modeled phenomenologically.
+Core-Corona Separation:
+The system is divided into a core (high-density region that undergoes collective expansion) and a corona (low-density region treated as independent strings).
+2. Parton Evolution and Hadronization
+The system evolves as a parton cascade, incorporating color exchanges and multiple interactions.
+String formation occurs at intermediate stages, where partons are organized into color flux tubes.
+Hadronization follows a string fragmentation mechanism similar to the Lund model.
+3. Hydrodynamical Evolution (For Heavy-Ion Collisions)
+The dense core undergoes 3D viscous hydrodynamic expansion, capturing the collective flow of the system.
+This stage includes:
+Longitudinal and transverse expansion.
+Equation of state effects, incorporating realistic hadron resonance gas properties.
+The transition from partonic to hadronic matter is modeled dynamically.
+4. Hadronic Cascade and Final Interactions
+After hadronization, the system undergoes final-state interactions using a Boltzmann transport approach.
+Elastic and inelastic scatterings, decays, and resonance interactions are included.
+This phase is crucial for accurately describing observables like hadron spectra and flow coefficients
 
 % This is a table
 %If you are having issues with \midline use \hline insteadn and remove booktabs package from thesis.tex
