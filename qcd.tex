@@ -1,4 +1,34 @@
 \subsection{QCD Lagrangian}
+Quantum Chromodynamics (QCD) is the theory of the strong interaction, describing the interactions between quarks and gluons.
+QCD also describes how these quarks and gluons interact to form hadrons, like protons and neutrons. 
+QCD belongs to the Yang Mills class of theories in Quantum Field Theory and is defined by a SU(3) gauge symmetry.
+Other examples of Yang Mills theories include Quantum Electrodynamics (QED) and electroweak theory, which are based on U(1) and SU(2) gauge symmetries, respectively.
+The QCD Lagrangian can be used to fully describe the dynamics and interactions of quarks and gluons through QCD.
+
+The QCD Lagrangian is given by:
+\begin{equation}
+    \mathcal{L}_{QCD} = -\frac{1}{4} F_{\mu\nu}^a F^{a\mu\nu} + \sum_{f=1}^{N_f} \bar{\psi}_f (i\gamma^\mu D_\mu - m_f) \psi_f
+\end{equation}
+The QCD Lagrangian consists of two main terms: the first term contains the field strength tensor $F_{\mu\nu}^a$ related to the gluon fields and the second term contains the dirac spinor fields $\psi_f$ representing the quarks.
+In the first term, a is the color index that runs from 1 to 8, and in the second term, f is the quark flavor index which runs from 1 to $N_f$ (with six known quark flavors in the standard model), $m_f$ is the mass of the quark of flavor f, and $\gamma^\mu$ are Dirac matrices. 
+
+The field strength tensor $F_{\mu\nu}^a$ in the first term is defined as: 
+\begin{equation}
+    F_{\mu\nu}^a = \partial_\mu A_\nu^a - \partial_\nu A_\mu^a + g_s f^{abc} A_\mu^b A_\nu^c
+\end{equation}
+where $A_\mu^a$ is the gluon field, $g_s$ is the strong coupling constant, and $f^{abc}$ are the structure constants of the SU(3) gauge group.
+Here the third term indicates the possiblity for self-interactions between gluons, which is not present in QED and leads to properties such as confinement and asymptotic freedom in QCD.
+
+The coviariant derivative $D_\mu$ in the second term is defined as:
+\begin{equation}
+    D_\mu = \partial_\mu - i g_s A_\mu^a t^a
+\end{equation}
+where $t^a$ are the generators of the SU(3) gauge group following the commutation relation: 
+\begin{equation}
+    [t^a, t^b] = i f^{abc} t^c
+\end{equation}
+and $g_s$ is the strong coupling constant. 
+The strong coupling constant is often expressed in terms of $\alpha_s$ as $\alpha_s = \frac{g_s^2}{4\pi}$, which is a dimensionless quantity that characterizes the strength of the strong interaction.
 
 \subsection{Feynman Rules and Running of the Coupling Constant}
 
@@ -6,7 +36,6 @@
 \subsubsection{Factorization Theorem}
 \subsubsection{Deep Inelastic Scattering}
 \subsubsection{Parton Distribution Functions}
-\subsubsection{Jet Functions}  
  
 \subsection{Parton Showers}
 \subsubsection{Initial State Radiation}
