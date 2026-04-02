@@ -1,9 +1,27 @@
 \subsection{Relativistic Heavy Ion Collision Phenomenology}
-    - Initial State and Bjorken Energy Density
-    - Thermalization
-    - Hydrodynamic Evolution
-    - Hadronization
-    - Freeze-out
+Heavy ion collisions can be described in terms of a sequences of states that the system is in over time, beginning with the initial state of the colliding nuclei and ending with the final state partcles produced in the collision.
+The system goes through extreme changes in energy density and temperature through this evolution, therefore the system is best modeled through a combination of phenomenological models. 
+Figure~\ref{fig:heavy_ion_collision_evolution} shows a schematic of the phenomenological models used to describe the heavy ion collision evolution.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/chapter1/hic_phenomenology.png}
+    \caption{Schematic of the phenomenological models used to describe the heavy ion collision evolution: initial state, thermalization, hydrodynamic evolution, hadronization, and freeze-out. Reproduced from \cite{heavy_ion_collision_evolution}.}
+    \label{fig:heavy_ion_collision_evolution}
+\end{figure}
+
+The initial state of heavy ion collisions can be described in a variety of ways using phenomenological models, including the models outlined in Section~\ref{sec:qgp}.
+Additional models include kinetic gas theories, string models, and glasma models for the initial state.
+Following the initial state modeling at a set time from the collision, the system undergoes a thermalization process where the system is assumed to reach local thermal equilibrium.
+At this point, the system can be described by a hydrodynamical model where the system is treated as a relativistic fluid.
+Here, the QGP phase is modeled using a variety of equations of state and viscoity terms as the system expands and cools.
+In practice, the system is evolved hydrodynamically by evolving the energy density and velocity field of hypercube lattices.
+
+Once the hypercubes on the surface of the fluid system reach a low enough energy density or temperature, they are each hadronized locally using the Cooper-Frye method which samples a distribution of particles from these fluid cells assuming a grand canonical ensemble of particle states.
+The resulting hadrons are then developed through a particle cascade where elastic and inelastic collisions and particle decays are simulated.
+Finally, the system is frozen out and the final state particles are available for analysis and comparison to experimental data.
+A suite of light weight ion collision event generators are used to model this evolution of the heavy ion collision system including some or all of these steps.
+Descritions of the set of event generators used for comparison to and extraction of truth level information from experimental data for the analyses in this thesis are included in the following sections.
 
 \subsection{Monte Carlo Generators in Au+Au analysis}
 \subsubsection{\hijing}

@@ -1,48 +1,68 @@
 \subsection{Existence of Quark Gluon Plasma}
+
 \subsection{Relativistic Heavy Ion Collision Geometry}
-\textcolor{red}{include a figure of the lightcone diagram for heavy ion collisions}
-\textcolor{red}{include explanation of pseudorapidity in heavy ion collisions}
+Figure~\ref{fig:lightcone_diagram} outlines the progression in time of heavy ion collisions from initial nuclei moving with ultra-relativistic speed along the beam axis (z axis in the diagram) to the final state particles produced in the collision.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/chapter1/hic_geometry_lightcone.png}
+    \caption{Lightcone diagram for heavy ion collisions. Reproduced from \cite{rapidity_review}.}
+    \label{fig:lightcone_diagram}
+\end{figure}
+Since the dynamics of heavy ion collisions are dominated by ultra-relativistic motion along the beam ($z$) axis, rapidity is a natural variable to describe the kinematics of the system along this axis since differences in rapidity are invariant under Lorentz boosts along the beam axis. 
+Rapidity is defined as:
+\begin{equation}
+    y = \frac{1}{2}\ln\left(\frac{E + p_z}{E - p_z}\right),
+\end{equation}
+where $E$ is the particle energy and $p_z$ is the longitudinal momentum.
+
+However, in experimental analyses, pseudorapidity is more commonly used and is defined as:
+\begin{equation}
+    \eta = -\ln\left[\tan\left(\frac{\theta}{2}\right)\right],
+\end{equation}
+where $\theta$ is the polar angle of the particle with respect to the beam axis.
+Pseudorapidity can be directly related to detector geometry, as it depends only on the angular position of a detector level object (track, calorimeter tower, jet), and does not require knowledge of the object's energy or mass. 
+However, in the very high-momentum (or massless) limit, $\eta \approx y$, making pseudorapidity a good approximation to rapidity for most particles produced in ultra-relativistic collisions.
+
 \subsubsection{Initial State and Bjorken Energy Density}
-The experimental measurement of the mean transverse energy as a function of rapidity of the final collision particles has direct link to the initial state of these heavy ion collisions. 
-In an idealized picture of heavy ion collisions, the energy density of the initial collision just prior to hydrodynamic flow could be found directly from measuring the average energy as a function of rapidity of the final state particles in the central rapidity plateau region, assuming the QGP behaves as an ideal boost invariant relativistic fluid and there are little final state effects \cite{bjorken_energy_density}. 
-Here Bjorken estimated the initial energy density that forms in the central rapidity region between two receeding Lorentz contracted nuclei using the mean number of charged particles as a function of rapidity for nucleon-nucleon collisions measured in data, the average energy per nucleon from collision data, and assumed that for a collision system of nuclei, the average energy as a function of rapidity should be additive. 
-In his initial estimates, the energy density in the central rapidity region for A+A collisions should be on the order of 1 to 10 GeV/fm$^3$ \cite{bjorken_energy_density}.
-This relationship has since been used to provide experimental measurements of \detdeta, \: and subsequent measurements of $dE_{T}/dy$, and infer mean initial energy densities for these collision systems using the following relationship: 
+In an idealized picture of heavy ion collisions, the energy density of the system just after the collision but just prior to the onset of hydrodynamic evolution can be estimated by measuring the average energy of the final state particles in the central rapidity plateau region using the framework proposed by Bjorken \cite{bjorken_energy_density}. 
+In this idealized model, the evolution of the QGP system is treated as a boost-invariant, relativistic fluid and final-state effects are assumed to be minimal. 
+
+Under these assumptions, Bjorken estimated the initial energy density that forms in the central rapidity region between two receeding Lorentz contracted nuclei using the mean number of charged particles as a function of rapidity for nucleon-nucleon collisions measured in data, the average energy per nucleon from collision data, and the assumption that for a collision system of nuclei, the average energy as a function of rapidity should be additive. 
+From these initial estimates, the energy density in the central rapidity region for A+A collisions should be on the order of 1 to 10 GeV/fm$^3$ \cite{bjorken_energy_density}.
+Even though this model is highly idealized, its simplicity makes it extremely useful for connecting experimental measurements back to the initial state, and it has remained largely valid as a benchmark even with the availability of much more sophisticated modeling.  
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/chapter1/bjorken_energy_schematic.png}
+    \caption{Schematic for initial state energy density calculations of plasma produced in heavy ion collisions. Reproduced from \cite{bjorken_energy_density}.}
+    \label{fig:bjorken_energy_schematic}
+\end{figure}
+Figure~\ref{fig:bjorken_energy_schematic} shows a schematic of the geometric picture Bjorken used to develop this initial state energy density relationship defined in \ref{eq:bjorken_e}.
+Using this diagram and with the knowledge that energy density is defined by $\epsilon$ = total energy / total volume, the total energy of the plasma in the central region of of interest is defined by:
+\begin{equation}
+    E = \int_{-d}^{d} \frac{dE_{T}}{dx} dx
+\end{equation}
+With the assumption that particles are expanding longitudinally and that the particle movement in the transverse plane is negigible with respect to the expansion along the collision axis, the particle rapidity can be given by $y = \tanh ^{-1}(v_{x}) = \tanh ^{-1}(\frac{x}{\tau_{0}})$ where $\tau_{0}$ is the formation time of the plasma.
+The $dE_{T}/dx$ term can now be written in terms of rapidity by taking the derivative of $dy/dx$ and evaluating at $x$ = 0 to get a final result for the total energy of the system:
+\begin{equation}
+    E = \int_{-d}^{d} \frac{dE_{T}}{dy} \frac{dy}{dx} dx = \frac{dE_{T}}{dy} \int_{-d}^{d} \frac{1}{\tau_{0}} dx = \frac{2d}{\tau_{0}} \frac{dE_{T}}{dy}
+\end{equation}
+The total volume can be defined as just a cylinder with height $2d$ and radius $R$, giving a final relationship for the initial state energy density of: 
 \begin{equation}
     \epsilon_{Bj} = \frac{dE_{T}}{dy} \frac{1}{\tau_{0} \pi R^2}
+    \label{eq:bjorken_e}
 \end{equation}
-where $\tau_{0}$ is the formation time and $\pi R^2$ is the effective area of the collision. 
+Through this model, the mean initial energy densities for a wide variety of collision systems can be inferred from experimental measurements of \detdeta, and subsequent measurements of $dE_{T}/dy$.
 
 From previous measurements of the energy density via the mean transverse energy of final state particles of the heavy ion collisions, the energy density in central collisions of \auau \: ions at \sqsntwo \: using this Bjorken energy density relationship  has been measured to be greater than 4 GeV/fm$^3$ \cite{STAR_detdeta,PHENIX_200gev}. 
 In comparison, the energy density inside of a typical hadron is about 500 MeV/fm$^3$ \cite{Busza_2018}. 
 Therefore, from first measurements of this Bjorken energy density in heavy ion collisions, the energy density was found to be much greater than the energy density of typical confined nuclear matter.
-
-Measurements of the mean transverse energy and resulting initial collision energy density have been studied by many detectors at RHIC and the LHC for both heavy ion collisions and small systems such as $p+p$, $p+Pb$ and $d+Au$ \cite{PHENIX_detdeta,STAR_detdeta,cms_pbpb_detdeta,alice_detdeta,cms_pPb_detdeta,atlas_detdeta}. 
-These experiments have for the large part employed two distinct methods of measuring total transverse energy, the first method has been used by ATLAS and CMS \cite{cms_pbpb_detdeta,atlas_detdeta}, where the transverse energy in the detectors' calorimeters are measured and these measurements are corrected for detector effects, limits in detector acceptance and detector hadronic response back to the truth \detdeta of the collisions, which includes both hadronic and electromagnetic energy contributions. 
-This method works best in calorimeter systems with a large number of radiation/interaction lengths therefore allowing for the majority if not all of the collision energy to be captured by the detector. 
-This methodology was also employed by PHENIX \cite{PHENIX_detdeta} without a hadronic calorimeter; instead PHENIX was able to correct back to the truth \detdeta from a combination of electromagnetic energy, minimum ionizing particles and a small contribution from hadronic showers. 
-The second method has been used by STAR and ALICE \cite{STAR_detdeta,alice_detdeta}, in which the hadronic component of the transverse energy is measured using the tracking subsystems and the electromagnetic component of the transverse energy is measured using the calorimeter subsystems. 
-This measurement method is useful to employ with very precise tracking systems and particle identification, ensuring electromagnetic energy measured by the calorimeter is not double counted in the tracking system's hadronic energy measurement and vice versa. 
-Notably, sPHENIX with the first hadronic calorimeter at RHIC will be able to capture both the electromagnetic and hadronic energy contributions in a similar manner to the previously listed LHC detectors. 
-
-Understanding properties of initial collision including the energy density from experimental measurements is particularly useful for the further development of the field of heavy ion collisions, where theory and phenomenology of the field rely heavily on experimental measurements to compare to as use as initial parameters in various phenomenological models and hydrodynamic codes. 
-Specifically in the case of the initial state energy density, phenomenological models use the measured total energy per unit rapidity in central collisions to set the initial energy density calculated for central collisions from phenomenological models \cite{Busza_2018}. 
-
-Further, measurements of the centrality dependence of the mean transverse energy is sensitive to the collision dynamics the understand the mean energy density produced from a collision overlap region of the two incoming nuclei. 
-Therefore, in the subsequent two analyses presented by this proposal, the mean transverse energy will be measured as a function of centrality in Au+Au collisions and multiplicity in p+p collisions. 
-
-Through the study of mean transverse energy over multiple centralities for various collision systems, it has been discovered that the mean transverse energy as a function of pseudorapidity scales linearly with the number of constituent-quark participants in the collision \cite{PHENIX_npq_scaling_detdeta}. 
-This scaling phenomena with number of participants suggests that the majority of the entropy in heavy ion collisions is produced very early in the collision prior to hydrodynamic evolution. 
-This agrees with our understanding of the hydrodynamic evolution of the QGP which has a very low shear viscosity to entropy density, and this nearly perfect fluid with almost no viscosity produces almost no entropy in its flow and evolution \cite{bjorken_energy_density,Busza_2018}.
-
-Initial energy density that forms in the central rapidity region between two receding Lorentz contracted nuclei was first theorized from the mean number of charged particles as a function of rapidity for nucleon nucleon collisions measured in data, the average energy per nucleon from collision data, and the assumption that for a collision system of nuclei, the average energy as a function of rapidity should be additive
-From these initial estimates, the energy density in the central rapidity region for A+A collisions should be on the order of 1 to 10 GeV/fm
-This relationship has since been used to take experimental measurements of (and subsequent measurements of) to infer mean initial energy densities for these collision systems using the following relationship: 
+These measurements demonstrated the presence of a necessary condition for QGP formation in heavy ion collisions since these energy densities ($> 4 GeV/fm^{3}$) are above the theoretical predicutions from Lattice QCD for the transition to a deconfined phase of nuclear matter~\cite{Aoki:2006we}.
 
 \subsubsection{Glauber model}
 
 The initial geometry of the collision is modeled in heavy ion collisions using the Glauber model, which has its origins in the multiple scattering theories developed by Glauber in the 1950s \cite{Glauber_1955}.
-The basic assumption of the Glauber model used for initial state modeling in heavy ion collisions is that at sufficiently high energies, individual nucleon-nucleon collisions within colliding nuclei can be treated as independent and incoherent processes since (1) the nucleons carry sufficient momentum so that they are essentially undeflected as the nuclei pass through each other and (2) the size of the nucleus is large compared to the extent of the nucleon-nucleon force.
+The basic assumption of the Glauber model used for initial state modeling in heavy ion collisions is that at sufficiently high energies, individual nucleon-nucleon collisions within colliding nuclei can be treated as independent and incoherent processes since (1) the nucleons carry sufficient momentum so that they are essentially undeflected when the nuclei pass through each other and (2) the size of the nucleus is large compared to the reach of the nucleon-nucleon force.
 
 The Glauber model was originally used in modeling nuclear collisions using the optical limit approximation which treated the colliding nuclei as smooth, continuous matter distributions. 
 Both this model and the later developed Monte Carlo based model use two key pieces of information from experiment to model the initial geometry of the collision: the nuclear density distribution and the nucleon-nucleon cross section at a given collision energy.
@@ -52,55 +72,106 @@ The nuclear density distribution is typically modeled using a Woods-Sakon distri
 \end{equation}
 where $\rho_0$ is the density of the nucleus at its center, R is the radius of the nucleus, a is "skin depth" which describes how quickly the density falls off at the edge of the nucleus, and w describes deviations from spherical symmetry. 
 For Au+Au collisions, the nominal values for these parameters are R = 6.38 fm, a = 0.535 fm and w = 0.
-The nucleon-nucleon cross section was determined from measurements of proton-proton collisions at a range of collision energies; the proton-proton cross section as a function of collision energy is shown in Figure \ref{fig:pp_cross_section}.
+
+The nucleon-nucleon cross section has been determined from measurements of proton-proton collisions at a range of collision energies and the world reference for the proton-proton cross section as a function of collision energy is shown in Figure \ref{fig:pp_cross_section}.
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/chapter1/pp_cross_section.png}
+    \caption{p+p cross section as a function of collision energy. Reproduced from \cite{PDG_2012}.}
+    \label{fig:pp_cross_section}
+\end{figure}
+
 In the optical limit model, the total cross section for a collision of two nuclei is calculated by integrating over the density profiles of the projectile and target nuclei area, to determine the probability of a collision.
 Figure~\ref{fig:optical_glauber_model} shows a schematic of the optical limit Glauber model where the nuclei are separated in transverse direction by a distance b and a small overlap area between the two nuclei is highlighted in grey.
 \begin{figure}
     \centering
-    \includegraphics[width=\textwidth]{figures/chapter1/optical_glauber.png}
+    \includegraphics[width=0.7\textwidth]{figures/chapter1/optical_glauber.png}
     \caption{Schematic of the optical limit Glauber model. Reproduced from \cite{glauber_review}.}
     \label{fig:optical_glauber_model}
 \end{figure}
-The probability of a collision in the overlap region 
-
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{figures/chapter1/pp_cross_section.png}
-    \caption{p+p cross section as a function of collision energy. Reproduced from \cite{ParticleDataGroup:2024cfk}.}
-    \label{fig:pp_cross_section}
-\end{figure}
+Following from Figure~\ref{fig:optical_glauber_model}, the probability of a collision per unit area of a nuclei is given by $ \hat{T}_{A}(\textbf{s}) = \int \hat{\rho}_{A}(\textbf{s},z) dz$, where $\hat{\rho}_{A}$ is the normalized nuclear density distribution of the nucleus A and $\textbf{s}$ is the transverse position in the plane perpendicular to the beam axis. 
+Then, the collision overlap function or "thickness function" of two nuclei A and B can be calculated as:
+\begin{equation}
+    T_{AB}(\textbf{b}) = \int \hat{T}_{A}(\textbf{s}) \hat{T}_{B}(\textbf{s}-\textbf{b}) d^2s
+\end{equation}
+The probability of $n$ nucleon-nucleon collisions between the two nuclei with total A and B nucleons can then be calcuated in terms of $T_{AB}$ and the nucleon-nucleon cross section, $\sigma_{NN}$, using the binomial distribution as:
+\begin{equation}    
+    P_{coll}(n,\textbf{b}) = \binom{AB}{n} [\sigma_{NN} \hat{T}_{AB}(\textbf{b})]^{n} [1 - \sigma_{NN} T_{AB}(\textbf{b})]^{AB-n}
+\end{equation}
+From this probability distribution, the total cross section of the nuclei-nuclei collision and the number of binary collisions and number of participating nucleons can be calcuated for a given impact parameter.
+For unpolarized symmetric nuclei, the vector impact parameter $\textbf{b}$ can also be simplified to a scalar impact parameter, b, which is just the transverse distance between the centers of the two colliding nuclei.
+The total cross section is then calculated by integrating over the impact parameter as:
+\begin{equation}
+    \sigma_{A+B} = 2 \pi \int b \sum_{n=1}^{AB} P_{coll}(n,b) db = 2 \pi \int b [1 - (1 - \sigma_{NN} T_{AB}(b))^{AB}] db
+\end{equation}
+Collisions are tracked between theory and experiment using the number of participant nucleons and number of binary collisions since these quantities are accessible both from Glauber model calculations and from experimental measurements using comparisons to the Glauber model.
+The details of extracting these quantities from theoretical calcuations and simulations are included below while additional details on the extraction of \Npart and \Ncoll from experimental data are included in Section~\ref{sec:detdeta_selection}.
+The number of participant nucleons, \Npart, is the number of nucleons that undergo at least one inelastic collision, and the number of binary collisions, \Ncoll, is the total number of inelastic nucleon-nucleon collisions that occur in a given heavy ion collision. 
+\Ncoll for a set impact parameter can be calculated as:
+\begin{equation}
+    N_{coll}(b) = AB \sigma_{NN} T_{AB}(b)
+\end{equation}
+\Npart for a set impact parameter can be calculated as: 
+\begin{equation}
+    N_{part}(\textbf{b}) = A \int \hat{T}_{A}(\textbf{s}) [1 - (1 - \sigma_{NN} \hat{T}_{B}(\textbf{s}-\textbf{b}))^{B}] d^2s + B \int \hat{T}_{B}(\textbf{s}-\textbf{b}) [1 - (1 - \sigma_{NN} \hat{T}_{A}(\textbf{s}))^{A}] d^2s
+\end{equation}
+which can be understood in both terms as the probability per unit area function $\hat{T}$ from one nuclei multiplied by the nucleon-nucleus cross section of the other nuclei. 
+The Glauber model using the optical limit can directly use the above equations to determine these collision parameters for a set impact parameter.
+A key note here however is that since the optical model models the nuclei as a set continuous density distribution, there are no event-by-event fluctuations included in the model and values for collision information like \Npart are set for a particular impact parameter.
 
 The Glauber model was later extended to include a Monte Carlo implementation, which allowed for the modeling of individual nucleon-nucleon collisions rather than continuous matter distributions.
-In the Monte Carlo Glauber model, the Woods-Sakon distribution is now sampled to determine the positions of individual nucleons within the colliding nuclei on an event by event basis. 
-Figure \ref{fig:mc_glauber_model} shows a schematic of the Monte Carlo Glauber model, where the positions of individual nucleons are sampled from the Woods-Sakon distribution and the collision geometry is determined by the impact parameter, b, which is the transverse distance between the centers of the two colliding nuclei.
-Then, the nucleon-nucleon cross section is used to determine if a collision occurs between two nucleons by requiring that the transverse distance between two nucleons be within $\sqrt{\sigma_{NN}/\pi}$, where $\sigma_{NN}$ is the nucleon-nucleon cross section at the given collision energy.
-This method allows for the modeling of fluctuations in the initial geometry of the collision and becomes important when comparing to the results from the optical limit model in highly central events.
-Additionally, this method includes shadowing effects where interactions with multiple nucleons where nucleons can "hide" behind each other thereby lowering the overall total cross section.
-These effects are not included in the optical limit model where the calculation of the total cross section is higher than the measured total cross section.
-
+In the Monte Carlo Glauber model, the Woods-Sakon distribution is now sampled to determine the positions of individual nucleons within the colliding nuclei on an event by event basis allowing for event by event fluctuations in the nuclear geometry. 
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/chapter1/mc_glauber.png}
     \caption{Schematic of the Monte Carlo Glauber model. Reproduced from \cite{glauber_review}.}
     \label{fig:mc_glauber_model}
 \end{figure}
+The result of this sampling procedure is shown in a schematic in Figure \ref{fig:mc_glauber_model}.
+Then, the nucleon-nucleon cross section is used to determine if a collision occurs between two nucleons by requiring that the transverse distance between two nucleons be within $\sqrt{\sigma_{NN}/\pi}$, where $\sigma_{NN}$ is the nucleon-nucleon cross section at the given collision energy.
+This method allows for the modeling of fluctuations in the initial geometry of the collision and becomes important when comparing to the results from the optical limit model in highly central events.
+Additionally, this method includes shadowing effects where interactions with multiple nucleons where nucleons can "hide" behind each other thereby lowering the overall total cross section.
+These effects are not included in the optical limit model where the calculation of the total cross section is higher than the measured total cross section.
+The difference extracted in cross section distributions from the optical and MC Glauber models as a function of impact parameter are shown for Au+Au collisions in Figure~\ref{fig:cross_section_vs_b}.
 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/chapter1/cross_section_vs_b.png}
+    \caption{Comparison of nuclei-nuclei cross sections calculated using optical and MC Glauber models. Model dependence is shown for Au+Au cross section values for the optical model (red) and MC model (black). Reproduced from \cite{glauber_review}.}
+    \label{fig:cross_section_vs_b}
+\end{figure}
 
-\textcolor{red}{Include a figure of the difference between optical limit and MC glauber model.}
+\subsubsection{\detdeta Measurements}
 
-\subsubsection{Binary Scaling}
+Measurements of the mean transverse energy and resulting initial collision energy density have been studied by many detectors at RHIC and the LHC for both heavy ion collisions and small systems such as $p+p$, $p+Pb$ and $d+Au$ \cite{PHENIX_detdeta,STAR_detdeta,cms_pbpb_detdeta,alice_detdeta,cms_pPb_detdeta,atlas_detdeta}. 
+These experiments have for the large part employed two distinct methods of measuring total transverse energy, the first method has been used by ATLAS and CMS \cite{cms_pbpb_detdeta,atlas_detdeta}, where the transverse energy in the detectors' calorimeters are measured and these measurements are corrected for detector effects, limits in detector acceptance and detector hadronic response back to the truth \detdeta of the collisions, which includes both hadronic and electromagnetic energy contributions. 
+This method works best in calorimeter systems with a large number of radiation/interaction lengths, allowing for the majority if not all of the collision energy to be captured by the detector. 
+This methodology was also employed by PHENIX \cite{PHENIX_detdeta} without a hadronic calorimeter; instead PHENIX was able to correct back to the truth \detdeta from a combination of electromagnetic energy, minimum ionizing particles and a small contribution from hadronic showers. 
+The second method has been used by STAR and ALICE \cite{STAR_detdeta,alice_detdeta}, in which the hadronic component of the transverse energy is measured using the tracking subsystems and the electromagnetic component of the transverse energy is measured using the calorimeter subsystems. 
+This measurement method is useful to employ with very precise tracking systems and particle identification, ensuring electromagnetic energy measured by the calorimeter is not double counted in the tracking system's hadronic energy measurement and vice versa. 
+Notably, sPHENIX with the first hadronic calorimeter at RHIC is able to capture both the electromagnetic and hadronic energy contributions in a similar manner to the previously listed LHC detectors. 
 
-Collisions are tracked between theory and experiment using the number of participant nucleons and number of binary collisions which is something that is calculated from the Glauber model but can also be extracted from experimental measurements using comparisons to the Glauber model.
-The number of participant nucleons, $N_{part}$, is the number of nucleons that undergo at least one inelastic collision, and the number of binary collisions, $N_{coll}$, is the total number of inelastic nucleon-nucleon collisions that occur in a given heavy ion collision. 
-The number of participant nucleons and number of binary collisions are used to understand the scaling of various observables in heavy ion collisions, such as particle yields and transverse energy, with the geometry of the collision. 
-For example, if an observable scales with the number of participant nucleons, it suggests that the observable is primarily influenced by the geometry of the collision and the number of nucleons that are involved in the collision. 
-On the other hand, if an observable scales with the number of binary collisions, it suggests that the observable is primarily influenced by hard scatterings between individual nucleons. 
+\Npart and \Ncoll defined in the context of the Glauber model are used to understand the scaling of various observables in heavy ion collisions, such as particle yields and transverse energy, with the geometry of the collision. 
+For example, if an observable scales with the number of participant nucleons, \Npart, it suggests that the observable is primarily influenced by the geometry of the collision and the number of nucleons that are involved in the collision. 
+On the other hand, if an observable scales with the number of binary collisions, \Ncoll, it suggests that the observable is primarily influenced by hard scatterings between individual nucleons. 
 
-A parameterization of the $N_{part}$ and $N_{coll}$ scaling of various observables including the mean transverse energy as a function of pseudorapidity, \detdeta, has been previously investigated in various collision systems and energies at RHIC. 
-The resulting understanding of the scaling of \detdeta with $N_{part}$ and $N_{coll}$ has been found to be well described by a two component model with the form:
+A parameterization of the \Npart and \Ncoll scaling of various observables including the mean transverse energy as a function of pseudorapidity, \detdeta, has been previously investigated in various collision systems and energies at RHIC and the LHC. 
+The scaling of \detdeta in heavy ion collisions with \Npart and \Ncoll has been found to be nonlinear (with saturation as a function of \Npart in more central collisions) but well described by a two component parameterization of the form:
 \begin{equation}
-    \frac{dE_{T}}{d\eta} = A N_{part} + B N_{coll}
+    \frac{dE_{T}^{AA}}{d\eta} = \frac{dE_{T}^{pp}}{d\eta} [(1-x)\langle \Npart \rangle/2 + x\langle \Ncoll \rangle]
 \end{equation}
-where A and B are free parameters that are fit to the data.
-Further studies into the scaling of \detdeta with $N_{pq}$, the number of constituent quark participants, have found that \detdeta scales linearly with $N_{pq}$, suggesting that \detdeta is sensitive to the initial state of the collision \cite{PHENIX_npq_scaling_detdeta}.
-\textcolor{red}{Include another statement on \detdeta scaling}.
+where x is a free parameter that is fit to the data and has a nominal value of 0.08 for Au+Au collisions at \sqsntwo.
+
+However, through the further study of mean transverse energy over multiple centralities for various collision systems, it has been discovered that the mean transverse energy as a function of pseudorapidity scales linearly with the number of constituent-quark participants in the collision \cite{PHENIX_npq_scaling_detdeta}. 
+A comparison of the nonlinear scaling of $\detdeta/\Npart$ and linear scaling of $\detdeta/N_{pq}$ as a function of \Npart is given in Figure~\ref{fig:detdeta_npq}.
+This scaling phenomena with number of participants suggests that the majority of the entropy in heavy ion collisions is produced very early in the collision prior to hydrodynamic evolution. 
+This agrees with the general understanding of the QGP hydrodynamic evolution which has a very low shear viscosity to entropy density.
+This nearly perfect fluid with almost no viscosity produces almost no entropy in its flow and evolution \cite{bjorken_energy_density,Busza_2018}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.48\textwidth]{figures/chapter1/detdeta_vs_npart_scaling.png}
+    \includegraphics[width=0.48\textwidth]{figures/chapter1/detdeta_vs_npq_scaling.png}
+    \caption{\detdeta normalized by \Npart (left) and $N_{pq}$ (right) as a function of \Npart for Au+Au collisions at \sqsntwo, $130$, and $62.4$ GeV. Correlated scale uncertainties associated with the event selection are included in dashed bands around points and correlated scale uncertainties with the calorimeter \ET measurement are included in error band on right of plot. Reproduced from \cite{PHENIX_npq_scaling_detdeta}.}
+    \label{fig:detdeta_npq}
+\end{figure}

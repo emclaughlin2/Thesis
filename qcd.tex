@@ -5,7 +5,7 @@ QCD belongs to the Yang Mills class of theories in Quantum Field Theory and is d
 Other examples of Yang Mills theories include Quantum Electrodynamics (QED) and electroweak theory, which are based on U(1) and SU(2) gauge symmetries, respectively.
 The QCD Lagrangian can be used to fully describe the dynamics and interactions of quarks and gluons through QCD.
 
-The QCD Lagrangian is given by:
+The QCD Lagrangian is given by: 
 \begin{equation}
     \mathcal{L}_{QCD} = -\frac{1}{4} F_{\mu\nu}^a F^{a\mu\nu} + \sum_{f=1}^{N_f} \bar{\psi}_f (i\gamma^\mu D_\mu - m_f) \psi_f
 \end{equation}
@@ -19,7 +19,7 @@ The field strength tensor $F_{\mu\nu}^a$ in the first term is defined as:
 where $A_\mu^a$ is the gluon field, $g_s$ is the strong coupling constant, and $f^{abc}$ are the structure constants of the SU(3) gauge group.
 Here the third term indicates the possiblity for self-interactions between gluons, which is not present in QED and leads to properties such as confinement and asymptotic freedom in QCD.
 
-The coviariant derivative $D_\mu$ in the second term is defined as:
+The coviariant derivative $D_\mu$ in the second term of the QCD Lagrangian is defined as:
 \begin{equation}
     D_\mu = \partial_\mu - i g_s A_\mu^a t^a
 \end{equation}
@@ -27,7 +27,7 @@ where $t^a$ are the generators of the SU(3) gauge group following the commutatio
 \begin{equation}
     [t^a, t^b] = i f^{abc} t^c
 \end{equation}
-and $g_s$ is the strong coupling constant. 
+$A_\mu^a$ is again the gluon field/QCD vector potential and $g_s$ is the strong coupling constant. 
 The strong coupling constant is often expressed in terms of $\alpha_s$ as $\alpha_s = \frac{g_s^2}{4\pi}$, which is a dimensionless quantity that characterizes the strength of the strong interaction.
 
 \subsection{Feynman Rules and Running of the Coupling Constant}
@@ -41,3 +41,44 @@ The strong coupling constant is often expressed in terms of $\alpha_s$ as $\alph
 \subsubsection{Initial State Radiation}
 \subsubsection{Final State Radiation}
 \subsubsection{Jet Algorithms}
+Partons produced in the hard scattering of ion collisions fragment and give rise to a "spray" of final state particlces known as jets that can be measured in experimental detectors.
+In an ideal picture, the initial partons kinematics can be determined from the four momenta of all of the particles within the jet.
+Therefore, jets can be constructed from the final state particles by clustering them together based on their transverse momentum and/or angular separation as they are both directly related to the fragmentation of the parton shower.
+This allows for a direct connection between theory and experiment by using an object measureable in experimental detectors and calculable theoretically. 
+In order to use jets to connect to the partons described by pQCD, the jets must be constructed in a way that is infrared and collinear (IRC) safe, meaning that the jets should not be modified by soft or collinear emissions.
+
+The most common class of jet algorithms used in heavy ion collisions currently is sequential clustering algorithms, including the $k_{t}$, anti-$k_{t}$, and Cambridge/Aachen algorithms.
+These algorithms use a distance measure defined by a combination of momentum and angular separation to cluster particles together in an iterative manner to form jets.
+The distance measures are defined as: 
+\begin{equation}
+    d_{ij} = \min(p_{Ti}^{2n}, p_{Tj}^{2n}) \frac{\Delta R_{ij}^{2} }{R^2}, \quad d_{iB} = p_{Ti}^{2n}
+\end{equation}
+where $d_{ij}$ is the distance between two particles and $d_{iB}$ is the distance between a particle and the beam.
+The transverse momenta of the two particles is given by $p_{Ti}$ and $p_{Tj}$ and $\Delta R_{ij} = \sqrt{\Delta y_{ij}^2 + \Delta \phi_{ij}^2}$ is the angular separation between the two particles. 
+$R$ is a parameter that controls the size of the jet cone.
+
+Each of these sequential clustering algorithms act iteratively to cluster particles together based on the distance measures defined above.
+The clustering process is as follows:
+\begin{enumerate}
+    \item Calculate the distance measures $d_{ij}$ for each particle pair and $d_{iB}$ for each particle.
+    \item For particle i, if the minimum distance measure $d_{ij}$ is smaller than the minimum distance measure $d_{iB}$, combine the two particles into a new particle by summing their four-momenta. Otherwise, declare the particle ias a jet and remove it from the list.
+    \item Repeat until all particles are clustered into jets.
+\end{enumerate}
+
+The $n$ parameter in the distance measures is a parameter that controls the sensitivity of the algorithm to the transverse momentum of the particles.
+It is set to 1 for the $k_{t}$ algorithm, set to 0 for the Cambridge/Aachen algorithm, and set to -1 for the anti-$k_{t}$ algorithm.
+Therefore, each algorithm has a different sensitivity to the transverse momentum of the particles.
+Figure~\ref{fig:jet_algorithms} shows a schematic of the jets constructed using these different jet algorithms.
+The $k_{t}$ algorithm has a high sensitivity to low momentum particles, clustering nearby low momentum particles together first. 
+The Cambridge/Aachen algorithm is insensitive to the transverse momentum of the particles, clustering particles together based on their angular separation.
+The anti-$k_{t}$ algorithm has a high sensitivity to hard particles, clustering high $p_{T}$ particles to nearby particles first.
+This method of clustering nearby soft particles to high $p_{T}$ particle "prongs" is a good description of the soft and collinear radiation produced by a high $p_{T}$ particle during its parton shower.
+Additionally, as seen in Figure~\ref{fig:jet_algorithms}, the anti-$k_{t}$ algorithm creates smooth, conical jets with well-defined boundaries. 
+Therefore, the anti-$k_{t}$ algorithm is the most commonly used jet algorithm in heavy ion collisions currently, and is used to construct jets in the underlying event analysis in thesis.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/chapter1/jet_algorithms.png}
+    \caption{Schematic of the jets constructed using different jet algorithms: $k_{t}$ (top left), Cambridge/Aachen (top right), cone algorithm (bottom left) and anti-$k_{t}$ (bottom right). Reproduced from \cite{jet_algorithms}.}
+    \label{fig:jet_algorithms}
+\end{figure}
