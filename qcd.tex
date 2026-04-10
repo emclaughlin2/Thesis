@@ -31,11 +31,88 @@ $A_\mu^a$ is again the gluon field/QCD vector potential and $g_s$ is the strong 
 The strong coupling constant is often expressed in terms of $\alpha_s$ as $\alpha_s = \frac{g_s^2}{4\pi}$, which is a dimensionless quantity that characterizes the strength of the strong interaction.
 
 \subsection{Feynman Rules and Running of the Coupling Constant}
-
 \subsection{Perturbative QCD}
-\subsubsection{Factorization Theorem}
+
+\subsection{Factorization}
+Due to the confined nature of QCD at low energies, the measurement and detection of physics from high energy hadronic collisions involve a processes across both high energy scales where perturbative QCD (pQCD) can be used and low energy scales where non-perturbative QCD processes dominate.
+Factorization theorem in QCD is used to separate the treatment of these short distance, perturbative QCD processes from long distance, non-perturbative QCD processes both present in hadronic collisions.
+The factorization scale, $\mu_f^2$, is the scale that separates the short distance and long distance physics in the factorization theorem.
+Under this factorization assumption, the inclusive cross section for a hard scattering process in hadron-hadron collisions can be expressed as a convolution of the parton distribution functions (PDFs) and the partonic cross section as follows:
+\begin{equation}
+    \sigma_{AB}(p_{A}, p_{B}) = \sum_{a,b} \int dx_a dx_b dz f^{A}_{a}(x_a, \mu_f^2) f^{B}_{b}(x_b, \mu_f^2) \hat{\sigma}_{ab}(x_{a}p_{A}, x_{b}p_{B},\mu_R^2,\mu_f^2)
+\end{equation}
+where $p_{A}$ and $p_{B}$ are the momenta of the incoming hadrons A and B, $x_a$ and $x_b$ are the momentum fractions of the partons a and b inside the hadrons A and B, $f^{A}_{a}(x_a, \mu_f^2)$ and $f^{B}_{b}(x_b, \mu_f^2)$ are the PDFs for partons a and b in hadrons A and B evaluated at the factorization scale $\mu_f^2$, $\hat{\sigma}_{ab}$ is the hard scattering cross section for partons a and b, which can be calculated using pQCD at a renormalization scale $\mu_R$.
+The parton distribution functions (PDFs) are number density distributions of a given parton within the hadron carrying a fraction $x$ of the hadrons momentum.
+These PDFs not calcuated from first principles in pQCD, but are instead extracted from experimental data, such as deep inelastic scattering (DIS) experiments.
+Factoriztion has been proven experimentally to hold for processes such as deep inelastic scattering (DIS), electron-positron collisions, and Drell-Yan processes, but is only an approximation in other QCD systems such as hadron-hadron collisions.
+\textcolor{red}{Include a sentence about PDF universality and how DIS is a clean process to extract PDFs from.}
+
 \subsubsection{Deep Inelastic Scattering}
+Deep inelastic scattering (DIS) involves the scattering of a lepton off a hadron, such as an electron scattering off a proton, through the exchange of a highly virtual photon.
+DIS is a clean process to extract PDFs from since the lepton can be treated perturbatively with non-perturbative contributions only coming from the hadron.
+\textcolor{red}{Include sentence about what deep and inelastic mean in this context.}
+Taking for example the scattering of an electron with momentum $k$ off a proton with momentum $P$ through the exchange of a virtual photon with momentum $q$, standard variables used in describing DIS include: 
+\begin{equation}
+    Q^2 = -q^2, \quad x = \frac{Q^2}{2P\cdot q}, \quad y = \frac{P\cdot q}{P\cdot k}
+\end{equation}
+Where the momentum transfer of the virtual photon is given by $q^2$, the fraction of the proton’s momentum carried by the iteracting quark is given by $x$, and the fraction of the electron’s energy lost in the proton's rest frame is given by $y$.
+Structure functions, $F_1(x,Q^2)$ and $F_2(x,Q^2)$, are used to describe the structure of the proton seen by the virtual photon in DIS.
+Therefore, the cross section for DIS can be expressed in terms of these structure functions as follows:
+\begin{equation}
+    \frac{d^2\sigma}{dx dy} = \frac{4\pi \alpha^2}{Q^4} \left[ (1-y) F_2(x,Q^2) + y^2 F_1(x,Q^2) \right]    
+\end{equation}
+In the limit that $Q^2$ is large, the structure functions obey a scaling law and can be described solely in terms of x.
+This approximate scaling behavior of the structure functions is known as Bjorken scaling and the structure functions independence of $Q^2$ indicates that the virtual photon is scattering off point-like constituents within the proton.
+This experimental evidence of point-like constituents within the proton is consistent with the parton model of the proton, where the proton is made up of quarks and gluons. 
+Using the results from $e^+e^- \rightarrow q\bar{q}$ collisions, a relationship between the structure functions and the PDFs can be expressed as follows:
+\begin{equation}
+    F_2(x) = 2xF_1(x) = \sum_{f} e_f^2 x f_f(x)
+\end{equation}
+where $e_f$ is the electric charge of the quark of flavor f and $f_f(x)$ is the PDF for the quark of flavor f.
+From this relationship between $F_2$ and $F_1$ within the leading order parton model, known as the Callan-Gross relation, 
+the longitudinal contrbutions to the cross section from structure functions are zero with agrees with the theory of partons as spin-1/2 particles.
 \subsubsection{Parton Distribution Functions}
+From experimental measurements of DIS, the structure functions can be extracted and used to determine the PDFs at different values of x and $Q^2$. 
+In order to determine the PDFs at different values of $Q^2$, the Bjorken scaling picture no longer holds, and the Dokshitzer-Gribov-Lipatov-Altarelli-Parisi (DGLAP) equations are used to evolve PDFs as a function of $Q^2$ using pQCD for higher orders in $\alpha_s$.
+These equations work by using LO, NLO or NNLO pQCD calculations of the splitting functions within the DGLAP framework given at leading order by:
+\begin{equation}
+    \mu_f^2 \frac{\partial f_a(x, Q^2)}{\partial \mu_f^2} = \sum_b \int_x^1 \frac{dz}{z} P_{ab}(z, \alpha_s(Q^2)) f_b\left(\frac{x}{z}, Q^2\right)
+\end{equation}
+where $f_a(x, Q^2)$ is the PDF for parton a at momentum fraction x and scale $Q^2$, $P_{ab}(z, \alpha_s(Q^2))$ is the splitting function for parton b splitting into parton a with momentum fraction z, and the sum is taken over all parton flavors b.
+The factorization scale $\mu_f^2$ is explicitly set now for different values of $Q^2$ to separate the hard emissions from the soft emissions in the PDFs, and the DGLAP equations govern the evolution of the PDFs with respect to this factorization scale.
+Similar to the renormalization scale, the choice of factorization scale is arbitrary and leaves a residual dependence on the factorization scale at the order in $\alpha_s$ of the perturbative expansion used to calculate the splitting functions.
+However, for inclusive DIS predictions, the default choice for the scales is usually $\mu_R = \mu_F = Q$.
+The splitting functions describe the probability of finding parton i in a parton of type j with a fraction x of the longitudinal momentum of the parent parton and a transverse momentum much less than p. 
+\textcolor{red}{Include figure of splitting functions.}
+Figure~\ref{fig:structure_func} shows the proton structure function $F_2$ as a function of $Q^2$ and x, where the scaling behavior of the structure function at large $Q^2$ and the evolution of the structure function with $Q^2$ can be observed.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/chapter1/proton_structure_function.png}
+    \caption{Structure function $F_2$ as a function of $Q^2$ and x. Reproduced from \cite{structure_func}.}
+    \label{fig:structure_func}
+\end{figure}
+
+In practice, to determine PDFs from experimental data, taken for a discrete sets of points in x for a given $Q^2$, like that shown in Figure~\ref{fig:structure_func}.
+PDFs are typically parameterized in terms of higher order polynomials in x at some initial scale $Q_0^2$ and then evolved using the DGLAP equations to determine the PDFs at other scales where experimental data is available.
+The resulting PDFs are then used as input to perturbative calculations of cross-sections for different observables in hadronic collisions.
+Figure~\ref{fig:pdfs} shows the PDFs calculated at NLO and NNLO for different parton flavors as a function of x at a set value of $Q^2$.
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/chapter1/pdf_fits.png}
+    \caption{PDFs for different parton flavors as a function of x at different values of $Q^2$. Reproduced from \cite{pdfs}.}
+    \label{fig:pdfs}
+\end{figure}
+
+In the regime of very small x, the DGLAP evolution equations may not be sufficient to describe the evolution of the PDFs, and other approaches such as the Balitsky-Fadin-Kuraev-Lipatov (BFKL) evolution equations may be needed to describe the behavior of the PDFs.
+Here, each power of $\alpha_s$ in pQCD beyond leading order is accompanied by a power of $\ln(1/x)$ contributing to the evolution.
+This phenomenon can be understood as the emission of gluons with small longitudinal momentum fractions, which can lead to a rapid growth of the gluon density at small x.
+A schematic of the PDF evolution in the DGLAP and BFKL regimes is shown in Figure~\ref{fig:pdf_evolution}.
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/chapter1/pdf_evolution.jpg}
+    \caption{Schematic of the PDF evolution in the DGLAP and BFKL regimes. Reproduced from \cite{pdf_evolution}.}
+    \label{fig:pdf_evolution}
+\end{figure}
  
 \subsection{Parton Showers}
 \subsubsection{Initial State Radiation}
