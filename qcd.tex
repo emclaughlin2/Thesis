@@ -1,9 +1,9 @@
 \subsection{QCD Lagrangian}
 Quantum Chromodynamics (QCD) is the theory of the strong interaction, describing the interactions between quarks and gluons.
 QCD also describes how these quarks and gluons interact to form hadrons, like protons and neutrons. 
-QCD belongs to the Yang Mills class of theories in Quantum Field Theory and is defined by a SU(3) gauge symmetry.
+QCD belongs to the Yang Mills class of theories in Quantum Field Theory and is defined by a SU(3) gauge symmetry~\cite{Peskin:1995ev,yang_mills_1954}.
 Other examples of Yang Mills theories include Quantum Electrodynamics (QED) and electroweak theory, which are based on U(1) and SU(2) gauge symmetries, respectively.
-The QCD Lagrangian can be used to fully describe the dynamics and interactions of quarks and gluons through QCD.
+The QCD Lagrangian can be used to fully describe the dynamics and interactions of quarks and gluons through QCD~\cite{ParticleDataGroup:2024cfk,Peskin:1995ev}.
 
 The QCD Lagrangian is given by: 
 \begin{equation}
@@ -31,11 +31,51 @@ $A_\mu^a$ is again the gluon field/QCD vector potential and $g_s$ is the strong 
 The strong coupling constant is often expressed in terms of $\alpha_s$ as $\alpha_s = \frac{g_s^2}{4\pi}$, which is a dimensionless quantity that characterizes the strength of the strong interaction.
 
 \subsection{Feynman Rules and Running of the Coupling Constant}
-\subsection{Perturbative QCD}
+
+Perturbative calculations in QCD are performed using Feynman diagrams, which at tree level for QCD involve a quark-antiquark-gluon vertex, a three-gluon vertex, and a four-gluon vertex.
+Figure~\ref{fig:QCDFeynmanDiagrams} shows an example of Feynman diagrams for QCD processes. 
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/chapter1/QCD_feynman_diagrams.png}
+    \caption{Example Feynman diagrams for QCD processes. Reproduced from \cite{particles_and_nuclei}.}
+    \label{fig:QCDFeynmanDiagrams}
+\end{figure}
+
+The perturbative regime of quantum field theories like QCD requires the coupling constant to be small, allowing for a well-defined expansion in terms of the coupling constant~\cite{ParticleDataGroup:2024cfk,Peskin:1995ev,particles_and_nuclei}.
+Additionally, the coupling constant in QCD is not a fixed value but is allowed to run as a function of a renormalization scale, $\mu_R$, which is introduced to regulate the divergences that arise in perturbative calculations.
+In practice, $\mu_R$ is often chosen to be on the order of the energy scale, $Q^2$, of the process being calculated.
+In the perturbative QCD (pQCD) framework, the strong coupling constant $\alpha_s$ is taken as a function of the energy scale of the interaction and satisfies the renormalization group equation:
+\begin{equation}
+    \mu^2_R \frac{d\alpha_s}{d\mu^2_R} = \beta(\alpha_s) = -(b_0 \alpha_s^2 + b_1 \alpha_s^3 + \ldots)
+\end{equation}
+where $\mu_R$ is the renormalization scale, and $b_0$ and $b_1$ are the 1 and 2-loop coefficients of the beta function.
+The 1-loop $\beta$ function coefficient is given by $b_0 = 33 - 2 n_f/12\pi$, where $n_f$ is the number of quark flavors and 2-loop $\beta$ function coefficient is given by $b_1 = 153 - 19 n_f/24\pi^2$.
+The coeffients beyond 2-loop are renomalization scheme dependent and are not included here.
+
+The negative sign in the beta function is the origin for aysmptotic freedom in QCD and indicates that $\alpha_s$ decreases as the energy scale of the interaction increases and distance scale of the interaction decreases.
+For interations with high momentum transfer on the order of 100 GeV to 10 TeV range, $\alpha_s$ is on the order of 0.1 and perturbative calculations are well defined.
+High energy and heavy ion physics experiments have measured $\alpha_s$ as a function of interaction energy scale for energy scales in the range of 1 GeV to 10 GeV with a summary of these measurements shown in Figure~\ref{fig:alpha_s_measurements}.
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/chapter1/alpha_s_measurements.png}
+    \caption{Summary of $\alpha_s$ measurements as a function of interaction energy scale. Reproduced from \cite{ParticleDataGroup:2024cfk}.}
+    \label{fig:alpha_s_measurements}
+\end{figure}
+
+However, as the energy scale decreases, corresponding to longer distance interations, $\alpha_s$ increases and the perturbative expansion breaks down, with a non-perturbative regime at energy scales around or below 1 GeV. 
+The running of the strong coupling constant with energy can be illustrated using the renormalization group equation solved at the 1-loop level~\cite{Peskin:1995ev,particles_and_nuclei,Ellis:1996qcd_collider_physics}:
+\begin{equation}
+    \alpha_s(\mu_R^2) = \frac{1}{\beta_0 \ln(\mu_R^2 / \Lambda_{QCD}^2)}
+\end{equation}
+where $\Lambda_{QCD}$ is the QCD scale parameter, which is $\sim 200$ MeV and sets the scale for non-perturbative effects in QCD.
+At energy scales around $\Lambda_{QCD}$, $\alpha_s$ is on the order of 1 and confinement occurs, leading to the formation of color-neutral hadrons from quarks and gluons. 
+
+\section{Perturbative QCD}
+\label{sec:pQCD}
 
 \subsection{Factorization}
-Due to the confined nature of QCD at low energies, the measurement and detection of physics from high energy hadronic collisions involve a processes across both high energy scales where perturbative QCD (pQCD) can be used and low energy scales where non-perturbative QCD processes dominate.
-Factorization theorem in QCD is used to separate the treatment of these short distance, perturbative QCD processes from long distance, non-perturbative QCD processes both present in hadronic collisions.
+Due to the confined nature of QCD at low energies, the measurement and detection of physics from high energy hadronic collisions involve a processes across both high energy scales where pQCD can be used and low energy scales where non-perturbative QCD processes dominate.
+Factorization theorem in QCD is used to separate the treatment of these short distance, perturbative QCD processes from long distance, non-perturbative QCD processes both present in hadronic collisions~\cite{factorization_review}.
 The factorization scale, $\mu_f^2$, is the scale that separates the short distance and long distance physics in the factorization theorem.
 Under this factorization assumption, the inclusive cross section for a hard scattering process in hadron-hadron collisions can be expressed as a convolution of the parton distribution functions (PDFs) and the partonic cross section as follows:
 \begin{equation}
@@ -44,14 +84,16 @@ Under this factorization assumption, the inclusive cross section for a hard scat
 where $p_{A}$ and $p_{B}$ are the momenta of the incoming hadrons A and B, $x_a$ and $x_b$ are the momentum fractions of the partons a and b inside the hadrons A and B, $f^{A}_{a}(x_a, \mu_f^2)$ and $f^{B}_{b}(x_b, \mu_f^2)$ are the PDFs for partons a and b in hadrons A and B evaluated at the factorization scale $\mu_f^2$, $\hat{\sigma}_{ab}$ is the hard scattering cross section for partons a and b, which can be calculated using pQCD at a renormalization scale $\mu_R$.
 The parton distribution functions (PDFs) are number density distributions of a given parton within the hadron carrying a fraction $x$ of the hadrons momentum.
 These PDFs not calcuated from first principles in pQCD, but are instead extracted from experimental data, such as deep inelastic scattering (DIS) experiments.
-Factoriztion has been proven experimentally to hold for processes such as deep inelastic scattering (DIS), electron-positron collisions, and Drell-Yan processes, but is only an approximation in other QCD systems such as hadron-hadron collisions.
-\textcolor{red}{Include a sentence about PDF universality and how DIS is a clean process to extract PDFs from.}
+Factoriztion has been proven experimentally to hold for processes such as deep inelastic scattering (DIS)~\cite{collins_dis} and Drell-Yan processes~\cite{Bodwin:1984hc}, but is only an approximation in other QCD systems such as hadron-hadron collisions~\cite{COLLINS1985104}.
+However, PDFs are universal and can be used across different processes, allowing, for example, the use of PDFs extracted from DIS experiments to be used in cross section calculations for hadron-hadron collisions.
+PDF global fits, like that shown in Figure~\ref{fig:pdf_fits}, also exploit this universality to combine data from a variety of collision processes and systems to constrain the PDFs across a wide range of x and $Q^2$ values.
 
 \subsubsection{Deep Inelastic Scattering}
-Deep inelastic scattering (DIS) involves the scattering of a lepton off a hadron, such as an electron scattering off a proton, through the exchange of a highly virtual photon.
-DIS is a clean process to extract PDFs from since the lepton can be treated perturbatively with non-perturbative contributions only coming from the hadron.
-\textcolor{red}{Include sentence about what deep and inelastic mean in this context.}
-Taking for example the scattering of an electron with momentum $k$ off a proton with momentum $P$ through the exchange of a virtual photon with momentum $q$, standard variables used in describing DIS include: 
+Deep inelastic scattering (DIS) involves the scattering of a lepton off a hadron, such as an electron scattering off a proton, through the exchange of a highly virtual photon~\cite{Halzen:1984quarks_leptons}.
+Specifically, DIS requires that the wavelength of the virtual photon be small, thereby providing a very fine resolution to scan the internal structure of the hadron. 
+Futher, since the lepton can be treated perturbatively, DIS is a clean process to extract PDFs, with non-perturbative contributions only coming from the hadron.
+
+Taking for example the scattering of an electron with momentum $k$ off a proton with momentum $P$ through the exchange of a virtual photon with momentum $q$~\cite{Halzen:1984quarks_leptons,Ellis:1996qcd_collider_physics}, standard variables used in describing DIS include: 
 \begin{equation}
     Q^2 = -q^2, \quad x = \frac{Q^2}{2P\cdot q}, \quad y = \frac{P\cdot q}{P\cdot k}
 \end{equation}
@@ -62,19 +104,19 @@ Therefore, the cross section for DIS can be expressed in terms of these structur
     \frac{d^2\sigma}{dx dy} = \frac{4\pi \alpha^2}{Q^4} \left[ (1-y) F_2(x,Q^2) + y^2 F_1(x,Q^2) \right]    
 \end{equation}
 In the limit that $Q^2$ is large, the structure functions obey a scaling law and can be described solely in terms of x.
-This approximate scaling behavior of the structure functions is known as Bjorken scaling and the structure functions independence of $Q^2$ indicates that the virtual photon is scattering off point-like constituents within the proton.
-This experimental evidence of point-like constituents within the proton is consistent with the parton model of the proton, where the proton is made up of quarks and gluons. 
+This approximate scaling behavior of the structure functions is known as Bjorken scaling~\cite{Bjorken_scaling} and the structure functions independence of $Q^2$ indicates that the virtual photon is scattering off point-like constituents within the proton.
+This experimental evidence of point-like constituents within the proton is consistent with the parton model of the proton~\cite{feynman_parton_model}, where the proton is made up of quarks and gluons. 
 Using the results from $e^+e^- \rightarrow q\bar{q}$ collisions, a relationship between the structure functions and the PDFs can be expressed as follows:
 \begin{equation}
     F_2(x) = 2xF_1(x) = \sum_{f} e_f^2 x f_f(x)
 \end{equation}
 where $e_f$ is the electric charge of the quark of flavor f and $f_f(x)$ is the PDF for the quark of flavor f.
-From this relationship between $F_2$ and $F_1$ within the leading order parton model, known as the Callan-Gross relation, 
+From this relationship between $F_2$ and $F_1$ within the leading order parton model, known as the Callan-Gross relation~\cite{Callan:1969uq}, 
 the longitudinal contrbutions to the cross section from structure functions are zero with agrees with the theory of partons as spin-1/2 particles.
 \subsubsection{Parton Distribution Functions}
 From experimental measurements of DIS, the structure functions can be extracted and used to determine the PDFs at different values of x and $Q^2$. 
-In order to determine the PDFs at different values of $Q^2$, the Bjorken scaling picture no longer holds, and the Dokshitzer-Gribov-Lipatov-Altarelli-Parisi (DGLAP) equations are used to evolve PDFs as a function of $Q^2$ using pQCD for higher orders in $\alpha_s$.
-These equations work by using LO, NLO or NNLO pQCD calculations of the splitting functions within the DGLAP framework given at leading order by:
+In order to determine the PDFs at different values of $Q^2$, the Bjorken scaling picture no longer holds, and the Dokshitzer-Gribov-Lipatov-Altarelli-Parisi (DGLAP) equations~\cite{dglap_Altarelli:1977zs,dglap_Dokshitzer:1977sg,dglap_Gribov:1972ri,dglap_Lipatov:1974qm} are used to evolve PDFs as a function of $Q^2$ using pQCD for higher orders in $\alpha_s$.
+These equations work by using LO, NLO or NNLO pQCD calculations of the splitting functions within the DGLAP framework given at leading order by~\cite{Ellis:1996qcd_collider_physics}:
 \begin{equation}
     \mu_f^2 \frac{\partial f_a(x, Q^2)}{\partial \mu_f^2} = \sum_b \int_x^1 \frac{dz}{z} P_{ab}(z, \alpha_s(Q^2)) f_b\left(\frac{x}{z}, Q^2\right)
 \end{equation}
@@ -83,12 +125,11 @@ The factorization scale $\mu_f^2$ is explicitly set now for different values of 
 Similar to the renormalization scale, the choice of factorization scale is arbitrary and leaves a residual dependence on the factorization scale at the order in $\alpha_s$ of the perturbative expansion used to calculate the splitting functions.
 However, for inclusive DIS predictions, the default choice for the scales is usually $\mu_R = \mu_F = Q$.
 The splitting functions describe the probability of finding parton i in a parton of type j with a fraction x of the longitudinal momentum of the parent parton and a transverse momentum much less than p. 
-\textcolor{red}{Include figure of splitting functions.}
 Figure~\ref{fig:structure_func} shows the proton structure function $F_2$ as a function of $Q^2$ and x, where the scaling behavior of the structure function at large $Q^2$ and the evolution of the structure function with $Q^2$ can be observed.
 \begin{figure}
     \centering
     \includegraphics[width=0.7\textwidth]{figures/chapter1/proton_structure_function.png}
-    \caption{Structure function $F_2$ as a function of $Q^2$ and x. Reproduced from \cite{structure_func}.}
+    \caption{Structure function $F_2$ as a function of $Q^2$ and x. Reproduced from \cite{ParticleDataGroup:2024cfk}.}
     \label{fig:structure_func}
 \end{figure}
 
@@ -99,32 +140,70 @@ Figure~\ref{fig:pdfs} shows the PDFs calculated at NLO and NNLO for different pa
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/chapter1/pdf_fits.png}
-    \caption{PDFs for different parton flavors as a function of x at different values of $Q^2$. Reproduced from \cite{pdfs}.}
+    \caption{PDFs for different parton flavors as a function of x at different values of $Q^2$. Reproduced from \cite{ParticleDataGroup:2024cfk}.}
     \label{fig:pdfs}
 \end{figure}
 
-In the regime of very small x, the DGLAP evolution equations may not be sufficient to describe the evolution of the PDFs, and other approaches such as the Balitsky-Fadin-Kuraev-Lipatov (BFKL) evolution equations may be needed to describe the behavior of the PDFs.
+In the regime of very small x, the DGLAP evolution equations may not be sufficient to describe the evolution of the PDFs, and other approaches such as the Balitsky-Fadin-Kuraev-Lipatov (BFKL) evolution equations~\cite{bfkl_Balitsky:1978ic,bfkl_Kuraev:1977fs} may be needed to describe the behavior of the PDFs.
 Here, each power of $\alpha_s$ in pQCD beyond leading order is accompanied by a power of $\ln(1/x)$ contributing to the evolution.
 This phenomenon can be understood as the emission of gluons with small longitudinal momentum fractions, which can lead to a rapid growth of the gluon density at small x.
 A schematic of the PDF evolution in the DGLAP and BFKL regimes is shown in Figure~\ref{fig:pdf_evolution}.
 \begin{figure}
     \centering
     \includegraphics[width=0.7\textwidth]{figures/chapter1/pdf_evolution.jpg}
-    \caption{Schematic of the PDF evolution in the DGLAP and BFKL regimes. Reproduced from \cite{pdf_evolution}.}
+    \caption{Schematic of the PDF evolution in the DGLAP and BFKL regimes. Reproduced from \cite{DGLAP_BFKL_review}.}
     \label{fig:pdf_evolution}
 \end{figure}
  
 \subsection{Parton Showers}
-\subsubsection{Initial State Radiation}
+The evolution of the hard scattering process in hadronic collisions towards the final state particles that are measured in detectors involves a complex interplay of perturbative and non-perturbative QCD processes.
+For clarity, the perturbative QCD processes that govern this evolution are described below by the models used in event generators where the main contributions to these parton showers can be labeled as final state radiation (FSR), initial state radiation (ISR), and multi-parton interactions (MPI).
+Taking the implementation in \pythia for example~\cite{Buckley:2011event_generators_lhc}, parton showering is implemented as a $p_T$-ordered, Sudakov-based evolution that interleaves FSR, ISR, and MPI effects. 
+The $p_{T}$ ordering of the parton shower can be understood as an evolution towards increasing resolution, where the hardest scattering sets the initial scale for the evolution and subsequent emissions are ordered in decreasing $p_{T}$, with the softer emissions occurring at lower $p_{T}$ scales.
+Therefore, the hard scattering scale informs what emissions are possible at each lower $p_{T}$ scale of the evolution. 
+This regulates the soft and collinear divergences inherent in QCD, as emissions with $p_{T}$ below a certain cutoff are not allowed, ensuring a finite cross section for the parton shower evolution~\cite{Sterman:2022collinear_factorization}.
+Additionally, the interleaving of FSR, ISR and MPI effects allows for soft-hard correlations to be naturally included in the evolution, since MPI and ISR are in direct competition for momentum set by the beam energy, while FSR redistributes momenta between partons already within the scattering process.
+
 \subsubsection{Final State Radiation}
+For the development of the parton shower, the differential probability for an emission is of the form:
+\begin{equation}
+d\mathcal{P} \;=\; \frac{d p_T^2}{p_T^2}\,\frac{\alpha_s(p_T^2)}{2\pi}\,P(z)\,dz
+\end{equation}
+which reflects the first-order DGLAP evolution logarithmic enhancement $d p_T^2 / p_T^2$ and DGLAP splitting functions $P(z)$. 
+To obtain the probability for the next emission at a given resolution scale, $p_{T,\max}$, the probability is combined with the Sudakov form factor given by:
+\begin{equation}
+\Delta(p_{T,\max}, p_T) \;=\; \exp\!\left(-\int_{p_T^2}^{p_{T,\max}^2} \frac{d \tilde{p}_T^2}{\tilde{p}_T^2}\,\frac{\alpha_s(\tilde{p}_T^2)}{2\pi}\!\int dz\,P(z)\right)
+\end{equation}
+which gives the probability of no emission between $p_{T,\max}$ and $p_T$.
+The exclusive probability density for the next emission is then:
+\begin{equation}
+\frac{d\mathcal{P}}{d p_T^2} \;=\; \frac{1}{p_T^2}\,\frac{\alpha_s(p_T^2)}{2\pi}\,P(z)\,\Delta(p_{T,\max}, p_T)
+\end{equation}
+ensuring proper ordering and probabilistic consistency. 
+
+\subsubsection{Initial State Radiation and Multi-Parton Interactions}
+For ISR, the branching probability is modified by the proton structure through a convolution with the PDFs and are implemented via backward evolution~\cite{Buckley:2011event_generators_lhc}. 
+The corresponding probability for ISR is given by:
+\begin{equation}
+d\mathcal{P}_{\text{ISR}} \;=\; \frac{d p_T^2}{p_T^2}\,\frac{\alpha_s(p_T^2)}{2\pi}\,P(z)\,\frac{f\!\left(\frac{x}{z}, p_T^2\right)}{f(x, p_T^2)}\,dz
+\end{equation}
+where the ratio of PDFs encodes the probability of finding the parent parton with momentum fraction $x/z$. 
+The same splitting kernels $P(z)$ and logarithmic scaling seen in the FSR case are included here as well as they appear from the DGLAP evolution.
+Finally, MPI are incorporated in the same $p_T$-ordered framework, with a differential rate:
+\begin{equation}
+\frac{d\sigma}{d p_T^2} \;\sim\; \frac{\alpha_s^2(p_T^2)}{p_T^4}
+\end{equation}
+that is regulated by an experimentally-tuned cutoff $p_{T0}$, ensuring finite cross sections at low $p_T$ and providing a consistent description of additional semi-hard scatterings in the event.
+At each step in the parton shower evolution, trial emissions for ISR, FSR, and MPI are generated, each assigned a candidate $p_T$, and the largest is selected, producing a unified, interleaved evolution in hardness.
+
 \subsubsection{Jet Algorithms}
-Partons produced in the hard scattering of ion collisions fragment and give rise to a "spray" of final state particlces known as jets that can be measured in experimental detectors.
+As outlined in the previous section on parton showers, partons produced in the hard scattering of ion collisions fragment and give rise to a "spray" of final state particlces known as jets that can be measured in experimental detectors.
 In an ideal picture, the initial partons kinematics can be determined from the four momenta of all of the particles within the jet.
-Therefore, jets can be constructed from the final state particles by clustering them together based on their transverse momentum and/or angular separation as they are both directly related to the fragmentation of the parton shower.
+Therefore, jets can be constructed from the final state particles by clustering them together based on their transverse momentum and/or angular separation as they are both directly related to the fragmentation of the parton shower~\cite{Cacciari:2012fastjet_manual}.
 This allows for a direct connection between theory and experiment by using an object measureable in experimental detectors and calculable theoretically. 
 In order to use jets to connect to the partons described by pQCD, the jets must be constructed in a way that is infrared and collinear (IRC) safe, meaning that the jets should not be modified by soft or collinear emissions.
 
-The most common class of jet algorithms used in heavy ion collisions currently is sequential clustering algorithms, including the $k_{t}$, anti-$k_{t}$, and Cambridge/Aachen algorithms.
+The most common class of jet algorithms used in heavy ion collisions currently is sequential clustering algorithms, including the $k_{t}$~\cite{kt_algorithm}, anti-$k_{t}$~\cite{Cacciari:2008antikt_jet_algorithm}, and Cambridge/Aachen~\cite{Dokshitzer:1997cambridge_aachen_jet} algorithms.
 These algorithms use a distance measure defined by a combination of momentum and angular separation to cluster particles together in an iterative manner to form jets.
 The distance measures are defined as: 
 \begin{equation}
@@ -133,6 +212,14 @@ The distance measures are defined as:
 where $d_{ij}$ is the distance between two particles and $d_{iB}$ is the distance between a particle and the beam.
 The transverse momenta of the two particles is given by $p_{Ti}$ and $p_{Tj}$ and $\Delta R_{ij} = \sqrt{\Delta y_{ij}^2 + \Delta \phi_{ij}^2}$ is the angular separation between the two particles. 
 $R$ is a parameter that controls the size of the jet cone.
+Figure~\ref{fig:jet_algorithms} shows a schematic of the jets constructed using different jet algorithms~\cite{Cacciari:2012fastjet_manual,kt_algorithm,Cacciari:2008antikt_jet_algorithm,Dokshitzer:1997cambridge_aachen_jet}.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/chapter1/jet_algorithms.png}
+    \caption{Schematic of the jets constructed using different jet algorithms: $k_{t}$ (top left), Cambridge/Aachen (top right), cone algorithm (bottom left) and anti-$k_{t}$ (bottom right). Reproduced from \cite{Cacciari:2008antikt_jet_algorithm}.}
+    \label{fig:jet_algorithms}
+\end{figure}
 
 Each of these sequential clustering algorithms act iteratively to cluster particles together based on the distance measures defined above.
 The clustering process is as follows:
@@ -145,17 +232,9 @@ The clustering process is as follows:
 The $n$ parameter in the distance measures is a parameter that controls the sensitivity of the algorithm to the transverse momentum of the particles.
 It is set to 1 for the $k_{t}$ algorithm, set to 0 for the Cambridge/Aachen algorithm, and set to -1 for the anti-$k_{t}$ algorithm.
 Therefore, each algorithm has a different sensitivity to the transverse momentum of the particles.
-Figure~\ref{fig:jet_algorithms} shows a schematic of the jets constructed using these different jet algorithms.
 The $k_{t}$ algorithm has a high sensitivity to low momentum particles, clustering nearby low momentum particles together first. 
 The Cambridge/Aachen algorithm is insensitive to the transverse momentum of the particles, clustering particles together based on their angular separation.
 The anti-$k_{t}$ algorithm has a high sensitivity to hard particles, clustering high $p_{T}$ particles to nearby particles first.
 This method of clustering nearby soft particles to high $p_{T}$ particle "prongs" is a good description of the soft and collinear radiation produced by a high $p_{T}$ particle during its parton shower.
 Additionally, as seen in Figure~\ref{fig:jet_algorithms}, the anti-$k_{t}$ algorithm creates smooth, conical jets with well-defined boundaries. 
 Therefore, the anti-$k_{t}$ algorithm is the most commonly used jet algorithm in heavy ion collisions currently, and is used to construct jets in the underlying event analysis in thesis.
-
-\begin{figure}
-    \centering
-    \includegraphics[width=\textwidth]{figures/chapter1/jet_algorithms.png}
-    \caption{Schematic of the jets constructed using different jet algorithms: $k_{t}$ (top left), Cambridge/Aachen (top right), cone algorithm (bottom left) and anti-$k_{t}$ (bottom right). Reproduced from \cite{jet_algorithms}.}
-    \label{fig:jet_algorithms}
-\end{figure}
