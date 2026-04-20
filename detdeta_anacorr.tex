@@ -20,7 +20,7 @@ There is a very minor $\eta$ dependence in the sampling fraction of HCal towers 
 However, it was determined that for this analysis, the $\eta$-independent IHCal and OHCal sampling fraction values determined from simulation particle gun studies can be used, since the HCal absolute energy scale calibration is determined on the scintillator EM energy level and the same sampling fraction was applied to both simulation and data. 
 Therefore, this sampling fraction value applied in both data and MC cancels out in the correction step when extracting measurements of the truth level \detdeta. 
 Studies of the HCal sampling fraction are detailed in Appendix~\ref{sec:SamplingFrac}. 
-Furthermore, during analyzing the data, the effect of implementing the realistic support structure into the simulation software package was found to be crucial for accurately simulating the in-flow and out-flow of collision particles in the forward $\eta$ regions of the calorimeters. 
+Furthermore, while analyzing the data, the effect of implementing the realistic support structure into the simulation software package was found to be crucial for accurately simulating the in-flow and out-flow of collision particles in the forward $\eta$ regions of the calorimeters. 
 The detailed studies of the impact of the support structures for this analysis can be found in Appendix~\ref{sec:SupportStruct}.
 
 \subsubsection{Hot Tower Masking}
@@ -50,7 +50,7 @@ Following the application of the above calibration steps and these hot tower mas
 The transverse energy per pseudorapidity unit, \detdeta, is calculated in a given $\eta$ interval based on the $\eta$ position of individual calorimeter towers in the lab frame.
 To take into account the position of the collision vertex, the $\eta$ value in each tower is corrected event-by-event relative to the vertex position of the collision. 
 For the runs used in this analysis, the x and y vertex reconstruction was not possible due to absence of tracker detector data.
-Therefore only a correction for the z-coordinate is obtained. 
+Therefore only a correction for the z-coordinate is obtained. \textcolor{red}{You should comment that the x and y correctinos are expcted to be small (explain why).}
 
 In both simulation and data, a corrected tower $\eta$ is calculated for each tower as:
 \begin{equation}
@@ -75,14 +75,16 @@ To obtain uncorrected (reconstructed from data) or reconstructed simulated \detd
 \begin{equation}
     E_{\text{T,tower}}=E_{\text{tower}}/\cosh\eta
 \end{equation}
+\textcolor{red}{Presumably this is the corrected $\eta$ discussed above? You may also wish to comment for non-experts that sin $\theta$ = 1/cosh $\eta$.}
 Tower $\ET$ are summed in $\eta$ across the full event selection and then scaled by the $\eta$ bin width and total number of events to obtain the average reconstructed \detdeta in a given $\eta$ interval per event.
-In total, five reconstructed \detdeta measurements are made for each centrality bin, a reconstructed \detdeta from each of the individual calorimeters using only contributions from that calorimeters' towers (e.g. the EMCal \detdeta measurement only has contributions from EMCal towers), a HCal reconstructed \detdeta histogram comprising both layers of the HCal, and a full calorimeter reconstructed \detdeta histogram which is filled with tower contribution from all three calorimeter layers. 
+In total, five reconstructed \detdeta measurements are made for each centrality bin \textcolor{red}{This is a long sentenece because you are enumerating 5 things. For starters, you could replace the comma following “bin” with a colon, but perhaps a list would work better.}, a reconstructed \detdeta from each of the individual calorimeters using only contributions from that calorimeters' towers (e.g. the EMCal \detdeta measurement only has contributions from EMCal towers), a HCal reconstructed \detdeta histogram comprising both layers of the HCal, and a full calorimeter reconstructed \detdeta histogram which is filled with tower contribution from all three calorimeter layers. 
 The reconstructed full calorimeter measurement is the same as the sum of the reconstructed individual calorimeter measurements; 
 there is no additional weighting applied to combine the contributions of the hadronic calorimeters and EM calorimeter to create the full calorimeter reconstructed \detdeta. 
 Fig.~\ref{fig:dEtdeta_reco} shows the detector-level \detdeta measurements for all calorimeter layers for both data and simulation samples for the 0-5\% most central events; 
 reconstructed \detdeta measurements for all centrality bins are included in Appendix~\ref{sec:full_detdeta_plots}.
 For all centrality bins and calorimeter layer measurements, the simulation is able to reproduce the general shape and mangitude of the reconstructed \detdeta from data, indicating that the detector response and acceptance modeling performs well in the simulation.
 
+\textcolor{red}{What does “New centrality” mean on these plots?}
 \begin{figure}
     \centering
     \includegraphics[width=0.49\linewidth]{detdeta/Figures/dETdeta_measurements/emcal_reco_0-5.png}
@@ -112,7 +114,7 @@ Correction factors are created for each calorimeter measurement and each central
 In this analysis, correction factors from the reweighted \epos dataset are used to correct the nominal \detdeta measurements, with correction factors from reweighted \ampt and \hijing used to determine the uncertainty in the MC reweighting method and residual model dependence. 
 Correction factor distributions created using reweighted \epos, \ampt and \hijing for each calorimeter layer \detdeta measurement are shown in Figure~\ref{fig:correction_factors} for 0-5\% centrality events.
 The correction factors for each calorimeter measurement are fairly consistent as a function of centrality with variations in the correction factors across all centrality bins studies in this analysis of at most 2-4\% for all calorimeter layer measurements.
-The full set of correction factors for all centralities are also included in Appendix~\ref{sec:full_detdeta_plots}.
+The full set of correction factors for all centralities are also included in Appendix~\ref{sec:full_detdeta_plots}. \textcolor{red}{It would help a lot to have 2D plots of the 5 different measurements, with horizontal axis being the measured quantity and the vertical axis the reconstructed or inferred \detdeta. Perhaps do this for one centrality and $\eta$ interval here in the text here, with the rest in App. D. }
 
 \begin{figure}
     \centering
@@ -130,7 +132,7 @@ The full set of correction factors for all centralities are also included in App
 The effect of the MC reweighting procedure on the correction factors used in the analysis was also studied by comparing the correction factors obtained from the reweighted \epos, \ampt and \hijing datasets to the correction factors obtained from the unweighted MC samples.
 The effect of the MC reweighting procedure on the correction factors across the measurement's centrality range agrees well with the data/MC differences seen in the identified particle spectra ratios shown in Section~\ref{sec:detdeta_mcsamples}.
 Noteably for both \epos and \ampt the agreement between data and MC in the particle spectra was best in very central events and poorer in more peripheral events. 
-This trend can be seen in the correction factors as well, where the correction factors obtained from the reweighted and unweighted MC samples are more consistent in central events and less consistent in peripheral events, with the largest differences observed in the HCal correction factors for peripheral events.
+This trend can be seen in the correction factors as well, where the correction factors obtained from the reweighted and unweighted MC samples are more consistent in central events and less consistent in peripheral events, with the largest differences observed in the HCal correction factors for peripheral events. \textcolor{red}{I would expect HIJING to show the opposite trend. Is  that the case? You seem to focus mostly on EPOS and AMPT in this discussion. Is there a reason HIJING is not tn the discussion?}
 A comparison of the correction factors obtained from the reweighted and unweighted MC samples for the EMCal, HCal and Full Calorimeter measurements for 0-5\% and 40-50\% centrality events is shown in Fig.~\ref{fig:correction_factors_reweighting}.
 The full set of correction factors for all centrality bins for the reweighted and unweighted MC samples are included in Appendix~\ref{sec:full_detdeta_plots}.
 
