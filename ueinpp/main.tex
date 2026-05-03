@@ -1,0 +1,117 @@
+\PassOptionsToPackage{colorlinks=true, linkcolor=blue, citecolor=blue, urlcolor=blue}{hyperref} % Add all desired hyperref options here
+\documentclass[type=report,linenumbering=on]{sphenix}
+\usepackage{amsmath}
+\usepackage{lipsum}
+\usepackage{array}
+\usepackage{cleveref}
+\usepackage{gensymb}
+\usepackage{subcaption}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+
+\newcommand{\detdetadphi}{\mbox{$\text{d}E_{\text{T}}/\text{d}\eta\text{d}\phi$}\xspace}
+\newcommand{\meanpt}{\mbox{$\langle p_T \rangle$}\xspace}
+\newcommand{\meanet}{\mbox{$\langle {\rm E}_{\text{T}} \rangle$}\xspace}
+\newcommand{\sqs}{\mbox{$\sqrt{s}$}\xspace}
+\newcommand{\pp}{\mbox{$p$+$p$}\xspace}
+\newcommand{\pT}{\mbox{$p_{\text{T}}$}}
+\newcommand{\ET}{\mbox{$E_{\text{T}}$}}
+\newcommand{\detdeta}{\mbox{$\text{d}E_{\text{T}}/\text{d}\eta$}\xspace}
+
+\begin{document}
+
+\title{Measurement of underlying event production in p+p collisions at 200 GeV}
+\author{Ghosoun Adawi (GSU), Ben Kimelman (Vanderbilt), Rithya Kunnawalkam Elayavalli (Vanderbilt), Emma McLaughlin (Columbia), Veronica Verkest (Wayne State)}
+\date{\today}
+
+\doctag{sPH-ppg-2026-010}
+\docversion{0.1} 
+
+
+\maketitle
+
+\begin{abstract}
+This is the internal note for sPH-ppg-2026-010, the measurement of underlying event in p+p collisions at 200 GeV from Run 24 data.
+\end{abstract}
+
+\tableofcontents
+
+\section{Introduction} 
+\label{sec:introduction}
+\input{introduction}
+
+\section{Analysis Workflow}
+\label{sec:workflow}
+\input{workflow}
+
+\section{Data Selection}
+\label{sec:selection}
+\input{selection}
+
+\section{Calorimeter Tower, Topocluster and Jet Reconstruction}
+\label{sec:towerreco}
+\input{towerreco}
+
+\section{Run by Run Calorimeter Tower, Topocluster and Jet QA}
+\label{sec:runbyrunqa}
+\input{QA}
+
+\section{Jet Background Effects} 
+\label{sec:jetbackground}
+\input{jetbackground}
+
+\section{Pileup Effects}
+\label{sec:pileup}
+\input{pileup}
+
+\section{Jet and MBD Trigger Efficiency Studies}
+\label{sec:trigger_efficiency}
+\input{trigger_efficiency}
+
+\clearpage
+\section{Analysis Procedure}
+\label{sec:analysis}
+\input{analysis}
+
+\section{Systematic Uncertainties}
+\label{sec:systematic_uncertainties}
+\input{systematics}
+
+\clearpage
+\section{Results}
+\label{sec:results}
+\input{results}
+
+%\clearpage
+%\section{Conclusion}
+%\input{conclusion}
+
+\clearpage
+\bibliographystyle{unsrturl}
+\bibliography{cite}
+\clearpage
+
+\appendix{Appendix} 
+
+\section{UE from Towers QA}
+\label{sec:UE_from_Towers_QA}
+\input{UE_from_Towers_QA}
+
+\clearpage
+
+\section{Topocluster Resolution Simulation Studies with Tracks}
+\label{sec:additional_topo_reso}
+\input{topocluster_reco_studies}
+
+\clearpage
+
+\section{Calorimeter Reconstruction Initial Studies}
+\label{sec:initial_studies}
+\input{initial_calo_tower_reco_studies}
+
+\clearpage
+
+\section{Jet-MBD Time Background Cut}
+\label{sec:jet_mbd_time_bkg_cut}
+\input{jet_mbd_time_cut}
+
+\end{document}

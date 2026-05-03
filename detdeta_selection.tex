@@ -10,7 +10,7 @@ Following the MIP counts calibration, loose requirements on individual MBD PMT c
 These MBD PMT hit requirements are $q > 0.5$ in MIP counts and a time between $-20 < t < 20$ ns. 
 Figure~\ref{fig:mbd_pmt_hit_criteria} shows the full PMT charge and time distributions for an example PMT with the hit requirement cuts overlaid. 
 The PMT MIP peak is clearly visible in the charge distribution and $q > 0.5$ is well below the MIP peak. 
-Additiionally, the loose timing cuts applied are well outside the main collision timing distribution.
+Additionally, the loose timing cuts applied are well outside the main collision timing distribution.
 
 \begin{figure}
     \centering
@@ -75,7 +75,7 @@ Combining all these selections, the total number of events used in the \detdeta 
 \end{figure}
 
 \subsection{Event Centrality Determination}
-Events in both data and MC are assigned a centrality value which characterizes the level of geomertric overlap between the two colliding nuclei.
+Events in both data and MC are assigned a centrality value which characterizes the level of geometric overlap between the two colliding nuclei.
 The MBD charge sum distribution for all events passing the minimum bias event selection is fit to the MC Glauber $\oplus$ Negative Binomial Distribution (MBD) model.
 The first part of this model is a MC Glauber simulation, which simulates the nuclear geometry event by event and outputs nuclear geometry information such as the impact parameter, b, number of participating nucleons, $\Npart$, and number of nucleon collisions, $\Ncoll$.
 The second part of the model samples multiplicity distributions from events with set nuclear geometry information, set $\Npart$ and $\Ncoll$, using a negative binomial distribution to get a realistic distribution of particle production and final state multiplicity.
@@ -83,7 +83,7 @@ The MC Glauber parameters nucleon-nucleon cross-section, nuclear radius, and Woo
 The MBD charge sum distribution with fit to the MC Glauber $\oplus$ NBD model is shown in Figure~\ref{fig:mbd_charge_sum}.
 By extracting the integral of the MBD charge sum distribution and fitted MC Glauber $\oplus$ NBD result, the minimum bias event selection efficiency was determined to be $93.4\%^{+3.4\%}_{-3.1\%}$ of the Au+Au inelastic cross section and centrality intervals are determined as percentiles of the minimum bias event distribution between 0 and 93\%. 
 The bottom panel of Figure~\ref{fig:mbd_charge_sum} shows the peripheral event region in detail to highlight this minimum bias trigger efficiency turn on region. 
-The resulting Glauber parameters and extracted $\Npart$ values for eeach centrality interval are included in Table~\ref{tab:glauber}.
+The resulting Glauber parameters and extracted $\Npart$ values for each centrality interval are included in Table~\ref{tab:glauber}.
 Figure~\ref{fig:npart_ncoll_b} also includes a reference of the relationship between $\langle \Npart \rangle$, $\langle \Ncoll \rangle$ and the collision impact parameter, b, to highlight the range in nuclei-nuclei geometric overlap in this analysis.
 
 \begin{figure}

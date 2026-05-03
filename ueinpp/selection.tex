@@ -1,0 +1,80 @@
+We used \mbox{p+p}\xspace Run 2024 data for this analysis. This section describes the specifics of the dataset, MC samples, and event selection.
+
+\subsection{Data and MC samples}
+This analysis used good runs from the 0 + 1.5 mrad crossing angle data from Run 24. The run range for the 0 mrad crossing angle data was runs 47289 to 51237 and the run range for the 1.5 mrad crossing angle data was runs 51274 to 53862.
+
+The list of good runs is selected with the following criteria:
+\begin{itemize}
+    \item Run type is marked as ``physics''
+    \item Run number between $47289$ and $53880$ (The p+p run range with updated trigger firmware)
+    \item vGTMS 5, 9, and 10 enabled
+    \item Trigger $MBD\; N\&S >= 1$ has scale down $\geq 1$
+    \item Trigger $MBD\; N\&S >= 1$ has live time $\geq 80\%$
+    \item Run time $\geq 5$ minutes
+    \item Pass calorimeter cold/dead tower check: $N_{cold} + N_{dead} < Limit$ (500, 31, 31 for EMCal, iHCal, oHCal)
+    \item Pass calorimeter hot tower check: $N_{hot} < Limit$ (100, 6, 6 for EMCal, iHCal, oHCal)
+    \item Pass calorimeter signal timing check: $-1 < \textit{mean time} < 1$, and $\sigma_{time} < Limit$ (2, 3, 3 for EMCal, iHCal, oHCal)
+    \item MBD mean z-vertex $< 30$ cm
+    \item Magnet on
+\end{itemize}
+Runs that fail these criteria are not analyzed. The tool for creating the "golden run list" (GRL) is located in the \href{https://github.com/sPHENIX-Collaboration/analysis/tree/master/runListGeneration/Run2024pp}{run list generator workspace} in the sPHENIX analysis repo. This workspace also includes the \href{https://github.com/sPHENIX-Collaboration/analysis/tree/master/runListGeneration/Run2024pp/Full\_ppGoldenRunList\_Version3.list}{ good run list} used for this analysis.
+
+The additional ``Jet'' triggers use a jet-patch algorithm to search $\Delta\eta \times \Delta\phi = 0.8 \times 0.8$ overlapping windows for the highest total energy from all calorimeter towers in that region, i.e., EMCal, IHCal, and OHCal. The Jet 8, 10, 12 triggers correspond to approximately energy thresholds with the patch of 8, 10, and 12~\GeV.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|cc|}
+\hline
+Run Numbers & Production tag & CDB tag  \\ \hline
+47289-53862 & Ana.521 & 2024p012\_v001 \\ \hline
+\end{tabular}
+\caption{List of runs used in this analysis with production and cdb tag information.}
+\label{table:Run2023dataset}
+\end{table}
+
+Seven Monte Carlo datasets were used to compare to data in this analysis. These datasets all used the Detroit \verb|Pythia-8| tune with options \verb|HardQCD:all = on| and \verb|PromptPhoton:all = on| coupled with the sPHENIX \verb|GEANT4| simulation where the calorimeter waveform reconstruction method was utilized with different jet trigger thresholds. All datasets were from Run 28 simulation production which looked to match the calorimeter noise conditions of the 2024 combined 0 + 1.5 mrad p+p running and the $z_{vtx}$ distribution of the 2024 combined 0 mrad p+p running. The datasets are combined using a weighting factor where weight $w = \sigma/N_{events}$. $\sigma$ is the cross section of the triggered dataset and $N_{events}$ is the number of events of the triggered dataset; since all triggered datasets have the same number of events (10M) only the cross section is used as a weight for combining these samples. These values are given for each dataset in Table~\ref{table:MCdataset}.
+
+\begin{table}[ht]    
+\centering
+\begin{tabular}{|c|ccccc|}
+\hline
+Name  & Generator & Production tag & CDB tag & $\sigma$ [pb] & $N_{events}$ \\ \hline
+Jet5  & Pythia8   & run 28 type 36 & MDC2    & 1.3878e+08 & 10M   \\ \hline
+Jet12 & Pythia8   & run 28 type 39 & MDC2    & 1.4903e+06 & 10M   \\ \hline
+Jet20 & Pythia8   & run 28 type 21 & MDC2    & 6.2623e+04 & 10M   \\ \hline
+Jet30 & Pythia8   & run 28 type 11 & MDC2    & 2.5298e+03 & 10M   \\ \hline
+Jet40 & Pythia8   & run 28 type 19 & MDC2    & 1.3553e+02 & 10M   \\ \hline
+Jet50 & Pythia8   & run 28 type 34 & MDC2    & 7.3113     & 10M   \\ \hline
+Jet60 & Pythia8   & run 28 type 38 & MDC2    & 3.3261e-01 & 10M   \\ \hline
+
+\end{tabular}
+\caption{Summary of MC samples with production and cdb tag information.}
+\label{table:MCdataset}
+\end{table}
+
+\subsection{Event Selection}
+Two sets of events are selected for analysis: first, an event selection for inclusive R=0.4 jet studies and second, an event selection for R=0.4 dijet studies.
+The inclusive R=0.4 jet study event selection is as follows: 
+\begin{itemize}
+    \item $|z_{vtx}| <$ 60 cm
+    \item Jet 10 trigger - scaled trigger bit 22 (data only)
+    \item Njet $\geq$ 1
+    \item Leading jet $\|\eta\| <$ 0.7
+    \item Leading jet calibrated $\pT >$ 21 GeV, truth $\pT >$ 17 GeV
+\end{itemize}
+
+The R=0.4 dijet study event selection is as follows: 
+\begin{itemize}
+    \item $|z_{vtx}| <$ 60 cm
+    \item Jet 10 trigger - scaled trigger bit 22 (data only)
+    \item Njet $\geq$ 2
+    \item Leading jet $\|\eta\| <$ 0.7
+    \item Leading jet calibrated $\pT >$ 21 GeV, truth $\pT >$ 17 GeV
+    \item Subleading $\pT >$ 0.3* Leading jet \pT (both calibrated and truth jets)
+    \item Leading and Subleading jet with $\|\Delta\phi\| >$ 3$\pi$/4
+    \item Subleading jet with $\|\eta\| <$ 0.7
+\end{itemize}
+
+An additional cut on the final set of runs use for the analysis is applied following the results found from pileup studies included in Section~\ref{sec:pileup}. This additional cut is to only include runs with average pileup as determined by the MBD live rate of less than 6\%. Details on how this pileup rate is determined and corrections on the observable from pileup are also included in Section~\ref{sec:pileup}.
+Combining all these selections including the low pileup run requirement, the total number of events used in this analysis corresponds to an integrated luminosity of 34 pb$^{-1}$. 
+The calculated luminosity values for events with $|z_{vtx}| <$ 60 cm are located in the file 60cmlumi\_allxing.list within the \href{https://github.com/sPHENIX-Collaboration/analysis/tree/master/LuminosityCounterGoodRuns/run}{Luminosity counter workspace} in the sPHENIX analysis repo. The full set of details for these luminosity calculations are included in the PPG09 analysis note~\cite{ppg09AN}.
