@@ -4,7 +4,7 @@ In the MBD, signals are split to read out both the charge and time of each PMT c
 Here the charge information relates to the amplitude of the signal waveform and the time information relates to the timing of the waveform peak. 
 The timing information has $\sim 50$ ps resolution and is used to calculate the z-vertex of the collision. 
 This timing resolution translates to a 1-2 cm resolution in the z-vertex position in minimum bias events that is mildly dependent on the event multiplicity, with high multiplicity events having a smaller z-vertex resolution. 
-Additionally, the MBD acts as a multiplicity counter, and therefore, the charge information is calibrated in terms of MIP counts.
+Additionally, the MBD acts as a multiplicity counter, and therefore, the charge information is calibrated in terms of MIP \textcolor{red}{Defined where?} counts.
 
 Following the MIP counts calibration, loose requirements on individual MBD PMT charge are imposed to classify a PMT as a "fired" tube in the MBD and for that charge information to be included in the total MBD charge sum used for centrality calibration.
 These MBD PMT hit requirements are $q > 0.5$ in MIP counts and a time between $-20 < t < 20$ ns. 
@@ -23,7 +23,7 @@ Events in both data and MC are selected using the following minimum-bias event s
 The selection requirements are as follows: 
 \begin{itemize}
     \item MBD $\textit{N}_{\textit{tubes,N}} \geq 2 \, \& \, \textit{N}_{\textit{tubes,S}} \geq 2$ 
-    \item $\Sigma Q_{MBD,N} > 10 \lor \Sigma Q_{MBD,S} < 150 $
+    \item $\Sigma Q_{MBD,N} > 10 \lor \Sigma Q_{MBD,S} < 150 $ \textcolor{red}{This confuses me. Is it an OR condition?}
     \item $\Sigma E_{ZDC,N} > 40\, \text{GeV}\, \& \, \Sigma E_{ZDC,S} > 40\, \text{GeV} $
     \item $\mid z_{vtx,MBD}\mid < 60$ cm
 \end{itemize}
@@ -31,7 +31,7 @@ The selection requirements are as follows:
 The first requirement is the hardware level MBD trigger requirement. 
 This requirement is also required in the offline reconstruction since online and offline MBD charge calibration factors can be slightly different.
 The second requirement removes nonphysical backgrounds in the MBD charge distribution determined from studies of the charge correlation between the two sides of the MBD. 
-Figure~\ref{fig:mbd_ns_correlation} shows the region of nonphysical background events removed using this second requirement on the MBD charge sum. 
+Figure~\ref{fig:mbd_ns_correlation} shows the region of nonphysical background events \textcolor{red}{Do you understand why this is so asymmetric?} removed using this second requirement on the MBD charge sum. 
 The third requirement is a requirement of energy in both sides of the ZDC to remove any remaining beam backgrounds that may still pass the hardware trigger from the MBD like beam-gas interactions.
 An energy requirement of 40 GeV is taken since the ZDC response to spectator neutrons is fully efficient at 40 GeV when the ZDC is calibrated so that the single spectator neutron peak is at 100 GeV.
 Figure~\ref{fig:zdc_efficiency_run_by_run} shows the run dependence of including this ZDC requirement in the minimum bias criteria.
@@ -39,7 +39,7 @@ Here there is a small store dependence, where a store contains consecutive runs 
 this higher rate of beam backgrounds at the start of a store can be seen in the lower ZDC hit efficiency in the minimum bias definition at the start of the store which then levels off later in the store as background rates are lower. 
 Later in the store there still remains a 2\% difference in the minimum bias definition with and without the ZDC requirement which can be due to very peripheral events only having a spectator neutron on one side or the other. 
 Due to modeling limitations in simulation, the ZDC requirement is not included in the selection requirements.
-Therefore, this 2\% difference in the minimum bias definition from this ZDC requirement is included in the uncertainty on the minimum bias trigger efficiency. 
+Therefore, this 2\% difference in the minimum bias definition from this ZDC requirement is included in the uncertainty on the minimum bias trigger efficiency. \textcolor{red}{Is the 2\% taken as 1 sigma, 90\% C.L., is it asymmetric?}
 
 \begin{figure}
     \centering
@@ -65,7 +65,7 @@ This corresponds to regions of very central collisions, where only a small numbe
 Finally, for the \detdeta measurement, a tighter cut has been applied on the z-vertex, $\mid z_{vtx,MBD} \mid < 10$ cm, since the calorimeter towers are projective in $\eta$ from the nominal center of the detector at z = 0. 
 This tighter z-vertex cut is also applied to avoid large fluctuations in the calorimeter acceptance region of $\eta$ < 1.1 as a result of a wide collision vertex distribution.
 Events were further selected to be in the centrality range of 0-70\% to ensure complete minimum-bias event selection efficiency, while also including a broad range of geometric sizes of the produced QGP. 
-Combining all these selections, the total number of events used in the \detdeta measurements of events with centrality between 0 and 70\% correspond to 518,000 events.
+Combining all these selections, the total number of events used in the \detdeta measurements of events with centrality between 0 and 70\% corresponds to 518,000 events.
 
 \begin{figure}
     \centering
@@ -78,18 +78,18 @@ Combining all these selections, the total number of events used in the \detdeta 
 Events in both data and MC are assigned a centrality value which characterizes the level of geometric overlap between the two colliding nuclei.
 The MBD charge sum distribution for all events passing the minimum bias event selection is fit to the MC Glauber $\oplus$ Negative Binomial Distribution (MBD) model.
 The first part of this model is a MC Glauber simulation, which simulates the nuclear geometry event by event and outputs nuclear geometry information such as the impact parameter, b, number of participating nucleons, $\Npart$, and number of nucleon collisions, $\Ncoll$.
-The second part of the model samples multiplicity distributions from events with set nuclear geometry information, set $\Npart$ and $\Ncoll$, using a negative binomial distribution to get a realistic distribution of particle production and final state multiplicity.
+The second part of the model samples multiplicity distributions from events with set nuclear geometry information, set $\Npart$ and $\Ncoll$, using a negative binomial distribution to get a realistic distribution of particle production and final state multiplicity. \textcolor{red}{Do you have a plot of $\Ncoll$ vs $\Npart$? Is $\Npart$ or $\Ncoll$ used to set NBD mean? The k-parameter is set how?}
 The MC Glauber parameters nucleon-nucleon cross-section, nuclear radius, and Woods-Saxon skin thickness are given in Table \ref{tab:glauber} and the MC Glauber $\oplus$ NBD result is fit to the MBD charge sum distribution for the minimum bias trigger's fully efficient region ($\Sigma Q_{MBD} > 150 N_{MIP}$) to determine the best values for the NBD. 
 The MBD charge sum distribution with fit to the MC Glauber $\oplus$ NBD model is shown in Figure~\ref{fig:mbd_charge_sum}.
 By extracting the integral of the MBD charge sum distribution and fitted MC Glauber $\oplus$ NBD result, the minimum bias event selection efficiency was determined to be $93.4\%^{+3.4\%}_{-3.1\%}$ of the Au+Au inelastic cross section and centrality intervals are determined as percentiles of the minimum bias event distribution between 0 and 93\%. 
-The bottom panel of Figure~\ref{fig:mbd_charge_sum} shows the peripheral event region in detail to highlight this minimum bias trigger efficiency turn on region. 
+The bottom panel of Figure~\ref{fig:mbd_charge_sum} shows the peripheral event region in detail to highlight this minimum bias trigger efficiency turn-on region. 
 The resulting Glauber parameters and extracted $\Npart$ values for each centrality interval are included in Table~\ref{tab:glauber}.
 Figure~\ref{fig:npart_ncoll_b} also includes a reference of the relationship between $\langle \Npart \rangle$, $\langle \Ncoll \rangle$ and the collision impact parameter, b, to highlight the range in nuclei-nuclei geometric overlap in this analysis.
 
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{figures/chapter4/PPG03_Fig1_updated_20250728.pdf}
-    \caption{The MBD charge sum distribution in minimum-bias Au+Au events (points), compared to the best fit from a MC Glauber $\oplus$ NBD simulation (red line). The shaded bands indicate 5-10\% wide centrality intervals. The lower panel highlights the ratio of the MBD charge sum to the MC Glauber $\oplus$ NBD fit in the peripheral event region, showing the effect of the trigger turn on. The MBD charge sum is in units of calibrated MIPs. Reproduced from \cite{sphenix_detdeta}.}
+    \caption{The MBD charge sum distribution in minimum-bias Au+Au events (points), compared to the best fit from a MC Glauber $\oplus$ NBD simulation (red line). The shaded bands indicate 5-10\% wide centrality intervals. The lower panel highlights the ratio of the MBD charge sum to the MC Glauber $\oplus$ NBD fit in the peripheral event region, showing the effect of the trigger turn-on. The MBD charge sum is in units of calibrated MIPs. Reproduced from \cite{sphenix_detdeta}.}
     \label{fig:mbd_charge_sum}
 \end{figure}
 
@@ -138,5 +138,5 @@ A minimum bias event selection and centrality percentile determination were also
 The same MC Glauber $\oplus$ NBD fitting procedure is carried out in simulation, here based on the simulated MBD PMT hits and total charge sum distribution, providing event by event centrality characterization in the same way as in data. 
 
 Additionally, in simulation the efficiency of the minimum bias trigger requirement was also studied. 
-An overall 3\% discrepancy was found between the trigger efficiency extracted from the MC Glauber $\oplus$ NBD fitting to the simulated MBD charge sum distribution and the fraction of generated minimum bias events that pass the minimum bias trigger requirement for events from all three generators.
+An overall 3\% discrepancy \textcolor{red}{Is the 3\% between the data and all 3 of the generators, or the overall spread between various generators and the data. In other words, are the 3 generators in agreement amongst themselves?} was found between the trigger efficiency extracted from the MC Glauber $\oplus$ NBD fitting to the simulated MBD charge sum distribution and the fraction of generated minimum bias events that pass the minimum bias trigger requirement for events from all three generators.
 This discrepancy is also included in the systematic uncertainty on the minimum bias trigger efficiency. 
