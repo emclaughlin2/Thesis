@@ -17,9 +17,9 @@ The field strength tensor $F_{\mu\nu}^a$ in the first term is defined as:
     F_{\mu\nu}^a = \partial_\mu A_\nu^a - \partial_\nu A_\mu^a + g_s f^{abc} A_\mu^b A_\nu^c
 \end{equation}
 where $A_\mu^a$ is the gluon field, $g_s$ is the strong coupling constant, and $f^{abc}$ are the structure constants of the SU(3) gauge group.
-Here the third term indicates the possiblity for self-interactions between gluons, which is not present in QED and leads to properties such as confinement and asymptotic freedom in QCD.
+Here the third term indicates the possibility for self-interactions between gluons, which is not present in QED and leads to properties such as confinement and asymptotic freedom in QCD.
 
-The coviariant derivative $D_\mu$ in the second term of the QCD Lagrangian is defined as:
+The covariant derivative $D_\mu$ in the second term of the QCD Lagrangian is defined as:
 \begin{equation}
     D_\mu = \partial_\mu - i g_s A_\mu^a t^a
 \end{equation}
@@ -50,9 +50,9 @@ In the perturbative QCD (pQCD) framework, the strong coupling constant $\alpha_s
 \end{equation}
 where $\mu_R$ is the renormalization scale, and $b_0$ and $b_1$ are the 1 and 2-loop coefficients of the beta function.
 The 1-loop $\beta$ function coefficient is given by $b_0 = 33 - 2 n_f/12\pi$, where $n_f$ is the number of quark flavors and 2-loop $\beta$ function coefficient is given by $b_1 = 153 - 19 n_f/24\pi^2$.
-The coefficients beyond 2-loop are renomalization scheme dependent and are not included here.
+The coefficients beyond 2-loop are renormalization scheme dependent and are not included here.
 
-The negative sign in the beta function is the origin for aysmptotic freedom in QCD and indicates that $\alpha_s$ decreases as the energy scale of the interaction increases, which corresponds to shorter distance scales.
+The negative sign in the beta function is the origin for asymptotic freedom in QCD and indicates that $\alpha_s$ decreases as the energy scale of the interaction increases, which corresponds to shorter distance scales~\cite{GrossWilczek1973,CollinsPerry1975}.
 For interactions with high momentum transfer on the order of 100 GeV to 10 TeV range, including interactions produced in high energy and heavy ion collisions, $\alpha_s$ is on the order of 0.1 and perturbative calculations are well defined.
 High energy and heavy ion physics experiments have measured $\alpha_s$ as a function of interaction energy scale for energy scales in the range of 1 GeV to 10 GeV with a summary of these measurements shown in Figure~\ref{fig:alpha_s_measurements}.
 \begin{figure}
@@ -62,7 +62,7 @@ High energy and heavy ion physics experiments have measured $\alpha_s$ as a func
     \label{fig:alpha_s_measurements}
 \end{figure}
 
-However, as the energy scale decreases, corresponding to longer distance interations, $\alpha_s$ increases and the perturbative expansion breaks down, with a non-perturbative regime at energy scales around or below 1 GeV. 
+However, as the energy scale decreases, corresponding to longer distance interactions, $\alpha_s$ increases and the perturbative expansion breaks down, with a non-perturbative regime at energy scales around or below 1 GeV. 
 The running of the strong coupling constant with energy can be illustrated using the renormalization group equation solved at the 1-loop level~\cite{Peskin:1995ev,particles_and_nuclei,Ellis:1996qcd_collider_physics}:
 \begin{equation}
     \alpha_s(Q^2) = \frac{1}{b_0 \ln(Q^2 / \Lambda_{QCD}^2)}
@@ -74,8 +74,8 @@ At energy scales around $\Lambda_{QCD}$, $\alpha_s$ is on the order of 1 and con
 \label{sec:pQCD}
 
 \subsection{Factorization}
-Due to the confined nature of QCD at low energies, the physical system in high energy hadronic collisions includes both a high energy scale state well described by pQCD and a lower energy scale state where non-perturbative QCD processes dominate.
-Factorization theorem in QCD is used to separate the treatment of these short distance, perturbative QCD processes from long distance, non-perturbative QCD processes that are both present in hadronic collisions~\cite{factorization_review}.
+Due to the confined nature of QCD at low energies, the physical system in high-energy hadronic collisions includes both a high energy scale state well described by pQCD and a lower energy scale state where non-perturbative QCD processes dominate.
+The factorization theorem in QCD is used to separate the treatment of these short distance, perturbative QCD processes from long distance, non-perturbative QCD processes that are both present in hadronic collisions~\cite{factorization_review}.
 Factorization also formalizes this separation by introducing a factorization scale, $\mu_f^2$, which is the scale that separates the short distance and long distance physics in the factorization theorem.
 For example, under this factorization assumption, the inclusive cross section for a hard scattering process in hadron-hadron collisions can be expressed as a convolution of the hadrons' parton distribution functions (PDFs), which encode the long distance physics, and the partonic cross section, which encodes the short distance physics, as follows:
 \begin{equation}
@@ -93,13 +93,13 @@ PDF global fits, like that shown in Figure~\ref{fig:pdfs}, also exploit this uni
 \subsubsection{Deep Inelastic Scattering}
 Deep inelastic scattering (DIS) involves the scattering of a lepton off a hadron, such as an electron scattering off a proton, through the exchange of a highly virtual photon~\cite{Halzen:1984quarks_leptons}.
 Specifically, DIS requires that the wavelength of the virtual photon be small, thereby providing a very fine resolution probe to scan the internal structure of the hadron. 
-Futher, since the lepton can be treated perturbatively, DIS is a clean process to extract PDFs, with non-perturbative contributions only coming from the hadron.
+Further, since the lepton can be treated perturbatively, DIS is a clean process to extract PDFs, with non-perturbative contributions only coming from the hadron.
 
 Taking for example the scattering of an electron with momentum $k$ off a proton with momentum $P$ through the exchange of a virtual photon with momentum $q$~\cite{Halzen:1984quarks_leptons,Ellis:1996qcd_collider_physics}, standard variables used in describing DIS include: 
 \begin{equation}
     Q^2 = -q^2, \quad x = \frac{Q^2}{2P\cdot q}, \quad y = \frac{P\cdot q}{P\cdot k}
 \end{equation}
-Where the momentum transfer of the virtual photon is given by $q^2$, the fraction of the proton’s momentum carried by the iteracting quark is given by $x$, and the fraction of the electron’s energy lost in the proton's rest frame is given by $y$.
+Where the momentum transfer of the virtual photon is given by $q^2$, the fraction of the proton’s momentum carried by the interacting quark is given by $x$, and the fraction of the electron’s energy lost in the proton's rest frame is given by $y$.
 Structure functions, $F_1(x,Q^2)$ and $F_2(x,Q^2)$, are used to describe the structure of the proton seen by the virtual photon and the cross section for DIS can be expressed in terms of these structure functions as follows:
 \begin{equation}
     \frac{d^2\sigma}{dx dy} = \frac{4\pi \alpha^2}{Q^4} \left[ (1-y) F_2(x,Q^2) + y^2 F_1(x,Q^2) \right]    
@@ -109,13 +109,24 @@ From experimental measurements, the structure functions were found to scale sole
 The structure functions independence of $Q^2$ was experimental evidence of the composite nature of the proton, suggesting that the virtual photon was scattering off point-like constituents within the proton.
 These point-like constituents were also theorized within the parton model of the proton~\cite{feynman_parton_model}, where the proton is made up of quarks and gluons. 
 
-Using the results from $e^+e^- \rightarrow q\bar{q}$ collisions, a relationship between the structure functions and the PDFs can be expressed as follows:
+In the parton model, the structure functions can be directly related to the PDFs.
+The hadronic tensor can be expressed generally as a function of the structure functions as:
 \begin{equation}
-    F_2(x) = 2xF_1(x) = \sum_{f} e_f^2 x f_f(x)
+    W^{\mu\nu} = (-g^{\mu\nu} + \frac{q^\mu q^\nu}{q^2}) F_1(x,Q^2) + (P^\mu - \frac{P\cdot q}{q^2} q^\mu)(P^\nu - \frac{P\cdot q}{q^2} q^\nu) \frac{F_2(x,Q^2)}{P\cdot q}
 \end{equation}
-where $e_f$ is the electric charge of the quark of flavor f and $f_f(x)$ is the PDF for the quark of flavor f.
-From this relationship between $F_2$ and $F_1$ within the leading order parton model, known as the Callan-Gross relation~\cite{Callan:1969uq}, 
-the longitudinal contrbutions to the cross section from structure functions are zero with agrees with the theory of partons as spin-1/2 particles.
+
+By matching the hadronic tensor calculated from the parton model to the general form involving the structure functions and enforcing Bjorken scaling, the following relationships between the structure functions and PDFs can be derived:
+\begin{equation}
+    F_1(x) = \frac{1}{2} \sum_f e_f^2 [q_f(x) + \bar{q}_f(x)]
+    F_2(x) = x \sum_f e_f^2 [q_f(x) + \bar{q}_f(x)]
+\end{equation}
+where $e_f$ is the electric charge of the quark of flavor f and $q_f(x)$ is the PDF for the quark of flavor f.
+From here the Callan-Gross relation~\cite{Callan:1969uq} can be derived as:
+\begin{equation}
+    F_2(x) = 2x F_1(x) \quad \text{and} \quad F_L = F_2 - 2xF_1 = 0
+\end{equation}
+where the $F_2$ and $F_1$ structure functions are related by a factor of 2x, and the longitudinal structure function $F_L$ is zero at leading order.
+This implies that the longitudinal contribution to the deep inelastic scattering cross section is zero, consistent with the interpretation of the partons as spin-1/2 particles.
 
 \subsubsection{Parton Distribution Functions}
 Using this relationship between the structure functions and PDFs, experimental data can be used to determine the PDFs at different values of x and $Q^2$. 
@@ -159,10 +170,11 @@ A schematic of the PDF evolution in the DGLAP and BFKL regimes is shown in Figur
 \end{figure}
  
 \subsection{Parton Showers}
-The evolution of hadronic collisions from the initial state to the final state particles measured in detectors involves a complex interplay of perturbative and non-perturbative QCD processes.
+\label{sec:parton_showers}
+The evolution of hadronic collisions from the initial state to the final state particles measured in detectors involves a complex interplay of QCD processes.
 For clarity, the perturbative QCD processes that govern this evolution are described below by the models used in event generators where the main contributions to these parton showers can be labeled as final state radiation (FSR), initial state radiation (ISR), and multi-parton interactions (MPI).
 
-Taking the implementation in \pythia, for example~\cite{Buckley:2011event_generators_lhc}, parton showering is implemented as a $p_T$-ordered, Sudakov-based evolution that interleaves FSR, ISR, and MPI effects. 
+Taking the implementation in \pythia, for example~\cite{pythia_evolution,Buckley:2011event_generators_lhc}, parton showering is implemented as a $p_T$-ordered, Sudakov-based evolution that interleaves FSR, ISR, and MPI effects. 
 The $p_{T}$ ordering of the parton shower can be understood as an evolution towards increasing resolution, where the hardest scattering sets the initial scale for the evolution and subsequent emissions are ordered in decreasing $p_{T}$, with the softer emissions occurring at lower $p_{T}$ scales.
 Therefore, the hard scattering scale informs what emissions are possible at each lower $p_{T}$ scale of the evolution. 
 This regulates the soft and collinear divergences inherent in QCD, as emissions with $p_{T}$ below a certain cutoff are not allowed, ensuring a finite cross section for the parton shower evolution~\cite{Buckley:2011event_generators_lhc,Sterman:2022collinear_factorization}.
@@ -171,41 +183,90 @@ Additionally, the interleaving of FSR, ISR and MPI effects allows for soft-hard 
 \subsubsection{Final State Radiation}
 For the development of the parton shower, the differential probability for an emission is of the form:
 \begin{equation}
-d\mathcal{P} \;=\; \frac{d p_T^2}{p_T^2}\,\frac{\alpha_s(p_T^2)}{2\pi}\,P(z)\,dz
+d\mathcal{P}_\text{FSR} \;=\; \frac{d p_T^2}{p_T^2}\,\frac{\alpha_s(p_T^2)}{2\pi}\,P(z)\,dz
 \end{equation}
 which reflects the first-order DGLAP evolution logarithmic enhancement $d p_T^2 / p_T^2$ and DGLAP splitting functions $P(z)$. 
 To obtain the probability for the next emission at a given resolution scale, $p_{T,\max}$, the probability is combined with the Sudakov form factor given by:
 \begin{equation}
-\Delta(p_{T,\max}, p_T) \;=\; \exp\!\left(-\int_{p_T^2}^{p_{T,\max}^2} \frac{d \tilde{p}_T^2}{\tilde{p}_T^2}\,\frac{\alpha_s(\tilde{p}_T^2)}{2\pi}\!\int dz\,P(z)\right)
+\Pi(p_{T,\max}, p_T) \;=\; \exp\!\left(-\int_{p_T^2}^{p_{T,\max}^2} \frac{dp_T'^2}{p_T'^2}\,\frac{\alpha_s(p_T'^2)}{2\pi}\!\int dz\,P(z)\right)
 \end{equation}
 which gives the probability of no emission between $p_{T,\max}$ and $p_T$.
 The exclusive probability density for the next emission is then:
 \begin{equation}
-\frac{d\mathcal{P}}{d p_T^2} \;=\; \frac{1}{p_T^2}\,\frac{\alpha_s(p_T^2)}{2\pi}\,P(z)\,\Delta(p_{T,\max}, p_T)
+d\mathcal{P}^{next}_\text{FSR} \;=\; \frac{d p_T^2}{p_T^2}\,\frac{\alpha_s(p_T^2)}{2\pi}\,P(z)\,\Pi(p_{T,\max}, p_T)
 \end{equation}
 ensuring proper ordering and probabilistic consistency. 
 
-\subsubsection{Initial State Radiation and Multi-Parton Interactions}
+\subsubsection{Initial State Radiation}
 For ISR, the branching probability is modified by the proton structure through a convolution with the PDFs and are implemented via backward evolution~\cite{Buckley:2011event_generators_lhc}. 
-The corresponding probability for ISR is given by:
+The corresponding differential probability for ISR is given by:
 \begin{equation}
 d\mathcal{P}_{\text{ISR}} \;=\; \frac{d p_T^2}{p_T^2}\,\frac{\alpha_s(p_T^2)}{2\pi}\,P(z)\,\frac{f\!\left(\frac{x}{z}, p_T^2\right)}{f(x, p_T^2)}\,dz
 \end{equation}
 where the ratio of PDFs encodes the probability of finding the parent parton with momentum fraction $x/z$. 
 The same splitting functions $P(z)$ and logarithmic $Q^2$ or $p_{T}^2$ scaling seen in the FSR case are included here as well as they appear from the DGLAP evolution.
-Finally, MPI are incorporated in the same $p_T$-ordered framework, with a differential rate:
+
+\subsubsection{Multi-Parton Interactions}
+For MPI, the probability to have an MPI is directly related to the partonic cross-section for an additional hard scatter. 
+This differential probability is given by:
 \begin{equation}
-\frac{d\sigma}{d p_T^2} \;\sim\; \frac{\alpha_s^2(p_T^2)}{p_T^4}
+    d\mathcal{P}_{\text{MPI}} \;=\; \frac{dp^2_T}{\sigma_{\text{nd}}}\frac{d\sigma}{dp^2_T}
 \end{equation}
-that is regulated by an experimentally-tuned cutoff $p_{T0}$, ensuring finite cross sections at low $p_T$ and providing a consistent description of additional semi-hard scatterings in the event.
+where $\sigma_{\text{nd}}$ is the non-diffractive cross-section and $d\sigma/dp^2_T$ is the partonic $2\to 2$ cross-section. 
+Note when modeling MPI, the divergence in the cross-section as $p_T \to 0$ is regulated by an experimentally-tuned cutoff $p_{T0}$.
+
+The generation of MPI in \pythia\ follows a $p_{T}$-ordered procedure similar to that of FSR and ISR.
+The Sudakov form factor for MPI is given by:
+\begin{equation}
+\Pi_{\text{MPI}}(p_{T,\max}, p_T) \;=\; \exp\!\left(-\int_{p_T^2}^{p_{T,\max}^2} \frac{dp_T'^2}{\sigma_{\text{nd}}}\frac{d\sigma}{dp_T'^2}\right)
+\end{equation}
+Combined the exclusive probability density for the next MPI is then:
+\begin{equation}
+d\mathcal{P}^{next}_{\text{MPI}} \;=\; \frac{dp^2_T}{\sigma_{\text{nd}}}\frac{d\sigma}{dp^2_T}\Pi_{\text{MPI}}(p_{T,\max}, p_T)
+\end{equation}
+
+MPI rates are also weighted by an impact-parameter-dependent overlap function $\tilde{\mathcal{O}}(b)$, where $b$ is the impact parameter. 
+\pythia\ uses a parametrized form for the overlap between two colliding hadrons given by:
+\begin{equation}
+\tilde{\mathcal{O}}(b) \;\propto\; \exp\!\left(-b^d\right)
+\end{equation}
+where a default value of $d = 1.85$ is used. 
+When comparing this expression to a Gaussian, $d < 2$ gives more spatial fluctuations than a Gaussian and $d > 2$ gives fewer. 
+
+The mean number of MPI at impact parameter $b$ is taken to be proportional to the overlap:
+\begin{equation}
+\langle \tilde{n}_{\text{MPI}}(b) \rangle \;=\; k\,\tilde{\mathcal{O}}(b)
+\end{equation}
+where $k = k(s)$ carries the energy-dependent parton--parton interaction cross-section information, while $\tilde{\mathcal{O}}(b)$ is purely geometrical. 
+This factorization is directly analogous to the eikonal model for hadronic scattering~\cite{glauber_lecture}, where $k\tilde{\mathcal{O}}(b)$ plays the role of the eikonal function $\Omega(s,b) = 2\,\text{Im}\,\chi(s,b)$, split into a geometric piece and an energy-dependent piece. 
+
+When impact-parameter dependence is included, the exclusive probability distribution for the next MPI generation generalizes to:
+\begin{equation}
+d\mathcal{P}_{\text{MPI}}^{next}(b) \;=\; d\mathcal{P}_{\text{MPI}}(b)\Pi_{\text{MPI}}(p_{T,\max}, p_T, b) = 
+\frac{\tilde{\mathcal{O}}(b)}{\langle\tilde{\mathcal{O}}\rangle}
+\frac{1}{\sigma_{\text{nd}}}\frac{d\sigma}{dp_{T}^2}
+\exp\!\left(-\frac{\tilde{\mathcal{O}}(b)}{\langle\tilde{\mathcal{O}}\rangle}
+\int_{p_{T}^2}^{p_{T,max}^2} \frac{1}{\sigma_{\text{nd}}} \frac{d\sigma}{dp_T'}\,dp_T'\right)
+\label{eq:mpi_continued}
+\end{equation}
+The factor $\tilde{\mathcal{O}}(b)/\langle\tilde{\mathcal{O}}\rangle$ uniformly enhances or suppresses the MPI rate relative to the average depending on the centrality of the collision. 
+The harder the selected process, the more central the collision on average, and therefore the higher the rate of subsequent MPI from Equation~\eqref{eq:mpi_continued}.
+This results in an elevated level of underlying event activity relative to minimum-bias collisions.
+
+Finally, momentum conservation is enforced between successive MPI by rescaling the momentum fractions available to each subsequent scatter. 
+If k partons carrying fractions $x_k$ have already been extracted in previous interactions, then the effective momentum fraction for the next scatter is $x/(1 - \sum_k x_k)$.
+This ensures that the total momentum extracted from the proton never exceeds the beam energy. 
+
+MPI are incorporated in the same $p_T$-ordered framework as ISR and FSR. 
 At each step in the parton shower evolution, trial emissions for ISR, FSR, and MPI are generated, each assigned a candidate $p_T$, and the largest is selected, producing a unified, interleaved evolution in hardness.
 
 \subsubsection{Jet Algorithms}
-As outlined in the previous section on parton showers, partons produced in the hard scattering of ion collisions fragment and give rise to a "spray" of final state particlces known as jets that can be measured in experimental detectors.
-In an ideal picture, the full parton shower can be contained and initial partons kinematics can be determined from the four momenta of all of the particles within the jet.
-Therefore, jets can be constructed from the final state particles by clustering them together based on their transverse momentum and/or angular separation as they are both directly related to the fragmentation of the parton shower.
-This allows for a direct connection between theory and experiment by using an object easy to implement, measureable in experimental detectors, and calculable theoretically~\cite{Cacciari:2012fastjet_manual}. 
+\label{sec:jet_algo}
+As outlined in the previous section on parton showers, partons produced in the hard scattering of ion collisions fragment and give rise to a "spray" of final state particles known as jets that can be measured in experimental detectors.
+In an ideal picture, the full parton shower can be contained and initial partons' kinematics can be determined from the four-momenta of all of the particles within the jet.
+This allows for a direct connection between theory and experiment by using an object easy to implement, measurable in experimental detectors, and calculable theoretically~\cite{Cacciari:2012fastjet_manual}. 
 In order to use jets to connect to the partons described by pQCD and representative of the structure of the parton shower, the jets must be constructed in a way that is infrared and collinear (IRC) safe, meaning that the jets should not be modified by soft or collinear emissions.
+Therefore, jets are often constructed from the final state particles by clustering them together based on their transverse momentum and/or angular separation as these variables are both directly related to the fragmentation of the parton shower.
 
 The most common class of jet algorithms used in heavy ion collisions currently is sequential clustering algorithms, including the $k_{t}$~\cite{kt_algorithm}, anti-$k_{t}$~\cite{Cacciari:2008antikt_jet_algorithm}, and Cambridge/Aachen~\cite{Dokshitzer:1997cambridge_aachen_jet} algorithms.
 These algorithms use a distance measure defined by a combination of momentum and angular separation to cluster particles together in an iterative manner to form jets.
