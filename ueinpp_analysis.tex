@@ -3,8 +3,8 @@ The reconstructed level underlying event measurement is shown via the mean trans
 Fairly good agreement is seen between data and simulation for these uncorrected distributions prior to unfolding.
 \begin{figure}
     \centering
-    \includegraphics[width=0.7\linewidth]{ueinpp/Figures/unfolding/reco_ue_pt_transverse.png}
-    \caption{Comparison of reconstructed level mean topocluster (tower) total transverse energy versus leading jet $p_{T}$ in dijet events for transverse jet regions.}
+    \includegraphics[width=0.7\linewidth]{figures/chapter5/h_ue_pt_transverse_Topoclusters.png}
+    \caption{Comparison of reconstruction-level mean transverse region energy distributions from topoclusters (solid points) and towers (hollow points) versus leading jet $p_{T}$ in data (black) and \pythia p+p simulation (red) dijet events.}
     \label{fig:reco_ue_pt}
 \end{figure}
 
@@ -26,17 +26,15 @@ where $\hat{n}(C_i)$ is the best estimate of the true distribution or distributi
 The unfolding matrix $M_{ij}$ is comprised of the conditional probability $P(E_j|C_i)$, which is the probability of a measured event $j$ given a true cause $i$, and the prior probability $P_0(C_i)$, which is the initial guess for the true cause distribution. 
 $\sum_{l=1}^{n_E}P(E_l|C_i)$ is the efficiency to measure a true cause $i$ and $\sum_{l=1}^{n_C}P(E_j|C_l)P_0(C_l)$ is the probability of measuring an event $j$ given the prior distribution.
 This unfolding procedure is applied iteratively, where the unfolded distribution $\hat{n}(C_i)$ from one iteration is used as the prior for the next iteration and the change in the unfolded distribution per iteration is checked by comparing the initial expected number of truth events in each bin, $n_0(C_i) = P_0(C_i) \sum_{j=1}^{n_E}P(E_j|C_i)$, to the unfolded number of truth events in each bin, $\hat{n}(C_i)$, to determine the optimal number of iterations for the unfolding procedure.
-
 For this analysis, the unfolding is performed in two dimensions with the leading jet $p_{T}$ and transverse region $\Sigma E_{T}$ as the two axes of the response matrix and unfolded spectra. 
 The unfolding procedure corrects for detector effects such as the finite calorimeter energy resolution and the hadronic scale correction on the $\Sigma E_{T}$ observable, which is not applied at the reconstruction level.
-The unfolding procedure also accounts for the trigger efficiency, timing cut efficiency and run-dependent pileup corrections applied as scale factors on the data events filling the histogram that will be used for unfolding, as these corrections are applied to the data at the reconstruction level and thus are included in the response matrix derived from simulation.
 
 \subsubsection{Simulation Processing for Unfolding Procedure}
-The response matrix used in the unfolding procedure is built from \pythia jet-triggered samples by applying the same kinematic selections used in the data and outlined in Section~\ref{sec:ueinpp_selection} to the truth and reconstructed level information. 
-The reconstructed leading jets are calibrated using the JES correction function derived from a MC-based numerical inversion JES derivation~\cite{ppg09AN} and an additional JER smearing term of 10.1\% is applied to the simulation reconstruction-level jets, determined from differences in the Data/MC JER~\cite{ppg08AN}. Finally, truth and calibrated jets are matched with a matching radius requirement of $\Delta R < 0.75R$. 
+The response matrix used in the unfolding procedure is built from \pythia jet-triggered samples applying the kinematic selections outlined in Section~\ref{sec:ueinpp_selection} to the truth and reconstructed level information. 
+The reconstructed leading jets are calibrated using the JES correction function derived from a MC-based numerical inversion JES derivation~\cite{ppg09AN} and an additional JER smearing term of 10.1\% is applied to the simulation reconstruction-level jets, determined from differences in the Data/MC JER determined using the dijet bisector and imbalance methods~\cite{ppg08AN}. Finally, truth and calibrated jets are matched with a matching radius requirement of $\Delta R < 0.75R$. 
 
-The transverse region $E_{T}$ is determined by summing topocluster $E_{T}$ in the transverse region: $\pi/3 < |\Delta\phi| < 2\pi/3$ relative to the leading jet. 
-Truth $\Sigma E_{T}$ uses final-state particles within $|\eta|<1.1$ and applies the per-particle energy thresholds used for the analysis (0.5~GeV for hadrons and 0.2~GeV for EM particles), again summing in the transverse region.
+The transverse region $E_{T}$ is determined by summing topocluster $E_{T}$ in the transverse region: $\pi/3 < |\Delta\phi| < 2\pi/3$ relative to the leading truth jet. 
+Truth $\Sigma E_{T}$ uses final-state particles within $|\eta|<1.1$ and $E > 0.5$~GeV for hadrons and $E > 0.2$~GeV for EM particles. These thresholds are chosen to be consistent with other experiments' UE measurements.
 
 \subsubsection{Response Matrix Filling}
 
@@ -81,10 +79,10 @@ Additionally, the off-diagonal smearing in the $\Sigma E_{T}$ response is also l
 
 \subsubsection{MC Prior Reweighting for Unfolding}
 \label{sec:prior_reweighting}
-To reduce prior dependence in the unfolded result, the simulation truth distributions are reweighted to match a data-driven pseudo-truth spectrum. 
-The procedure uses the simulation response matrices and the data measured spectrum as inputs to a single-iteration RooUnfoldBayes pre-unfolding. 
-For each response matrix variation, nominal and each systematic variation, the unfolded pseudo-truth is normalized and divided by the normalized simulation truth to form a weight matrix. 
-These weights are applied to the original truth distribution to produce reweighted truth spectra that serve as priors for the subsequent response-matrix reweighting step. 
+To reduce prior dependence in the unfolded result, the simulation truth prior distribution is reweighted to match a data-driven pseudo-truth spectrum. 
+To get the prior reweighting factors, a single-iteration of the bayesian unfolding is performed for each response matrix variation, nominal and each systematic variation.
+This single-unfold pseudo-truth is then normalized and divided by the normalized simulation truth to form a weight matrix. 
+These weights are applied to the original truth distribution to produce reweighted prior that serve as the nominal prior distribution for the analysis. 
 
 \begin{figure}
     \centering
@@ -96,10 +94,10 @@ These weights are applied to the original truth distribution to produce reweight
 
 \subsubsection{Closure Tests}
 Closure tests are performed with the same response matrices used in the unfolding. 
-Both a full-closure test, where each response matrix is unfolded against its own measured distribution with one Bayesian iteration, and a half-closure test, where the response from one half-sample is used to unfold the measured distribution from the complementary half-sample across 1--6 iterations, are performed. 
-All response matrices are tested for closure. 
+Both a full-closure test, where each response matrix is unfolded against its own measured distribution with one Bayesian iteration, and a half-closure test, where the response from one half-sample is used to unfold the measured distribution from the other half-sample across 1--6 iterations, are performed. 
+All response matrices (nominal and systematic variations) are tested for closure. 
 Statistical uncertainties on the closure spectra are evaluated with 1000 toy variations of the response matrix and combined in quadrature with the unfolded errors. 
-The full closure and half closure tests for the nominal response matrix are shown in Figures~\ref{fig:full_closure_test_dijet} and \ref{fig:half_closure_test_dijet}. Both the full and half closure tests show agreement between the truth spectra and unfolded spectra of unity within statistical uncertainties. 
+The full closure and half closure tests for the nominal response matrices are shown in Figures~\ref{fig:full_closure_test_dijet} and \ref{fig:half_closure_test_dijet}. Both the full and half closure tests show agreement between the truth spectra and unfolded spectra of unity within statistical uncertainties. 
 Since both closure tests fully close, there is no additional systematic taken for non-closure in the unfolding procedure.
 
 \begin{figure}
@@ -124,12 +122,11 @@ The leading jet $p_{T}$ in the data is then calibrated with the same MC-derived 
 
 \subsubsection{Unfolding Data Results}
 A 2D unfolding procedure in leading jet $p_{T}$ and transverse region $\Sigma E_{T}$ is performed using the 4D response matrices from simulation and the 2D histograms of reconstruction-level information from data.
-The unfolding is performed with the response matrices from simulation after both the trimming requirements and prior reweighting procedure for up to 20 iterations to determine the optimal number of iterations in the unfolding process
-where the change in unfolded result per iteration is at the level of the statistical precision of the measurement. 
+The unfolding is performed with the response matrices from simulation after both the trimming requirements and prior reweighting procedure for up to 20 iterations to determine the optimal number of iterations in the unfolding process where the change in unfolded result per iteration is at the level of the statistical precision of the measurement. 
 
-Figure~\ref{fig:unfold_iterations} shows this iteration optimization point for unfolding both inclusive jet and dijet event using the nominal-result MC response matrix with a trimming requirement of 10 entries for each jet triggered MC sample and the prior reweighting procedure applied.
-The two trends which define this minimum is the total change in unfolded values for each iteration in red and the total statistical error on the unfolded result in blue determined from the quadrature sum of the bin errors in the data histogram and the effect of statistical error in the response matrix tested by sampling 1000 toy models varying the response matrix bin values within 1$\sigma$ of their nominal value.
-For both the inclusive jet and dijet results, the change in unfolded values per iteration x total statistical error curve has a minimum around 3 iterations, and thus 3 iterations is chosen as the optimal point for unfolding to balance minimizing prior dependence with minimizing statistical uncertainty in the measurement.
+Figure~\ref{fig:unfold_iterations} shows this iteration optimization point for unfolding both inclusive jet and dijet events. 
+The total change in unfolded values for each iteration is shown in red and the total statistical error on the unfolded result in blue, determined from the quadrature sum of the bin errors in the data histogram and the effect of statistical error in the response matrix tested by sampling 1000 toy models varying the response matrix bin values within 1$\sigma$ of their nominal value.
+For both the inclusive jet and dijet results, the change in unfolded values per iteration x total statistical error curve has a minimum around 3 iterations, and thus 3 iterations is chosen as the optimal point for unfolding balancing minimizing prior dependence with minimizing statistical uncertainty in the measurement.
 \begin{figure}
     \centering
     \includegraphics[width=0.48\linewidth]{ueinpp/Figures/unfolding/unfolding_iterations_inclusive.png}

@@ -7,7 +7,7 @@
 \usepackage{times}  %set Times New Roman as the font
 \usepackage[explicit]{titlesec}  %title control and formatting
 \usepackage[titles]{tocloft}  %table of contents control and formatting
-\usepackage[backend=bibtex, sorting=none, bibstyle=ieee]{biblatex}  %reference manager
+\usepackage[backend=bibtex, sorting=none, sortcites=true, bibstyle=ieee, citestyle=numeric-comp]{biblatex}  %reference manager
 \usepackage{appendix}  %for appendices
 \usepackage{rotating}  %for rotated, landscape images
 \usepackage[normalem]{ulem}  %for underlined section titles
@@ -175,11 +175,6 @@
 \pagenumbering{arabic}
 \setcounter{page}{1} 
 
-% Preface %This is optional
-\phantomsection
-\addcontentsline{toc}{chapter}{Introduction or Preface}
-\input{Preface.tex}
-
 % Adjust chapter title formatting
 \titleformat{\chapter}[display]
 {\normalfont\bfseries\filcenter}{}{0pt}{\large\chaptertitlename\ \large\thechapter : \large\bfseries\filcenter{#1}}  
@@ -198,6 +193,8 @@
 %%%%%%%%%%%%%%%%
 % Chapter 1
 %%%%%%%%%%%%%%%%
+
+\input{Preface.tex}
 
 \input{chapter1.tex}
 
@@ -222,17 +219,6 @@
 \input{chapter5.tex}
 
 \input{chapter6.tex}
-
-%%%%%%%%%%%%%%%%
-% Conclusion
-%%%%%%%%%%%%%%%%
-
-
-\clearpage
-\phantomsection
-\addcontentsline{toc}{chapter}{Conclusion or Epilogue}
-\input{Conclusion.tex}
-
 
 %%%%%%%%%%%%%%%%
 % References

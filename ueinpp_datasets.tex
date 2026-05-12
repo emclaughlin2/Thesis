@@ -11,11 +11,11 @@ More details on the offline event selection used to select jet events for this a
 \label{sec:mc_samples}
 Two MC generators, \pythia and \herwig, are used for comparison to data and for deriving response matrix information when unfolding detector-level results of the underlying event back to the truth level.
 A total of eleven samples, filtered across a range of jet trigger thresholds, are used to cover the phase space of \pp jet events at \snn = 200 GeV.
-For both the \pythia and \herwig generators, each sample is generated with a minimum hard-scattering \pT{} threshold to ensure sufficient statistical precision in the high-\pT{} jet region.
+For both the \pythia and \herwig generators, each sample is generated with a minimum hard-scattering \pT{} threshold to ensure sufficient statistics in the high-\pT{} jet region.
 Events are subsequently filtered using R=0.4 anti-$k_T$ jets formed from generator-level stable particles to ensure the events have a generator-level leading jet above the desired \pT{} threshold for that jet sample within the detector acceptance.
 The quoted cross sections for each sample include the efficiency correction of this filtering step and are used to weight the samples when combining them.
 The final combined distributions are obtained using weights based on the filtered cross section and the number of events in each dataset.
-Finally, the fully efficient truth-level leading jet \pT{} ranges for each sample are determined by matching the resulting spectra to those from minimum-bias and/or lower-threshold filtered samples, ensuring a consistent description across overlapping regions of phase space. 
+Finally, the fully efficient truth-level leading jet \pT{} ranges for each sample are determined by matching the resulting spectra to those from minimum-bias and/or lower-threshold filtered samples, ensuring a continuous spectrum across overlapping regions of phase space. 
 These events were then passed through the full sPHENIX detector \geant~\cite{GEANT4} simulation and reconstruction to produce simulation datasets that can be compared directly to data.
 The MC events are also reweighted to match the z-vertex distribution and calorimeter pedestal noise level in data during the 2024 p+p running. 
 The full set of MC sample details used in the analysis are included in Table~\ref{table:MCdataset}.
@@ -37,7 +37,7 @@ Lead Jet $p_T$ range [GeV] & Min $\hat{p_{T}}$ [GeV] & Generator & $\sigma$ [pb]
 42-52 & 22 & Herwig    & 1.0510e+02 & 10M   \\ \hline
 52+   & 29 & Herwig    & 5.2089     & 10M   \\ \hline
 \end{tabular}
-\caption{Summary of MC samples with generator, cross section and number of events information.}
+\caption{Summary of MC samples used in the p+p underlying event measurement. For each sample, the leading jet transverse momentum range, generator type, minimum $p_{T}$ for generated hard scattering, sample cross section with filter efficiency applied and number of events information are included.}
 \label{table:MCdataset} 
 \end{table}
 

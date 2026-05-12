@@ -1,12 +1,8 @@
 This section describes the various systematic uncertainties considered in the analysis, including uncertainties on both the jet and calorimeter clusters objects.
 The uncertainties are broadly categorized into three classes: calibration, selection efficiency, and unfolding uncertainties. 
 The calibration and selection efficiency uncertainties are studied for the jet and calorimeter clusters independently and then propagated through the full unfolding procedure, while the unfolding uncertainties are studied for the combined jet and calorimeter cluster response. 
-The jet and calorimeter cluster calibration and selection efficiency uncertainties are treated as uncorrelated. 
-This is a reasonable method for this analysis since the dominant calorimeter cluster and jet uncertainties have largely distinct physical origins: calorimeter cluster uncertainties are primarily driven by low-energy effects such as noise and pileup, whereas the jet energy scale is constrained using an in-situ photon-jet calibration and is expected to be relatively insensitive to these contributions for jets with reconstructed $p_{T} > 21$ GeV. 
-Any residual correlation between these sources is therefore expected to be small compared to the overall systematic uncertainty.
-The dominant contributions to the total systematic uncertainty arise from the calorimeter cluster hadronic response, pileup correction and noise effects, while jet calibration and selection efficiency uncertainties are generally subdominant. 
-In addition, the impact of noise and pileup on jets in the kinematic region considered is expected to be small, and the calorimeter hadronic response is reasonably well constrained at jet energies above 20 GeV by photon-jet calibration studies.
-
+This independent treatment is well-motivated given that the dominant uncertainty contributions arise from the hadronic response and noise threshold effects on the low-energy calorimeter clusters, which are less precisely constrained than the jet energy scale and resolution for jets with reconstructed $p_{T} > 21$ GeV.
+All variations are evaluated both upward and downward, with the exception of the unfolding, pileup correction, and cluster resolution uncertainties, which are one-sided and not symmetrized. The overall uncertainty is dominated by the hadronic response and noise threshold variations.
 The full set of systematic uncertainties with details on their evaluation in the analysis chain are listed in Table \ref{table:full_systematics}. 
 Further details on the determination of each systematic uncertainty is given in the following sections. \newline
 \begin{table}[ht]
@@ -31,10 +27,10 @@ Herwig response & Unfolding & Simulation \\ \hline
 \label{table:full_systematics}
 
 \subsection{Jet Systematic Uncertainties}
-The jet systematic uncertainties include the jet energy scale (JES) uncertainty, the jet energy resolution (JER) uncertainty and the jet trigger efficiency uncertainty.
-The JES uncertainty is derived from the scale difference between data and MC in the in-situ photon-jet calibration studies~\cite{in_situ_note} and results in a $p_{T}$-independent 2.5\% uncertainty on the jet energy scale. 
+The jet systematic uncertainties include the Jet Energy Scale (JES) uncertainty, the Jet Energy Resolution (JER) uncertainty and the jet trigger efficiency uncertainty.
+The JES uncertainty is derived from the scale difference between data and MC in the in-situ photon-jet and multi-jet balance calibration studies~\cite{in_situ_note} and results in a $p_{T}$-independent 2.5\% uncertainty on the jet energy scale. 
 The JER uncertainty is derived from the differences in JER results extracted from two different data-driven methods, the dijet balance method and the bisector method and results in a 1.8\% uncertainty on the jet energy resolution~\cite{ppg08AN}.
-The jet trigger efficiency is derived by varying the fit parameters of the jet trigger efficiency fit function outlined in Section~\ref{sec:jet_trigger_eff} by to find the 1$\sigma$ variations on the parameterized jet trigger efficiency. THe jet trigger efficiency uncertainty is found to be negligible for the UE measurement with variations at the $<$ 1\% level.
+The jet trigger efficiency is derived by varying the fit parameters of the jet trigger efficiency fit function outlined in Section~\ref{sec:jet_trigger_eff} to find the 1$\sigma$ variations on the parameterized jet trigger efficiency. The jet trigger efficiency uncertainty is found to be negligible for the UE measurement with variations at the $<$ 1\% level.
 
 \subsection{Calorimeter Cluster Systematic Uncertainties}
 
@@ -51,7 +47,7 @@ The uncertainty values are determined as a function of OHCal $i\eta$ bin across 
 \begin{figure}
     \centering
     \includegraphics[width=0.7\linewidth]{ueinpp/Figures/systematics/eta_dependent_scale_uncertainty.png}
-    \caption{Additional $\eta$ dependent scale uncertainty values as a function of OHCal $i\eta$ bin based on the Data/MC differences in the \detdeta extracted from the OHCal in \cite{ppg03AN}. Blue curve showing the MC/Data differences using \ampt is used for this scale uncertainty.}
+    \caption{Additional $\eta$ dependent scale uncertainty values as a function of OHCal $\eta$ tower index, $i\eta$, based on the Data/MC differences in the \detdeta extracted from the OHCal in \cite{ppg03AN}. Blue curve showing the MC/Data differences using \ampt is used for this scale uncertainty.}
     \label{fig:ohcal_eta_dep_scale_uncertainty}
 \end{figure}
 For all of these calorimeter tower calibration uncertainties, the overall scale of individual calorimeter towers included in the topoclusters is varied by the corresponding calibration uncertainty and this variation is then propagated through the unfolding procedure.
@@ -64,13 +60,13 @@ The uncertainty is applied in the underlying event measurement by varying the ov
 
 \subsubsection{Calorimter cluster resolution}
 The calorimeter cluster resolution uncertainty is constrained from the Data/MC differences seen in the EMCal clusters in toy MC studies of the mass and width of the $\pi^{0}$ and $\eta$ peaks~\cite{jaeboem_emcal_calib} at low energy ($E_{T} \sim 2-10$ GeV) and data-driven JER studies~\cite{ppg08AN} at high energy ($E_{T} > 15$ GeV).
-Two difference resolution variations are applied to the topoclusters used for the UE measurement: a variation on the position resolution of the topoclusters and a variation on the energy resolution of the topoclusters.
+Two different resolution variations are applied to the topoclusters used for the UE measurement: a variation on the position resolution of the topoclusters and a variation on the energy resolution of the topoclusters.
 
 The position resolution of the topoclusters is varied by 0.005 radian. This uncertainty corresponds to the difference in position resolution factors between different toy MC models that were used to accurately fit both the mass and width of the $\pi^{0}$ and $\eta$ peaks in data and MC in the EMCal cluster calibration studies.
 The variation in the position resolution of the topoclusters should have a negligible effect on the UE measurement as the UE measurement is summed over a large region of 2.2 units in $\eta$ and $2 \pi/ 3$ radians in $\phi$.
 However, this variation is tested to check for any effects from flow of topoclusters in and out of the transverse region due to the position resolution of the topoclusters.
 This uncertainty is applied by varying the position of the topoclusters in simulation by 0.005 radians and then propagating this uncertainty through the unfolding procedure.
-The overall effect of this position resolution variation on the UE measurement is found to be negligible ($<$ 0.1\%).
+The overall effect of this position resolution variation on the UE measurement is found to be negligible.
 
 Two resolution studies are then used to constrain the calorimeter topocluster energy resolution uncertainty.
 For both lower energy EMCal clusters and higher energy full calorimeter jets, the Data/MC differences in the resolution are found to be around 8-9\% with studies of the JER showing the majority of the Data/MC differences in resolution come from the EMCal contributions.
@@ -80,16 +76,16 @@ The total effect of this energy resolution variation on the on the UE measuremen
 \subsubsection{Topocluster noise threshold}
 The topocluster noise threshold are varied between the $2\sigma_{ped}$ and $4\sigma_{ped}$ clustering thresholds studied in the topocluster noise study in Section~\ref{sec:ueinpp_towerreco} to test the impact of the nominal noise threshold ($3\sigma_{ped}$) in the topocluster reconstruction on extracted calorimeter cluster total energy.
 This variation is also sensitive to the reconstruction of low-energy particles by probing the extent to which real soft particles are included or excluded by the seeding requirements of the clustering procedure. 
-In particular, varying the seeding requirements provides a test of the robustness of the truth-level results with respect to the reconstruction-level low-energy fiducial selection. 
+In particular, varying the seeding requirements provides a test of the robustness of the truth-level results with respect to the reconstruction-level low-energy fiducial cut. 
 By modifying the clustering thresholds, this study assesses the extent to which the final UE measurement depends on the inclusion or exclusion of soft particles near the fiducial boundary.
 This uncertainty is applied by varying the topocluster noise threshold in both simulation and data and is propagated through the unfolding procedure with variations on both the measured histogram and the simulation response matrix.
-The overall effect of this topocluster noise threshold variation on the UE measurement is found to be at the 3-4\% level when varying up and down to the $2\sigma_{ped}$ and $4\sigma_{ped}$ thresholds defined in Section~\ref{sec:ueinpp_towerreco}.
+The overall effect of this topocluster noise threshold variation on the UE measurement is found to be at the 3-4\% level when varying up and down to the $2\sigma_{ped}$ and $4\sigma_{ped}$ thresholds.
 
 \subsubsection{Pileup correction}
 The pileup correction is derived from the pileup correction study Section~\ref{sec:ueinpp_pileup} which shows the impact of pileup on the topocluster reconstruction and extracted calorimeter cluster total energy.
 This pileup correction is applied to the reconstructed calorimeter cluster total energy to correct for the pileup effect and is propagated through the unfolding procedure as a variation on the data histogram.
 To determine the impact of this pileup correction on the UE measurement, the pileup correction is toggled on and off.
-The overall effect of the pileup correction on the UE measurement is found to be $< 5\%$ for all leading jet $p_T$ bins.
+The overall effect of the pileup correction on the UE measurement is found to be $< 3\%$ for all leading jet $p_T$ bins.
 
 \subsubsection{MBD vertex efficiency}
 To test the impact of using the simulation based MBD vertex efficiency applied in Section~\ref{sec:mbd_vertex_eff_app}, the MBD vertex efficiency differences in data and simulation are studied for a set of clean events, defined as events that pass the full suite of non collision background rejection cuts and have a leading jet with $\pT >$ 21 GeV and $\|\eta\| <$ 0.7.
@@ -105,7 +101,7 @@ The overall effect of this MBD vertex efficiency systematic uncertainty on the U
     \centering
     \includegraphics[width=0.48\linewidth]{ueinpp/Figures/mbd_vertex_efficiency/mbd_eff_mc_data_var_vs_jetpt.png}
     \includegraphics[width=0.48\linewidth]{ueinpp/Figures/mbd_vertex_efficiency/mbd_eff_mc_data_var_vs_et.png}
-    \caption{MBD vertex efficiency as a function of leading jet $\pT$ (left) and transverse region $\Sigma E_{T}$ (right) for data and simulation.}
+    \caption{Data-driven MBD vertex efficiency as a function of reconstruction-level leading jet $\pT$ (left) and transverse region $\Sigma E_{T}$ (right) for data (black) and \pythia simulation (red).}
     \label{fig:mbd_vertex_efficiency_data_mc}
 \end{figure}
 
@@ -123,12 +119,12 @@ There is an overall $\sim$ 3\% effect on using the \herwig simulation samples fo
 \subsection{Total Systematic Uncertainty}
 The total systematic uncertainty is found by adding the individual systematic uncertainties in quadrature.
 Figure~\ref{fig:total_systematic_uncertainty} shows the contributions to the total systematic uncertainty on the UE measurement as a function of leading jet $p_T$.
-The largest sources of uncertainty are from the uncertainties in the calorimeter hadronic response, and the variations in the pileup correction and the topocluster noise threshold.
+The largest sources of uncertainty are from the uncertainties in the calorimeter hadronic response and the variations in the topocluster noise threshold.
 \begin{figure}
     \centering
-    \includegraphics[width=0.48\linewidth]{ueinpp/Figures/systematics/h_syst_profile_inclusive.png}
-    \includegraphics[width=0.48\linewidth]{ueinpp/Figures/systematics/h_syst_profile_dijet.png}
-    \caption{Contributions to the total systematic uncertainty on the UE measurement as a function of leading jet $p_T$ for inclusive jet (left) and dijet (right) events.}
+    \includegraphics[width=0.48\linewidth]{ueinpp/Figures/h_profile_inclusive.png}
+    \includegraphics[width=0.48\linewidth]{ueinpp/Figures/h_profile_dijet.png}
+    \caption{Total set of contributions to the systematic uncertainty on the UE measurement as a function of leading jet $p_T$ for inclusive jet (left) and dijet (right) events. Ratio of variations to nominal distribution shown in bottom panel.}
     \label{fig:total_systematic_uncertainty}
 \end{figure}
 

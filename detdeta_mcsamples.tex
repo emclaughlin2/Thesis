@@ -1,13 +1,11 @@
 The \detdeta measurement, summing over final particles of all energies, is sensitive to all aspects of the collision event, from the initial state through hadronization and final state interactions. 
-Therefore, multiple events generators with different underlying physics modeling are used for comparison in this \detdeta measurement allowing for insights into how different heavy ion collision phenomena impact \detdeta. 
-Minimum bias \auau collision events at \sqsntwo were produced from three different MC event generators: \hijing~\cite{hijing}, \ampt~\cite{ampt} and \epos~\cite{epos}.
-For all three generators, the events were then passed through a full \geant~\cite{GEANT4} simulation of the sPHENIX detector and reconstruction chain to produce detector-level objects comparable to those in data. \textcolor{red}{There is some repetition between what is here and what appears at the end of section 4.1.}
-A total of ~1M events for each MC generator were used in this analysis.
+Therefore, multiple event generators, \hijing, \ampt, and \epos, with different underlying physics modeling are used for comparison in this \detdeta measurement, allowing for insights into how different heavy ion collision phenomena impact \detdeta. 
 For determining the MC-based correction factors used for mapping the detector-level \detdeta to the truth particle level \detdeta, the MC events are weighted to match the $z$-vertex and particle composition in data to limit model dependence in the final measurements. 
 
 \subsection{MC Z-vertex Reweighting}
 In both the data and simulation datasets, the event z-vertex is reconstructed using the MBD. 
-The simulation events are reweighted to match the z-vertex distribution in data since the z-vertex distribution in data is wider than the z-vertex distribution of the simulation samples. \textcolor{red}{You should explain why we didn’t simply match the distributions used in the MC to that seen in the data.}
+While the z-vertex distribution in simulation is typically generated to match the z-vertex distribution in data, small discrepancies still existed between the z-vertex distribution in data and the z-vertex distribution in the simulation samples used in this analysis.
+Therefore, the simulation events are reweighted to match the z-vertex distribution in data since the z-vertex distribution in data is slightly wider than the z-vertex distribution of the simulation samples. 
 The z-vertex distribution in data has a mean value of 1.6 cm and width of 11.6 cm. 
 The z-vertex distribution for the simulation datasets have a mean value $\sim$ 0 cm and width of 5-7 cm.
 The top plots in Fig.~\ref{fig:zvtxweight} show the reconstructed z-vertex distribution using the MBD for data and three simulation samples. 
@@ -19,7 +17,7 @@ The MC event-level weights vary between 0.82 and 1.66 for z-vertex values in the
     \includegraphics[width=0.48\linewidth]{detdeta/Figures/zvertex_reweighting/vz_all_runs_run24_-30_30cm.png}
     \includegraphics[width=0.48\linewidth]{detdeta/Figures/zvertex_reweighting/vz_all_runs_run24.png}
         \includegraphics[width=0.48\linewidth]{detdeta/Figures/zvertex_reweighting/vz_ratio_all_runs_run24.png}
-    \caption{Distributions of the z-vertex reconstructed using the MBD in data and MC (top) for z-vertex ranges [-30,30] cm (left) and [-10,10] cm {right}, and the data-over-MC ratios (bottom).}
+    \caption{Distributions of the z-vertex reconstructed using the MBD in data (black) and \epos (blue), \ampt (orange) and \hijing (purple) events (top) for z-vertex ranges [-30,30] cm (left) and [-10,10] cm {right}, and the data-over-MC ratios (bottom).}
     \label{fig:zvtxweight}
 \end{figure}
 
@@ -28,9 +26,9 @@ Many light weight \textcolor{red}{I wasn’t at all sure what you meant by “li
 Heavy ion generators are grounded in perturbative QCD \textcolor{red}{Not all, JETSCAPE being a prime example.} and models to approximate non-perturbative effects. 
 Parameter tuning for light-weight generators has been used successfully to more accurately reproduce previous experimental results at RHIC and LHC energies, and tunes for \pp collisions at RHIC energies, such as the \pythia~\cite{pythia8,pythia8_detroittune} and \herwig~\cite{herwig7,herwig7_tune} tunes, are used in the \pp analysis in Chapter~\ref{ch:ue_in_pp}.
 However, for this \detdeta measurements using \auau MC samples, no such tunes existed for the heavy ion MC generators used in this analysis.
-Therefore, to reduce model dependence in the final \detdeta measurement, a particle composition reweighting procedure at the simulation final state particle level was implemented to increase the agreement between the MC samples and previous measurements of identified particles in 200 GeV \auau collisions at RHIC.
+Therefore, to reduce model dependence in the final \detdeta measurement, a particle composition reweighting procedure at the simulation final-state particle level was implemented to increase the agreement between the MC samples and previous measurements of identified particles in 200 GeV \auau collisions at RHIC.
 
-As a first step in this reweighting procedure, the nominal discrepancy between the final state particle spectra from the MC generators used in this analysis and previous measurements at RHIC from PHENIX and STAR was investigated. \textcolor{red}{I would not call this a “nominal discrepancy”. It was a real RHIC disovery, rooted in the quark coalescence model. I recenlty went through the hisotry of this in order to correct one STAR vs PHENIX line in Berndt Mueller’s opening talk at SQM. Remind me to send it to you.}
+As a first step in this reweighting procedure, the discrepancy between the final state particle spectra from the MC generators used in this analysis and previous measurements at RHIC from PHENIX and STAR was investigated~\cite{phenix_particle_spectra,star_lambda_spectra}. 
 Specifically, the particle spectra of $\pi^{\pm}$, $K^{\pm}$, $p$, $\bar{p}$, $\Lambda$ and $\bar{\Lambda}$ at central rapidity ($|\eta| < 0.35$ for p, $\pi$ and K and $|\eta| < 1.0$ for $\Lambda$) as functions of transverse momentum ($p_{T}$) were studied across various centrality bins.
 
 \subsubsection{Proton to Pion Ratios in MC Generators and Data}
@@ -48,7 +46,7 @@ However, \epos does show some small splitting effects across centrality bins, es
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{figures/chapter4/phenix_p_pi_k_pi_ratios.png}
-    \caption{Proton to pion ratios (left) and kaon to pion ratios (right) as a function of particle $p_{T}$ from \auau collisions at 200 GeV measured by PHENIX. Reproduced from ~\cite{phenix_particle_spectra}.}
+    \caption{Proton to pion ratios (left) and kaon to pion ratios (right) as a function of particle $p_{T}$ from \auau and \pp collisions at 200 GeV measured by PHENIX. Ratios shown for \auau centrality bins $0$--$10$\% (gray), $10$--$20$\% (red), $20$--$40$\% (blue), $40$--$60$\% (green), $60$--$92$\% (pink) and inclusive \pp events (open). Reproduced from ~\cite{phenix_particle_spectra}.}
     \label{fig:phenix_particle_ratios}
 \end{figure}
 
@@ -60,7 +58,7 @@ However, \epos does show some small splitting effects across centrality bins, es
     \includegraphics[width=0.48\linewidth]{detdeta/Figures/particle_comp/pbar_pi_ratio_epos.png}
     \includegraphics[width=0.48\linewidth]{detdeta/Figures/particle_comp/p_pi_ratio_ampt.png}
     \includegraphics[width=0.48\linewidth]{detdeta/Figures/particle_comp/pbar_pi_ratio_ampt.png}
-    \caption{Proton to pion ratios (left) and anti-proton to pion ratios (right) for truth particles from unweighted \hijing~(top), \ampt~(middle) and \epos~(bottom).}
+    \caption{Proton to pion ratios (left) and anti-proton to pion ratios (right) as a function of particle $p_{T}$ for generator-level particles from unweighted \hijing~(top), \ampt~(middle) and \epos~(bottom). Ratios shown for \auau centrality bins $0$--$10$\% (black), $10$--$20$\% (red), $20$--$40$\% (blue), $40$--$60$\% (green), $60$--$92$\% (pink).}
     \label{fig:mc_p_pi_ratio}
 \end{figure}
 
@@ -84,36 +82,36 @@ However, \ampt does exhibit a centrality dependence of similar scale to that see
     \includegraphics[width=0.48\linewidth]{detdeta/Figures/particle_comp/k-_pi_ratio_epos.png}
     \includegraphics[width=0.48\linewidth]{detdeta/Figures/particle_comp/k+_pi_ratio_ampt.png}
     \includegraphics[width=0.48\linewidth]{detdeta/Figures/particle_comp/k-_pi_ratio_ampt.png}
-    \caption{Kaon to pion ratios for truth particles from unweighted \hijing~(top), \ampt~(middle) and \epos~(bottom).}
+    \caption{Kaon to pion ratios as a function of particle $p_{T}$ for generator-level particles from unweighted \hijing~(top), \ampt~(middle) and \epos~(bottom). Ratios shown for \auau centrality bins $0$--$10$\% (black), $10$--$20$\% (red), $20$--$40$\% (blue), $40$--$60$\% (green), $60$--$92$\% (pink).}
     \label{fig:mc_k_pi_ratio}
 \end{figure}
 
 From these studies of the proton to pion and kaon to pion ratios, none of the three MC generators were found to accurately reproduce the proton, pion and kaon particle spectra differential in $p_{T}$ and centrality seen in previous RHIC meaurements. 
-To correct for this discrepancy in identified particle spectra between the MC generators and experimental data, a truth-level particle and calorimeter G4Hit energy reweighting module was employed within the \detdeta analysis reconstruction chain. 
-This module adjusted the simulation final state truth particles and detector-level calorimeter energy distribution based on the particle yield spectrum obtained from previous PHENIX and STAR experiments. \textcolor{red}{This is a little confuing to me. It’s clear you need to reweight truth yields describe observed flavor dynamics. But aren’t those weights just propagated into calorimeter MC and (weighted) pi/K/p simulated as pi/K/p?}
+To correct for this discrepancy in identified particle spectra between the MC generators and experimental data, a truth-level particle and calorimeter energy reweighting module was employed within the \detdeta analysis reconstruction chain. 
+This module adjusted the simulation final state truth particles and resulting detector-level calorimeter energy distribution based on the particle yield spectrum obtained from previous PHENIX and STAR experiments. 
 
 \subsubsection{Determining MC Particle Composition Reweighting Factors}
 
 Reweight factors were created for final state particles in each of the three MC generators.
-Using both the final state particle spectra of the three MC generators and the measured identified particle spectra from PHENIX and STAR, the invariant yields of $\pi^{\pm}$, $K^{\pm}$, $p$, $\bar{p}$, $\Lambda$, and $\bar{\Lambda}$ as functions of transverse momentum ($p_{T}$) were analyzed across various centrality bins. 
-The Monte Carlo particle spectrum was calculated for models like \hijing, \epos and \ampt, utilizing identical centrality binning and $\eta$ acceptance range as was used in the PHENIX and STAR measurements. 
+Using both the final state particle spectra of the three MC generators and the measured identified particle spectra from PHENIX and STAR~\cite{phenix_particle_spectra,star_lambda_spectra}, the invariant yields of $\pi^{\pm}$, $K^{\pm}$, $p$, $\bar{p}$, $\Lambda$, and $\bar{\Lambda}$ as functions of transverse momentum ($p_{T}$) were analyzed across various centrality bins. 
+The Monte Carlo particle spectrum was calculated using the same centrality binning and $\eta$ acceptance range as was used in the PHENIX and STAR measurements. 
 The MC generator spectra of $\pi^{\pm}$, $K^{\pm}$, $p$, and $\bar{p}$ were then compared to PHENIX data, while $\Lambda$ and $\bar{\Lambda}$ were compared to STAR data to compute the data/MC ratios. 
 
-PHENIX data was specifically chosen for the p, K and $\pi$ particle reweighting procedure as it was feed-down corrected for contributions from weak decays, while the STAR data included these contributions. 
-As an additional check, a comparison between the previously measured $\pi$ invariant yield in STAR and PHENIX data for three separate centrality ranges was performed as $\pi$ yields should still be affected by the feed-down corrections, but less so then protons or kaons.
+PHENIX data was specifically chosen for the p, K and pion particle reweighting procedure as it was feed-down corrected for contributions from weak decays, while the STAR data included these contributions. 
+As an additional check, a comparison between the previously measured pion invariant yield in STAR and PHENIX data for three separate centrality ranges was performed as pion yields should still be affected by the feed-down corrections, but less so then protons or kaons.
 Since the STAR data does not include feed-down corrections it was expected that this measurement of invariant yield of pions to be slightly higher in the lower $p_{T}$ range than the pion yield from PHENIX. 
-In the comparison of STAR and PHENIX $\pi$ yield in Figure~\ref{fig:star_phenix_comparison}, small differences were observed in the $\pi$ particle spectra at low $p_{T}$ ($\sim 1$ GeV) due to the different feed-down corrections; otherwise, the spectra showed good agreement.  
+In the comparison of STAR and PHENIX pion yield in Figure~\ref{fig:star_phenix_comparison}, small differences were observed in the pion particle spectra at low $p_{T}$ ($\sim 1$ GeV) due to the different feed-down corrections; otherwise, the spectra showed good agreement.  
 
 \begin{figure}
     \centering
     \includegraphics[width=0.48\linewidth]{detdeta/Figures/particle_comp/10-20_pions_STAR_PHENIX.png}
     \includegraphics[width=0.48\linewidth]{detdeta/Figures/particle_comp/20-40_pions_STAR_PHENIX.png}
     \includegraphics[width=0.48\linewidth]{detdeta/Figures/particle_comp/40-60_pions_STAR_PHENIX.png}
-    \caption{Comparison of previously measured $\pi^{+}$ spectra from STAR~\cite{star_pion_p_spectra} and PHENIX~\cite{phenix_particle_spectra} for centrality ranges 0-10\% (top left), 20-40\% (top right) and 40-60\% (bottom).}
+    \caption{Comparison of previously measured $\pi^{+}$ spectra from STAR~\cite{star_pion_p_spectra} (red) and PHENIX~\cite{phenix_particle_spectra} (blue) for centrality ranges $0$--$10$\% (top left), $20$--$40$\% (top right) and $40$--$60$\% (bottom).}
     \label{fig:star_phenix_comparison}
 \end{figure}
 
-The data/MC ratio as a function of $p_{T}$ for each centrality range was then fit with a Padé approximant of order 2/2 \textcolor{red}{Please check if this is standard nomenclature; I’m certainly not sure.}, and this fit function was used as the reweighting factor for each specific particle. 
+The data/MC ratio as a function of $p_{T}$ for each centrality range was then fit with a Padé approximation of order 2/2, and this fit function was used as the reweighting factor for each specific particle. 
 This is illustrated for \hijing proton and kaon reweighting factors in Fig. \ref{fig:hijing_data_mc_ratios}, where proton yield weight factors of $\sim 2$ at intermediate $p_{T}$ values can be understood to represent the inclusion of radial flow effects and enhanced baryon production.
 All remaining MC generator particle composition reweighting factors used in this analysis are outlined in Appendix \ref{sec:MC_particle_ratios}. 
 For neutral pions and kaons, the reweighting factor was determined as the average of the charged counterparts' reweighting factors. 
@@ -126,7 +124,7 @@ Finally, for baryons and anti-baryons other than $\Lambda$'s and $\Sigma$'s, the
     \includegraphics[width=0.48\linewidth]{detdeta/Figures/particle_reweighting_ratios/HIJING_p_1.png}
     \includegraphics[width=0.48\linewidth]{detdeta/Figures/particle_reweighting_ratios/HIJING_p_2.png}
     \includegraphics[width=0.48\linewidth]{detdeta/Figures/particle_reweighting_ratios/HIJING_p_3.png}
-    \caption{Data to MC ratios of proton yields for \sqsntwo \auau PHENIX data \cite{phenix_particle_spectra} versus \hijing for centrality ranges 0-10\%, 10-20\%, 20-40\% and 40-60\%.}
+    \caption{Data to MC ratios of proton yields for \sqsntwo \auau PHENIX data \cite{phenix_particle_spectra} versus \hijing for centrality ranges $0$--$10$\% (top left), $10$--$20$\% (top right), $20$--$40$\% (bottom left) and $40$--$60$\% (bottom right).}
     \label{fig:hijing_data_mc_ratios}
 \end{figure}
 
@@ -138,6 +136,7 @@ The reweighting factor for each hit is then calculated based on the primary pare
 This factor is derived from interpolating the MC/data ratios across different centrality bins as a function of $p_{T}$ and using fits like those shown in Figure~\ref{fig:hijing_data_mc_ratios} to ensure a precise adjustment of the G4Hit energy.
 This same reweighting factor is then also applied to update the final state particles' four-momenta in the truth record for the truth $\ET$ calculation.
 
-Although this approach does not replicate the precise conditions of each individual event, as this approach equates one 2 GeV $\pi$ with two 1 GeV $\pi$, it effectively incorporates the average energy contributions from the data into the MC simulations across a multitude of events. \textcolor{red}{I don’t understand this statement.}
-The motivation for this reweighting method was to align the average energy contributions from simulated data more closely with the actual experimental observations. 
-By applying these reweighting factors, the method on average adjusts the MC simulation to approach the empirical data, thereby ensuring that the particle average \detdeta in the simulation is representative of real-world observations. 
+Since this approach upweights or downweights the energy of each particle as a proxy for adding or removing particles to match the particle spectra in data, this approach does not replicate the precise conditions of each individual event.
+For example, this approach equates one 2 GeV $\pi$ with two 1 GeV $\pi$.
+However, this reweighting method does effectively incorporate the \textit{average} energy contributions from the data into the MC simulations across a multitude of events. 
+By applying these reweighting factors, the method on average adjusts the MC simulation to approach empirical data, making the particle-level average \detdeta in the simulation more representative of real-world measurements. 

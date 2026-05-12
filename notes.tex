@@ -243,3 +243,50 @@ This phase is crucial for accurately describing observables like hadron spectra 
 Possible future additions to introduction section:
 QCD Phase Diagram - not priority
 Lattice QCD/EOS - not priority
+
+figures for hard-soft correlations 
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/chapter1/star_ue_in_pAu.png}
+    \caption{Underlying event measurements in p+Au collisions at 200 GeV from STAR. Plot shows the underlying event as a function of leading jet pT for dijet events for a selection of events with high- and low-event activity as determined from the forward region. Reproduced from~\cite{star_ue_pAu}.}
+    \label{fig:ue_pAu_star}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/chapter1/atlas_RpA_dijet.png}
+    \caption{Dijet measurements in p+p collisions at 7 TeV from ATLAS. The left plots shows the dijet Rcp as a function of proton parton x, while the right plots shows the dijet Rcp as a function of the lead ion parton x. Reproduced from~\cite{ATLAS:2024dijet_centrality_pPb_816tev}.}
+    \label{fig:dijet_pPb_atlas}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{figures/chapter1/atlas_dijet_pp_EA_vs_pt.png}
+    \caption{Underlying event measurements in p+p collisions at 7 TeV from ATLAS. Plot shows the underlying event as a function of leading jet pT for exclusive dijet events for a selection of events with high- and low-event activity as determined from the forward region. Reproduced from~\cite{ATLAS:2016transverse_energy_pp_276tev}.}
+    \label{fig:atlas_dijet_pp_EA_vs_pt}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{figures/chapter1/atlas_dijet_pp_EA_vs_x.png}
+    \caption{Underlying event measurements in p+p collisions at 7 TeV from ATLAS. Plot shows the underlying event as a function of leading jet pT for exclusive dijet events for a selection of events with high- and low-event activity as determined from the forward region, but plotted as a function of the proton parton x instead of the leading jet pT. Reproduced from~\cite{ATLAS:2016transverse_energy_pp_276tev}.}
+    \label{fig:atlas_dijet_pp_EA_vs_x}
+\end{figure}
+
+Figure~\ref{fig:unfolded_pt} presents the unfolded underlying event observable, 
+$\langle \Sigma E_{T}/\delta\eta\delta\phi \rangle$, as a function of the leading jet transverse momentum for both inclusive jet and dijet event selections. The results are compared to generator-level predictions from \textsc{Pythia8} and \textsc{Herwig7}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.48\linewidth]{fig/h_result_inclusive.png}
+    \includegraphics[width=0.48\linewidth]{fig/h_result_dijet.png}
+    \caption{
+    Underlying event transverse energy density, $\langle \Sigma E_{T}/\delta\eta\delta\phi \rangle$, as a function of leading jet $p_{T}$ for inclusive jet (left) and dijet (right) event selections. Data (black points) are shown with statistical uncertainties (bars) and systematic uncertainties (blue bands). The results are compared to generator-level predictions from \textsc{Pythia8} (red line) and \textsc{Herwig7} (green line).
+    }
+    \label{fig:unfolded_pt}
+\end{figure}
+
+A consistent trend is observed in both event selections: the underlying event transverse energy density decreases with increasing leading jet $p_{T}$. While the overall normalization of the measurement is affected by sizable systematic uncertainties, these uncertainties are strongly correlated across jet $p_{T}$ bins. As a result, the shape of the distribution and its dependence on the hard scale are more precisely constrained than the absolute scale. Additionally, the inclusive jet and dijet measurements are in agreement within their uncorrelated uncertainties, indicating that the observed anti-correlation is not significantly sensitive to requiring a dijet event selections at RHIC energies.
+
+The observed decrease of UE activity with increasing jet $p_{T}$ indicates a non-trivial correlation between the hard scattering scale and soft particle production at RHIC energies. In a naive picture of the underlying event, higher-$Q^{2}$ scatterings are expected to be associated with both increased initial- and final-state radiation and a more central overlap of the colliding nucleons, leading to enhanced multiple parton interactions and, therefore, increased UE activity. Instead, we observe that the UE transverse energy density decreases with increasing jet $p_{T}$ indicating an overall energy conservation phenomena which is consistent between inclusive jet and dijet selections and suggests that the interplay between soft and hard processes at RHIC energies is more subtle than a simple scaling of radiation effects with the hard scattering scale.
+
+Comparisons to \textsc{Pythia8} show that the generator reproduces the observed trend. Both \textsc{Pythia8} and \textsc{Herwig} incorporate multiple parton interactions through an impact-parameter-dependent framework and include initial- and final-state radiation tied to the hard scattering scale. However, a key distinction lies in how the interplay between these components is modeled. In \textsc{Pythia8}, multiple parton interactions are interleaved with parton shower evolution in a common $p_T$-ordered sequence, introducing a dynamical and tunable competition between soft and hard processes. This framework allows the relative contributions of MPI and radiation to evolve with the event kinematics, leading to a correlated dependence of UE activity on the leading jet $p_T$.
+
+In contrast, \textsc{Herwig} treats multiple parton interactions and parton shower evolution in a more factorized manner, without an explicit interleaved competition between soft and hard components. As a result, the underlying event activity is more weakly coupled to the hard scattering scale. The sensitivity of the present measurement to the evolution of UE activity with jet $p_T$ therefore provides a discriminating test of these modeling approaches and places important constraints on the description of soft--hard interplay in $p+p$ collisions at RHIC energies.

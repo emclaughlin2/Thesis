@@ -9,8 +9,8 @@ A detailed description of the topocluster algorithm, reconstruction and optimiza
 
 The calorimeter topoclustering algorithm groups individual calorimeter towers into contiguous clusters designed to reconstruct energy deposits from showering particles.
 Topoclusters are a particular clustering method used to cluster calorimeter signals while suppressing electronic noise and pile-up contributions. 
-To limit noise contributions, the clustering algorithm evaluates a signal-to-noise significance for each tower, defined as the tower's energy divided by its expected noise~\cite{ATLAS:2017_topological_cluster_performance,ATLAS:2024_topological_cluster_timing}. 
-Topoclusters are then grown around "seed" towers with high significance in the following way:
+To limit noise contributions, the clustering algorithm uses the ratio of the tower's energy to its expected noise as a significance metric for seeding and expanding clusters.~\cite{ATLAS:2017_topological_cluster_performance,ATLAS:2024_topological_cluster_timing}. 
+Topoclusters are then grown using the following thresholds:
 \begin{itemize}
     \item Seed threshold ($S$): Towers with $|E_{\mathrm{tower}}| > S\,\sigma_{\mathrm{noise}}$ initiate clusters, typically with $S=4$.
     \item Neighbor growth threshold ($N$): Adjacent towers with $|E_{\mathrm{tower}}| > N\,\sigma_{\mathrm{noise}}$ are iteratively added to expand the cluster, typically with $N=2$.
@@ -25,7 +25,7 @@ Importantly, this cluster formation ordering of seed, neighboring and peripheral
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{figures/chapter5/topocluster_event_display.png}
-    \caption{Display of topocluster boundaries across the sPHENIX EMCal (left), IHCal (middle) and OHCal (right) calorimeter layers for a \pythia p+p dijet event. The transverse region is shown in gray shading.}
+    \caption{Display of topocluster boundaries (colored line borders) across the EMCal (left), IHCal (middle) and OHCal (right) calorimeter layers for a dijet event in $p+p$ collisions in \pythia. Each panel shows a rolled-out projection of the calorimeter acceptance, with the tower pseudorapidity index $i\eta$ on the horizontal axis and the tower azimuthal index $i\phi$ on the vertical axis. Tower energies in GeV are indicated by the fill color, with the scale shown by the color axis on the right. The transverse region is shown in gray shading.}
     \label{fig:topocluster_event_display}
 \end{figure}
 
@@ -40,7 +40,7 @@ The full set of tested pedestal RMS values are included in Table~\ref{tab:topo_n
 \begin{table}[]
     \centering
     \begin{tabular}{c|c|c|c|c|c}
-        Calorimeter & Run 54256 $\langle \sigma_{ped} \rangle$ & p+p running $\langle \sigma_{ped} \rangle$ & p+p $\langle 2\sigma_{ped} \rangle$ & p+p $\langle 3\sigma_{ped} \rangle$ & p+p $\langle 4\sigma_{ped} \rangle$ \\
+        Calorimeter & Pedestal run $\langle \sigma_{ped} \rangle$ & p+p running $\langle \sigma_{ped} \rangle$ & p+p $\langle 2\sigma_{ped} \rangle$ & p+p $\langle 3\sigma_{ped} \rangle$ & p+p $\langle 4\sigma_{ped} \rangle$ \\
         \hline
         EMCal & 30.4 & 22.8 & 45.6 & 68.4 & 91.2 \\
         IHCal & 1.77 & 1.77 & 3.5 & 5.3 & 7.0 \\
@@ -66,12 +66,12 @@ The resolution of topoclusters is studied in the \pythia p+p simulation with rea
 The resolution is quantified using the relative width of the $E/p$ ratio, where $E$ is the topocluster energy and $p$ is the momentum of the matched truth particle.  
 Since this study was conducted in a minimum bias collision event instead of a single-particle simulation, an isolation condition is applied, requiring the truth particle to have no other nearby truth particles with transverse momentum $p_T > 0.2$\,GeV within a cone of $\Delta R < 0.6$. 
 
-The analysis is performed for the three noise suppression thresholds: $\langle2\sigma_{ped}\rangle$, $\langle3\sigma_{ped}\rangle$, and $\langle4\sigma_{ped}\rangle$. The explicit values for these noise threshold are given in Table~\ref{tab:topo_noise_parameters} and the methodology for determining this values is outlined in the above section. These thresholds are used to evaluate how noise impacts the resolution performance of topoclusters.
+The analysis is performed for the three noise suppression thresholds: $\langle2\sigma_{ped}\rangle$, $\langle3\sigma_{ped}\rangle$, and $\langle4\sigma_{ped}\rangle$. The explicit values for these noise threshold are given in Table~\ref{tab:topo_noise_parameters} and the methodology for determining these values is outlined in the above section. These thresholds are used to evaluate how noise impacts the resolution performance of topoclusters.
 
 The extracted resolutions from the $E/p$ distributions for EM particles are 13.7\%, 13.4\%, and 13.3\% for the $\langle2\sigma_{ped}\rangle$, $\langle3\sigma_{ped}\rangle$, and $\langle4\sigma_{ped}\rangle$ thresholds, respectively. 
 While the extracted resolutions for the $E/p$ distributions for hadronic particles are 69.1\%, 59.6\%, and 58.9\% for the $\langle2\sigma_{ped}\rangle$, $\langle3\sigma_{ped}\rangle$, and $\langle4\sigma_{ped}\rangle$ thresholds, respectively.  
-While the resolutions are very similar for the EM shower case, in the hadronic shower case, the resolutions obtained with the $\langle3\sigma_{ped}\rangle$ and $\langle4\sigma_{ped}\rangle$ thresholds are significantly better and are found to be very similar to each other. 
-Based on this observation, the $\langle3\sigma_{ped}\rangle$ threshold is selected as the optimal working point, balancing resolution performance and noise suppression.
+While the resolutions are very similar for the EM shower case, in the hadronic shower case, the resolutions obtained with the $\langle3\sigma_{ped}\rangle$ and $\langle4\sigma_{ped}\rangle$ thresholds are better than the resolution from the $\langle2\sigma_{ped}\rangle$ threshold and are found to be very similar to each other. 
+Therefore, the $\langle3\sigma_{ped}\rangle$ threshold is selected for the nominal topocluster reconstruction threshold in the analysis.
 Figure~\ref{fig:topocluster_resolution_3sigma} shows the $E/p$ distributions for the $\langle3\sigma_{ped}\rangle$ noise threshold for both electromagnetic particles and hadronic particles, while the distributions for the $\langle2\sigma_{ped}\rangle$ and $\langle4\sigma_{ped}\rangle$ noise threshold cases are included in Appendix~\ref{sec:additional_topo_reso}. 
 Additionally, the resolution values obtained using the $\langle3\sigma_{ped}\rangle$ noise threshold  are consistent with resolution results obtained from test beam measurements~\cite{emcal_beamtest,emcal_hcal_beamtest}. 
 
@@ -86,7 +86,7 @@ Additionally, the resolution values obtained using the $\langle3\sigma_{ped}\ran
     \includegraphics[width=\textwidth]{figures/chapter5/Hadron_Isolated_Resolution_3Plots_sphenix.png}
     \caption{Hadronic particles ($E>3$\,GeV, $\Delta R<0.2$)}
   \end{subfigure}
-  \caption{$E/p$ distributions for EM and hadronic particles using the optimal topocluster noise thresholds for Run 2024 p+p noise conditions.}
+  \caption{$E/p$ distributions from isolated single hadrons in \pythia simulation with realistic pedestal noise conditions from the Run 2024 p+p collision period. Distributions for EM (left) and hadronic (right) particles using $\langle3\sigma_{ped}\rangle$ topocluster noise thresholds.}
   \label{fig:topocluster_resolution_3sigma}
 \end{figure}
 
@@ -102,7 +102,7 @@ This observable is calculated at the reconstruction level by first summing the t
 
 The total transverse energy ($\Sigma E_{T}$) is then averaged over all jet events for a particular jet $p_{T}$, giving the average total transverse energy, $\langle\Sigma E_{T}\rangle$ in the transverse region. Finally, the average transverse energy density ($\langle\Sigma E_{T}/\delta\eta\delta\phi\rangle$) is calculated by dividing by the overall acceptance in the transverse region in $\eta$ and $\phi$. The acceptance of the transverse region is $\Delta\eta = 2.2$ x $\Delta\phi = 2\pi /3$. 
 
-The reconstructed transverse energy in dijet events from summing calorimeter towers versus summing topoclusters are shown in Figure~\ref{fig:towers_and_topo} with the $\langle3\sigma_{ped}\rangle$ noise thresholds for the topocluster seeding. 
+The reconstructed transverse energy in dijet events from summing calorimeter towers versus summing topoclusters are shown in Figure~\ref{fig:towers_and_topo} with the $\langle3\sigma_{ped}\rangle$ noise thresholds for the topocluster construction. 
 The \ET{} distribution from towers is wider than the distribution from topoclusters.
 Notably, the mean topocluster \ET{} in the transverse region is about half the tower sum \ET{} in the transverse region, meaning likely the towers measurement contains a large noise contribution. 
 This theory that the towers measurement includes contributions from noise is supported by the results in Section~\ref{sec:ueinpp_runbyrunqa}, which includes studies of the mean topocluster and tower total \ET{} under varying noise conditions.
@@ -110,7 +110,7 @@ Therefore, the robustness of the topoclusters to noise makes using the topoclust
 
 \begin{figure}
     \centering
-    \includegraphics[width=0.7\linewidth]{ueinpp/Figures/topocluster_noise/transverse_ET.png}
+    \includegraphics[width=0.7\linewidth]{figures/chapter5/h_ue_transverse_Topoclusters.png}
     \caption{Comparison of transverse region energy distributions from topoclusters (solid points) and towers (hollow points) in dijet events in data (black) and Pythia8 p+p simulation (red).}
     \label{fig:towers_and_topo}
 \end{figure}

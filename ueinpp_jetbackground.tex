@@ -1,4 +1,4 @@
-\subsection{Simulation-Based Jet Background Cuts and Efficiencies}
+\subsection{Simulation-Based Non Collision Background Cuts and Efficiencies}
 \label{sec:sim_jet_background}
 
 A necessary step in the analysis is the removal of “jet background,” defined as non-collision background events that are mistakenly reconstructed as jets. 
@@ -7,7 +7,7 @@ In principle, many of these backgrounds can be removed by matching calorimeter t
 
 The two methods are considered for background rejection~\cite{ppg09AN}:
 \begin{itemize}
-    \item The first method, referred to as the “energy fraction" requirement, applies selections on the fraction of reconstructed jet energy deposited in each calorimeter layer. Specifically, the EMCal and OHCal fractions, $E_{EMCal}/E_{Jet}$ and $E_{OHCal}/E_{Jet}$, must be between 10\% and 90\%, while the IHCal fraction, $E_{IHCal}/E_{Jet}$, must lie between 0\% and 90\%. Notably, this method would require a simulation-based correction for this jet selection inefficiency and is therefore sensitive to the \geant modeling of the longitudinal shower deposition in simulation.
+    \item The first method, referred to as the “energy fraction" requirement, applies selections on the fraction of reconstructed jet energy deposited in each calorimeter layer. Specifically, the EMCal and OHCal fractions, $E_{EMCal}/E_{Jet}$ and $E_{OHCal}/E_{Jet}$, must be between 10\% and 90\%, while the IHCal fraction, $E_{IHCal}/E_{Jet}$, must lie between 0\% and 90\%. This method would require a simulation-based correction for this jet selection inefficiency and is therefore sensitive to the \geant modeling of the longitudinal shower deposition in simulation.
     \item The second method, the “dijet" requirement, necessitates the presence of a second jet in the event, approximately balanced in azimuth. Specifically, the ratio of the subleading jet energy to the leading jet energy must exceed 0.3, and the azimuthal separation ($\delta\phi$) must be greater than 3$\pi$/4. This method would also require a simulation-based correction for this jet selection inefficiency and is instead sensitive to the modeling of dijet topologies in the event generator, \pythia.
 \end{itemize}
 
@@ -50,7 +50,7 @@ These data-driven timing cuts are discussed in more detail in the follow section
 
 Additional background rejection cuts are applied to both the inclusive jet and dijet samples to remove additional jet backgrounds not accounted for in the energy fraction cut or the requirement of a dijet event, respectively.
 For the dijet analysis, two additional data-driven background cuts are applied. The first is on the leading jet time and second is on the time difference between the leading and subleading jet in the event~\cite{tf1_note}. 
-The inclusive jet analysis also uses two additional data-driven background cuts. The ifrst is on the leading jet time, similar to the dijet analysis case, and the second is on the time difference between the leading jet and the MBD since a subleading jet may not be available in the inclusive jet case. Table~\ref{tab:jet_background_cuts} outlines the full set of jet background cuts applied to the inclusive jet and dijet analyses respectively.
+The inclusive jet analysis also uses two additional data-driven background cuts. The first is on the leading jet time, similar to the dijet analysis case, and the second is on the time difference between the leading jet and the MBD since a subleading jet may not be available in the inclusive jet case. Table~\ref{tab:jet_background_cuts} outlines the full set of jet background cuts applied to the inclusive jet and dijet analyses respectively.
 
 \begin{table}[]
     \centering
@@ -101,7 +101,7 @@ The addition of these timing cuts, which have high efficiency and purity, allows
     \centering
     \includegraphics[width=0.48\linewidth]{ueinpp/Figures/jet_bkg_cuts/lead_time_cut_efficiency.png}
     \includegraphics[width=0.48\linewidth]{ueinpp/Figures/jet_bkg_cuts/deltat_cut_efficiency.png}
-    \caption{Timing cut efficiency as a function of leading jet $p_{T}$ for events passing the "energy fraction" background cut and the data-driven leading jet time + jet--MBD time cuts.}
+    \caption{Timing cut efficiencies shown as a function of leading jet $p_{T}$ for events passing the leading jet time (left) and the leading jet--MBD (right) time cuts. Cut efficiencies for nominal timing cuts shown in red and efficiencies for the timing cut variation are shown in blue.}
     \label{fig:timing_cut_efficiencies}
 \end{figure}
 
@@ -109,7 +109,7 @@ The addition of these timing cuts, which have high efficiency and purity, allows
     \centering
     \includegraphics[width=0.48\linewidth]{ueinpp/Figures/jet_bkg_cuts/lead_time_cut_purity.pdf}
     \includegraphics[width=0.48\linewidth]{ueinpp/Figures/jet_bkg_cuts/deltat_cut_purity.pdf}
-    \caption{Timing cut purity as a function of leading jet $p_{T}$ for events passing the "energy fraction" background cut and the data-driven leading jet time + jet--MBD time cuts.}
+    \caption{Timing cut purities shown as a function of leading jet $p_{T}$ for events passing the leading jet time (left) and the leading jet--MBD (right) time cuts. Cut purities for nominal timing cuts shown in red and purities for the timing cut variation are shown in blue.}
     \label{fig:timing_cut_purity}
 \end{figure}
 

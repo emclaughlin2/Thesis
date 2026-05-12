@@ -18,13 +18,13 @@ These uncalibrated leading jet spectra are shown for the "MB" and "Jet + MB" tri
 \begin{figure}
     \centering
     \includegraphics[width=0.7\linewidth]{ueinpp/Figures/trigger_efficiency/0mrad_all_jet_events.png}
-    \caption{Comparison of the "MB" (black) and "MB + Jet" trigger events for Jet8 (red), Jet10 (blue) and Jet12 (magneta).}
+    \caption{Comparison of the number of "MB" (black) and "MB + Jet" trigger events as a function of reconstruction-level leading jet $p_{T}$ for Jet8 (red), Jet10 (blue) and Jet12 (magenta).}
     \label{fig:mb_jet_spectra}
 \end{figure}
 
 \subsubsection{Run-by-Run Stability}
 
-Run-by-run differences in the efficiency arise from changes in the calorimeter response and calibration across the full Run 2024 p+p dataset.
+Run-by-run differences in the efficiency arise from changes in the calorimeter response and calibration across the full run dataset with consistent values for the hardware trigger conditions.
 Therefore, an investigation into the statistical power of different running ranges was undertaken and implemented into the final efficiencies for the analysis.
 
 For the majority of the Run 2024 p+p dataset, the trigger efficiency calculation is statistically limited by the amount of MB reference trigger events.
@@ -62,13 +62,14 @@ approximating a logistic turn-on behavior with asymptotic behavior at 1 (full ef
 Fits are performed using a binomial likelihood. 
 Figure~\ref{fig:jet_trig_fitting} shows the resulting efficiency curves as a function of uncalibrated leading jet $p_{T}$. 
 Statistical uncertainties are estimated by sampling the fit parameters within their covariance matrix to extract 1$\sigma$ variations. 
+The overall correction from the jet trigger efficiency for the analysis range on the leading jet spectra is $< 3\%$ at 21 GeV, the start of the measurement range, and $<1\%$ for all leading jet $p_{T}$ values greater than 24 GeV.
 
 \begin{figure}
     \centering
     \includegraphics[width=0.48\linewidth]{ueinpp/Figures/trigger_efficiency/jet_trig_eff_fit_0mrad_early.png}
     \includegraphics[width=0.48\linewidth]{ueinpp/Figures/trigger_efficiency/jet_trig_eff_fit_0mrad_mid.png}
     \includegraphics[width=0.48\linewidth]{{ueinpp/Figures/trigger_efficiency/jet_trig_eff_fit_1.5mrad}.png}
-    \caption{Jet trigger efficiency curve fitting using data from early 0mrad- (top left), mid-time 0mrad- (top right) and 1.5mrad- (bottom) run ranges. Nominal fit shown in black with fits defined from 1$\sigma$ variations on fit parameters shown in red/blue.}
+    \caption{Jet trigger efficiency fits using data from early 0mrad (top left), mid-time 0mrad (top right) and 1.5mrad (bottom) run ranges. Nominal fit shown in black with fits defined from 1$\sigma$ variations on fit parameters shown in red/blue.}
     \label{fig:jet_trig_fitting}
 \end{figure}
 
@@ -78,14 +79,7 @@ Statistical uncertainties are estimated by sampling the fit parameters within th
 Since this analysis selects for only events with a reconstructed MBD vertex, a study of the inefficiency caused by this selection is investigated.
 For this analysis, the MBD vertex efficiency determines the inefficiency at reconstructing a vertex using the MBD for a jet event with a particular jet $p_{T}$ and transverse region $E_{T}$.
 Here, the vertex efficiency is evaluated in simulation and a simulation to data comparison is taken as a systematic on the simulation-based efficiency. 
-Figure~\ref{fig:mbd_eff_meas_range} shows the MBD vertex efficiency both as a function of jet $p_{T}$ and transverse region $E_{T}$ across the PPG10 measurement ranges.
-
-%\begin{figure}
-%    \centering
-%    \includegraphics[width=\linewidth]{ueinpp/Figures/mbd_vertex_efficiency/vertex_eff_vs_zvertex_range.png}
-%    \caption{MBD vertex efficiency versus leading jet $p_{T}$ (left) and transverse region $E_{T}$ (right) for different $z_{\mathrm{vtx}}$ ranges.}
-%    \label{fig:mbd_eff_zvertex_range}
-%\end{figure}
+Figure~\ref{fig:mbd_eff_meas_range} shows the MBD vertex efficiency both as a function of jet $p_{T}$ and transverse region $E_{T}$.
 
 \begin{figure}
     \centering

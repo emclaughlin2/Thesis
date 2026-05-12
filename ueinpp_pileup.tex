@@ -2,7 +2,7 @@
 \label{sec:pileup_studies}
 
 To study the effect of pileup on the UE measurement, the average pile up rates run-by-run is determined for full set of good runs during the Run 2024 p+p data taking period.
-The run integrated MBD live rate is used to determine the average pile up rates as the live rate is directly related to the number of collisions seen by the sPHENIX detector.
+The run-integrated minimum bias live trigger rate is used to determine the average pile up rates as the live MB trigger rate is directly related to the number of collisions seen by the sPHENIX detector.
 The average pile up rate calculation assumes that simultaneous collisions are given by a Poisson distribution: $P(k) = (\lambda^{k}e^{-\lambda})/k!$ where $\lambda$ is the average number of collisions per bunch crossing.
 Therefore, $\lambda$ can be calculated as $\lambda = f_{c}/(f_{b}*N)$ where $f_{c}$ is the run integrated MBD live rate, determined run-by-run by the number of MBD live counts divided by the length of the run in seconds, the bunch crossing rate is $f_{b} = 78 kHz$ and bunch number $N = 111$. 
 
@@ -11,11 +11,11 @@ The average pileup rate follows as:
    \langle PU \rangle = \frac{P(k>1)}{P(1)+P(k>1)}
 \end{equation}
 Here the average pileup rate is calculated from the triggered dataset; therefore this quantity can be understood as "given a crossing with a collision, what is the probability of that crossing having more than one collision".
-The MBD live rates range run-by-run from 60kHz-2MHz across the full Run 2024 p+p dataset with the largest variation in the MBD live rates in the early period of the Run when the beam crossing angle at the sPHENIX interaction point was at 0 mrad. 
-When the beam crossing angle at the sPHENIX IP was at 1.5mrad, later in p+p Run, the MBD live rates were lower overall and the variation across a store of runs was small. 
-The full range of MBD live rates across the Run 2024 p+p dataset correspond to run-by-run average pile up values from $< 1\%$ to $> 10\%$. 
-The average pileup value and MBD live rate for each run are shown in Figure~\ref{fig:pileup_runbyrun}. 
-Here a clear difference in the average pileup rate and MBD live rate can be seen for the two different beam crossing angles, with a switch in crossing angle occuring just after run number 51000.
+The MB live trigger rates range run-by-run from 60kHz-2MHz across the full Run 2024 p+p dataset with the largest variation in the trigger rates in the early period of the Run when the beam crossing angle at the sPHENIX interaction point was at 0 mrad. 
+When the beam crossing angle at the sPHENIX IP was at 1.5mrad, later in p+p Run, the rates were lower overall and the variation across a store of runs was small. 
+The full range of MB live trigger rates across the Run 2024 p+p dataset correspond to run-by-run average pile up values from $< 1\%$ to $> 10\%$. 
+The average pileup value and MB live trigger rate, "MBD live rate", for each run are shown in Figure~\ref{fig:pileup_runbyrun}. 
+Here a clear difference in the average pileup rate and MBD live rate can be seen for the two different beam crossing angles, with a switch in crossing angle occurring just after run number 51000.
 
 \begin{figure}
     \centering
@@ -68,15 +68,15 @@ Additionally, the separate 0 mrad and 1.5 mrad beam crossing angle datasets agre
 \label{sec:pileup_application}
 
 Pileup effects are studied by examining the relationship between the average pileup, determined on a run-by-run basis, and the transverse region average total $E_{T}$. 
-A pileup correction, derived from the slope of the linear fit to the transverse region average total $E_{T}$ of clean dijet events passing the cuts outlined in Section~\ref{sec:ueinpp_jetbackground} shown in Figure~\ref{fig:pileup_0mrad_1.5mrad_separately_together}, is applied to the reconstructed transverse region $E_{T}$ prior to unfolding. 
-Pileup corrections derived from clean inclusive jet events, jets passing the cuts outlined in Section~\ref{sec:ueinpp_jetbackground}, namely the energy fraction cut and timing cuts, were also derived and found to be consistent with the pileup correction derived from clean dijet events.
+A pileup correction, derived from the slope of the linear fit to the transverse region average total $E_{T}$ of dijet events passing the cuts outlined in Section~\ref{sec:ueinpp_jetbackground} shown in Figure~\ref{fig:pileup_0mrad_1.5mrad_separately_together}, is applied to the reconstructed transverse region $E_{T}$ prior to unfolding. 
+Pileup corrections derived from inclusive jet events, jets passing the cuts outlined in Section~\ref{sec:ueinpp_jetbackground}, namely the energy fraction cut and timing cuts, were also derived and found to be consistent with the pileup correction derived from dijet events.
 
 Figure~\ref{fig:pu_reco_unfolded} compares reconstructed and unfolded distributions with and without the pileup correction. 
 Small differences are observed in the $E_{T}$ distribution at the reconstructed level and the effect on the mean of the reconstructed $E_{T}$ distribution shown in the legends of Figure~\ref{fig:pu_reco_unfolded} is also relatively small.
-The effect on the unfolded mean transverse region $E_{T}$ is $<4\%$ for all leading jet $p_{T}$ bins in the measurement range.  
+The effect on the unfolded mean transverse region $E_{T}$ is $<3\%$ for all leading jet $p_{T}$ bins in the measurement range.  
 
 As a result, the final measurement uses the results with the pileup correction applied and as a systematic uncertainty on the effect of pileup this pileup correction is toggled off.
-The observed difference between the pileup correction on and off is treated as a systematic uncertainty, shown for an unfolded distribution in Figure~\ref{fig:pu_reco_unfolded}, and is found to have at most a $4\%$ effect on both the reconstructed and unfolded average transverse region $E_{T}$.
+The observed difference between the pileup correction on and off is treated as a systematic uncertainty, shown for an unfolded distribution in Figure~\ref{fig:pu_reco_unfolded}, and is found to have at most a $3\%$ effect on both the reconstructed and unfolded average transverse region $E_{T}$.
  
 \begin{figure}
     \centering
@@ -98,6 +98,6 @@ The observed difference between the pileup correction on and off is treated as a
         \includegraphics[width=\linewidth]{ueinpp/Figures/pileup/pileup_effects_unfolded_dijet.png}
         \caption{Unfolded transverse region $E_{T}$ distribution for dijet events with and without pileup correction.}
     \end{subfigure}
-    \caption{Reconstructed (top) and unfolded (bottom) transverse region $E_{T}$ distributions for inclusive jet (left) and dijet (right) events with and without the pileup correction.}
+    \caption{Reconstructed (top) and unfolded (bottom) transverse region $E_{T}$ distributions for inclusive jet (left) and dijet (right) events with (red) and without (black) the pileup correction.}
     \label{fig:pu_reco_unfolded}
 \end{figure}
