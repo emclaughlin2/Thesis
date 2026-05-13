@@ -28,7 +28,7 @@ where $t^a$ are the generators of the SU(3) gauge group following the commutatio
     [t^a, t^b] = i f^{abc} t^c
 \end{equation}
 $A_\mu^a$ is again the gluon field/QCD vector potential and $g_s$ is the strong coupling constant. 
-\textcolor{red}{Bill edit: you might want to indicate that this term leads to the classification as non-Abelian, and this feature, plus the non-linear term in Eq 1.2, creates the difficulties in finding analytic solutions.}
+This non-zero commutation relation is what defines the group as non-Abelian and leads to the self-interacting term included in the field strength tensor above. 
 The strong coupling constant is often expressed in terms of $\alpha_s$ as $\alpha_s = \frac{g_s^2}{4\pi}$, which is a dimensionless quantity that characterizes the strength of the strong interaction and is the only fundamental parameter of QCD.
 
 \subsection{Feynman Rules and Running of the Coupling Constant}
@@ -82,8 +82,9 @@ For example, under this factorization assumption, the inclusive cross section fo
 \begin{equation}
     \sigma_{AB}(p_{A}, p_{B}) = \sum_{a,b} \int dx_a dx_b dz f^{A}_{a}(x_a, \mu_f^2) f^{B}_{b}(x_b, \mu_f^2) \hat{\sigma}_{ab}(x_{a}p_{A}, x_{b}p_{B},\mu_R^2,\mu_f^2)
 \end{equation}
-where $p_{A}$ and $p_{B}$ are the momenta of the incoming hadrons A and B, $x_a$ and $x_b$ are the momentum fractions of the partons a and b inside the hadrons A and B, $f^{A}_{a}(x_a, \mu_f^2)$ and $f^{B}_{b}(x_b, \mu_f^2)$ are the PDFs for partons a and b in hadrons A and B evaluated at the factorization scale $\mu_f^2$, $\hat{\sigma}_{ab}$ is the hard scattering cross section for partons a and b, which can be calculated using pQCD at a renormalization scale $\mu_R$.
-\textcolor{red}{Bill edit: this expression seems to have an explicit dependence on the renormalization scale; you should comment on this}
+where $p_{A}$ and $p_{B}$ are the momenta of the incoming hadrons A and B, $x_a$ and $x_b$ are the momentum fractions of the partons a and b inside the hadrons A and B, $f^{A}_{a}(x_a, \mu_f^2)$ and $f^{B}_{b}(x_b, \mu_f^2)$ are the PDFs for partons a and b in hadrons A and B evaluated at the factorization scale $\mu_f^2$, $\hat{\sigma}_{ab}$ is the hard scattering cross section for partons a and b, which can be calculated using pQCD.
+
+Note, the physical cross section $\sigma_{AB}$ is independent of $\mu_R$ when including all orders of the perturbative expansion. However, in practice $\hat{\sigma}_{ab}$ is explicitly dependent on $\mu_R$, since $\hat{\sigma}_{ab}$ is computed to a finite order in $\alpha_s(\mu_R^2)$. Calculations at any finite order result in this residual dependence at the next order (so calculations at order $\alpha_s$ have a residual dependence at $\mathcal{O}(\alpha_s^2)$). 
 
 Factorization has been proven experimentally to hold for processes such as deep inelastic scattering (DIS)~\cite{collins_dis} and Drell-Yan processes~\cite{Bodwin:1984hc}, but is only an approximation in other QCD systems such as hadron-hadron collisions~\cite{COLLINS1985104}.
 However, the factorization framework is incredibly powerful, since this separation of scales allows for the composite hadron structure to be encoded solely in the PDFs, making them "universal" or able to describe hadron structure across different scattering processes.
@@ -135,9 +136,9 @@ This implies that the longitudinal contribution to the deep inelastic scattering
 \subsubsection{Parton Distribution Functions}
 Using this relationship between the structure functions and PDFs, experimental data can be used to determine the PDFs at different values of $x$ and $Q^2$. 
 To determine the full evolution of PDFs across the $x$ and $Q^2$ phase space, the Bjorken scaling, $Q^2$-independent picture no longer holds, and the Dokshitzer-Gribov-Lipatov-Altarelli-Parisi (DGLAP) equations~\cite{dglap_Altarelli:1977zs,dglap_Dokshitzer:1977sg,dglap_Gribov:1972ri,dglap_Lipatov:1974qm} are used to evolve PDFs as a function of $Q^2$ using pQCD for higher orders in $\alpha_s$.
-These equations work by using leading-order (LO), next-to-leading-order (NLO) or next-to-next-to-leading-order (NNLO) pQCD calculations of the splitting functions within the DGLAP framework given at leading order by~\cite{Ellis:1996qcd_collider_physics}:
+These equations work by using leading-order (LO), next-to-leading-order (NLO) or next-to-next-to-leading-order (NNLO) pQCD calculations of the splitting functions within the DGLAP framework given by~\cite{Ellis:1996qcd_collider_physics}:
 \begin{equation}
-    \mu_f^2 \frac{\partial f_a(x, Q^2)}{\partial \mu_f^2} = \sum_b \int_x^1 \frac{dz}{z} P_{ab}(z, \alpha_s(Q^2)) f_b\left(\frac{x}{z}, Q^2\right)
+    \mu_f^2 \frac{\partial f_a(x, Q^2)}{\partial \mu_f^2} = \frac{\alpha_s(Q^2)}{2\pi} \sum_b \int_x^1 \frac{dz}{z} P_{ab}(z) f_b\left(\frac{x}{z}, Q^2\right)
 \end{equation}
 where $f_a(x, Q^2)$ is the PDF for parton a at momentum fraction $x$ and scale $Q^2$, $P_{ab}(z, \alpha_s(Q^2))$ is the DGLAP splitting function for parton b splitting into parton a with momentum fraction $z$, and the sum is taken over all parton species (all quark flavors and gluons).
 The factorization scale $\mu_f^2$ is explicitly set now for different values of $Q^2$ to separate the hard emissions from the soft emissions in the PDFs, and the DGLAP equations govern the evolution of the PDFs with respect to this factorization scale.
@@ -154,12 +155,11 @@ Figure~\ref{fig:structure_func} shows the proton structure function $F_2$ as a f
 In practice, PDFs are constructed from a set of discrete points in $x$ for a given $Q^2$, corresponding to experimental measurements, like that shown in Figure~\ref{fig:structure_func}.
 PDFs are typically parameterized in terms of higher order polynomials in $x$ at some initial scale $Q_0^2$ and then evolved using the DGLAP equations to determine the PDFs at other scales where experimental data is available.
 The resulting PDFs are then used as input to perturbative calculations of cross-sections for different observables in hadronic collisions.
-Figure~\ref{fig:pdfs} shows the PDFs calculated at NLO and NNLO for different parton flavors as a function of $x$ at a set value of $Q^2$.
-\textcolor{red}{Bill edit: Why is there such a huge difference between g(x) for these two different calculations? Why are some of the PDF's negative in the second row? It does not seem to follow the sign of the quark electric charge.}
+Figure~\ref{fig:pdfs} shows the PDFs calculated at NNLO from the MSHT20 NNLO global fit for different parton flavors as a function of $x$ at set values of $Q^2$.
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{figures/chapter1/pdf_fits.png}
-    \caption{PDFs for different parton flavors as a function of $x$ at different values of $Q^2$. \textcolor{red}{More info on plots.} Reproduced from \cite{ParticleDataGroup:2024cfk}.}
+    \caption{Unpolarised $x$ $\times$ PDF evaluated at $\mu^2 = 10 \text{ GeV}^2$ (left) and $\mu^2 = 10^4 \text{ GeV}^2$ (right) as a function of $x$ from MSHT20 NNLO global fit. Reproduced from \cite{ParticleDataGroup:2024cfk}.}
     \label{fig:pdfs}
 \end{figure}
 
@@ -177,21 +177,20 @@ A schematic of the PDF evolution in the DGLAP and BFKL regimes is shown in Figur
  
 \subsection{Parton Showers}
 \label{sec:parton_showers}
-The evolution of hadronic collisions from the initial state to the final-state particles measured in detectors involves a complex interplay of QCD processes.
-For clarity, the perturbative QCD processes that govern this evolution are described below by the models used in event generators where the main contributions to these parton showers can be labeled as final-state radiation (FSR), initial-state radiation (ISR), and multi-parton interactions (MPI).
+For clarity, the perturbative QCD processes that govern the evolution in hadronic collisions from the initial state to final-state particles measured in detectors are described below by the models used in event generators where the main contributions to these parton showers can be labeled as final-state radiation (FSR), initial-state radiation (ISR), and multi-parton interactions (MPI).
 
 Taking the implementation in \pythia, for example~\cite{pythia_evolution,Buckley:2011event_generators_lhc}, parton showering is implemented as a $p_T$-ordered, Sudakov-based evolution that interleaves FSR, ISR, and MPI effects. 
 The $p_{T}$ ordering of the parton shower can be understood as an evolution towards increasing resolution, where the hardest scattering sets the initial scale for the evolution and subsequent emissions are ordered in decreasing $p_{T}$, with the softer emissions occurring at lower $p_{T}$ scales.
-Therefore, the hard scattering scale informs what emissions are possible at each lower $p_{T}$ scale of the evolution. 
-This regulates the soft and collinear divergences inherent in QCD, as emissions with $p_{T}$ below a certain cutoff are not allowed, ensuring a finite cross section for the parton shower evolution~\cite{Buckley:2011event_generators_lhc,Sterman:2022collinear_factorization}.
-Additionally, the interleaving of FSR, ISR and MPI effects allows for soft-hard correlations to be naturally included in the evolution, since MPI and ISR are in direct competition for available momentum set by the beam energy.
+Therefore, the harder scattering scales inform what emissions are possible at each lower $p_{T}$ scales of the evolution. 
+The soft and collinear divergences inherent in QCD are regulated through the use of Sudakov factors, accounting for no emission probabilities between two scales, and by requiring emissions with $p_{T}$ below a certain cutoff are not allowed, ensuring a finite cross section for the parton shower evolution~\cite{Buckley:2011event_generators_lhc,Sterman:2022collinear_factorization}.
+Additionally, the interleaving of FSR, ISR and MPI effects allows for soft-hard correlations to be naturally included in the evolution, since, for example, MPI and ISR are in direct competition for available momentum set by the beam energy.
 
 \subsubsection{Final State Radiation}
-For the development of the parton shower, the differential probability for an emission is of the form:
+For the development of the parton shower, the differential probability for an emission is given by:
 \begin{equation}
 d\mathcal{P}_\text{FSR} \;=\; \frac{d p_T^2}{p_T^2}\,\frac{\alpha_s(p_T^2)}{2\pi}\,P(z)\,dz
 \end{equation}
-which reflects the first-order DGLAP evolution logarithmic enhancement $d p_T^2 / p_T^2$ and DGLAP splitting functions $P(z)$. 
+which includes the first-order DGLAP evolution logarithmic enhancement $d p_T^2 / p_T^2$ and DGLAP splitting functions $P(z)$. 
 To obtain the probability for the next emission at a given resolution scale, $p_{T,\max}$, the probability is combined with the Sudakov form factor given by:
 \begin{equation}
 \Pi(p_{T,\max}, p_T) \;=\; \exp\!\left(-\int_{p_T^2}^{p_{T,\max}^2} \frac{dp_T'^2}{p_T'^2}\,\frac{\alpha_s(p_T'^2)}{2\pi}\!\int dz\,P(z)\right)
@@ -243,7 +242,7 @@ The mean number of MPI at impact parameter $b$ is taken to be proportional to th
 \langle \tilde{n}_{\text{MPI}}(b) \rangle \;=\; k\,\tilde{\mathcal{O}}(b)
 \end{equation}
 where $k = k(s)$ carries the energy-dependent parton--parton interaction cross-section information, while $\tilde{\mathcal{O}}(b)$ is purely geometrical. 
-This factorization is directly analogous to the eikonal model for hadronic scattering~\cite{glauber_lecture}, where $k\tilde{\mathcal{O}}(b)$ plays the role of the eikonal function $\Omega(s,b) = 2\,\text{Im}\,\chi(s,b)$, split into a geometric piece and an energy-dependent piece. 
+This factorization is directly analogous to the eikonal model for hadronic scattering~\cite{glauber_lecture}, where $k\tilde{\mathcal{O}}(b)$ plays the role of the eikonal function $\Omega(s,b) = 2\,\text{Im}\,\chi(s,b)$, split into a geometric piece and an energy-dependent piece~\cite{pythia_evolution}. 
 
 When impact-parameter dependence is included, the exclusive probability distribution for the next MPI generation generalizes to:
 \begin{equation}
@@ -255,12 +254,13 @@ d\mathcal{P}_{\text{MPI}}^{next}(b) \;=\; d\mathcal{P}_{\text{MPI}}(b)\Pi_{\text
 \label{eq:mpi_continued}
 \end{equation}
 The factor $\tilde{\mathcal{O}}(b)/\langle\tilde{\mathcal{O}}\rangle$ uniformly enhances or suppresses the MPI rate relative to the average depending on the centrality of the collision. 
-The harder the selected process, the more central the collision on average, and therefore the higher the rate of subsequent MPI from Equation~\eqref{eq:mpi_continued}.
-This results in an elevated level of underlying event activity relative to minimum-bias collisions.
-\textcolor{red}{Bill edit: this is not obvious. Harder processes have smaller cross sections. So you have more changes to get a rare process if you have small b -> several independent parton-parton interactions. But several tries at a hard process by definition -> MPI}
+
+Since hard scatterings have smaller cross sections than minimum-bias collisions, they are most likely to occur in central collisions where there is higher parton-parton overlap. 
+Therefore, hard scatterings select for more central collisions on average.
+Following this and using the geometric model for MPI generation from Equation~\eqref{eq:mpi_continued}, there should be a higher rate of MPI for harder, more central collisions.
 
 Finally, momentum conservation is enforced between successive MPI by rescaling the momentum fractions available to each subsequent scatter. 
-If $k$ partons carrying fractions $x_k$ have already been extracted in previous interactions, then the effective momentum fraction for the next scatter is $x/(1 - \sum_k x_k)$.
+For example, if $k$ partons carrying fractions $x_k$ have already been extracted in previous interactions, then the effective momentum fraction for the next scatter is $x/(1 - \sum_k x_k)$.
 This ensures that the total momentum extracted from the proton is never greater than the beam energy. 
 
 MPI are incorporated in the same $p_T$-ordered framework as ISR and FSR. 

@@ -7,7 +7,7 @@
 \usepackage{times}  %set Times New Roman as the font
 \usepackage[explicit]{titlesec}  %title control and formatting
 \usepackage[titles]{tocloft}  %table of contents control and formatting
-\usepackage[backend=bibtex, sorting=none, sortcites=true, bibstyle=ieee, citestyle=numeric-comp]{biblatex}  %reference manager
+\usepackage[backend=bibtex, sorting=none, sortcites=true, bibstyle=ieee, citestyle=numeric-comp, dashed=false]{biblatex}  %reference manager
 \usepackage{appendix}  %for appendices
 \usepackage{rotating}  %for rotated, landscape images
 \usepackage[normalem]{ulem}  %for underlined section titles
@@ -154,12 +154,6 @@
 \phantomsection
 \addcontentsline{toc}{chapter}{Acknowledgments}
 \input{acknowledgements.tex}
-
-
-% Dedication
-\phantomsection
-\addcontentsline{toc}{chapter}{Dedication}
-\input{Dedication.tex}
 
 %%%%%%%
 %	            %

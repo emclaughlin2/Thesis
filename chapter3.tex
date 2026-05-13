@@ -88,8 +88,16 @@ A diagram of the ADC board design is shown in Figure~\ref{figure:adc_diagram}.
 \subsection{Nominal Calorimeter Tower Reconstruction}
 \label{sec:nominal_calorimeter_reconstruction}
 
-\textcolor{red}{Bill edit: include some figures showing waveforms, templates and chi2 distributions would be useful.}
+
 The digitized waveform signals from the calorimeters are reconstructed into energy deposits using a fit to a custom waveform template method which extracts the ADC signal amplitude from each tower in each event.
+Figure~\ref{fig:waveform_template} shows the shape of a good digitized-signal waveform with the waveform template fit overlaid.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.7\linewidth]{figures/chapter3/waveform_template.png}
+    \caption{Calorimeter digitized signal waveform given in ADC counts digitized for 31 time samples. The waveform template function is fit to this waveform and overlaid to show the extracted waveform shape.}
+    \label{fig:waveform_template}
+\end{figure}
 Additionally, tower-by-tower hardware zero suppression (ZS) thresholds set at 2$\sigma$ of the calorimeter pedestal noise were implemented to reduce data volume. 
 Calorimeter tower waveforms with recorded pre-minus-post values below the hardware level ZS threshold only recorded the pre and post samples of the waveform and pre-minus-post values above the ZS threshold recorded the full 12 time sample waveform. 
 During the fitting step of the calorimeter tower reconstruction, an additional software level ZS threshold is applied to correct for biases in the calorimeter energy distribution from noise waveforms. 
@@ -182,6 +190,13 @@ In the default calorimeter reconstruction chain, waveforms from channels with st
 This masking was determined by fitting the waveform to a template and masking based on the value of a quality parameter defined as the least squared error over the number of degrees of freedom of the fit. 
 In this default reconstruction chain, waveforms with stuck bit issues have a characteristic value for the quality parameter (denoted as $\chi^2/NDF$) which is different from the nominal value range.
 These abnormal waveforms have a $\chi^2/NDF$ value of greater than 10 times the nominal value range.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.6\linewidth]{figures/chapter3/emcal_chi2.png}
+    \caption{EMCal channel $\chi^2/NDF$ factor extracted from the waveform template fit versus extracted energy E. Three trend lines included in the plot, a vertical band in the low EMCal tower energy range with varied $\chi^2/NDF$ from noise, a main band of good signals featuring a dilute correlation between EMCal tower energy and $\chi^2/NDF$ and a horizontal band at very high $\chi^2/NDF$ values where read out failures (stuck bit and bit misalignment issues) are located.}
+    \label{fig:emcal_chi2}
+\end{figure}
 
 While this masking was effective, in an effort to maximize calorimeter acceptance and minimize event-by-event changes in the calorimeter acceptance, a recovery scheme at the offline waveform fitting stage was devised to "un-flip" the stuck bits and recover a high quality, useable waveform. 
 The goal of this recovery method was fairly constrained as to not introduce any reconstruction artifacts into the calorimeter reconstruction chain.

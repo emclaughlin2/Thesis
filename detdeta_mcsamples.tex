@@ -17,17 +17,12 @@ The MC event-level weights vary between 0.82 and 1.66 for z-vertex values in the
     \includegraphics[width=0.48\linewidth]{detdeta/Figures/zvertex_reweighting/vz_all_runs_run24_-30_30cm.png}
     \includegraphics[width=0.48\linewidth]{detdeta/Figures/zvertex_reweighting/vz_all_runs_run24.png}
         \includegraphics[width=0.48\linewidth]{detdeta/Figures/zvertex_reweighting/vz_ratio_all_runs_run24.png}
-    \caption{Distributions of the z-vertex reconstructed using the MBD in data (black) and \epos (blue), \ampt (orange) and \hijing (purple) events (top) for z-vertex ranges [-30,30] cm (left) and [-10,10] cm {right}, and the data-over-MC ratios (bottom).}
+    \caption{Distributions of the z-vertex reconstructed using the MBD in data (black) and \epos (blue), \ampt (orange) and \hijing (purple) events (top) for z-vertex ranges [-30,30] cm (left) and [-10,10] cm (right), and the data-over-MC ratios (bottom).}
     \label{fig:zvtxweight}
 \end{figure}
 
 \subsection{MC Particle Composition Reweighting}
-Many light weight \textcolor{red}{I wasn’t at all sure what you meant by “light weight” (which should probably be “light-weight”) in this context. It’s an label to ascribe to AMPT or EPOS. I infer what you mean is generators that don’t perform the triad of I.S. + hydro + hadronic afterburner.  I would not call EPOS and AMPT “pure transport”, so we should discuss if there is some way other than “non-hydro” to label them.} heavy ion collision generators fail to accurately reproduce particle spectra seen in data due to the intensive computational requirements involved in including all relevant physics processes in the simulation, especially the hydrodynamic evolution and final state effects like hadronization through recombination. 
-Heavy ion generators are grounded in perturbative QCD \textcolor{red}{Not all, JETSCAPE being a prime example.} and models to approximate non-perturbative effects. 
-Parameter tuning for light-weight generators has been used successfully to more accurately reproduce previous experimental results at RHIC and LHC energies, and tunes for \pp collisions at RHIC energies, such as the \pythia~\cite{pythia8,pythia8_detroittune} and \herwig~\cite{herwig7,herwig7_tune} tunes, are used in the \pp analysis in Chapter~\ref{ch:ue_in_pp}.
-However, for this \detdeta measurements using \auau MC samples, no such tunes existed for the heavy ion MC generators used in this analysis.
-Therefore, to reduce model dependence in the final \detdeta measurement, a particle composition reweighting procedure at the simulation final-state particle level was implemented to increase the agreement between the MC samples and previous measurements of identified particles in 200 GeV \auau collisions at RHIC.
-
+Since the \detdeta measurement is sensitive to all of the collision energy contributions, a particle composition reweighting scheme was devised to account for differences between the particle spectra produced from the event generators used in this analysis and previous measurements of identified particle spectra in Au+Au collisions at \sqsntwo.
 As a first step in this reweighting procedure, the discrepancy between the final state particle spectra from the MC generators used in this analysis and previous measurements at RHIC from PHENIX and STAR was investigated~\cite{phenix_particle_spectra,star_lambda_spectra}. 
 Specifically, the particle spectra of $\pi^{\pm}$, $K^{\pm}$, $p$, $\bar{p}$, $\Lambda$ and $\bar{\Lambda}$ at central rapidity ($|\eta| < 0.35$ for p, $\pi$ and K and $|\eta| < 1.0$ for $\Lambda$) as functions of transverse momentum ($p_{T}$) were studied across various centrality bins.
 
@@ -86,13 +81,13 @@ However, \ampt does exhibit a centrality dependence of similar scale to that see
     \label{fig:mc_k_pi_ratio}
 \end{figure}
 
-From these studies of the proton to pion and kaon to pion ratios, none of the three MC generators were found to accurately reproduce the proton, pion and kaon particle spectra differential in $p_{T}$ and centrality seen in previous RHIC meaurements. 
+From these studies of the proton to pion and kaon to pion ratios, none of the three MC generators were found to accurately reproduce the proton, pion and kaon particle spectra differential in $p_{T}$ and centrality seen in previous RHIC measurements. 
 To correct for this discrepancy in identified particle spectra between the MC generators and experimental data, a truth-level particle and calorimeter energy reweighting module was employed within the \detdeta analysis reconstruction chain. 
 This module adjusted the simulation final state truth particles and resulting detector-level calorimeter energy distribution based on the particle yield spectrum obtained from previous PHENIX and STAR experiments. 
 
 \subsubsection{Determining MC Particle Composition Reweighting Factors}
 
-Reweight factors were created for final state particles in each of the three MC generators.
+Weight factors were created for final state particles in each of the three MC generators.
 Using both the final state particle spectra of the three MC generators and the measured identified particle spectra from PHENIX and STAR~\cite{phenix_particle_spectra,star_lambda_spectra}, the invariant yields of $\pi^{\pm}$, $K^{\pm}$, $p$, $\bar{p}$, $\Lambda$, and $\bar{\Lambda}$ as functions of transverse momentum ($p_{T}$) were analyzed across various centrality bins. 
 The Monte Carlo particle spectrum was calculated using the same centrality binning and $\eta$ acceptance range as was used in the PHENIX and STAR measurements. 
 The MC generator spectra of $\pi^{\pm}$, $K^{\pm}$, $p$, and $\bar{p}$ were then compared to PHENIX data, while $\Lambda$ and $\bar{\Lambda}$ were compared to STAR data to compute the data/MC ratios. 

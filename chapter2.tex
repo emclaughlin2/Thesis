@@ -15,7 +15,7 @@ In the insertion sections, a pair of dipole magnets are used to steer the beams 
 In total, 1740 superconducting magnets were required for the two storage rings. 
 
 To reach a stage of steady ion storage and collision at RHIC, a series of ion sources and accelerators are needed \cite{rhic_overview}. 
-When running with heavy ions such as Au, ions are first produced from the Electron Beam Ion Source (EBIS), which is an upgrade from the Tandem Van de Graff previous used as the heavy ion source for RHIC operations \cite{ebis_rhic_overview}.
+In the planned upgrade from the Tandem Van de Graaff used for the heavy ion source for RHIC operations, when running with heavy ions such as Au, ions are first produced from the Electron Beam Ion Source (EBIS) \cite{ebis_rhic_overview}.
 In the EBIS, Au atoms are ionized via electron-impact ionization, freeing the atoms' bound-state electrons until $Au^{32+}$ ions are created.
 Following the EBIS, ions are injected into the Booster Synchrotron which accelerates the ions to an energy of 95 MeV/u.
 When exiting the Booster, ions are stripped again, this time via a silicon foil to reach a ionization of $Au^{77+}$, reaching a Helium-like ionization.
@@ -200,7 +200,6 @@ These detectors have full azimuthal coverage ($0 < \phi < 2 \pi$) and pseudorapi
     \caption{(a) Schematic of EMCal sector highlighting projective geometry of towers in $\eta$ and lightguides and electronics on the inner radius of the sector. (b) Schematic of OHCal half-sector highlighting projective geometry of towers in $\eta$, layered absorber/scintillator tile tower design, wavelength-shifting fiber located within HCal scintillating tiles, and readout electronics on the outer radius of the sector. Both reproduced from \cite{sPHENIX_TDR}.}
     \label{fig:sphenix_emcal_schematic}
 \end{figure}
-\textcolor{red}{Bill edit: include scales for EMCal and OHCal sector sizes.}
  
 The sPHENIX EMCal is designed to precisely measure photons, electrons and positrons via electromagnetic showers.
 To acheive this goal, the EMCal has a depth of 18 radiation lengths and its electromagnetic shower resolution was measured in beam tests to be 2.8\% $\oplus$ 15.5\%/$\sqrt{E}$ for electrons \cite{emcal_beamtest,emcal_hcal_beamtest}.
@@ -261,13 +260,18 @@ Additionally, specifically in sPHENIX, criteria on signals in both sides of the 
 \subsection{sPHENIX Data Acquisition and Readout}
 sPHENIX is designed with a state of the art data acquisition system and computing resources to collect data at very high rates in order to achieve its data-intensive physics goals within its short three year running period.
 The sPHENIX data acquisition system is designed to read out data from triggered calorimeter events at a rate of 15 kHz in both \pp{} and \auau{} collisions and read out tracking detectors in full streaming mode collecting all of the supplied collision data.
+
 With the high collision rate (>> 15 kHz) supplied by RHIC, the sPHENIX trigger system is used to make decisions using information from the calorimeter and global detectors on whether to read out a particular collision event.
 This trigger system uses calorimeter information to identify and save likely high $p_{T}$ photon and jet events and uses the global detectors to identify and save minimum bias hadronic collision events.
-\textcolor{red}{Bill edit: include information about triggered versus streaming read out here}
 The triggered calorimeter and global detector data is read out passing through five steps: 
 first the front end modules (FEM) digitize the analog signals from the SiPMs and PMTs in the detectors, 
 second the data collection modules (DCMs) combine data from multiple FEMs and act as very short term buffers.
 The data is then passed through the sub event buffer (SEB) computers used to store the data temporarily, and then is transferred to bufferboxes, before finally being written to disk storage.
+
+The tracking data is read out in streaming mode with each of the tracking subsystems having a different readout window length. The MVTX is read out continuously with a readout window of 10 $\mu s$, providing an equivalent timing resolution. 
+The INTT has precision timing resolution, smaller than the bunch crossing rate for collisions (106 ns).
+The TPC has a long electron drift period of 13 $\mu s$ and then a readout extension period of 40 $\mu s$. 
+In this extended readout period, zero-bias collision data is collected by the tracking detectors (MVTX, INTT and TPC) in addition to the data collected at triggered beam crossings. 
 The tracking data is read out from the front end electronics (FEEs) through the ATLAS "FELIX" card which is connected directly to a standard computer which serves as a buffer similar to the triggered SEBs.
 The tracking data is also transferred to bufferboxes and written to disk storage in the same manner as the triggered data.
 \begin{figure}

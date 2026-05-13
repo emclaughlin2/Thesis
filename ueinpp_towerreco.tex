@@ -7,20 +7,20 @@ A detailed description of the topocluster algorithm, reconstruction and optimiza
 
 \subsection{Topocluster algorithm}
 
-The calorimeter topoclustering algorithm groups individual calorimeter towers into contiguous clusters designed to reconstruct energy deposits from showering particles.
-Topoclusters are a particular clustering method used to cluster calorimeter signals while suppressing electronic noise and pile-up contributions. 
-To limit noise contributions, the clustering algorithm uses the ratio of the tower's energy to its expected noise as a significance metric for seeding and expanding clusters.~\cite{ATLAS:2017_topological_cluster_performance,ATLAS:2024_topological_cluster_timing}. 
-Topoclusters are then grown using the following thresholds:
+The calorimeter topoclustering algorithm groups individual calorimeter towers into clusters and is designed to reconstruct electromagnetic and hadronic showers as cluster objects.
+Topoclusters are an ideal clustering method when looking to suppress electronic noise and pile-up contributions. 
+To limit these noise contributions, the clustering algorithm requires energies much higher than the noise floor for seeding and expanding clusters.~\cite{ATLAS:2017_topological_cluster_performance,ATLAS:2024_topological_cluster_timing}. 
+Topoclusters are grown using the following thresholds:
 \begin{itemize}
-    \item Seed threshold ($S$): Towers with $|E_{\mathrm{tower}}| > S\,\sigma_{\mathrm{noise}}$ initiate clusters, typically with $S=4$.
-    \item Neighbor growth threshold ($N$): Adjacent towers with $|E_{\mathrm{tower}}| > N\,\sigma_{\mathrm{noise}}$ are iteratively added to expand the cluster, typically with $N=2$.
-    \item Peripheral threshold ($P$): Boundary towers are included bordering the neighboring towers with an even lower threshold, often $P=0$, to capture the full shower energy.
+    \item Seed threshold ($S$): Towers with $|E_{\mathrm{tower}}| > S\,\sigma_{\mathrm{noise}}$ initiate clusters, where $S=4$.
+    \item Neighbor growth threshold ($N$): Adjacent towers with $|E_{\mathrm{tower}}| > N\,\sigma_{\mathrm{noise}}$ added to expand the cluster, where $N=2$.
+    \item Peripheral threshold ($P$): Boundary towers bordering the neighboring towers, where $P=0$.
 \end{itemize}
 where each threshold is defined in units of the tower noise: $\sigma_{\mathrm{noise}}$.
 
-The clusters are grown iteratively outwards from the cluster seeds using the neighboring towers. Here neighboring towers that satisfy the $N$ threshold can themselves contribute additional neighbors and expanded the cluster until no further cells meet the criteria. Towers are added to clusters if they are adjacent in either $\eta$ or $\phi$ within the same calorimeter layer or if they overlap in the $(\eta,\phi)$ plane across calorimeter layers (EMCal, IHCal, and OHCal in sPHENIX). 
-The inclusion of boundary cells at the $P$ threshold helps to preserve the shower shape with still minimal noise contamination. An example of topocluster growth in sPHENIX is shown in the distribution of topoclusters across calorimeter layers in a simulated dijet event display (Figure~\ref{fig:topocluster_event_display}). 
-Importantly, this cluster formation ordering of seed, neighboring and peripheral towers makes topoclusters far less sensitive to noise than traditional distance-only based clustering, since isolated noise fluctuations typically fail the seed threshold, and lower significance noise towers are excluded unless supported by adjacent high-significance signals. 
+Topoclusters are grown outwards from seed towers using towers adjacent in either $\eta$ or $\phi$ within the same calorimeter layer or overlapping in the $(\eta,\phi)$ plane across layers (EMCal, IHCal, and OHCal). These neighboring towers must satisfy the $N$ threshold to be added to the cluster and can then itself seed further neighbors, expanding the cluster until no additional towers meet the $N$ criteria. 
+After this, boundary towers at the $P$ threshold are then included to preserve the full shower shape with minimal noise contamination.
+An example of topocluster growth is shown in the distribution of topoclusters across calorimeter layers in a simulated dijet event display (Figure~\ref{fig:topocluster_event_display}). 
 
 \begin{figure}
     \centering
